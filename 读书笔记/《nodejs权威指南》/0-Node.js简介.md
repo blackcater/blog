@@ -6,11 +6,7 @@ Node.js用异步I/O和事件驱动代替多线程，带来了客观的性能提�
 
 Node.js的开发者在libev和libeio的基础上抽象出了层libuv。对于POSIX操作系统，libuv通过封装libev和libeio来利用epoll或kqueue。而在Windows下，libuv使用了Windows的IOCP机制，以在不同的平台下实现同样的性能。
 
-[](Node.js的架构)
-
-[](./nodejs/Node.js的结构.PNG)
-
-![Node.js的结构](C:/Users/BlackCater/Desktop/note/nodejs/Node.js的结构.PNG)
+![Node.js的结构](https://raw.githubusercontent.com/blackcater/blog/master/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/%E3%80%8Anodejs%E6%9D%83%E5%A8%81%E6%8C%87%E5%8D%97%E3%80%8B/images/Node.js%E7%9A%84%E7%BB%93%E6%9E%84.PNG)
 
 
 

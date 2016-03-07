@@ -14,7 +14,6 @@
 
 
 
-
 ##使用dns模块解析域名
 
 在网络编程中，开发者更倾向于使用域名，而不是IP地址来指定网络链接的目标地址。在Node.js中，提供dns模块，以实现域名查找及域名解析的处理。
@@ -103,7 +102,7 @@
 
 ###dns模块中的各种错误代码
 
-![dns_error1](C:\Users\BlackCater\Desktop\note\nodejs\dns_error1.PNG)![dns_error2](C:\Users\BlackCater\Desktop\note\nodejs\dns_error2.PNG)
+![dns_error1](https://raw.githubusercontent.com/blackcater/blog/master/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/%E3%80%8Anodejs%E6%9D%83%E5%A8%81%E6%8C%87%E5%8D%97%E3%80%8B/images/dns_error1.PNG)![dns_error2](https://raw.githubusercontent.com/blackcater/blog/master/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/%E3%80%8Anodejs%E6%9D%83%E5%A8%81%E6%8C%87%E5%8D%97%E3%80%8B/images/dns_error2.PNG)
 
 
 
@@ -373,7 +372,7 @@ rl.on('line', (line) => {
         %s: 字符串
         %j: JSON
         %%: %本身
-        
+
     如果格式化字符串中使用的参数个数少用format方法中使用的除了format参数之外的其他参数个数，则根据format方法中多余参数值的类型自动将其转化为字符串，中间使用一个空格进行分割。
 */
 
@@ -391,9 +390,9 @@ rl.on('line', (line) => {
 */
 ```
 
-![util-inspect-style](C:\Users\BlackCater\Desktop\note\nodejs\util_inspect1.PNG)
+![util-inspect-style](https://raw.githubusercontent.com/blackcater/blog/master/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/%E3%80%8Anodejs%E6%9D%83%E5%A8%81%E6%8C%87%E5%8D%97%E3%80%8B/images/util_inspect1.PNG)
 
-![util-inspect-colors](C:\Users\BlackCater\Desktop\note\nodejs\util_inspect2.PNG)
+![util-inspect-colors](https://raw.githubusercontent.com/blackcater/blog/master/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/%E3%80%8Anodejs%E6%9D%83%E5%A8%81%E6%8C%87%E5%8D%97%E3%80%8B/images/util_inspect2.PNG)
 
 
 
@@ -429,7 +428,7 @@ rl.on('line', (line) => {
         columnOffset: 列偏移值
         displayErrors: 布尔值，是否输出错误到stderr。默认为true。
         timeout: a number of milliseconds to execute code before terminating execution. If execution is terminated, an Error will be thrown.
-    
+
     事实上runInThisContext方法维护的是一个独立的上下文运行环境，因此，如果一个runInThisContext方法中定义一个变量，对象或方法，那么可以在之后的runInThisContext方法中访问这些变量，对象或方法。
 */
 
@@ -502,4 +501,4 @@ rl.on('line', (line) => {
 */
 ```
 
-![repl-eval属性值默认值](C:\Users\BlackCater\Desktop\note\nodejs\repl_eval.PNG)
+![repl-eval属性值默认值](https://raw.githubusercontent.com/blackcater/blog/master/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/%E3%80%8Anodejs%E6%9D%83%E5%A8%81%E6%8C%87%E5%8D%97%E3%80%8B/images/repl_eval.PNG)
