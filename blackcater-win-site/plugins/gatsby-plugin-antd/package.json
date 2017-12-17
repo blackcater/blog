@@ -1,0 +1,7 @@
+{
+  "name": "gatsby-plugin-antd",
+  "dependencies": {
+    "antd": "^3.0.1",
+    "babel-plugin-import": "^1.6.3"
+  }
+}
