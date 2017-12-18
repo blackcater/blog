@@ -1,4 +1,5 @@
 import React from 'react'
+import { Button } from 'antd'
 import Link from 'gatsby-link'
 
 const IndexPage = () => (
@@ -7,6 +8,7 @@ const IndexPage = () => (
     <p>Welcome to your new Gatsby site.</p>
     <p>Now go build something great.</p>
     <Link to="/page-2/">Go to page 2</Link>
+    <Button type="primary" size="large">登录</Button>
   </div>
 )
 
