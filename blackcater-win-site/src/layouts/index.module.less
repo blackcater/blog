@@ -1,0 +1,115 @@
+@import "../styles/_variables";
+
+:global(#___gatsby) {
+  width: 100%;
+  height: 100%;
+}
+
+.main {
+  width: 100%;
+  height: 100%;
+}
+
+.header {
+  position: fixed;
+  width: 100%;
+  z-index: 100;
+
+  .title {
+    float: left;
+
+    h1 { margin: 0 }
+  }
+
+  .menu {
+    float: right;
+
+    .links {
+      margin: 45px 0;
+      width: 270px;
+      line-height: 30px;
+      list-style: none;
+      padding: 0;
+
+      .link {
+        float: left;
+        width: 90px;
+
+        a {
+          color: @header-color;
+          text-decoration: underline;
+
+          &:hover {
+            color: @primary-color;
+          }
+        }
+      }
+
+      &::after {
+        content: '';
+        display: table;
+        clear: both;
+      }
+    }
+  }
+}
+
+.content {
+  margin-top: 150px;
+}
+
+.footer {
+  position: relative;
+  height: 460px;
+  background: linear-gradient(45deg, #fd8b42, #fc255f);
+  overflow: hidden;
+
+  .bg-text {
+    position: absolute;
+    bottom: -35%;
+    left: 50%;
+    transform: translate(-50%, 0);
+    font-size: 24rem;
+    color: rgba(255, 255, 255, 0.4);
+    user-select: none;
+  }
+}
+
+.footer-content {
+  position: absolute;
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  margin-top: 150px;
+  text-align: center;
+}
+
+.footer-slogan {
+  margin-bottom: 36px;
+  color: @header-color;
+}
+
+.footer-email {
+  margin-bottom: 120px;
+  font-size: 40px;
+  color: @header-color;
+}
+
+.footer-social {
+  z-index: 2;
+
+  a {
+    margin: 0 10px;
+    color: @header-color;
+    cursor: pointer;
+
+    &:hover {
+      color: @primary-color;
+    }
+  }
+}
+
+.footer-social--icon {
+  font-size: 20px;
+}
