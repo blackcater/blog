@@ -14,41 +14,64 @@
   position: fixed;
   width: 100%;
   z-index: 100;
+}
 
-  .title {
-    float: left;
+.header-title {
+  float: left;
 
-    h1 { margin: 0 }
-  }
+  h1 { margin: 0 }
+}
 
-  .menu {
-    float: right;
+.header-menu {
+  float: right;
 
-    .links {
-      margin: 45px 0;
-      width: 270px;
-      line-height: 30px;
-      list-style: none;
-      padding: 0;
+  .links {
+    margin: 45px 0;
+    width: 270px;
+    line-height: 30px;
+    list-style: none;
+    padding: 0;
 
-      .link {
-        float: left;
-        width: 90px;
+    .link {
+      float: left;
+      width: 90px;
 
-        a {
-          color: @header-color;
-          text-decoration: underline;
+      a {
+        color: @header-color;
+        text-decoration: underline;
 
-          &:hover {
-            color: @primary-color;
-          }
+        &:hover {
+          color: @primary-color;
         }
       }
+    }
 
-      &::after {
-        content: '';
-        display: table;
-        clear: both;
+    &::after {
+      content: '';
+      display: table;
+      clear: both;
+    }
+  }
+}
+
+@media (max-width: 600px) {
+  .header-menu {
+    .links {
+      margin: 0;
+      position: fixed;
+      top: 150px;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      width: 100%;
+      background-color: @background-color;
+
+      .link {
+        display: block;
+        width: 100%;
+        text-align: center;
+        margin: 20px 0;
+        font-size: 1.5rem;
       }
     }
   }
@@ -92,7 +115,7 @@
 
 .footer-email {
   margin-bottom: 120px;
-  font-size: 40px;
+  font-size: 1.5rem;
   color: @header-color;
 }
 
