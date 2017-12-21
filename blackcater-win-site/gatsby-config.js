@@ -30,6 +30,13 @@ module.exports = {
     ],
   },
   plugins: [
+    {
+      resolve: `gatsby-source-filesystem`,
+      options: {
+        name: `posts`,
+        path: `${__dirname}/src/pages/`,
+      },
+    },
     `gatsby-transformer-remark`,
     `gatsby-plugin-antd`,
     {
@@ -38,8 +45,6 @@ module.exports = {
         modifyVars: theme,
       },
     },
-    `gatsby-plugin-feed`,
-    `gatsby-plugin-offline`,
     `gatsby-plugin-react-helmet`,
   ],
 }
