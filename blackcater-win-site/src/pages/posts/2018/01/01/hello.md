@@ -1,6 +1,7 @@
 ---
 title: hello title
 cover: http://editorconfig.org/logo.png
+date: 2018-01-01
 tags: [React, Gatsby, Tutorial]
 archives: [前端, 博客, 哈哈]
 ---

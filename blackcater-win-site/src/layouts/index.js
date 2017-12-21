@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { Layout, Icon } from 'antd'
 import Link from 'gatsby-link'
 import { ContainerQuery } from 'react-container-query'
+import { Helmet } from 'react-helmet'
 
 import styles from './index.module.less'
 
@@ -43,6 +44,10 @@ export default class MainLayout extends Component {
 
             return (
               <Layout className={styles.main}>
+                <Helmet>
+                  <title>{metaData.title}</title>
+                  <meta name="description" content={metaData.description} />
+                </Helmet>
                 <Header className={styles.header}>
                   <div className={styles['header-title']}>
                     <h1>{metaData.nickname}.</h1>
@@ -96,6 +101,7 @@ export const query = graphql`
     site {
       siteMetadata {
         title
+        description
         nickname
         slogan
         email

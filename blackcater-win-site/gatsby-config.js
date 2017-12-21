@@ -3,6 +3,8 @@ const theme = require('./theme')
 module.exports = {
   siteMetadata: {
     title: 'blackcater\'s blog',
+    description: 'blackcater的个人博客————全栈工程师成长之路',
+    website: 'http://www.blackcater.win',
     nickname: 'blackcater',
     slogan: '一心所向，必有回响',
     email: 'blackcater2015@gmail.com',
@@ -45,6 +47,8 @@ module.exports = {
         modifyVars: theme,
       },
     },
+    `gatsby-plugin-feed`,
+    `gatsby-plugin-offline`,
     `gatsby-plugin-react-helmet`,
   ],
 }
