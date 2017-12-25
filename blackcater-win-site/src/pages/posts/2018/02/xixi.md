@@ -1,9 +1,9 @@
 ---
-title: hello title
+title: xixi title
 cover: http://editorconfig.org/logo.png
-date: 2018-01-01
-tags: [React, Gatsby, Tutorial]
-archives: [前端, 博客, 哈哈]
+date: 2018-02-01
+tags: [React]
+category: TECH.
 ---
 
 # heading one

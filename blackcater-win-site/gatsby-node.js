@@ -25,28 +25,83 @@ exports.createPages = ({ graphql, boundActionCreators }) => {
   return new Promise((resolve, reject) => {
     graphql(`
       {
-        allMarkdownRemark {
+        allMarkdownRemark(sort: { fields: [frontmatter___date], order:DESC }) {
           edges {
             node {
               fields {
                 slug
               }
+              frontmatter {
+                title
+                cover
+                date
+                tags
+                category
+              }
+              tableOfContents
+              timeToRead
+              wordCount {
+                paragraphs
+                sentences
+                words
+              }
+              headings {
+                value
+                depth
+              }
+              excerpt
+              html
             }
           }
         }
       }
     `)
       .then(({ data }) => {
+        const tagMap = {}
+        const archiveMap = {}
+        const categoryMap = {}
+
         data.allMarkdownRemark.edges.map(({ node }) => {
+          const { fields: { slug }, frontmatter: { date, tags, category } } = node
+
+          // 每个帖子的详情页
           createPage({
-            path: node.fields.slug,
+            path: slug,
             component: path.resolve(__dirname, 'src/templates/post.js'),
             context: {
               // 你可以在 graphql 中使用该参数
-              slug: node.fields.slug,
+              slug,
             },
           })
+
+          // 分类
+          if (category) {
+            categoryMap[category] = (categoryMap[category] || []).concat(node)
+          }
+
+          // 标签
+          if (tags) {
+            (tags || []).forEach(tag => {
+              tagMap[tag] = (tagMap[tag] || []).concat(node)
+            })
+          }
+
+          // 归档
+          if (date) {
+            const date$ = new Date(date)
+            const year = date$.getUTCFullYear()
+            const month = date$.getUTCMonth() + 1
+            const day = date$.getUTCDay()
+
+            archiveMap[year] = archiveMap[year] || {}
+            archiveMap[year][month] = archiveMap[year][month] || {}
+            archiveMap[year][month][day] = (archiveMap[year][month][day] || []).concat(node)
+          }
         })
+
+        console.dir(tagMap)
+        console.dir(archiveMap)
+        console.dir(categoryMap)
 
         resolve()
       })
