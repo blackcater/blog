@@ -71,6 +71,14 @@ exports.createPages = ({ graphql, boundActionCreators }) => {
             context: {
               // 你可以在 graphql 中使用该参数
               slug,
+              tags: tags.map(tag => ({
+                name: tag,
+                slug: `/tag/${tag}/`,
+              })),
+              category: {
+                name: category,
+                slug: `/category/${category}/`,
+              },
             },
           })
 
@@ -93,18 +101,153 @@ exports.createPages = ({ graphql, boundActionCreators }) => {
             const month = date$.getUTCMonth() + 1
             const day = date$.getUTCDay()
 
+            archiveMap.default = (archiveMap.default || []).concat(node)
             archiveMap[year] = archiveMap[year] || {}
             archiveMap[year][month] = archiveMap[year][month] || {}
             archiveMap[year][month][day] = (archiveMap[year][month][day] || []).concat(node)
           }
         })
 
-        console.dir(tagMap)
-        console.dir(archiveMap)
-        console.dir(categoryMap)
+        createTagPagination(tagMap, createPage)
+        createArchivePagination(archiveMap, createPage)
+        createCategoryPagination(categoryMap, createPage)
 
         resolve()
       })
       .catch(reject)
   })
+}
+
+/**
+ * 标签分页
+ *
+ * @param tagMap
+ * @param createPage
+ */
+function createTagPagination(tagMap, createPage) {
+  const tagList = Object.keys(tagMap)
+  const tags = tagList
+    .sort((tag1, tag2) => tagMap[tag1].length < tagMap[tag2].length)
+    .map(tag => ({ name: tag, num: tagMap[tag].length, slug: `/tag/${tag}/` }))
+
+  // tag 首页
+  createPage({
+    path: '/tag/',
+    component: path.resolve(__dirname, 'src/templates/tag-index.js'),
+    context: {
+      // 你可以在 graphql 中使用该参数
+      tags,
+    },
+  })
+
+  // 分页
+  tags.forEach(tag => {
+    createPagination({
+      data: tagMap[tag.name],
+      base: `/tag/${tag.name}/`,
+      size: 20,
+      component: path.resolve(__dirname, 'src/templates/tag.js'),
+      context: {
+        tag,
+      },
+      createPage,
+    })
+  })
+}
+
+/**
+ * 归档分页
+ *
+ * @param archiveMap
+ * @param createPage
+ */
+function createArchivePagination(archiveMap, createPage) {
+  const { default: posts } = archiveMap
+
+  // 分页
+  createPagination({
+    data: posts,
+    base: '/archive/',
+    size: 20,
+    component: path.resolve(__dirname, 'src/templates/archive.js'),
+    context: {},
+    createPage,
+  })
+}
+
+/**
+ * 类目分页
+ *
+ * @param categoryMap
+ * @param createPage
+ */
+function createCategoryPagination(categoryMap, createPage) {
+  const categories = Object.keys(categoryMap)
+
+  categories.forEach(category => {
+    createPagination({
+      data: categoryMap[category],
+      base: `/category/${category}/`,
+      size: 20,
+      component: path.resolve(__dirname, 'src/templates/category.js'),
+      context: {
+        category,
+      },
+      createPage,
+    })
+  })
+}
+
+// 分页通用方法
+function createPagination(opts = {}) {
+  const options = {
+    data: [],
+    base: '/',
+    size: 20,
+    component: null,
+    context: {},
+    ...opts,
+  }
+  const { data, base, size, component, context, createPage } = options
+
+  if (!component) return
+  if (!createPage) return
+
+  // 共多少页面
+  const total = Math.ceil(data.length / size)
+
+  for (let i = 0; i < total; i++) {
+    const current = i + 1
+    const path = `${base}${current}`
+
+    if (current === 1) {
+      createPage({
+        path: base,
+        component,
+        context: {
+          ...context,
+          isFirstPage: current === 1,
+          isLastPage: current === total,
+          totalPage: total,
+          pageIndex: current,
+          pageSize: size,
+          pageData: data.slice(size * (current - 1), Math.min(size * current, data.length)),
+        },
+      })
+    }
+
+    createPage({
+      path,
+      component,
+      context: {
+        ...context,
+        isFirstPage: current === 1,
+        isLastPage: current === total,
+        totalPage: total,
+        pageIndex: current,
+        pageSize: size,
+        pageData: data.slice(size * (current - 1), Math.min(size * current, data.length)),
+      },
+    })
+  }
 }

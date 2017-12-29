@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 
-class CategoryPage extends Component {
+class TagIndex extends Component {
   constructor(props) {
     super(props)
   }
@@ -8,11 +8,11 @@ class CategoryPage extends Component {
   render() {
     return (
       <div>
-        <h1>Category</h1>
-        <p>Category 页面</p>
+        <h1>Tag</h1>
+        <p>tag list</p>
       </div>
     )
   }
 }
 
-export default CategoryPage
+export default TagIndex
