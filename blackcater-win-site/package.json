@@ -4,11 +4,11 @@
   "version": "1.0.0",
   "author": "Kyle Mathews <mathews.kyle@gmail.com>",
   "dependencies": {
-    "antd": "^3.0.3",
     "gatsby": "^1.9.127",
     "gatsby-image": "^1.0.30",
     "gatsby-link": "^1.6.30",
     "gatsby-plugin-catch-links": "^1.0.14",
+    "gatsby-plugin-emotion": "^1.1.10",
     "gatsby-plugin-feed": "^1.3.15",
     "gatsby-plugin-offline": "^1.0.12",
     "gatsby-plugin-react-helmet": "^1.0.8",
@@ -30,20 +30,24 @@
     "develop": "gatsby develop",
     "publish": "gatsby build && gh-pages -d public --branch master --repo https://github.com/blackcater/blackcater.github.io.git",
     "format": "prettier --trailing-comma es5 --no-semi --single-quote --write \"src/**/*.js\"",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "precommit": "lint-staged"
   },
   "devDependencies": {
-    "babel-plugin-import": "^1.6.3",
     "eslint": "^4.13.1",
     "eslint-config-airbnb": "^16.1.0",
     "eslint-plugin-import": "^2.8.0",
     "eslint-plugin-jsx-a11y": "^6.0.3",
     "eslint-plugin-react": "^7.5.1",
-    "extract-text-webpack-plugin": "^1.0.1",
-    "gatsby-1-config-css-modules": "^1.0.8",
-    "gh-pages": "^1.1.0",
-    "less": "^2.7.3",
-    "less-loader": "^4.0.5",
+    "husky": "^0.14.3",
+    "lint-staged": "^6.0.0",
     "prettier": "^1.8.2"
+  },
+  "lint-staged": {
+    "*.js": [
+      "prettier --write",
+      "eslint --fix",
+      "git add"
+    ]
   }
 }

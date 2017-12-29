@@ -1,8 +1,6 @@
-const theme = require('./theme')
-
 module.exports = {
   siteMetadata: {
-    title: 'blackcater\'s blog',
+    title: "blackcater's blog",
     description: 'blackcater的个人博客————全栈工程师成长之路',
     website: 'http://www.blackcater.win',
     nickname: 'blackcater',
@@ -33,22 +31,15 @@ module.exports = {
   },
   plugins: [
     {
-      resolve: `gatsby-source-filesystem`,
+      resolve: 'gatsby-source-filesystem',
       options: {
-        name: `posts`,
+        name: 'posts',
         path: `${__dirname}/src/pages/`,
       },
     },
-    `gatsby-transformer-remark`,
-    `gatsby-plugin-antd`,
-    {
-      resolve: `gatsby-plugin-less`,
-      options: {
-        modifyVars: theme,
-      },
-    },
-    `gatsby-plugin-feed`,
-    `gatsby-plugin-offline`,
-    `gatsby-plugin-react-helmet`,
+    'gatsby-transformer-remark',
+    'gatsby-plugin-feed',
+    'gatsby-plugin-offline',
+    'gatsby-plugin-react-helmet',
   ],
-}
+};
