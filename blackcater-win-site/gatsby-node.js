@@ -3,17 +3,32 @@
  *
  * See: https://www.gatsbyjs.org/docs/node-apis/
  */
-const path = require('path')
-const { createFilePath } = require('gatsby-source-filesystem')
+const path = require("path")
+const { createFilePath } = require("gatsby-source-filesystem")
+
+exports.modifyWebpackConfig = ({ config }) => {
+  config.merge({
+    resolve: {
+      alias: {
+        styles: path.resolve(__dirname, "./src/styles"),
+        components: path.resolve(__dirname, "./src/components"),
+      },
+      root: path.resolve(__dirname, "./src"),
+      extensions: ["", ".js", ".jsx", ".json"],
+    },
+  })
+
+  return config
+}
 
 exports.onCreateNode = ({ node, getNode, boundActionCreators }) => {
-  if (node.internal.type === 'MarkdownRemark') {
+  if (node.internal.type === "MarkdownRemark") {
     const { createNodeField } = boundActionCreators
-    const slug = createFilePath({ node, getNode, basePath: `pages` })
+    const slug = createFilePath({ node, getNode, basePath: "pages" })
 
     createNodeField({
       node,
-      name: 'slug',
+      name: "slug",
       value: slug,
     })
   }
@@ -25,7 +40,7 @@ exports.createPages = ({ graphql, boundActionCreators }) => {
   return new Promise((resolve, reject) => {
     graphql(`
       {
-        allMarkdownRemark(sort: { fields: [frontmatter___date], order:DESC }) {
+        allMarkdownRemark(sort: { fields: [frontmatter___date], order: DESC }) {
           edges {
             node {
               fields {
@@ -35,16 +50,12 @@ exports.createPages = ({ graphql, boundActionCreators }) => {
                 title
                 cover
                 date
+                edate: date(formatString: "MMMM DD, YYYY")
                 tags
                 category
               }
               tableOfContents
               timeToRead
-              wordCount {
-                paragraphs
-                sentences
-                words
-              }
               headings {
                 value
                 depth
@@ -61,13 +72,16 @@ exports.createPages = ({ graphql, boundActionCreators }) => {
         const archiveMap = {}
         const categoryMap = {}
 
-        data.allMarkdownRemark.edges.map(({ node }) => {
-          const { fields: { slug }, frontmatter: { date, tags, category } } = node
+        data.allMarkdownRemark.edges.forEach(({ node }) => {
+          const {
+            fields: { slug },
+            frontmatter: { date, tags, category },
+          } = node
 
           // 每个帖子的详情页
           createPage({
             path: slug,
-            component: path.resolve(__dirname, 'src/templates/post.js'),
+            component: path.resolve(__dirname, "src/templates/post.js"),
             context: {
               // 你可以在 graphql 中使用该参数
               slug,
@@ -89,7 +103,7 @@ exports.createPages = ({ graphql, boundActionCreators }) => {
 
           // 标签
           if (tags) {
-            (tags || []).forEach(tag => {
+            ;(tags || []).forEach(tag => {
               tagMap[tag] = (tagMap[tag] || []).concat(node)
             })
           }
@@ -104,7 +118,9 @@ exports.createPages = ({ graphql, boundActionCreators }) => {
             archiveMap.default = (archiveMap.default || []).concat(node)
             archiveMap[year] = archiveMap[year] || {}
             archiveMap[year][month] = archiveMap[year][month] || {}
-            archiveMap[year][month][day] = (archiveMap[year][month][day] || []).concat(node)
+            archiveMap[year][month][day] = (
+              archiveMap[year][month][day] || []
+            ).concat(node)
           }
         })
 
@@ -132,8 +148,8 @@ function createTagPagination(tagMap, createPage) {
 
   // tag 首页
   createPage({
-    path: '/tag/',
-    component: path.resolve(__dirname, 'src/templates/tag-index.js'),
+    path: "/tag/",
+    component: path.resolve(__dirname, "src/templates/tag-index.js"),
     context: {
       // 你可以在 graphql 中使用该参数
       tags,
@@ -146,7 +162,7 @@ function createTagPagination(tagMap, createPage) {
       data: tagMap[tag.name],
       base: `/tag/${tag.name}/`,
       size: 20,
-      component: path.resolve(__dirname, 'src/templates/tag.js'),
+      component: path.resolve(__dirname, "src/templates/tag.js"),
       context: {
         tag,
       },
@@ -167,9 +183,9 @@ function createArchivePagination(archiveMap, createPage) {
   // 分页
   createPagination({
     data: posts,
-    base: '/archive/',
+    base: "/archive/",
     size: 20,
-    component: path.resolve(__dirname, 'src/templates/archive.js'),
+    component: path.resolve(__dirname, "src/templates/archive.js"),
     context: {},
     createPage,
   })
@@ -189,7 +205,7 @@ function createCategoryPagination(categoryMap, createPage) {
       data: categoryMap[category],
       base: `/category/${category}/`,
       size: 20,
-      component: path.resolve(__dirname, 'src/templates/category.js'),
+      component: path.resolve(__dirname, "src/templates/category.js"),
       context: {
         category,
       },
@@ -202,7 +218,7 @@ function createCategoryPagination(categoryMap, createPage) {
 function createPagination(opts = {}) {
   const options = {
     data: [],
-    base: '/',
+    base: "/",
     size: 20,
     component: null,
     context: {},
@@ -231,7 +247,10 @@ function createPagination(opts = {}) {
           totalPage: total,
           pageIndex: current,
           pageSize: size,
-          pageData: data.slice(size * (current - 1), Math.min(size * current, data.length)),
+          pageData: data.slice(
+            size * (current - 1),
+            Math.min(size * current, data.length)
+          ),
         },
       })
     }
@@ -246,7 +265,10 @@ function createPagination(opts = {}) {
         totalPage: total,
         pageIndex: current,
         pageSize: size,
-        pageData: data.slice(size * (current - 1), Math.min(size * current, data.length)),
+        pageData: data.slice(
+          size * (current - 1),
+          Math.min(size * current, data.length)
+        ),
       },
     })
   }
