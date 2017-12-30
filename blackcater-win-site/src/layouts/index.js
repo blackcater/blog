@@ -1,6 +1,7 @@
 import React, { Component } from "react"
 import { Helmet } from "react-helmet"
 import { Icon } from "components"
+import { query as q, events } from "dom-helpers"
 import cx from "classnames"
 
 import "./index.styl"
@@ -11,7 +12,16 @@ export default class IndexLayout extends Component {
 
     this.state = {
       menu: false,
+      transparent: true,
     }
+  }
+
+  componentDidMount() {
+    events.on(window.document, "scroll", this.handleScroll)
+  }
+
+  componentWillUnmount() {
+    events.off(window.document, "scroll", this.handleScroll)
   }
 
   // 切换 菜单栏显隐
@@ -21,15 +31,30 @@ export default class IndexLayout extends Component {
     })
   }
 
+  // 滚动事件处理
+  handleScroll = () => {
+    const scrollTop = q.scrollTop(window.document)
+
+    if (scrollTop <= 0) {
+      this.setState({
+        transparent: true,
+      })
+    } else {
+      this.setState({
+        transparent: false,
+      })
+    }
+  }
+
   render() {
-    const { menu } = this.state
+    const { menu, transparent } = this.state
     const { children, data: { site: { siteMetadata: metaData } } } = this.props
     const { title, description, nickname, slogan, socials, links } = metaData
 
     console.dir(this.props)
 
     return (
-      <div className="layout">
+      <div className="layout" ref={ele => (this.layout = ele)}>
         <Helmet>
           <title>{title}</title>
           <meta charSet="utf-8" />
@@ -45,7 +70,11 @@ export default class IndexLayout extends Component {
           />
           <link href="/favicon.png" rel="apple-touch-icon-precomposed" />
         </Helmet>
-        <div className="layout-header">
+        <div
+          className={cx({
+            "layout-header": true,
+            transparent,
+          })}>
           <div className="title-section">
             <img
               className="avatar"
@@ -82,7 +111,7 @@ export default class IndexLayout extends Component {
               </div>
               <div className="social-list">
                 {socials.map(social => (
-                  <div className="social-item">
+                  <div key={social.type} className="social-item">
                     <a href={social.url} target="_blank">
                       <img
                         style={{ width: "14px", height: "14px" }}
@@ -100,7 +129,7 @@ export default class IndexLayout extends Component {
                   <div className="title">LINKS</div>
                   <div className="link-list">
                     {links.map(link => (
-                      <div className="link-item">
+                      <div key={link.name} className="link-item">
                         <a href={link.link} target="_blank">
                           {link.name}
                         </a>
@@ -110,6 +139,12 @@ export default class IndexLayout extends Component {
                 </div>
               ) : null}
             </div>
+          </div>
+          <div className="info">
+            <div className="right">
+              {nickname.toUpperCase()} &copy; ALL RIGHT RESERVED.
+            </div>
+            <div className="tool">POWERED BY GATSBY</div>
           </div>
         </div>
       </div>

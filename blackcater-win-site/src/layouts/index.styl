@@ -9,21 +9,23 @@
     top 0
     left 0
     right 0
+    line-height 50px
     background-color color-bg-light
+    transition all .2s ease-in-out-quad
+    &.transparent
+      line-height 120px
+      background-color transparent
 
     .title-section
       display flex
       flex-direction row
       justify-content space-between
       margin 0 auto
-      height 50px
       max-width 1200px
-      line-height 50px
-      background-color color-bg-light
 
       .avatar
-        margin 13px 0 13px 25px
         display inline-block
+        margin auto 0 auto 25px
         width 24px
         height 24px
         border-radius 18px
@@ -85,6 +87,7 @@
       justify-content space-between
       margin 0 auto
       max-width 1200px
+      border-bottom 0.5px solid color-bg
 
       .left
         margin 0 25px 50px
@@ -128,4 +131,17 @@
 
     +below(600px)
       .section
+        display block
+
+    .info
+      margin 30px 25px 0
+      display flex
+      flex-direction row
+      justify-content space-between
+
+      .right
+        margin-bottom 20px
+
+    +below(600px)
+      .info
         display block

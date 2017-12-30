@@ -5,6 +5,7 @@
   "author": "Kyle Mathews <mathews.kyle@gmail.com>",
   "dependencies": {
     "classnames": "^2.2.5",
+    "dom-helpers": "^3.3.1",
     "gatsby": "^1.9.127",
     "gatsby-image": "^1.0.30",
     "gatsby-link": "^1.6.30",

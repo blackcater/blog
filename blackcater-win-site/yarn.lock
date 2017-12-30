@@ -2726,6 +2726,10 @@ dom-helpers@^3.2.1:
   version "3.2.1"
   resolved "http://registry.npm.taobao.org/dom-helpers/download/dom-helpers-3.2.1.tgz#3203e07fed217bd1f424b019735582fc37b2825a"
 
+dom-helpers@^3.3.1:
+  version "3.3.1"
+  resolved "http://registry.npm.taobao.org/dom-helpers/download/dom-helpers-3.3.1.tgz#fc1a4e15ffdf60ddde03a480a9c0fece821dd4a6"
+
 dom-serializer@0, dom-serializer@~0.1.0:
   version "0.1.0"
   resolved "http://registry.npm.taobao.org/dom-serializer/download/dom-serializer-0.1.0.tgz#073c697546ce0780ce23be4a28e293e40bc30c82"
