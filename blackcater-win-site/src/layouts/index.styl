@@ -3,3 +3,69 @@
 .layout
   width 100%
   min-height 100%
+
+  .layout-header
+    position fixed
+    top 0
+    left 0
+    right 0
+    background-color color-bg-light
+
+    .title-section
+      display flex
+      flex-direction row
+      justify-content space-between
+      margin 0 auto
+      height 50px
+      max-width 1200px
+      line-height 50px
+      background-color color-bg-light
+
+      .avatar
+        margin 13px 0 13px 15px
+        display inline-block
+        width 24px
+        height 24px
+        border-radius 18px
+
+      .title
+        font-size 2rem
+        font-weight 700
+
+      .icon
+        margin-right 15px
+        cursor pointer
+
+    .menu-list
+      display flex
+      flex-direction row
+      justify-content center
+      height 0
+      opacity 0
+      overflow hidden
+      transform: translate(-100%, 0)
+      transition all .2s ease-in-out-quad
+      &.active
+        height auto
+        opacity 1
+        transform: translate(0, 0)
+
+      .menu-item
+        padding 0 35px
+        height 80px
+        line-height 80px
+        font-size 1.2rem
+        color color-text-light
+        cursor pointer
+        &:hover
+          color color-primary
+
+    +below(600px)
+      .menu-list
+        display block
+        text-align center
+
+        .menu-item
+          font-size 2rem
+          display block
+          border-bottom 0.5px solid color-bg
