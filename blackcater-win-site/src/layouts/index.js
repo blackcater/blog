@@ -24,7 +24,7 @@ export default class IndexLayout extends Component {
   render() {
     const { menu } = this.state
     const { children, data: { site: { siteMetadata: metaData } } } = this.props
-    const { title, description, nickname } = metaData
+    const { title, description, nickname, slogan, socials, links } = metaData
 
     console.dir(this.props)
 
@@ -73,7 +73,45 @@ export default class IndexLayout extends Component {
           </div>
         </div>
         <div className="layout-content">{children()}</div>
-        <div className="layout-footer" />
+        <div className="layout-footer">
+          <div className="section">
+            <div className="left">
+              <div className="slogan">
+                <div className="title">SLOGAN</div>
+                <p>{slogan}</p>
+              </div>
+              <div className="social-list">
+                {socials.map(social => (
+                  <div className="social-item">
+                    <a href={social.url} target="_blank">
+                      <img
+                        style={{ width: "14px", height: "14px" }}
+                        src={require(`images/links/${social.type}.png`)}
+                        alt={social.type}
+                      />
+                    </a>
+                  </div>
+                ))}
+              </div>
+            </div>
+            <div className="right">
+              {links.length > 0 ? (
+                <div className="section-list">
+                  <div className="title">LINKS</div>
+                  <div className="link-list">
+                    {links.map(link => (
+                      <div className="link-item">
+                        <a href={link.link} target="_blank">
+                          {link.name}
+                        </a>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              ) : null}
+            </div>
+          </div>
+        </div>
       </div>
     )
   }
@@ -91,6 +129,10 @@ export const query = graphql`
         socials {
           type
           url
+        }
+        links {
+          name
+          link
         }
       }
     }

@@ -22,7 +22,7 @@
       background-color color-bg-light
 
       .avatar
-        margin 13px 0 13px 15px
+        margin 13px 0 13px 25px
         display inline-block
         width 24px
         height 24px
@@ -33,7 +33,7 @@
         font-weight 700
 
       .icon
-        margin-right 15px
+        margin-right 25px
         cursor pointer
 
     .menu-list
@@ -69,3 +69,63 @@
           font-size 2rem
           display block
           border-bottom 0.5px solid color-bg
+
+.layout
+  .layout-content
+    min-height 70vh
+
+.layout
+  .layout-footer
+    padding 100px 0 50px
+    background-color color-bg-light
+
+    .section
+      display flex
+      flex-direction row
+      justify-content space-between
+      margin 0 auto
+      max-width 1200px
+
+      .left
+        margin 0 25px 50px
+
+        .slogan
+          margin-bottom 20px
+
+          .title
+            margin-bottom 40px
+            color: color-text-light
+            font-size 1.4rem
+
+          p
+            font-size 1.2rem
+
+        .social-list
+          display flex
+          flex-direction row
+          flex-wrap wrap
+
+          .social-item
+            margin 0 30px 20px 0
+
+      .right
+        margin 0 25px
+        display flex
+        flex-direction row
+
+        .section-list
+          margin-right 40px
+
+          .title
+            margin-bottom 40px
+            color: color-text-light
+            font-size 1.4rem
+
+          .link-item
+            margin-bottom 20px
+            font-size 1.2rem
+            white-space nowrap
+
+    +below(600px)
+      .section
+        display block

@@ -12,16 +12,16 @@ module.exports = {
     slogan: "一心所向，必有回响",
     email: "blackcater2015@gmail.com",
     socials: [
+      // {
+      //   type: "facebook",
+      //   url: "",
+      // },
+      // {
+      //   type: "google",
+      //   url: "",
+      // },
       {
         type: "twitter",
-        url: "",
-      },
-      {
-        type: "facebook",
-        url: "",
-      },
-      {
-        type: "google",
         url: "",
       },
       {
@@ -29,8 +29,34 @@ module.exports = {
         url: "",
       },
       {
+        type: "medium",
+        url: "",
+      },
+      {
         type: "weibo",
         url: "",
+      },
+      {
+        type: "segmentfault",
+        url: "",
+      },
+      {
+        type: "zhihu",
+        url: "",
+      },
+      {
+        type: "jianshu",
+        url: "",
+      },
+    ],
+    links: [
+      {
+        name: "小猫的博客",
+        link: "https://www.baidu.com",
+      },
+      {
+        name: "小狗的博客",
+        link: "https://www.baidu.com",
       },
     ],
   },

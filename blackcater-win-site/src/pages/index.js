@@ -1,9 +1,13 @@
-import React from 'react'
+import React, { Component } from "react"
 
-const IndexPage = () => (
-  <div>
-    <h1>Home Page</h1>
-  </div>
-)
+import "./index.styl"
 
-export default IndexPage
+export default class IndexPage extends Component {
+  render() {
+    return (
+      <div>
+        <h1>index page</h1>
+      </div>
+    )
+  }
+}
