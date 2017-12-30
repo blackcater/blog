@@ -5,7 +5,7 @@ const rucksack = require("rucksack-css")
 
 module.exports = {
   siteMetadata: {
-    title: "blackcater's blog",
+    title: "全栈成长路",
     description: "blackcater的个人博客————全栈工程师成长之路",
     website: "http://www.blackcater.win",
     nickname: "blackcater",
