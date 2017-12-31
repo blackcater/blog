@@ -3,19 +3,20 @@
  *
  * See: https://www.gatsbyjs.org/docs/node-apis/
  */
-const path = require("path")
-const { createFilePath } = require("gatsby-source-filesystem")
+const path = require('path')
+const { createFilePath } = require('gatsby-source-filesystem')
 
 exports.modifyWebpackConfig = ({ config }) => {
   config.merge({
     resolve: {
       alias: {
-        styles: path.resolve(__dirname, "./src/styles"),
-        images: path.resolve(__dirname, "./src/images"),
-        components: path.resolve(__dirname, "./src/components"),
+        styles: path.resolve(__dirname, './src/styles'),
+        images: path.resolve(__dirname, './src/images'),
+        utils: path.resolve(__dirname, './src/utils'),
+        components: path.resolve(__dirname, './src/components'),
       },
-      root: path.resolve(__dirname, "./src"),
-      extensions: ["", ".js", ".jsx", ".json"],
+      root: path.resolve(__dirname, './src'),
+      extensions: ['', '.js', '.jsx', '.json'],
     },
   })
 
@@ -23,13 +24,13 @@ exports.modifyWebpackConfig = ({ config }) => {
 }
 
 exports.onCreateNode = ({ node, getNode, boundActionCreators }) => {
-  if (node.internal.type === "MarkdownRemark") {
+  if (node.internal.type === 'MarkdownRemark') {
     const { createNodeField } = boundActionCreators
-    const slug = createFilePath({ node, getNode, basePath: "pages" })
+    const slug = createFilePath({ node, getNode, basePath: 'pages' })
 
     createNodeField({
       node,
-      name: "slug",
+      name: 'slug',
       value: slug,
     })
   }
@@ -82,7 +83,7 @@ exports.createPages = ({ graphql, boundActionCreators }) => {
           // 每个帖子的详情页
           createPage({
             path: slug,
-            component: path.resolve(__dirname, "src/templates/post.js"),
+            component: path.resolve(__dirname, 'src/templates/post.js'),
             context: {
               // 你可以在 graphql 中使用该参数
               slug,
@@ -149,8 +150,8 @@ function createTagPagination(tagMap, createPage) {
 
   // tag 首页
   createPage({
-    path: "/tag/",
-    component: path.resolve(__dirname, "src/templates/tag-index.js"),
+    path: '/tag/',
+    component: path.resolve(__dirname, 'src/templates/tag-index.js'),
     context: {
       // 你可以在 graphql 中使用该参数
       tags,
@@ -163,7 +164,7 @@ function createTagPagination(tagMap, createPage) {
       data: tagMap[tag.name],
       base: `/tag/${tag.name}/`,
       size: 20,
-      component: path.resolve(__dirname, "src/templates/tag.js"),
+      component: path.resolve(__dirname, 'src/templates/tag.js'),
       context: {
         tag,
       },
@@ -184,9 +185,9 @@ function createArchivePagination(archiveMap, createPage) {
   // 分页
   createPagination({
     data: posts,
-    base: "/archive/",
+    base: '/archive/',
     size: 20,
-    component: path.resolve(__dirname, "src/templates/archive.js"),
+    component: path.resolve(__dirname, 'src/templates/archive.js'),
     context: {},
     createPage,
   })
@@ -206,7 +207,7 @@ function createCategoryPagination(categoryMap, createPage) {
       data: categoryMap[category],
       base: `/category/${category}/`,
       size: 20,
-      component: path.resolve(__dirname, "src/templates/category.js"),
+      component: path.resolve(__dirname, 'src/templates/category.js'),
       context: {
         category,
       },
@@ -219,7 +220,7 @@ function createCategoryPagination(categoryMap, createPage) {
 function createPagination(opts = {}) {
   const options = {
     data: [],
-    base: "/",
+    base: '/',
     size: 20,
     component: null,
     context: {},

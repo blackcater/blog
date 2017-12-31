@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { Icon } from 'components'
+import { isMobile } from 'utils/common'
 import axios from 'axios'
 
 import './index.styl'
@@ -8,6 +9,9 @@ const NAMESPACE = 'UNSPLASH_IMG__BL0G_INDEX_PAGE'
 
 export default class IndexPage extends Component {
   componentDidMount() {
+    const mobile = isMobile()
+    const width = mobile ? '600' : '1800'
+
     if (this.shouldFetchUnsplashPhoto()) {
       // 需要更新
       this.fetchUnsplashPhoto(urls => {
@@ -19,14 +23,14 @@ export default class IndexPage extends Component {
           })
         )
 
-        this.props.setCover(`${urls.full}?w=2200`)
+        this.props.setCover(`${urls.full}?w=${width}`)
       })
     } else {
       const { urls } = JSON.parse(
         window.localStorage.getItem(NAMESPACE) || '{}'
       )
 
-      this.props.setCover(`${urls.full}?w=2200`)
+      this.props.setCover(`${urls.full}?w=${width}`)
     }
   }
 
@@ -47,11 +51,14 @@ export default class IndexPage extends Component {
   }
 
   fetchUnsplashPhoto = (cb, errCb) => {
+    const mobile = isMobile()
+    const orientation = mobile ? 'portrait' : 'landscape'
+
     axios
       .get('https://api.unsplash.com/photos/random', {
         params: {
           query: 'landscape',
-          orientation: 'landscape',
+          orientation,
         },
         headers: {
           'Accept-Version': 'v1',

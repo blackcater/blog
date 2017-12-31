@@ -12,7 +12,7 @@
     right 0
     line-height 50px
     background-color color-bg-light
-    transition all .2s ease-in-out-quad .7s
+    transition all .2s ease-in-out-quad
     z-index 1000
     &.transparent
       line-height 120px
@@ -84,7 +84,7 @@
     min-height 100vh
 
     .section-cover
-      position absolute
+      position fixed
       top 0
       left 0
       right 0
@@ -92,6 +92,7 @@
       animation-delay 0
       animation-duration .7s
       animation-timing-function cubic-bezier(.825,0,.5,1)
+      background-color color-bg-light
 
       .fullscreen
         position absolute
@@ -131,6 +132,9 @@
         .wbi
           position relative
           animation FloatAnimation .8s infinite alternate
+
+    .section-content
+      margin 70px 0 20px
 
 
 // footer
