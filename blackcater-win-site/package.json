@@ -4,6 +4,7 @@
   "version": "1.0.0",
   "author": "Kyle Mathews <mathews.kyle@gmail.com>",
   "dependencies": {
+    "axios": "^0.17.1",
     "classnames": "^2.2.5",
     "dom-helpers": "^3.3.1",
     "gatsby": "^1.9.127",

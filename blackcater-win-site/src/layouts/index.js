@@ -81,11 +81,16 @@ export default class IndexLayout extends Component {
               src={require("images/avatar.png")}
               alt={nickname}
             />
-            <div className="title">{title}</div>
+            <div id="title" className="title">
+              {title}
+            </div>
             <div className="icon" onClick={() => this.toggleMenu(menu)}>
               <Icon
                 type={menu ? "x" : "menu"}
-                style={{ color: "#758db0", fontSize: "20px" }}
+                style={{
+                  color: transparent ? "#ffffff" : "#758db0",
+                  fontSize: "20px",
+                }}
               />
             </div>
           </div>

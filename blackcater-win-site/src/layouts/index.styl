@@ -12,9 +12,13 @@
     line-height 50px
     background-color color-bg-light
     transition all .2s ease-in-out-quad
+    z-index 1000
     &.transparent
       line-height 120px
       background-color transparent
+
+      .title-section
+        color #fff
 
     .title-section
       display flex
@@ -74,7 +78,7 @@
 
 .layout
   .layout-content
-    min-height 70vh
+    min-height 100vh
 
 .layout
   .layout-footer
