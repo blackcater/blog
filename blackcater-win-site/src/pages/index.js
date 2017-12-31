@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
-import { Icon } from 'components'
+import { Icon, Button } from 'components'
+import Link from 'gatsby-link'
 import { isMobile } from 'utils/common'
 import axios from 'axios'
 
@@ -50,6 +51,7 @@ export default class IndexPage extends Component {
     )
   }
 
+  // 获取 unsplash 图片
   fetchUnsplashPhoto = (cb, errCb) => {
     const mobile = isMobile()
     const orientation = mobile ? 'portrait' : 'landscape'
@@ -72,7 +74,93 @@ export default class IndexPage extends Component {
       .catch(errCb)
   }
 
+  // 查看文章详情
+  handleReadPost = slug => {
+    const { history } = this.props
+
+    history.push(slug)
+  }
+
+  // 查看更多文章
+  handleMoreBtn = () => {
+    const { history } = this.props
+
+    history.push('/archive/')
+  }
+
   render() {
-    return <div>这是首页啊</div>
+    const { data: { allMarkdownRemark: { edges } } } = this.props
+    const posts = edges.map(edge => edge.node)
+
+    console.dir(posts)
+
+    return (
+      <div className="page-index">
+        <h2>RECENT</h2>
+        <div className="post-list">
+          {posts.map((post, index) => (
+            <div key={`${index}`} className="post">
+              <div
+                style={{
+                  backgroundImage: `url('${post.frontmatter.cover}')`,
+                }}
+                className="cover"
+              />
+              <div className="content">
+                <div className="title">{post.frontmatter.title}</div>
+                <div className="time">{post.frontmatter.edate}</div>
+                <div className="tags">
+                  {(post.frontmatter.tags || []).map((tag, idx) => (
+                    <div key={`${idx}`} className="tag">
+                      <Link to={`/tag/${tag}`}>{tag}</Link>
+                    </div>
+                  ))}
+                </div>
+                <div className="excerpt">{post.excerpt}</div>
+                <div className="category">{post.frontmatter.category}</div>
+                <Button
+                  type="circle"
+                  color="pink"
+                  onClick={() => this.handleReadPost(post.fields.slug)}
+                >
+                  READ
+                </Button>
+              </div>
+            </div>
+          ))}
+        </div>
+        <div className="more-section">
+          <Button type="circle" color="pink" onClick={this.handleMoreBtn}>
+            MORE
+          </Button>
+        </div>
+      </div>
+    )
   }
 }
+
+export const query = graphql`
+  query IndexPage {
+    allMarkdownRemark(
+      sort: { fields: [frontmatter___date], order: DESC }
+      limit: 9
+    ) {
+      edges {
+        node {
+          fields {
+            slug
+          }
+          frontmatter {
+            title
+            cover
+            date
+            edate: date(formatString: "MMMM DD, YYYY")
+            tags
+            category
+          }
+          excerpt
+        }
+      }
+    }
+  }
+`

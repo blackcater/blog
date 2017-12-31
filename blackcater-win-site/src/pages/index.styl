@@ -1,1 +1,79 @@
 @import "~styles/util.styl"
+
+.page-index
+  h2
+    color #fff
+    font-size 3rem
+    margin 130px auto 80px
+    padding 0 30px
+    max-width 960px
+    box-sizing border-box
+
+  .post-list
+    margin 0 auto
+    max-width 1020px
+
+    .post
+      position relative
+      margin 0 30px 30px
+      display flex
+      flex-direction row
+      border-radius 3px
+      background-color color-bg-light
+
+      .cover
+        flex 1
+        background-color color-bg-lightest
+        background-position: 50% 50%
+        background-size cover
+
+      .content
+        flex-basis 345px
+        padding 50px
+        box-sizing border-box
+
+        .title
+          margin-bottom 10px
+          font-size 1.6rem
+          line-height 2rem
+          color #fff
+
+        .time
+          margin-bottom 10px
+          font-size 0.8rem
+
+        .tags
+          margin-bottom 20px
+
+          &::after
+            content ''
+            display table
+            clear both
+            min-height 0
+
+          .tag
+            margin 0 5px 5px 0
+            padding 8px 9px
+            float left
+            font-size 9px
+            background-color color-bg
+            border-radius 2px
+            color color-text-secondary
+
+        .excerpt
+          margin-bottom 30px
+          line-height 1.6rem
+          color color-text-secondary
+
+        .category
+          position absolute
+          top 20px
+          left 20px
+          padding 8px 12px
+          font-size 1.6rem
+          color #fff
+          background-color color-green
+
+  .more-section
+    margin 50px 0
+    text-align center
