@@ -1,10 +1,10 @@
-import React, { Component } from "react"
-import { Icon } from "components"
-import axios from "axios"
+import React, { Component } from 'react'
+import { Icon } from 'components'
+import axios from 'axios'
 
-import "./index.styl"
+import './index.styl'
 
-const NAMESPACE = "UNSPLASH_IMG__BL0G_INDEX_PAGE"
+const NAMESPACE = 'UNSPLASH_IMG__BL0G_INDEX_PAGE'
 
 export default class IndexPage extends Component {
   componentDidMount() {
@@ -23,7 +23,7 @@ export default class IndexPage extends Component {
       })
     } else {
       const { urls } = JSON.parse(
-        window.localStorage.getItem(NAMESPACE) || "{}"
+        window.localStorage.getItem(NAMESPACE) || '{}'
       )
 
       this.props.setCover(`${urls.full}?w=2200`)
@@ -32,7 +32,7 @@ export default class IndexPage extends Component {
 
   // 判断是否需要更新图片
   shouldFetchUnsplashPhoto = () => {
-    const { date } = JSON.parse(window.localStorage.getItem(NAMESPACE) || "{}")
+    const { date } = JSON.parse(window.localStorage.getItem(NAMESPACE) || '{}')
     const now = new Date()
 
     if (!date) return true
@@ -48,15 +48,15 @@ export default class IndexPage extends Component {
 
   fetchUnsplashPhoto = (cb, errCb) => {
     axios
-      .get("https://api.unsplash.com/photos/random", {
+      .get('https://api.unsplash.com/photos/random', {
         params: {
-          query: "landscape",
-          orientation: "landscape",
+          query: 'landscape',
+          orientation: 'landscape',
         },
         headers: {
-          "Accept-Version": "v1",
+          'Accept-Version': 'v1',
           Authorization:
-            "Client-ID 2293f4e76a8b62a4e5c08a6d05f74d0f12c4cc9e84dc697736d50a422d9a541c",
+            'Client-ID 2293f4e76a8b62a4e5c08a6d05f74d0f12c4cc9e84dc697736d50a422d9a541c',
         },
       })
       .then(({ data }) => {

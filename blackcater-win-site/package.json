@@ -32,7 +32,7 @@
     "build": "gatsby build",
     "develop": "gatsby develop",
     "publish": "gatsby build && gh-pages -d public --branch master --repo https://github.com/blackcater/blackcater.github.io.git",
-    "format": "prettier --trailing-comma es5 --no-semi --single-quote --write \"src/**/*.js\"",
+    "format": "prettier --write \"src/**/*.js\"",
     "test": "echo \"Error: no test specified\" && exit 1",
     "precommit": "lint-staged"
   },

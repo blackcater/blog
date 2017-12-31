@@ -1,11 +1,11 @@
-import React, { Component } from "react"
-import { Helmet } from "react-helmet"
-import { Icon } from "components"
-import { query as q, events, style } from "dom-helpers"
-import { throttle } from "lodash"
-import cx from "classnames"
+import React, { Component } from 'react'
+import { Helmet } from 'react-helmet'
+import { Icon } from 'components'
+import { query as q, events, style } from 'dom-helpers'
+import { throttle } from 'lodash'
+import cx from 'classnames'
 
-import "./index.styl"
+import './index.styl'
 
 export default class IndexLayout extends Component {
   constructor(props) {
@@ -14,17 +14,17 @@ export default class IndexLayout extends Component {
     this.state = {
       menu: false,
       transparent: true,
-      cover: "",
-      title: "",
+      cover: '',
+      title: '',
     }
   }
 
   componentDidMount() {
-    events.on(window.document, "wheel", this.handleWheel)
+    events.on(window.document, 'wheel', this.handleWheel)
   }
 
   componentWillUnmount() {
-    events.off(window.document, "wheel", this.handleWheel)
+    events.off(window.document, 'wheel', this.handleWheel)
   }
 
   // 切换 菜单栏显隐
@@ -55,19 +55,19 @@ export default class IndexLayout extends Component {
 
   // 动画开始
   handleCoverTransitionStart = () => {
-    console.log("start")
+    console.log('start')
 
-    style(window.document.body, "overflow", "hidden")
+    style(window.document.body, 'overflow', 'hidden')
   }
 
   // 封面动画完毕
   handleCoverTransitionEnd = () => {
     const { transparent } = this.state
 
-    console.dir("end")
+    console.dir('end')
 
     if (!transparent) {
-      style(window.document.body, "overflow", "auto")
+      style(window.document.body, 'overflow', 'auto')
     }
   }
 
@@ -114,13 +114,14 @@ export default class IndexLayout extends Component {
         </Helmet>
         <div
           className={cx({
-            "layout-header": true,
+            'layout-header': true,
             transparent,
-          })}>
+          })}
+        >
           <div className="title-section">
             <img
               className="avatar"
-              src={require("images/avatar.png")}
+              src={require('images/avatar.png')}
               alt={nickname}
             />
             <div id="title" className="title">
@@ -128,25 +129,20 @@ export default class IndexLayout extends Component {
             </div>
             <div className="icon" onClick={() => this.toggleMenu(menu)}>
               <Icon
-                type={menu ? "x" : "menu"}
+                type={menu ? 'x' : 'menu'}
                 style={{
-                  color: transparent ? "#ffffff" : "#758db0",
-                  fontSize: "20px",
+                  color: transparent ? '#ffffff' : '#758db0',
+                  fontSize: '20px',
                 }}
               />
             </div>
           </div>
           <div
             className={cx({
-              "menu-list": true,
+              'menu-list': true,
               active: menu,
             })}
-            onScroll={e => {
-              console.log("haha")
-
-              e.preventDefault()
-              e.stopPropagation()
-            }}>
+          >
             <div className="menu-item">HOME</div>
             <div className="menu-item">TAG</div>
             <div className="menu-item">ARCHIVE</div>
@@ -158,15 +154,16 @@ export default class IndexLayout extends Component {
           <div
             style={{
               transform: transparent
-                ? "translate(0 ,0)"
-                : "translate(0, -100%)",
+                ? 'translate(0 ,0)'
+                : 'translate(0, -100%)',
               animationName: transparent
-                ? "CoverSlideDownAnimation"
-                : "CoverSlideUpAnimation",
+                ? 'CoverSlideDownAnimation'
+                : 'CoverSlideUpAnimation',
             }}
             className="section section-cover"
             onAnimationStart={this.handleCoverTransitionStart}
-            onAnimationEnd={this.handleCoverTransitionEnd}>
+            onAnimationEnd={this.handleCoverTransitionEnd}
+          >
             <div
               style={{
                 background: `url("${this.state.cover}") 50% 50% / cover`,
@@ -174,7 +171,7 @@ export default class IndexLayout extends Component {
               className="fullscreen"
             />
             <div className="fullscreen-by">
-              PROVIDED BY{" "}
+              PROVIDED BY{' '}
               <a href="https://unsplash.com" target="_blank">
                 Unsplash
               </a>
@@ -182,7 +179,7 @@ export default class IndexLayout extends Component {
             <div className="more-btn" onClick={this.handleMoveDown}>
               <Icon
                 type="arrow-down"
-                style={{ color: "#fff", fontSize: "20px" }}
+                style={{ color: '#fff', fontSize: '20px' }}
               />
             </div>
           </div>
@@ -206,7 +203,7 @@ export default class IndexLayout extends Component {
                   <div key={social.type} className="social-item">
                     <a href={social.url} target="_blank">
                       <img
-                        style={{ width: "14px", height: "14px" }}
+                        style={{ width: '14px', height: '14px' }}
                         src={require(`images/links/${social.type}.png`)}
                         alt={social.type}
                       />
