@@ -81,6 +81,13 @@ export default class IndexPage extends Component {
     history.push(slug)
   }
 
+  // 查看分类下文章
+  handleCategory = category => {
+    const { history } = this.props
+
+    history.push(`/category/${category}/`)
+  }
+
   // 查看更多文章
   handleMoreBtn = () => {
     const { history } = this.props
@@ -117,7 +124,12 @@ export default class IndexPage extends Component {
                   ))}
                 </div>
                 <div className="excerpt">{post.excerpt}</div>
-                <div className="category">{post.frontmatter.category}</div>
+                <div
+                  className="category"
+                  onClick={() => this.handleCategory(post.frontmatter.category)}
+                >
+                  {post.frontmatter.category}
+                </div>
                 <Button
                   type="circle"
                   color="pink"
