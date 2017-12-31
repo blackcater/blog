@@ -21,6 +21,10 @@
       .title-section
         color #fff
 
+      .menu-list
+        a
+          color #fff
+
     .title-section
       display flex
       flex-direction row
@@ -65,7 +69,8 @@
         color color-text-light
         cursor pointer
         &:hover
-          color color-primary
+          a
+            color color-primary
 
     +below(600px)
       .menu-list
@@ -207,6 +212,21 @@
     +below(600px)
       .info
         display block
+
+
+.layout
+  .rocket
+    position fixed
+    right 25px
+    bottom 80px
+
+    img
+      position relative
+      width 40px
+      height 40px
+      cursor pointer
+      &:hover
+        animation FloatAnimation .8s infinite alternate
 
 
 // animation

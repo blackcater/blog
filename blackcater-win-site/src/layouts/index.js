@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { Helmet } from 'react-helmet'
 import { Icon } from 'components'
+import { ScrollTo, ScrollArea } from 'react-scroll-to'
 import Link from 'gatsby-link'
 import ReactTouchEvents from 'react-touch-events'
 import { events, style } from 'dom-helpers'
@@ -23,15 +24,13 @@ export default class IndexLayout extends Component {
   }
 
   componentDidMount() {
-    if (isMobile()) {
-    } else {
+    if (!isMobile()) {
       events.on(window.document, 'wheel', this.handleWheel)
     }
   }
 
   componentWillUnmount() {
-    if (isMobile()) {
-    } else {
+    if (!isMobile()) {
       events.off(window.document, 'wheel', this.handleWheel)
     }
   }
@@ -46,8 +45,6 @@ export default class IndexLayout extends Component {
   handleWheel = throttle(e => {
     const { deltaY } = e
     const sTop = scrollTop()
-
-    console.log(sTop)
 
     if (deltaY === 0) return
 
@@ -171,19 +168,34 @@ export default class IndexLayout extends Component {
               active: menu,
             })}
           >
-            <div className="menu-item">
+            <div
+              className="menu-item"
+              onClick={() => this.setState({ menu: false })}
+            >
               <Link to="/">HOME</Link>
             </div>
-            <div className="menu-item">
+            <div
+              className="menu-item"
+              onClick={() => this.setState({ menu: false })}
+            >
               <Link to="/tag/">TAG</Link>
             </div>
-            <div className="menu-item">
+            <div
+              className="menu-item"
+              onClick={() => this.setState({ menu: false })}
+            >
               <Link to="/archive/">ARCHIVE</Link>
             </div>
-            <div className="menu-item">
+            <div
+              className="menu-item"
+              onClick={() => this.setState({ menu: false })}
+            >
               <Link to="/resume/">RESUME</Link>
             </div>
-            <div className="menu-item">
+            <div
+              className="menu-item"
+              onClick={() => this.setState({ menu: false })}
+            >
               <Link to="/about/">ABOUT</Link>
             </div>
           </div>
@@ -275,6 +287,17 @@ export default class IndexLayout extends Component {
             </div>
             <div className="tool">POWERED BY GATSBY</div>
           </div>
+        </div>
+        <div className="rocket">
+          <ScrollTo>
+            {scroll => (
+              <img
+                src={require('images/rocket.png')}
+                alt="rocket"
+                onClick={() => scroll(0, 0)}
+              />
+            )}
+          </ScrollTo>
         </div>
       </div>
     )
