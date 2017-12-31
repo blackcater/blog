@@ -144,11 +144,7 @@ export default class IndexLayout extends Component {
           })}
         >
           <div className="title-section">
-            <img
-              className="avatar"
-              src={require('images/avatar.png')}
-              alt={nickname}
-            />
+            <div className="avatar" />
             <div id="title" className="title">
               {this.state.title || title}
             </div>
