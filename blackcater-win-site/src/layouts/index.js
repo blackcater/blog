@@ -68,6 +68,7 @@ export default class IndexLayout extends Component {
   handleCoverAnimationStart = () => {
     style(window.document.body, 'overflow', 'hidden')
     style(window.document.documentElement, 'overflow', 'hidden')
+    style(window.document.body, 'height', '100%')
   }
 
   // 封面动画完毕
@@ -77,6 +78,7 @@ export default class IndexLayout extends Component {
     if (!transparent) {
       style(window.document.body, 'overflow', 'auto')
       style(window.document.documentElement, 'overflow', 'auto')
+      style(window.document.body, 'height', 'auto')
     }
   }
 
