@@ -1,5 +1,6 @@
 @import "~styles/main.styl"
 
+// header
 .layout
   width 100%
   min-height 100%
@@ -11,7 +12,7 @@
     right 0
     line-height 50px
     background-color color-bg-light
-    transition all .2s ease-in-out-quad
+    transition all .2s ease-in-out-quad .7s
     z-index 1000
     &.transparent
       line-height 120px
@@ -76,10 +77,63 @@
           display block
           border-bottom 0.5px solid color-bg
 
+
+// content
 .layout
   .layout-content
     min-height 100vh
 
+    .section-cover
+      position absolute
+      top 0
+      left 0
+      right 0
+      bottom 0
+      animation-delay 0
+      animation-duration .7s
+      animation-timing-function cubic-bezier(.825,0,.5,1)
+
+      .fullscreen
+        position absolute
+        top 0
+        left 0
+        right 0
+        bottom 45px
+        &::before
+          content ''
+          position absolute
+          top 0
+          right 0
+          bottom 0
+          left 0
+          background-color rgba(color-bg, 0.3)
+
+      .fullscreen-by
+        padding 10px 25px
+        position absolute
+        right 0
+        bottom 45px
+
+        a
+          font-style italic
+          color #fff
+          font-weight 700
+
+      .more-btn
+        position absolute
+        left 0
+        right 0
+        bottom 0
+        height 45px
+        line-height 45px
+        text-align center
+
+        .wbi
+          position relative
+          animation FloatAnimation .8s infinite alternate
+
+
+// footer
 .layout
   .layout-footer
     padding 100px 0 50px
@@ -149,3 +203,32 @@
     +below(600px)
       .info
         display block
+
+
+// animation
+@keyframes FloatAnimation {
+  from {
+    top -6px
+  }
+  to {
+    top 6px
+  }
+}
+
+@keyframes CoverSlideDownAnimation {
+  from {
+    transform translate(0, -100%)
+  }
+  to {
+    transform translate(0, 0)
+  }
+}
+
+@keyframes CoverSlideUpAnimation {
+  from {
+    transform translate(0, 0)
+  }
+  to {
+    transform translate(0, -100%)
+  }
+}

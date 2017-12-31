@@ -7,14 +7,6 @@ import "./index.styl"
 const NAMESPACE = "UNSPLASH_IMG__BL0G_INDEX_PAGE"
 
 export default class IndexPage extends Component {
-  constructor(props) {
-    super(props)
-
-    this.state = {
-      cover: "",
-    }
-  }
-
   componentDidMount() {
     if (this.shouldFetchUnsplashPhoto()) {
       // 需要更新
@@ -27,18 +19,14 @@ export default class IndexPage extends Component {
           })
         )
 
-        this.setState({
-          cover: `${urls.full}?w=2200`,
-        })
+        this.props.setCover(`${urls.full}?w=2200`)
       })
     } else {
       const { urls } = JSON.parse(
         window.localStorage.getItem(NAMESPACE) || "{}"
       )
 
-      this.setState({
-        cover: `${urls.full}?w=2200`,
-      })
+      this.props.setCover(`${urls.full}?w=2200`)
     }
   }
 
@@ -78,29 +66,6 @@ export default class IndexPage extends Component {
   }
 
   render() {
-    const { cover } = this.state
-
-    return (
-      <div className="page page-index">
-        <div className="section section-cover">
-          <div
-            style={{ background: `url("${cover}") 50% 50% / cover` }}
-            className="fullscreen"
-          />
-          <div className="fullscreen-by">
-            PROVIDED BY{" "}
-            <a href="https://unsplash.com" target="_blank">
-              Unsplash
-            </a>
-          </div>
-          <div className="more-btn">
-            <Icon
-              type="arrow-down"
-              style={{ color: "#fff", fontSize: "20px" }}
-            />
-          </div>
-        </div>
-      </div>
-    )
+    return <div>这是首页啊</div>
   }
 }

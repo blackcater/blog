@@ -1,7 +1,8 @@
 import React, { Component } from "react"
 import { Helmet } from "react-helmet"
 import { Icon } from "components"
-import { query as q, events } from "dom-helpers"
+import { query as q, events, style } from "dom-helpers"
+import { throttle } from "lodash"
 import cx from "classnames"
 
 import "./index.styl"
@@ -13,15 +14,17 @@ export default class IndexLayout extends Component {
     this.state = {
       menu: false,
       transparent: true,
+      cover: "",
+      title: "",
     }
   }
 
   componentDidMount() {
-    events.on(window.document, "scroll", this.handleScroll)
+    events.on(window.document, "wheel", this.handleWheel)
   }
 
   componentWillUnmount() {
-    events.off(window.document, "scroll", this.handleScroll)
+    events.off(window.document, "wheel", this.handleWheel)
   }
 
   // 切换 菜单栏显隐
@@ -31,27 +34,66 @@ export default class IndexLayout extends Component {
     })
   }
 
-  // 滚动事件处理
-  handleScroll = () => {
+  handleWheel = throttle(e => {
+    const { deltaY } = e
     const scrollTop = q.scrollTop(window.document)
 
-    if (scrollTop <= 0) {
-      this.setState({
-        transparent: true,
-      })
-    } else {
+    if (deltaY === 0) return
+
+    if (!scrollTop && deltaY > 10) {
       this.setState({
         transparent: false,
       })
     }
+
+    if (!scrollTop && deltaY < -10) {
+      this.setState({
+        transparent: true,
+      })
+    }
+  }, 300)
+
+  // 动画开始
+  handleCoverTransitionStart = () => {
+    console.log("start")
+
+    style(window.document.body, "overflow", "hidden")
+  }
+
+  // 封面动画完毕
+  handleCoverTransitionEnd = () => {
+    const { transparent } = this.state
+
+    console.dir("end")
+
+    if (!transparent) {
+      style(window.document.body, "overflow", "auto")
+    }
+  }
+
+  // 滚动
+  handleMoveDown = () => {
+    this.setState({
+      transparent: false,
+    })
+  }
+
+  setCover = cover => {
+    this.setState({
+      cover,
+    })
+  }
+
+  setTitle = title => {
+    this.setState({
+      title,
+    })
   }
 
   render() {
     const { menu, transparent } = this.state
     const { children, data: { site: { siteMetadata: metaData } } } = this.props
     const { title, description, nickname, slogan, socials, links } = metaData
-
-    console.dir(this.props)
 
     return (
       <div className="layout" ref={ele => (this.layout = ele)}>
@@ -82,7 +124,7 @@ export default class IndexLayout extends Component {
               alt={nickname}
             />
             <div id="title" className="title">
-              {title}
+              {this.state.title || title}
             </div>
             <div className="icon" onClick={() => this.toggleMenu(menu)}>
               <Icon
@@ -98,7 +140,13 @@ export default class IndexLayout extends Component {
             className={cx({
               "menu-list": true,
               active: menu,
-            })}>
+            })}
+            onScroll={e => {
+              console.log("haha")
+
+              e.preventDefault()
+              e.stopPropagation()
+            }}>
             <div className="menu-item">HOME</div>
             <div className="menu-item">TAG</div>
             <div className="menu-item">ARCHIVE</div>
@@ -106,7 +154,46 @@ export default class IndexLayout extends Component {
             <div className="menu-item">ABOUT</div>
           </div>
         </div>
-        <div className="layout-content">{children()}</div>
+        <div className="layout-content">
+          <div
+            style={{
+              transform: transparent
+                ? "translate(0 ,0)"
+                : "translate(0, -100%)",
+              animationName: transparent
+                ? "CoverSlideDownAnimation"
+                : "CoverSlideUpAnimation",
+            }}
+            className="section section-cover"
+            onAnimationStart={this.handleCoverTransitionStart}
+            onAnimationEnd={this.handleCoverTransitionEnd}>
+            <div
+              style={{
+                background: `url("${this.state.cover}") 50% 50% / cover`,
+              }}
+              className="fullscreen"
+            />
+            <div className="fullscreen-by">
+              PROVIDED BY{" "}
+              <a href="https://unsplash.com" target="_blank">
+                Unsplash
+              </a>
+            </div>
+            <div className="more-btn" onClick={this.handleMoveDown}>
+              <Icon
+                type="arrow-down"
+                style={{ color: "#fff", fontSize: "20px" }}
+              />
+            </div>
+          </div>
+          <div className="section section-content">
+            {children({
+              ...this.props,
+              setCover: this.setCover,
+              setTitle: this.setTitle,
+            })}
+          </div>
+        </div>
         <div className="layout-footer">
           <div className="section">
             <div className="left">
