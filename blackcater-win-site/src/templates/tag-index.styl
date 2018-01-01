@@ -1,0 +1,40 @@
+@import "~styles/util.styl"
+
+.template-tag-index
+  h2
+    color #fff
+    font-size 3rem
+    margin 130px auto 80px
+    padding 0 30px
+    max-width 960px
+    box-sizing border-box
+
+  .tag-list
+    margin 0 auto 50px
+    padding 0 30px
+    max-width 960px
+    &::after
+      content ''
+      display table
+      clear both
+      min-height 0
+
+    .tag
+      position relative
+      float left
+      margin 0 30px 30px 0
+      padding 8px 20px
+      background-color color-bg-light
+      cursor pointer
+
+      span
+        position absolute
+        top -15px
+        right -15px
+        width 30px
+        height 30px
+        text-align center
+        line-height 30px
+        border-radius 15px
+        color color-text-white
+        background-color color-pink
