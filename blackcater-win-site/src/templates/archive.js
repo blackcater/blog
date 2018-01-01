@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Icon, Button, PostList } from 'components'
+import { Icon, Button, PostList, Pagination } from 'components'
 import { isMobile } from 'utils/common'
 import axios from 'axios'
 
@@ -83,6 +83,7 @@ export default class ArchiveTemplate extends Component {
     return (
       <div className="template-archive">
         <h2>ARCHIVE</h2>
+        <Pagination current={4} total={138} />
         <PostList posts={posts} history={this.props.history} />
       </div>
     )

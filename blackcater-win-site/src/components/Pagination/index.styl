@@ -1,0 +1,27 @@
+@import "~styles/util.styl"
+
+.wbi--pagination
+  margin 50px 0
+  display flex
+  flex-direction row
+  justify-content center
+
+  .item
+    margin 0 5px
+    width 40px
+    height 40px
+    text-align center
+    line-height 40px
+    border-radius 20px
+    cursor pointer
+    color color-text-white
+    background-color color-bg-light
+    transition all .2s ease-in-out
+    &:hover
+      background-color color-bg-lightest
+    &.disabled
+      cursor not-allowed
+      color color-text-secondary
+      background-color #0C192F
+    &.active
+      background-color color-pink
