@@ -40,6 +40,11 @@
         border-radius 12px
         background-size cover
         background-image url("/favicon.png")
+        transform scale(1) rotate(0)
+        cursor pointer
+        &:hover
+          transform scale(1.5) rotate(360deg)
+          animation AvatarRotateAnimation .8s
 
       .title
         font-size 2rem
@@ -68,7 +73,7 @@
         height 80px
         line-height 80px
         font-size 1.2rem
-        color color-text-light
+        color color-text-white
         cursor pointer
         &:hover
           a
@@ -167,7 +172,7 @@
 
           .title
             margin-bottom 40px
-            color: color-text-light
+            color: color-text-white
             font-size 1.4rem
 
           p
@@ -191,7 +196,7 @@
 
           .title
             margin-bottom 40px
-            color: color-text-light
+            color: color-text-white
             font-size 1.4rem
 
           .link-item
@@ -239,6 +244,16 @@
   }
   to {
     top 6px
+  }
+}
+
+// avatar
+@keyframes AvatarRotateAnimation {
+  from {
+    transform scale(1) rotate(0)
+  }
+  to {
+    transform scale(1.5) rotate(360deg)
   }
 }
 

@@ -99,8 +99,6 @@ export default class IndexPage extends Component {
     const { data: { allMarkdownRemark: { edges } } } = this.props
     const posts = edges.map(edge => edge.node)
 
-    console.dir(posts)
-
     return (
       <div className="page-index">
         <h2>RECENT</h2>

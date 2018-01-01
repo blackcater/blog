@@ -1,0 +1,124 @@
+@import "~styles/util"
+
+.template-post
+  max-width 660px
+  margin 0 auto
+
+  .title
+    box-sizing border-box
+    margin 130px auto 20px
+    max-width 960px
+    color #fff
+    font-size 3rem
+    font-weight 700
+
+  .time
+    margin-bottom 10px
+
+  .info
+    margin-bottom 40px
+
+    &::after
+      content ''
+      display table
+      clear both
+
+    .time-to-read
+      padding 4px 10px
+      float left
+      font-size 1.4rem
+      background-color color-bg-light
+      border-right 0.5px solid color-bg
+      border-top-left-radius 2px
+      border-bottom-left-radius 2px
+      &::after
+        margin-left 5px
+        content 'min'
+
+    .words-count
+      padding 4px 10px
+      float left
+      font-size 1.4rem
+      background-color color-bg-light
+      border-top-right-radius 2px
+      border-bottom-right-radius 2px
+      &::after
+        margin-left 5px
+        content 'words'
+
+  .tags
+    text-align center
+
+    .tag
+      margin 0 20px
+      padding 8px 40px
+      display inline-block
+      font-size 1.6rem
+      border-radius 8px
+      border 2px solid color-bg-light
+      cursor pointer
+      &:hover
+        background-color color-bg-light
+
+  .content
+    margin 0 auto
+
+    .typograph
+      position relative
+      text-align justify
+
+      h2, h3, h4, h5, h6
+        &::before
+          margin-right 10px
+          content: '#'
+          font-size 1.2em
+          color color-pink
+
+      h2
+        font-size 2.5rem
+
+      h3
+        font-size 2rem
+
+      h4
+        font-size 1.8rem
+
+      h5, h6
+        font-size 1.6rem
+
+      h6
+        font-weight 400
+
+      p
+        margin-bottom 50px
+        font-size 1.6rem
+        line-height 2.8rem
+
+      ul
+        margin 0 0 50px 2rem
+        font-size 1.6rem
+        line-height 2rem
+
+        li
+          margin-bottom 10px
+
+      pre
+        margin-bottom 50px
+        padding 15px
+        box-sizing border-box
+        border-radius 4px
+        overflow auto
+        background-color color-bg-light
+
+      code
+        margin 0 4px
+        padding 3px 6px
+        font-size 0.875em
+        color color-pink
+        background-color color-bg-light
+        border-radius 4px
+        font-family Menlo, Monaco, Consolas, Andale Mono, lucida console, Courier New, monospace
+
+      strong, b
+        font-weight 700
+        color color-pink

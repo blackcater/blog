@@ -73,8 +73,9 @@ exports.createPages = ({ graphql, boundActionCreators }) => {
         const tagMap = {}
         const archiveMap = {}
         const categoryMap = {}
+        const { edges } = data.allMarkdownRemark
 
-        data.allMarkdownRemark.edges.forEach(({ node }) => {
+        edges.forEach(({ node }, index) => {
           const {
             fields: { slug },
             frontmatter: { date, tags, category },
@@ -87,6 +88,9 @@ exports.createPages = ({ graphql, boundActionCreators }) => {
             context: {
               // 你可以在 graphql 中使用该参数
               slug,
+              prevPost: index === 0 ? null : edges[index - 1].node,
+              nextPost:
+                index === edges.length - 1 ? null : edges[index + 1].node,
               tags: tags.map(tag => ({
                 name: tag,
                 slug: `/tag/${tag}/`,

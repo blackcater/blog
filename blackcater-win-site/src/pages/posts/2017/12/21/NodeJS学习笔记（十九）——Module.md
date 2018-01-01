@@ -1,12 +1,12 @@
 ---
 title: Module
 cover: http://oameisqha.bkt.clouddn.com/14834472506416.png
-date: 2017-12-14
+date: 2017-12-21
 tags: [Note, Tutorial]
 category: TECH.
 ---
 
-# Module
+## Module
 
 ES6的Class只是面向对象编程的语法糖，升级了ES5的构造函数的原型链继承的写法，并没有解决模块化问题。Module功能就是为了解决这个问题而提出的。
 
