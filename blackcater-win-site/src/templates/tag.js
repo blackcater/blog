@@ -91,8 +91,6 @@ export default class TagTemplate extends Component {
       totalPage,
     } = this.props.pathContext
 
-    console.dir(this.props)
-
     return (
       <div className="template-tag">
         <h2>{tag.name.toUpperCase()}</h2>
