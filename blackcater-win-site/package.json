@@ -22,6 +22,7 @@
     "gatsby-source-filesystem": "^1.5.11",
     "gatsby-transformer-remark": "^1.7.25",
     "lodash": "^4.17.4",
+    "react-modal": "^3.1.10",
     "react-scroll-to": "^1.1.0",
     "react-touch-events": "^2.1.0"
   },

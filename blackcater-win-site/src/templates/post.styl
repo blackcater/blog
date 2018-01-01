@@ -12,6 +12,10 @@
     font-size 3rem
     font-weight 700
 
+    .category
+      font-size 0.8rem
+      cursor pointer
+
   .time
     margin-bottom 10px
 
@@ -50,7 +54,7 @@
     text-align center
 
     .tag
-      margin 0 20px
+      margin 0 20px 50px
       padding 8px 40px
       display inline-block
       font-size 1.6rem
@@ -59,6 +63,44 @@
       cursor pointer
       &:hover
         background-color color-bg-light
+
+  .reward
+    margin-bottom 50px
+    text-align center
+
+    .reward-image
+      margin-bottom 10px
+      width 64px
+      height 64px
+      cursor pointer
+
+    .pay-list
+      display flex
+      flex-direction row
+      justify-content center
+
+      .pay
+        position relative
+        padding 10px 40px
+        line-height 20px
+        color: color-text-white
+        cursor pointer
+        &::after
+          content ''
+          display table
+          clear bottom
+
+        img
+          margin-right 10px
+          float left
+          width 20px
+          height 20px
+
+      .pay-zhifubao
+        background-color #1daaee
+
+      .pay-weixin
+        background-color #46ae3d
 
   .content
     margin 0 auto
@@ -122,3 +164,13 @@
       strong, b
         font-weight 700
         color color-pink
+
++below(600px)
+  .template-post
+    padding 0 15px
+
+
+.modal--reward
+  img
+    margin auto 10%
+    width 80%
