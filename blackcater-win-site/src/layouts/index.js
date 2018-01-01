@@ -11,6 +11,8 @@ import cx from 'classnames'
 
 import './index.styl'
 
+require('styles/prism.css')
+
 export default class IndexLayout extends Component {
   constructor(props) {
     super(props)
