@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Icon, Button, PostList } from 'components'
+import { Icon, Button, PostList, Pagination } from 'components'
 import { isMobile } from 'utils/common'
 import axios from 'axios'
 
@@ -77,15 +77,32 @@ export default class CategoryTemplate extends Component {
       .catch(errCb)
   }
 
-  render() {
-    const { pageData: posts = [], category } = this.props.pathContext
+  // 分页处理
+  handlePagination = index => {
+    const { history } = this.props
 
-    console.dir(this.props)
+    history.push(`/category/${this.props.pathContext.category}/${index}`)
+  }
+
+  render() {
+    const {
+      pageData: posts = [],
+      category,
+      pageIndex,
+      pageSize,
+      totalPage,
+    } = this.props.pathContext
 
     return (
       <div className="template-category">
         <h2>{category.toUpperCase()}</h2>
         <PostList posts={posts} history={this.props.history} />
+        <Pagination
+          current={pageIndex}
+          size={pageSize}
+          count={totalPage}
+          onPagination={this.handlePagination}
+        />
       </div>
     )
   }

@@ -40,7 +40,10 @@ export default class Pagination extends Component {
     this.setState(state)
   }
 
-  handleItemClick = index => {
+  handleItemClick = (index, disabled) => {
+    if (disabled) return
+    if (index === this.state.current) return
+
     const { onPagination } = this.props
 
     this.setState({ current: index })
@@ -253,6 +256,9 @@ export default class Pagination extends Component {
             item: true,
             disabled: count === 0 || current <= 1,
           })}
+          onClick={() =>
+            this.handleItemClick(current - 1, count === 0 || current <= 1)
+          }
         >
           <Icon type="chevron-left" />
         </div>
@@ -262,6 +268,9 @@ export default class Pagination extends Component {
             item: true,
             disabled: count === 0 || current >= count,
           })}
+          onClick={() =>
+            this.handleItemClick(current + 1, count === 0 || current >= count)
+          }
         >
           <Icon type="chevron-right" />
         </div>
@@ -273,8 +282,8 @@ export default class Pagination extends Component {
 Pagination.propTypes = {
   current: PropTypes.number.isRequired,
   size: PropTypes.number.isRequired,
-  total: PropTypes.number.isRequired,
-  count: PropTypes.number.isRequired,
+  total: PropTypes.number,
+  count: PropTypes.number,
   onPagination: PropTypes.func,
 }
 
@@ -282,4 +291,5 @@ Pagination.defaultProps = {
   current: 1,
   size: 20,
   total: 0,
+  count: 0,
 }

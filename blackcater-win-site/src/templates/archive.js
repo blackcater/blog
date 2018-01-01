@@ -75,16 +75,31 @@ export default class ArchiveTemplate extends Component {
       .catch(errCb)
   }
 
-  render() {
-    const { pageData: posts = [] } = this.props.pathContext
+  // 分页处理
+  handlePagination = index => {
+    const { history } = this.props
 
-    console.dir(this.props)
+    history.push(`/archive/${index}`)
+  }
+
+  render() {
+    const {
+      pageData: posts = [],
+      pageIndex,
+      pageSize,
+      totalPage,
+    } = this.props.pathContext
 
     return (
       <div className="template-archive">
         <h2>ARCHIVE</h2>
-        <Pagination current={4} total={138} />
         <PostList posts={posts} history={this.props.history} />
+        <Pagination
+          current={pageIndex}
+          size={pageSize}
+          count={totalPage}
+          onPagination={this.handlePagination}
+        />
       </div>
     )
   }
