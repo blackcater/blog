@@ -217,6 +217,17 @@
       h6
         font-weight 400
 
+      blockquote
+        padding 0 15px
+        border-left 4px solid color-pink
+        background-color color-bg-light
+        font-style italic
+        p
+          &::before
+            content "“ "
+          &::after
+            content " ”"
+
       p
         margin-bottom 50px
         font-size 1.6rem
@@ -254,6 +265,11 @@
       strong, b
         font-weight 700
         color color-pink
+
+      a
+        color color-pink
+        font-size 0.8em
+        text-decoration underline
 
 
 +below(600px)

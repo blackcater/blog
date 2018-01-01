@@ -1,7 +1,7 @@
 {
   "name": "gatsby-starter-default",
   "description": "Gatsby default starter",
-  "version": "1.0.0",
+  "version": "2.0.0",
   "author": "Kyle Mathews <mathews.kyle@gmail.com>",
   "dependencies": {
     "axios": "^0.17.1",
@@ -41,6 +41,7 @@
   },
   "devDependencies": {
     "autoprefixer": "^7.2.3",
+    "gh-pages": "^1.1.0",
     "husky": "^0.14.3",
     "lint-staged": "^6.0.0",
     "poststylus": "^1.0.0",

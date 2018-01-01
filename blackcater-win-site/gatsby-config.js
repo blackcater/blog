@@ -5,9 +5,10 @@ const rucksack = require('rucksack-css')
 
 module.exports = {
   siteMetadata: {
-    title: '全栈成长路',
-    description: 'blackcater的个人博客————全栈工程师成长之路',
+    title: "blackcater's blog",
+    description: 'blackcater的个人博客———-对任何技术都感兴趣的普通程序猿',
     website: 'http://www.blackcater.win',
+    siteUrl: 'http://www.blackcater.win',
     nickname: 'blackcater',
     slogan: '一心所向，必有回响',
     email: 'blackcater2015@gmail.com',
@@ -22,41 +23,45 @@ module.exports = {
       // },
       {
         type: 'twitter',
-        url: '',
+        url: 'https://twitter.com/tomtang2015',
       },
       {
         type: 'github',
-        url: '',
+        url: 'https://github.com/blackcater',
       },
       {
         type: 'medium',
-        url: '',
+        url: 'https://medium.com/@blackcater',
       },
       {
         type: 'weibo',
-        url: '',
+        url: 'https://weibo.com/tangyinong2013',
       },
       {
         type: 'segmentfault',
-        url: '',
+        url: 'https://segmentfault.com/u/blackcater',
       },
       {
         type: 'zhihu',
-        url: '',
+        url: 'https://www.zhihu.com/people/blackcater2015',
       },
       {
         type: 'jianshu',
-        url: '',
+        url: 'https://www.jianshu.com/users/df03cf10f42f/timeline',
+      },
+      {
+        type: 'bilibili',
+        url: 'https://space.bilibili.com/4718807/#/',
+      },
+      {
+        type: 'rss',
+        url: 'http://www.blackcater.win/rss.xml',
       },
     ],
     links: [
       {
-        name: '小猫的博客',
-        link: 'https://www.baidu.com',
-      },
-      {
-        name: '小狗的博客',
-        link: 'https://www.baidu.com',
+        name: "blackcater's blog",
+        link: 'http://www.blackcater.win',
       },
     ],
   },

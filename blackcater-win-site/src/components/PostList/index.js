@@ -53,7 +53,7 @@ export default class PostList extends Component {
                 className="category"
                 onClick={() => this.handleCategory(post.frontmatter.category)}
               >
-                {post.frontmatter.category}
+                {post.frontmatter.category.toUpperCase()}
               </div>
               <Button
                 type="circle"
