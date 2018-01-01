@@ -3,7 +3,7 @@ title: Set和Map数据结构
 cover: http://oameisqha.bkt.clouddn.com/14834472506416.png
 date: 2017-12-14
 tags: [Note, Tutorial]
-category: TECH.
+category: tech
 ---
 
 # Set和Map数据结构

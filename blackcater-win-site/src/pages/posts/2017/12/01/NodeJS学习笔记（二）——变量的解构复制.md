@@ -3,7 +3,7 @@ title: 变量的解构赋值
 cover: http://oameisqha.bkt.clouddn.com/14834472506416.png
 date: 2017-12-01
 tags: [Note, Tutorial]
-category: TECH.
+category: tech
 ---
 
 # 变量的解构赋值

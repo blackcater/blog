@@ -3,7 +3,7 @@ title: 数组的扩展
 cover: http://oameisqha.bkt.clouddn.com/14834472506416.png
 date: 2017-12-07
 tags: [Note, Tutorial]
-category: TECH.
+category: tech
 ---
 
 # 数组的扩展

@@ -1,0 +1,89 @@
+@import "~styles/util.styl"
+
+.wbi--post-list
+  margin 0 auto
+  max-width 1020px
+
+  .post
+    position relative
+    margin 0 30px 30px
+    display flex
+    flex-direction row
+    border-radius 3px
+    background-color color-bg-light
+
+    .cover
+      flex 1
+      background-color color-bg-lightest
+      background-position: 50% 50%
+      background-size cover
+
+    .content
+      flex-basis 345px
+      padding 50px
+      box-sizing border-box
+
+      .title
+        margin-bottom 10px
+        font-size 2.4rem
+        line-height 3rem
+        color #fff
+
+      .time
+        margin-bottom 10px
+        font-size 1.2rem
+
+      .tags
+        margin-bottom 20px
+
+        &::after
+          content ''
+          display table
+          clear both
+          min-height 0
+
+        .tag
+          margin 0 5px 5px 0
+          padding 8px 9px
+          float left
+          font-size 1rem
+          background-color color-bg
+          border-radius 2px
+          color color-text-secondary
+          cursor pointer
+
+      .excerpt
+        margin-bottom 30px
+        font-size 1.6rem
+        line-height 2rem
+        text-align justify
+        color color-text-secondary
+
+      .category
+        position absolute
+        top 20px
+        left 20px
+        padding 8px 20px
+        font-size 1.2rem
+        color #fff
+        border-radius 3px
+        background-color color-green
+        cursor pointer
+
+
++below(600px)
+  .wbi--post-list
+
+    .post
+      flex-wrap wrap
+      margin 0 0 50px 0
+
+      .cover
+        flex none
+        width 100%
+        height 250px
+
+      .content
+        padding 30px
+        flex-basis auto
+        width 100%

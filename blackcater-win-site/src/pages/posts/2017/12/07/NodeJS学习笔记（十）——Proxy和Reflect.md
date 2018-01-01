@@ -3,7 +3,7 @@ title: Proxy和Reflect
 cover: http://oameisqha.bkt.clouddn.com/14834472506416.png
 date: 2017-12-07
 tags: [Note, Tutorial]
-category: TECH.
+category: tech
 ---
 
 # Proxy和Reflect

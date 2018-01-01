@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
-import { Icon, Button } from 'components'
-import Link from 'gatsby-link'
+import { Icon, Button, PostList } from 'components'
 import { isMobile } from 'utils/common'
 import axios from 'axios'
 
@@ -76,20 +75,6 @@ export default class IndexPage extends Component {
       .catch(errCb)
   }
 
-  // 查看文章详情
-  handleReadPost = slug => {
-    const { history } = this.props
-
-    history.push(slug)
-  }
-
-  // 查看分类下文章
-  handleCategory = category => {
-    const { history } = this.props
-
-    history.push(`/category/${category}/`)
-  }
-
   // 查看更多文章
   handleMoreBtn = () => {
     const { history } = this.props
@@ -104,43 +89,7 @@ export default class IndexPage extends Component {
     return (
       <div className="page-index">
         <h2>RECENT</h2>
-        <div className="post-list">
-          {posts.map((post, index) => (
-            <div key={`${index}`} className="post">
-              <div
-                style={{
-                  backgroundImage: `url('${post.frontmatter.cover}')`,
-                }}
-                className="cover"
-              />
-              <div className="content">
-                <div className="title">{post.frontmatter.title}</div>
-                <div className="time">{post.frontmatter.edate}</div>
-                <div className="tags">
-                  {(post.frontmatter.tags || []).map((tag, idx) => (
-                    <div key={`${idx}`} className="tag">
-                      <Link to={`/tag/${tag}`}>{tag}</Link>
-                    </div>
-                  ))}
-                </div>
-                <div className="excerpt">{post.excerpt}</div>
-                <div
-                  className="category"
-                  onClick={() => this.handleCategory(post.frontmatter.category)}
-                >
-                  {post.frontmatter.category}
-                </div>
-                <Button
-                  type="circle"
-                  color="pink"
-                  onClick={() => this.handleReadPost(post.fields.slug)}
-                >
-                  READ
-                </Button>
-              </div>
-            </div>
-          ))}
-        </div>
+        <PostList posts={posts} history={this.props.history} />
         <div className="more-section">
           <Button type="circle" color="pink" onClick={this.handleMoreBtn}>
             MORE
