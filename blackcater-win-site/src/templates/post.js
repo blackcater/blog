@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import Modal from 'react-modal'
+import { Icon } from 'components'
 
 import './post.styl'
 
@@ -54,10 +55,22 @@ export default class PostTemplate extends Component {
     }
   }
 
+  // 帖子点击
+  handlePostClick = navPost => {
+    const { markdownRemark: post } = this.props.data
+    const { history } = this.props
+
+    if (navPost === post) return
+
+    history.push(navPost.fields.slug)
+  }
+
   render() {
     const { rewardModalOpen, rewardImageSrc } = this.state
     const { markdownRemark: post } = this.props.data
-    const { prePost, nextPost, category, tags = [] } = this.props.pathContext
+    const { prevPost, nextPost, category, tags = [] } = this.props.pathContext
+    const prev = prevPost || post
+    const next = nextPost || post
 
     return (
       <div className="template-post">
@@ -115,6 +128,40 @@ export default class PostTemplate extends Component {
             </div>
           </div>
         </div>
+        <div className="navigator-list">
+          <div
+            className="navigator-item navigator-item--prev"
+            onClick={() => this.handlePostClick(prev)}
+          >
+            <div
+              className="cover"
+              style={{ backgroundImage: `url("${prev.frontmatter.cover}")` }}
+            />
+            <div className="content">
+              {prevPost ? <Icon type="arrow-left" /> : <Icon type="arrow-up" />}
+              <div className="tip">PREV POST</div>
+              <div className="title">{prev.frontmatter.title}</div>
+            </div>
+          </div>
+          <div
+            className="navigator-item navigator-item--next"
+            onClick={() => this.handlePostClick(next)}
+          >
+            <div
+              className="cover"
+              style={{ backgroundImage: `url("${next.frontmatter.cover}")` }}
+            />
+            <div className="content">
+              {nextPost ? (
+                <Icon type="arrow-right" />
+              ) : (
+                <Icon type="arrow-up" />
+              )}
+              <div className="tip">NEXT POST</div>
+              <div className="title">{next.frontmatter.title}</div>
+            </div>
+          </div>
+        </div>
         <Modal
           isOpen={rewardModalOpen}
           style={{
@@ -131,7 +178,11 @@ export default class PostTemplate extends Component {
           onRequestClose={() => this.setState({ rewardModalOpen: false })}
         >
           <div className="modal--reward">
-            <img src={rewardImageSrc} alt="扫一扫打赏" />
+            <img
+              src={rewardImageSrc}
+              alt="扫一扫打赏"
+              onClick={() => this.setState({ rewardModalOpen: false })}
+            />
           </div>
         </Modal>
       </div>

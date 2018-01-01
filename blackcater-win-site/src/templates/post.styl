@@ -102,6 +102,92 @@
       .pay-weixin
         background-color #46ae3d
 
+  .navigator-list
+    display flex
+    flex-direction row
+    justify-content space-between
+    height 150px
+
+    .navigator-item
+      position relative
+      flex: 1
+
+      .cover
+        width 100%
+        height 100%
+        background-size cover
+        background-position 50% 50%
+
+      .content
+        position absolute
+        top 0
+        left 0
+        right 0
+        bottom 0
+        cursor pointer
+        color #fff
+        background-color rgba(18, 39, 72, 1)
+        transition all .2s ease-in-out
+        &:hover
+          background-color rgba(18, 39, 72, 0.3)
+
+        .wbi
+          font-size 24px
+
+        .tip
+          color color-text-secondary
+
+    .navigator-item--prev
+      border-right 1px solid color-bg
+
+      .wbi
+        margin-top -12px
+        position absolute
+        top 50%
+        left 15px
+
+      .tip
+        position absolute
+        top 30px
+        left 60px
+
+      .title
+        margin 0
+        position absolute
+        top 60px
+        left 60px
+        right 20px
+        font-size 2.4rem
+        overflow hidden
+        white-space nowrap
+        text-overflow ellipsis
+
+    .navigator-item--next
+      border-right 1px solid color-bg
+
+      .wbi
+        margin-top -12px
+        position absolute
+        top 50%
+        right 15px
+
+      .tip
+        position absolute
+        top 30px
+        right 60px
+
+      .title
+        margin 0
+        position absolute
+        top 60px
+        right 60px
+        left 20px
+        font-size 2.4rem
+        overflow hidden
+        white-space nowrap
+        text-overflow ellipsis
+        text-align right
+
   .content
     margin 0 auto
 
@@ -165,9 +251,18 @@
         font-weight 700
         color color-pink
 
+
 +below(600px)
   .template-post
     padding 0 15px
+
+    .navigator-list
+      flex-wrap wrap
+      height 300px
+
+      .navigator-item
+        width 100%
+        flex auto
 
 
 .modal--reward

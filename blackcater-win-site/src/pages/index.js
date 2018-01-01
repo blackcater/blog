@@ -33,6 +33,8 @@ export default class IndexPage extends Component {
 
       this.props.setCover(`${urls.full}?w=${width}`)
     }
+
+    this.props.setTitle(this.props.data.site.siteMetadata.title)
   }
 
   // 判断是否需要更新图片
@@ -170,6 +172,11 @@ export const query = graphql`
           }
           excerpt
         }
+      }
+    }
+    site {
+      siteMetadata {
+        title
       }
     }
   }
