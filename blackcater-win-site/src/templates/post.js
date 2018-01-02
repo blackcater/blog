@@ -1,7 +1,9 @@
 import React, { Component } from 'react'
 import Modal from 'react-modal'
 import { Icon } from 'components'
+import Gitment from 'gitment'
 
+import 'styles/gitment.css'
 import './post.styl'
 
 export default class PostTemplate extends Component {
@@ -17,9 +19,20 @@ export default class PostTemplate extends Component {
   componentDidMount() {
     const { setCover, setTitle } = this.props
     const { markdownRemark: post } = this.props.data
+    const gitment = new Gitment({
+      id: post.frontmatter.title,
+      owner: 'blackcater',
+      repo: 'blackcater.github.io',
+      oauth: {
+        client_id: 'f402dedf9798585394d9',
+        client_secret: '0ae847d4b789be4450e503948a8155a413349f7b',
+      },
+    })
 
     setCover(post.frontmatter.cover)
     setTitle(post.frontmatter.title)
+
+    gitment.render('comments')
   }
 
   // 标签点击
@@ -162,6 +175,7 @@ export default class PostTemplate extends Component {
             </div>
           </div>
         </div>
+        <div id="comments" />
         <Modal
           isOpen={rewardModalOpen}
           style={{

@@ -9,9 +9,8 @@ import { throttle } from 'lodash'
 import { scrollTop, isMobile } from 'utils/common'
 import cx from 'classnames'
 
+import 'styles/prism.css'
 import './index.styl'
-
-require('styles/prism.css')
 
 export default class IndexLayout extends Component {
   constructor(props) {
