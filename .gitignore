@@ -12,5 +12,5 @@ public/
 .DS_Store
 
 # editor
-.idea
-.code
+.idea/
+.code/
