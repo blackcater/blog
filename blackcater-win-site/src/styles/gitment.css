@@ -197,6 +197,7 @@ a.gitment-comment-name:visited {
 .gitment-editor-tabs {
   margin-bottom: -1px;
   margin-left: -1px;
+  background-color: #122748;
 }
 
 .gitment-editor-tab {
@@ -206,7 +207,7 @@ a.gitment-comment-name:visited {
   line-height: 20px;
   color: #3a5b8e;
   text-decoration: none;
-  background-color: transparent;
+  background-color: #122748;
   border-width: 0 1px;
   border-style: solid;
   border-color: transparent;
@@ -221,7 +222,7 @@ a.gitment-comment-name:visited {
 
 .gitment-editor-tab.gitment-selected {
   color: #758db0;
-  background-color: #122748;
+  background-color: #101c2e;
   border-color: #122748;
 }
 
@@ -315,7 +316,7 @@ a.gitment-editor-logout-link:hover {
   font-size: 14px;
   line-height: 1.6;
 
-  background-color: #122748;
+  background-color: #101c2e;
 
   color: #758db0;
   vertical-align: middle;
@@ -340,7 +341,7 @@ a.gitment-editor-logout-link:hover {
 
   padding: 16px;
   color: #758db0;
-  background-color: #122748;
+  background-color: #101c2e;
 
   width: 100%;
   font-size: 14px;

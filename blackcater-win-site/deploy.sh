@@ -5,5 +5,5 @@ yarn build
 cd ./public/
 
 git add .
-git commit -m 'v2.0-beta3'
+git commit -m 'v2.0-beta5'
 git push
