@@ -89,11 +89,11 @@ a.gitment-header-issue-link,
 a.gitment-header-issue-link:visited {
   float: right;
   line-height: 30px;
-  color: #666;
+  color: #ea70a1;
 }
 
 a.gitment-header-issue-link:hover {
-  color: #666;
+  color: #ea70a1;
 }
 
 .gitment-comments-loading,
@@ -177,8 +177,8 @@ a.gitment-header-issue-link:hover {
 
 .gitment-comment-header {
   margin: 12px 15px;
-  color: #666;
-  background-color: #fff;
+  color: #3a5b8e;
+  background-color: #101c2e;
   border-radius: 3px;
 }
 
@@ -191,7 +191,7 @@ a.gitment-header-issue-link:hover {
 a.gitment-comment-name,
 a.gitment-comment-name:visited {
   font-weight: 600;
-  color: #666;
+  color: #758db0;
 }
 
 .gitment-editor-tabs {
@@ -269,15 +269,15 @@ a.gitment-editor-logout-link:hover {
   top: 0;
   bottom: 50px;
   pointer-events: none;
-  background: -webkit-linear-gradient(top, rgba(255, 255, 255, 0), rgba(255, 255, 255, .9));
-  background: linear-gradient(180deg, rgba(255, 255, 255, 0), rgba(255, 255, 255, .9));
+  background: -webkit-linear-gradient(top, rgba(16, 28, 46, 0), rgba(16, 28, 46, .9));
+  background: linear-gradient(180deg, rgba(16, 28, 46, 0), rgba(16, 28, 46, .9));
 }
 
 .gitment-comment-body-folded::after {
   display: block !important;
   content: "Click to Expand" !important;
   text-align: center;
-  color: #666;
+  color: #758db0;
   position: absolute;
   width: 100%;
   height: 50px;
@@ -285,7 +285,7 @@ a.gitment-editor-logout-link:hover {
   left: 0;
   bottom: 0;
   pointer-events: none;
-  background: rgba(255, 255, 255, .9);
+  background: #101c2e;
 }
 
 .gitment-editor-body {
@@ -462,7 +462,7 @@ a.gitment-editor-footer-tip:hover {
 }
 
 .gitment-markdown .pl-c {
-  color: #969896;
+  color: #aaa;
 }
 
 .gitment-markdown .pl-c1,
@@ -477,7 +477,7 @@ a.gitment-editor-footer-tip:hover {
 
 .gitment-markdown .pl-smi,
 .gitment-markdown .pl-s .pl-s1 {
-  color: #333;
+  color: #758db0;
 }
 
 .gitment-markdown .pl-ent {
@@ -485,7 +485,7 @@ a.gitment-editor-footer-tip:hover {
 }
 
 .gitment-markdown .pl-k {
-  color: #a71d5d;
+  color: #ea70a1;
 }
 
 .gitment-markdown .pl-s,
@@ -495,7 +495,7 @@ a.gitment-editor-footer-tip:hover {
 .gitment-markdown .pl-sr .pl-cce,
 .gitment-markdown .pl-sr .pl-sre,
 .gitment-markdown .pl-sr .pl-sra {
-  color: #183691;
+  color: yellow;
 }
 
 .gitment-markdown .pl-v,
@@ -668,8 +668,8 @@ a.gitment-editor-footer-tip:hover {
 }
 
 .gitment-markdown a {
-  color: #0366d6;
-  text-decoration: none;
+  color: #ea70a1;
+  text-decoration: underline;
 }
 
 .gitment-markdown a:hover {
@@ -716,6 +716,7 @@ a.gitment-editor-footer-tip:hover {
 .gitment-markdown h4,
 .gitment-markdown h5,
 .gitment-markdown h6 {
+  color: #fff;
   margin-top: 0;
   margin-bottom: 0;
 }
@@ -881,9 +882,19 @@ a.gitment-editor-footer-tip:hover {
 
 .gitment-markdown blockquote {
   padding: 0 1em;
-  color: #6a737d;
-  border-left: 0.25em solid #dfe2e5;
+  border-left: 0.25em solid #ea70a1;
+  background-color: #122748;
+  font-style: italic;
 }
+
+.gitment-markdown blockquote p::before {
+  content: "“ ";
+}
+
+.gitment-markdown blockquote p::after {
+  content: " ”";
+}
+
 
 .gitment-markdown blockquote>:first-child {
   margin-top: 0;
@@ -919,13 +930,25 @@ a.gitment-editor-footer-tip:hover {
   line-height: 1.25;
 }
 
+.gitment-markdown h1::before,
+.gitment-markdown h2::before,
+.gitment-markdown h3::before,
+.gitment-markdown h4::before,
+.gitment-markdown h5::before,
+.gitment-markdown h6::before {
+  margin-right: 10px;
+  content: '#';
+  font-size: 1.2em;
+  color: #ea70a1;
+}
+
 .gitment-markdown h1 .octicon-link,
 .gitment-markdown h2 .octicon-link,
 .gitment-markdown h3 .octicon-link,
 .gitment-markdown h4 .octicon-link,
 .gitment-markdown h5 .octicon-link,
 .gitment-markdown h6 .octicon-link {
-  color: #1b1f23;
+  color: #ea70a1;
   vertical-align: middle;
   visibility: hidden;
 }
@@ -951,13 +974,11 @@ a.gitment-editor-footer-tip:hover {
 .gitment-markdown h1 {
   padding-bottom: 0.3em;
   font-size: 2em;
-  border-bottom: 1px solid #eaecef;
 }
 
 .gitment-markdown h2 {
   padding-bottom: 0.3em;
   font-size: 1.5em;
-  border-bottom: 1px solid #eaecef;
 }
 
 .gitment-markdown h3 {
@@ -1091,7 +1112,8 @@ a.gitment-editor-footer-tip:hover {
   overflow: auto;
   font-size: 85%;
   line-height: 1.45;
-  background-color: #f5f5f5;
+  color: #758db0;
+  background-color: #122748;
   border-radius: 0;
 }
 
