@@ -2,7 +2,7 @@
   font-family: sans-serif;
   font-size: 14px;
   line-height: 1.5;
-  color: #333;
+  color: #758db0;
   word-wrap: break-word;
 }
 
@@ -73,16 +73,20 @@
 .gitment-header-like-btn svg {
   vertical-align: middle;
   height: 30px;
+  -webkit-filter: drop-shadow(80px 0px rgb(234, 112, 161));
+  filter: drop-shadow(80px 0px rgb(234, 112, 161));
 }
 
 .gitment-comment-like-btn svg {
   vertical-align: middle;
   height: 20px;
+  -webkit-filter: drop-shadow(80px 0px rgb(234, 112, 161));
+  filter: drop-shadow(80px 0px rgb(234, 112, 161));
 }
 
 .gitment-header-like-btn.liked svg,
 .gitment-comment-like-btn.liked svg {
-  fill: #F44336;
+  fill: #ea70a1;
 }
 
 a.gitment-header-issue-link,
