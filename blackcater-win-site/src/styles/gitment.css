@@ -73,15 +73,13 @@
 .gitment-header-like-btn svg {
   vertical-align: middle;
   height: 30px;
-  -webkit-filter: drop-shadow(80px 0px rgb(234, 112, 161));
-  filter: drop-shadow(80px 0px rgb(234, 112, 161));
+  stroke: #ea70a1;
 }
 
 .gitment-comment-like-btn svg {
   vertical-align: middle;
   height: 20px;
-  -webkit-filter: drop-shadow(80px 0px rgb(234, 112, 161));
-  filter: drop-shadow(80px 0px rgb(234, 112, 161));
+  stroke: #ea70a1;
 }
 
 .gitment-header-like-btn.liked svg,
