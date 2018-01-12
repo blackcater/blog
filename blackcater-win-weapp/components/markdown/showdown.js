@@ -45,7 +45,7 @@ function getDefaultOpts (simple) {
     },
     excludeTrailingPunctuationFromURLs: {
       defaultValue: false,
-      describe: 'Excludes trailing punctuation from links generated with autoLinking',
+      describe: 'Excludes trailing punctuation from socials generated with autoLinking',
       type: 'boolean'
     },
     literalMidWordUnderscores: {
@@ -1351,10 +1351,10 @@ showdown.subParser('anchors', function (text, options, globals) {
     return result;
   };
 
-  // First, handle reference-style links: [link text] [id]
+  // First, handle reference-style socials: [link text] [id]
   text = text.replace(/(\[((?:\[[^\]]*]|[^\[\]])*)][ ]?(?:\n[ ]*)?\[(.*?)])()()()()/g, writeAnchorTag);
 
-  // Next, inline-style links: [link text](url "optional title")
+  // Next, inline-style socials: [link text](url "optional title")
   text = text.replace(/(\[((?:\[[^\]]*]|[^\[\]])*)]\([ \t]*()<?(.*?(?:\(.*?\).*?)?)>?[ \t]*((['"])(.*?)\6[ \t]*)?\))/g,
                       writeAnchorTag);
 
@@ -2523,9 +2523,9 @@ showdown.subParser('spanGamut', function (text, options, globals) {
   text = showdown.subParser('images')(text, options, globals);
   text = showdown.subParser('anchors')(text, options, globals);
 
-  // Make links out of things like `<http://example.com/>`
+  // Make socials out of things like `<http://example.com/>`
   // Must come after _DoAnchors(), because you can use < and >
-  // delimiters in inline links like [this](<url>).
+  // delimiters in inline socials like [this](<url>).
   text = showdown.subParser('autoLinks')(text, options, globals);
   text = showdown.subParser('italicsAndBold')(text, options, globals);
   text = showdown.subParser('strikethrough')(text, options, globals);
