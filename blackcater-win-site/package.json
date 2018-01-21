@@ -1,7 +1,7 @@
 {
   "name": "gatsby-starter-default",
   "description": "Gatsby default starter",
-  "version": "2.0.0",
+  "version": "2.0.1",
   "author": "Kyle Mathews <mathews.kyle@gmail.com>",
   "dependencies": {
     "axios": "^0.17.1",
@@ -25,8 +25,7 @@
     "gitment": "^0.0.3",
     "lodash": "^4.17.4",
     "react-modal": "^3.1.10",
-    "react-scroll-to": "^1.1.0",
-    "react-touch-events": "^2.1.0"
+    "react-scroll-to": "^1.1.0"
   },
   "keywords": [
     "gatsby"

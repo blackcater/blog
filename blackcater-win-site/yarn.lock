@@ -8151,12 +8151,6 @@ react-side-effect@^1.1.0:
     exenv "^1.2.1"
     shallowequal "^1.0.1"
 
-react-touch-events@^2.1.0:
-  version "2.1.0"
-  resolved "http://registry.npm.taobao.org/react-touch-events/download/react-touch-events-2.1.0.tgz#e1c93a328996344cd919537538d67b5fbf2b2ddf"
-  dependencies:
-    prop-types "^15.5.8"
-
 react@^15.6.0:
   version "15.6.2"
   resolved "http://registry.npm.taobao.org/react/download/react-15.6.2.tgz#dba0434ab439cfe82f108f0f511663908179aa72"
