@@ -92,68 +92,71 @@
 
 // content
 .layout
-  .layout-content
-    min-height 100vh
+  .layout-cover
+    position fixed
+    top 0
+    left 0
+    right 0
+    bottom 0
+    animation-delay 0
+    animation-duration .7s
+    animation-timing-function cubic-bezier(.825,0,.5,1)
+    background-color color-bg-light
+    z-index -100
 
-    .section-cover
-      position fixed
+    .fullscreen
+      position absolute
       top 0
       left 0
       right 0
-      bottom 0
-      animation-delay 0
-      animation-duration .7s
-      animation-timing-function cubic-bezier(.825,0,.5,1)
-      background-color color-bg-light
-      z-index 2
-
-      .fullscreen
+      bottom 45px
+      &::before
+        content ''
         position absolute
         top 0
-        left 0
-        right 0
-        bottom 45px
-        &::before
-          content ''
-          position absolute
-          top 0
-          right 0
-          bottom 0
-          left 0
-          background-color rgba(color-bg, 0.3)
-
-      .fullscreen-by
-        padding 10px 25px
-        position absolute
-        right 0
-        bottom 45px
-
-        a
-          font-style italic
-          color #fff
-          font-weight 700
-
-      .more-btn
-        position absolute
-        left 0
         right 0
         bottom 0
-        height 45px
-        line-height 45px
-        text-align center
+        left 0
+        background-color rgba(color-bg, 0.3)
 
-        .wbi
-          position relative
-          animation FloatAnimation .8s infinite alternate
+    .fullscreen-by
+      padding 10px 25px
+      position absolute
+      right 0
+      bottom 45px
 
-    .section-content
-      margin 70px 0 20px
+      a
+        font-style italic
+        color #fff
+        font-weight 700
+
+    .more-btn
+      position absolute
+      left 0
+      right 0
+      bottom 0
+      height 45px
+      line-height 45px
+      text-align center
+
+      .wbi
+        position relative
+        animation FloatAnimation .8s infinite alternate
+
+
+  .layout-content
+    margin 100vh 0 0
+    padding-bottom 20px
+    background-color color-bg
+    color color-text
+    box-shadow 0 0 20px color-bg
 
 
 // footer
 .layout
   .layout-footer
     padding 100px 0 50px
+    color color-text
     background-color color-bg-light
 
     .section

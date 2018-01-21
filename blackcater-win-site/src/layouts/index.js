@@ -25,15 +25,15 @@ export default class IndexLayout extends Component {
   }
 
   componentDidMount() {
-    if (!isMobile()) {
-      events.on(window.document, 'wheel', this.handleWheel)
-    }
+    // if (!isMobile()) {
+    //   events.on(window.document, 'wheel', this.handleWheel)
+    // }
   }
 
   componentWillUnmount() {
-    if (!isMobile()) {
-      events.off(window.document, 'wheel', this.handleWheel)
-    }
+    // if (!isMobile()) {
+    //   events.off(window.document, 'wheel', this.handleWheel)
+    // }
   }
 
   // 切换 菜单栏显隐
@@ -43,24 +43,24 @@ export default class IndexLayout extends Component {
     })
   }
 
-  handleWheel = throttle(e => {
-    const { deltaY } = e
-    const sTop = scrollTop()
-
-    if (deltaY === 0) return
-
-    if (sTop <= 0 && deltaY > 5) {
-      this.setState({
-        transparent: false,
-      })
-    }
-
-    if (sTop <= 0 && deltaY < 0) {
-      this.setState({
-        transparent: true,
-      })
-    }
-  }, 300)
+  // handleWheel = throttle(e => {
+  //   const { deltaY } = e
+  //   const sTop = scrollTop()
+  //
+  //   if (deltaY === 0) return
+  //
+  //   if (sTop <= 0 && deltaY > 5) {
+  //     this.setState({
+  //       transparent: false,
+  //     })
+  //   }
+  //
+  //   if (sTop <= 0 && deltaY < 0) {
+  //     this.setState({
+  //       transparent: true,
+  //     })
+  //   }
+  // }, 300)
 
   // 动画开始
   handleCoverAnimationStart = () => {
@@ -69,39 +69,39 @@ export default class IndexLayout extends Component {
     style(window.document.body, 'height', '100%')
   }
 
-  // 封面动画完毕
-  handleCoverAnimationEnd = () => {
-    const { transparent } = this.state
+  // // 封面动画完毕
+  // handleCoverAnimationEnd = () => {
+  //   const { transparent } = this.state
+  //
+  //   if (!transparent) {
+  //     style(window.document.body, 'overflow', 'auto')
+  //     style(window.document.documentElement, 'overflow', 'auto')
+  //     style(window.document.body, 'height', 'auto')
+  //   }
+  // }
 
-    if (!transparent) {
-      style(window.document.body, 'overflow', 'auto')
-      style(window.document.documentElement, 'overflow', 'auto')
-      style(window.document.body, 'height', 'auto')
-    }
-  }
-
-  // 移动端滚动事件
-  handleSwipe = direction => {
-    const sTop = scrollTop()
-
-    if (sTop <= 0 && direction === 'top') {
-      this.setState({
-        transparent: false,
-      })
-    }
-
-    if (sTop <= 0 && direction === 'bottom') {
-      this.setState({
-        transparent: true,
-      })
-    }
-  }
+  // // 移动端滚动事件
+  // handleSwipe = direction => {
+  //   const sTop = scrollTop()
+  //
+  //   if (sTop <= 0 && direction === 'top') {
+  //     this.setState({
+  //       transparent: false,
+  //     })
+  //   }
+  //
+  //   if (sTop <= 0 && direction === 'bottom') {
+  //     this.setState({
+  //       transparent: true,
+  //     })
+  //   }
+  // }
 
   // 滚动
   handleMoveDown = () => {
-    this.setState({
-      transparent: false,
-    })
+    // this.setState({
+    //   transparent: false,
+    // })
   }
 
   setCover = cover => {
@@ -197,49 +197,33 @@ export default class IndexLayout extends Component {
             </div>
           </div>
         </div>
-        <ReactTouchEvents onSwipe={this.handleSwipe}>
-          <div className="layout-content">
-            <div
-              style={{
-                transform: transparent
-                  ? 'translate(0 ,0)'
-                  : 'translate(0, -100%)',
-                animationName: transparent
-                  ? 'CoverSlideDownAnimation'
-                  : 'CoverSlideUpAnimation',
-              }}
-              className="section section-cover"
-              onAnimationStart={this.handleCoverAnimationStart}
-              onAnimationEnd={this.handleCoverAnimationEnd}
-            >
-              <div
-                style={{
-                  background: `url("${this.state.cover}") 50% 50% / cover`,
-                }}
-                className="fullscreen"
-              />
-              <div className="fullscreen-by">
-                PROVIDED BY{' '}
-                <a href="https://unsplash.com" target="_blank">
-                  Unsplash
-                </a>
-              </div>
-              <div className="more-btn" onClick={this.handleMoveDown}>
-                <Icon
-                  type="arrow-down"
-                  style={{ color: '#fff', fontSize: '20px' }}
-                />
-              </div>
-            </div>
-            <div className="section section-content">
-              {children({
-                ...this.props,
-                setCover: this.setCover,
-                setTitle: this.setTitle,
-              })}
-            </div>
+        <div className="layout-cover">
+          <div
+            style={{
+              background: `url("${this.state.cover}") 50% 50% / cover`,
+            }}
+            className="fullscreen"
+          />
+          <div className="fullscreen-by">
+            PROVIDED BY{' '}
+            <a href="https://unsplash.com" target="_blank">
+              Unsplash
+            </a>
           </div>
-        </ReactTouchEvents>
+          <div className="more-btn" onClick={this.handleMoveDown}>
+            <Icon
+              type="arrow-down"
+              style={{ color: '#fff', fontSize: '20px' }}
+            />
+          </div>
+        </div>
+        <div className="layout-content">
+          {children({
+            ...this.props,
+            setCover: this.setCover,
+            setTitle: this.setTitle,
+          })}
+        </div>
         <div className="layout-footer">
           <div className="section">
             <div className="left">
