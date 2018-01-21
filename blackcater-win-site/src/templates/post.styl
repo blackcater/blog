@@ -278,6 +278,39 @@
         width 100%
 
 
+.template-post
+  &.collapse
+    .post
+      transform translate(240px, 0)
+    .headings
+      transform translate(0, 0)
+    .collapse-icon.show
+      left 100px
+
+  .post
+    transition all .2s ease-in-out
+
+  .headings
+    position fixed
+    top 50px
+    left 0
+    bottom 0
+    width 240px
+    background-color color-bg-light
+    box-shadow 0 0 20px color-bg
+    transform translate(-300px, 0)
+    transition all .2s ease-in-out
+
+  .collapse-icon
+    position fixed
+    left -75px
+    bottom 40px
+    cursor pointer
+    background-color color-bg-light
+    &.show
+      left 25px
+
+
 +below(600px)
   .template-post
     padding 0 15px
