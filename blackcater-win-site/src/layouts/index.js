@@ -3,9 +3,7 @@ import { Helmet } from 'react-helmet'
 import { Icon } from 'components'
 import { ScrollTo, ScrollArea } from 'react-scroll-to'
 import Link from 'gatsby-link'
-import ReactTouchEvents from 'react-touch-events'
-import { events, style } from 'dom-helpers'
-import { throttle } from 'lodash'
+import { events, query as domQuery } from 'dom-helpers'
 import { scrollTop, isMobile } from 'utils/common'
 import cx from 'classnames'
 
@@ -25,15 +23,32 @@ export default class IndexLayout extends Component {
   }
 
   componentDidMount() {
-    // if (!isMobile()) {
-    //   events.on(window.document, 'wheel', this.handleWheel)
-    // }
+    events.on(window.document, 'scroll', this.handleScroll)
+
+    this.handleScroll({ target: document.body })
   }
 
   componentWillUnmount() {
-    // if (!isMobile()) {
-    //   events.off(window.document, 'wheel', this.handleWheel)
-    // }
+    events.off(window.document, 'scroll', this.handleScroll)
+  }
+
+  // 滚动事件
+  handleScroll = e => {
+    const scrollTop = domQuery.scrollTop(e.target)
+    const height = window.innerHeight
+    const { transparent } = this.state
+
+    if (scrollTop >= height - 50 && transparent) {
+      this.setState({
+        transparent: false,
+      })
+    }
+
+    if (scrollTop <= height - 50 && !transparent) {
+      this.setState({
+        transparent: true,
+      })
+    }
   }
 
   // 切换 菜单栏显隐
@@ -42,60 +57,6 @@ export default class IndexLayout extends Component {
       menu: !menu,
     })
   }
-
-  // handleWheel = throttle(e => {
-  //   const { deltaY } = e
-  //   const sTop = scrollTop()
-  //
-  //   if (deltaY === 0) return
-  //
-  //   if (sTop <= 0 && deltaY > 5) {
-  //     this.setState({
-  //       transparent: false,
-  //     })
-  //   }
-  //
-  //   if (sTop <= 0 && deltaY < 0) {
-  //     this.setState({
-  //       transparent: true,
-  //     })
-  //   }
-  // }, 300)
-
-  // 动画开始
-  handleCoverAnimationStart = () => {
-    style(window.document.body, 'overflow', 'hidden')
-    style(window.document.documentElement, 'overflow', 'hidden')
-    style(window.document.body, 'height', '100%')
-  }
-
-  // // 封面动画完毕
-  // handleCoverAnimationEnd = () => {
-  //   const { transparent } = this.state
-  //
-  //   if (!transparent) {
-  //     style(window.document.body, 'overflow', 'auto')
-  //     style(window.document.documentElement, 'overflow', 'auto')
-  //     style(window.document.body, 'height', 'auto')
-  //   }
-  // }
-
-  // // 移动端滚动事件
-  // handleSwipe = direction => {
-  //   const sTop = scrollTop()
-  //
-  //   if (sTop <= 0 && direction === 'top') {
-  //     this.setState({
-  //       transparent: false,
-  //     })
-  //   }
-  //
-  //   if (sTop <= 0 && direction === 'bottom') {
-  //     this.setState({
-  //       transparent: true,
-  //     })
-  //   }
-  // }
 
   // 滚动
   handleMoveDown = () => {
