@@ -2,6 +2,7 @@
 
 .template-post
   position relative
+  overflow hidden
 
   .post
     max-width 660px
@@ -284,22 +285,28 @@
 
 
   .headings
-    position fixed
-    top 50px
-    left 0
+    position absolute
+    top 0
+    left -300px
     bottom 0
     width 240px
     background-color color-bg-light
     box-shadow 0 0 20px color-bg
-    transform translate(-300px, 0)
-    transition all .2s ease-in-out
+    transition left .2s ease-in-out
+    &.fixed
+      position fixed
+      top 50px
 
   .collapse-icon
+    padding 8px
     position fixed
-    left -75px
+    left -100px
     bottom 40px
     cursor pointer
+    border-radius 20px
+    box-shadow 0 0 20px color-bg
     background-color color-bg-light
+    transition left .2s ease-in-out
     &.show
       left 25px
 
@@ -309,9 +316,9 @@
     .post
       transform translate(240px, 0)
     .headings
-      transform translate(0, 0)
+      left 0
     .collapse-icon.show
-      left 100px
+      left 265px
 
 
 +below(600px)

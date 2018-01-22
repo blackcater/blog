@@ -16,7 +16,7 @@ export default class PostTemplate extends Component {
       rewardModalOpen: false,
       rewardImageSrc: '',
       collapse: false,
-      showCollapse: false,
+      transparent: false,
     }
   }
 
@@ -50,14 +50,14 @@ export default class PostTemplate extends Component {
   handleScroll = e => {
     const scrollTop = domQuery.scrollTop(e.target)
     const height = window.innerHeight
-    const { showCollapse } = this.state
+    const { transparent } = this.state
 
-    if (scrollTop > height && !showCollapse) {
-      this.setState({ showCollapse: true })
+    if (scrollTop > height && transparent) {
+      this.setState({ transparent: false })
     }
 
-    if (scrollTop <= height && showCollapse) {
-      this.setState({ showCollapse: false })
+    if (scrollTop <= height && !transparent) {
+      this.setState({ transparent: true })
     }
   }
 
@@ -116,14 +116,12 @@ export default class PostTemplate extends Component {
       rewardModalOpen,
       rewardImageSrc,
       collapse,
-      showCollapse,
+      transparent,
     } = this.state
     const { markdownRemark: post } = this.props.data
     const { prevPost, nextPost, category, tags = [] } = this.props.pathContext
     const prev = prevPost || post
     const next = nextPost || post
-
-    console.dir(post)
 
     return (
       <div className={cx({ 'template-post': true, collapse })}>
@@ -248,9 +246,9 @@ export default class PostTemplate extends Component {
             </div>
           </Modal>
         </div>
-        <div className="headings" />
+        <div className={cx({ headings: true, fixed: !transparent })} />
         <div
-          className={cx({ 'collapse-icon': true, show: showCollapse })}
+          className={cx({ 'collapse-icon': true, show: !transparent })}
           onClick={this.handleToggleCollapse}
         >
           <Icon
