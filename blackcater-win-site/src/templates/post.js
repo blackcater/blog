@@ -16,7 +16,7 @@ export default class PostTemplate extends Component {
       rewardModalOpen: false,
       rewardImageSrc: '',
       collapse: false,
-      transparent: false,
+      transparent: true,
     }
   }
 
@@ -122,6 +122,8 @@ export default class PostTemplate extends Component {
     const { prevPost, nextPost, category, tags = [] } = this.props.pathContext
     const prev = prevPost || post
     const next = nextPost || post
+
+    console.dir(post)
 
     return (
       <div className={cx({ 'template-post': true, collapse })}>
@@ -246,7 +248,19 @@ export default class PostTemplate extends Component {
             </div>
           </Modal>
         </div>
-        <div className={cx({ headings: true, fixed: !transparent })} />
+        <div className={cx({ headings: true, fixed: !transparent })}>
+          <div className="index-title">INDEX</div>
+          <ul className="index-list">
+            {post.headings.map(heading => (
+              <li
+                key={heading.value}
+                className={`index-item index-item-${heading.depth}`}
+              >
+                <a href={`#${heading.value}`}>{heading.value}</a>
+              </li>
+            ))}
+          </ul>
+        </div>
         <div
           className={cx({ 'collapse-icon': true, show: !transparent })}
           onClick={this.handleToggleCollapse}
