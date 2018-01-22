@@ -229,7 +229,11 @@
   .rocket
     position fixed
     right 25px
-    bottom 80px
+    bottom -100px
+    transition all .2s ease-in-out
+
+    &.show
+      bottom 40px
 
     img
       position relative

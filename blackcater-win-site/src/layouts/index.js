@@ -230,7 +230,7 @@ export default class IndexLayout extends Component {
             <div className="tool">POWERED BY GATSBY</div>
           </div>
         </div>
-        <div className="rocket">
+        <div className={cx({ rocket: true, show: !transparent })}>
           <ScrollTo>
             {scroll => (
               <img
