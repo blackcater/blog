@@ -1,10 +1,10 @@
 import React, { Component } from 'react'
 import { Helmet } from 'react-helmet'
 import { Icon } from 'components'
-import { ScrollTo, ScrollArea } from 'react-scroll-to'
 import Link from 'gatsby-link'
 import { events, query as domQuery } from 'dom-helpers'
 import { scrollTop, isMobile } from 'utils/common'
+import SmoothScroll from 'smooth-scroll'
 import cx from 'classnames'
 
 import 'styles/prism.css'
@@ -20,16 +20,24 @@ export default class IndexLayout extends Component {
       cover: '',
       title: '',
     }
+
+    this.smoothScroll = new SmoothScroll()
   }
 
   componentDidMount() {
+    const hash = decodeURIComponent(window.location.hash)
+
     events.on(window.document, 'scroll', this.handleScroll)
 
     this.handleScroll({ target: document.body })
+
+    if (hash) this.scrollTo(hash)
   }
 
   componentWillUnmount() {
     events.off(window.document, 'scroll', this.handleScroll)
+
+    this.smoothScroll.destroy()
   }
 
   // 滚动事件
@@ -75,6 +83,28 @@ export default class IndexLayout extends Component {
     this.setState({
       title,
     })
+  }
+
+  // 滚动到顶部
+  scrollTo = hash => {
+    if (!hash) {
+      this.smoothScroll.animateScroll(document.querySelector('title'), null, {
+        offset: 0,
+        easing: 'easeInOutCubic',
+      })
+
+      return
+    }
+
+    const value = hash[0] === '#' ? hash.slice(1) : hash
+
+    this.smoothScroll.animateScroll(
+      document.querySelector(`[id='${value}']`),
+      null,
+      { offset: 60, easing: 'easeInOutCubic' }
+    )
+
+    window.location.hash = `#${encodeURIComponent(value)}`
   }
 
   render() {
@@ -183,6 +213,7 @@ export default class IndexLayout extends Component {
             ...this.props,
             setCover: this.setCover,
             setTitle: this.setTitle,
+            scrollTo: this.scrollTo,
           })}
         </div>
         <div className="layout-footer">
@@ -231,15 +262,11 @@ export default class IndexLayout extends Component {
           </div>
         </div>
         <div className={cx({ rocket: true, show: !transparent })}>
-          <ScrollTo>
-            {scroll => (
-              <img
-                src={require('images/rocket.png')}
-                alt="rocket"
-                onClick={() => scroll(0, 0)}
-              />
-            )}
-          </ScrollTo>
+          <img
+            src={require('images/rocket.png')}
+            alt="rocket"
+            onClick={() => this.scrollTo()}
+          />
         </div>
       </div>
     )
