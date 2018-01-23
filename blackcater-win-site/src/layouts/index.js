@@ -4,7 +4,6 @@ import { Icon } from 'components'
 import Link from 'gatsby-link'
 import { events, query as domQuery } from 'dom-helpers'
 import { scrollTop, isMobile } from 'utils/common'
-import SmoothScroll from 'smooth-scroll'
 import cx from 'classnames'
 
 import 'styles/prism.css'
@@ -21,7 +20,9 @@ export default class IndexLayout extends Component {
       title: '',
     }
 
-    this.smoothScroll = new SmoothScroll()
+    if (typeof window !== 'undefined') {
+      this.smoothScroll = window.smoothScroll
+    }
   }
 
   componentDidMount() {
@@ -29,7 +30,7 @@ export default class IndexLayout extends Component {
 
     events.on(window.document, 'scroll', this.handleScroll)
 
-    this.handleScroll({ target: document.body })
+    this.handleScroll({ target: window.document.body })
 
     if (hash) this.scrollTo(hash)
   }
@@ -88,10 +89,14 @@ export default class IndexLayout extends Component {
   // 滚动到顶部
   scrollTo = hash => {
     if (!hash) {
-      this.smoothScroll.animateScroll(document.querySelector('title'), null, {
-        offset: 0,
-        easing: 'easeInOutCubic',
-      })
+      this.smoothScroll.animateScroll(
+        window.document.querySelector('title'),
+        null,
+        {
+          offset: 0,
+          easing: 'easeInOutCubic',
+        }
+      )
 
       return
     }
@@ -99,7 +104,7 @@ export default class IndexLayout extends Component {
     const value = hash[0] === '#' ? hash.slice(1) : hash
 
     this.smoothScroll.animateScroll(
-      document.querySelector(`[id='${value}']`),
+      window.document.querySelector(`[id='${value}']`),
       null,
       { offset: 60, easing: 'easeInOutCubic' }
     )

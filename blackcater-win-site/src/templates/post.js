@@ -52,11 +52,11 @@ export default class PostTemplate extends Component {
     const height = window.innerHeight
     const { transparent } = this.state
 
-    if (scrollTop > height && transparent) {
+    if (scrollTop > height - 50 && transparent) {
       this.setState({ transparent: false })
     }
 
-    if (scrollTop <= height && !transparent) {
+    if (scrollTop <= height - 50 && !transparent) {
       this.setState({ transparent: true })
     }
   }
@@ -122,8 +122,6 @@ export default class PostTemplate extends Component {
     const { prevPost, nextPost, category, tags = [] } = this.props.pathContext
     const prev = prevPost || post
     const next = nextPost || post
-
-    console.dir(post)
 
     return (
       <div className={cx({ 'template-post': true, collapse })}>
