@@ -296,6 +296,50 @@
       position fixed
       top 50px
 
+    .index-title
+      margin 20px 0
+      color color-pink
+      font-size 2em
+      font-weight bolder
+      text-align center
+
+    .index-list
+      margin 0 20px
+      list-style none
+
+      .index-item
+        position relative
+        margin 5px 0
+        font-size 1.4em
+        cursor pointer
+        text-align justify
+        &::before
+          position absolute
+          left -12px
+          top 0
+          content "#"
+          font-size 14px
+          color color-pink
+        &.index-item-1
+          margin-left 0
+        &.index-item-2
+          margin-top 15px
+          margin-left 0.8em
+        &.index-item-3
+          margin-left 1.6em
+          font-size 1.2em
+        &.index-item-4
+          margin-left 2.4em
+          font-size 1.2em
+        &.index-item-5
+          margin-left 3.2em
+          font-size 1.2em
+        &.index-item-6
+          margin-left 4em
+          font-size 1.2em
+        &:hover
+          color #fff
+
   .collapse-icon
     padding 8px
     position fixed

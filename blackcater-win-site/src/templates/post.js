@@ -4,6 +4,7 @@ import { Icon } from 'components'
 import cx from 'classnames'
 import { events, query as domQuery } from 'dom-helpers'
 import Gitment from 'gitment'
+import SmoothScroll from 'smooth-scroll'
 
 import 'styles/gitment.css'
 import './post.styl'
@@ -18,6 +19,7 @@ export default class PostTemplate extends Component {
       collapse: false,
       transparent: true,
     }
+    this.smoothScroll = new SmoothScroll()
   }
 
   componentDidMount() {
@@ -32,6 +34,7 @@ export default class PostTemplate extends Component {
         client_secret: '0ae847d4b789be4450e503948a8155a413349f7b',
       },
     })
+    const hash = decodeURIComponent(window.location.hash)
 
     setCover(post.frontmatter.cover)
     setTitle(post.frontmatter.title)
@@ -40,10 +43,14 @@ export default class PostTemplate extends Component {
 
     // 监听滚动事件
     events.on(window.document, 'scroll', this.handleScroll)
+
+    if (hash) this.scrollTo(hash)
   }
 
   componentWillUnmount() {
     events.off(window.document, 'scroll', this.handleScroll)
+
+    this.smoothScroll.destroy()
   }
 
   // 滚动事件
@@ -109,6 +116,19 @@ export default class PostTemplate extends Component {
     if (navPost === post) return
 
     history.push(navPost.fields.slug)
+  }
+
+  // 滚动到特定位置
+  scrollTo(hash) {
+    const value = hash[0] === '#' ? hash.slice(1) : hash
+
+    this.smoothScroll.animateScroll(
+      document.querySelector(`[id='${value}']`),
+      null,
+      { offset: 60, easing: 'easeInOutCubic' }
+    )
+
+    window.location.hash = `#${encodeURIComponent(value)}`
   }
 
   render() {
@@ -255,8 +275,9 @@ export default class PostTemplate extends Component {
               <li
                 key={heading.value}
                 className={`index-item index-item-${heading.depth}`}
+                onClick={() => this.scrollTo(heading.value)}
               >
-                <a href={`#${heading.value}`}>{heading.value}</a>
+                {heading.value}
               </li>
             ))}
           </ul>
