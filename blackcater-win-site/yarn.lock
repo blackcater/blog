@@ -3769,6 +3769,13 @@ gatsby-plugin-google-analytics@^1.0.14:
   dependencies:
     babel-runtime "^6.26.0"
 
+gatsby-plugin-nprogress@^1.0.11:
+  version "1.0.11"
+  resolved "http://registry.npm.taobao.org/gatsby-plugin-nprogress/download/gatsby-plugin-nprogress-1.0.11.tgz#a9c68389be5f1c5463e25ed170ab5313f9cbed03"
+  dependencies:
+    babel-runtime "^6.26.0"
+    nprogress "^0.2.0"
+
 gatsby-plugin-offline@^1.0.12:
   version "1.0.12"
   resolved "http://registry.npm.taobao.org/gatsby-plugin-offline/download/gatsby-plugin-offline-1.0.12.tgz#b56309bb13e545d19181e75d7d35167946a6048d"
@@ -6626,6 +6633,10 @@ npmlog@^4.0.2:
     console-control-strings "~1.1.0"
     gauge "~2.7.3"
     set-blocking "~2.0.0"
+
+nprogress@^0.2.0:
+  version "0.2.0"
+  resolved "http://registry.npm.taobao.org/nprogress/download/nprogress-0.2.0.tgz#cb8f34c53213d895723fcbab907e9422adbcafb1"
 
 nth-check@^1.0.1, nth-check@~1.0.1:
   version "1.0.1"
