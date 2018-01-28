@@ -200,10 +200,12 @@
       margin 0 auto
 
       .typograph
+        margin-bottom 50px
         position relative
         text-align justify
 
         h2, h3, h4, h5, h6
+          word-break break-all
           a.anchor
             float none
           svg
@@ -229,6 +231,7 @@
           border-left 4px solid color-pink
           background-color color-bg-light
           font-style italic
+          word-break break-all
           p
             &::before
               content "“ "
@@ -236,14 +239,16 @@
               content " ”"
 
         p
-          margin-bottom 50px
+          margin-bottom 30px
           font-size 1.6rem
           line-height 2.8rem
+          word-break break-all
 
         ol, ul
           margin 0 0 50px 2rem
           font-size 1.6rem
           line-height 2rem
+          word-break break-all
 
           li
             margin-bottom 10px
@@ -258,6 +263,8 @@
           background-color color-bg-light
 
           code
+            margin 0
+            padding 0
             color color-text
 
         code
@@ -367,14 +374,14 @@
 +below(600px)
   .template-post
     padding 0 15px
+    .post
+      .navigator-list
+        flex-wrap wrap
+        height 300px
 
-    .navigator-list
-      flex-wrap wrap
-      height 300px
-
-      .navigator-item
-        width 100%
-        flex auto
+        .navigator-item
+          width 100%
+          flex auto
 
 
 .modal--reward
