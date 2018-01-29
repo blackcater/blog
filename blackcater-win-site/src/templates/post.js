@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import Modal from 'react-modal'
+import Link from 'gatsby-link'
 import { Icon } from 'components'
 import cx from 'classnames'
 import { events, query as domQuery } from 'dom-helpers'
@@ -68,20 +69,6 @@ export default class PostTemplate extends Component {
     })
   }
 
-  // 标签点击
-  handleTagClick = slug => {
-    const { history } = this.props
-
-    history.push(slug)
-  }
-
-  // 类目点击
-  handleCategoryClick = slug => {
-    const { history } = this.props
-
-    history.push(slug)
-  }
-
   // 打赏点击
   handleRewardClick = way => {
     if (way === 'zhifubao') {
@@ -101,16 +88,6 @@ export default class PostTemplate extends Component {
     }
   }
 
-  // 帖子点击
-  handlePostClick = navPost => {
-    const { markdownRemark: post } = this.props.data
-    const { history } = this.props
-
-    if (navPost === post) return
-
-    history.push(navPost.fields.slug)
-  }
-
   render() {
     const {
       rewardModalOpen,
@@ -128,11 +105,8 @@ export default class PostTemplate extends Component {
         <div className="post">
           <div className="title">
             {post.frontmatter.title}{' '}
-            <span
-              className="category"
-              onClick={() => this.handleCategoryClick(category.slug)}
-            >
-              {category.name}
+            <span className="category">
+              <Link to={category.slug}>{category.name}</Link>
             </span>
           </div>
           <div className="time">{post.frontmatter.edate}</div>
@@ -148,12 +122,8 @@ export default class PostTemplate extends Component {
           </div>
           <div className="tags">
             {tags.map((tag, index) => (
-              <div
-                key={`${index}`}
-                className="tag"
-                onClick={() => this.handleTagClick(tag.slug)}
-              >
-                {tag.name}
+              <div key={`${index}`} className="tag">
+                <Link to={tag.slug}>{tag.name}</Link>
               </div>
             ))}
           </div>
@@ -184,41 +154,43 @@ export default class PostTemplate extends Component {
             </div>
           </div>
           <div className="navigator-list">
-            <div
-              className="navigator-item navigator-item--prev"
-              onClick={() => this.handlePostClick(prev)}
-            >
-              <div
-                className="cover"
-                style={{ backgroundImage: `url("${prev.frontmatter.cover}")` }}
-              />
-              <div className="content">
-                {prevPost ? (
-                  <Icon type="arrow-left" />
-                ) : (
-                  <Icon type="arrow-up" />
-                )}
-                <div className="tip">PREV POST</div>
-                <div className="title">{prev.frontmatter.title}</div>
-              </div>
+            <div className="navigator-item navigator-item--prev">
+              <Link to={prev.fields.slug}>
+                <div
+                  className="cover"
+                  style={{
+                    backgroundImage: `url("${prev.frontmatter.cover}")`,
+                  }}
+                />
+                <div className="content">
+                  {prevPost ? (
+                    <Icon type="arrow-left" />
+                  ) : (
+                    <Icon type="arrow-up" />
+                  )}
+                  <div className="tip">PREV POST</div>
+                  <div className="title">{prev.frontmatter.title}</div>
+                </div>
+              </Link>
             </div>
-            <div
-              className="navigator-item navigator-item--next"
-              onClick={() => this.handlePostClick(next)}
-            >
-              <div
-                className="cover"
-                style={{ backgroundImage: `url("${next.frontmatter.cover}")` }}
-              />
-              <div className="content">
-                {nextPost ? (
-                  <Icon type="arrow-right" />
-                ) : (
-                  <Icon type="arrow-up" />
-                )}
-                <div className="tip">NEXT POST</div>
-                <div className="title">{next.frontmatter.title}</div>
-              </div>
+            <div className="navigator-item navigator-item--next">
+              <Link to={next.fields.slug}>
+                <div
+                  className="cover"
+                  style={{
+                    backgroundImage: `url("${next.frontmatter.cover}")`,
+                  }}
+                />
+                <div className="content">
+                  {nextPost ? (
+                    <Icon type="arrow-right" />
+                  ) : (
+                    <Icon type="arrow-up" />
+                  )}
+                  <div className="tip">NEXT POST</div>
+                  <div className="title">{next.frontmatter.title}</div>
+                </div>
+              </Link>
             </div>
           </div>
           <div id="comments" />
@@ -277,6 +249,9 @@ export default class PostTemplate extends Component {
 export const query = graphql`
   query PostQuery($slug: String!) {
     markdownRemark(fields: { slug: { eq: $slug } }) {
+      fields {
+        slug
+      }
       frontmatter {
         title
         cover

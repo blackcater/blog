@@ -11,20 +11,6 @@ export default class PostList extends Component {
     this.state = {}
   }
 
-  // 查看分类下文章
-  handleCategory = category => {
-    const { history } = this.props
-
-    history.push(`/category/${category}/`)
-  }
-
-  // 查看文章详情
-  handleReadPost = slug => {
-    const { history } = this.props
-
-    history.push(slug)
-  }
-
   render() {
     const { posts } = this.props
 
@@ -49,19 +35,16 @@ export default class PostList extends Component {
                 ))}
               </div>
               <div className="excerpt">{post.excerpt}</div>
-              <div
-                className="category"
-                onClick={() => this.handleCategory(post.frontmatter.category)}
-              >
-                {post.frontmatter.category.toUpperCase()}
+              <div className="category">
+                <Link to={`/category/${post.frontmatter.category}/`}>
+                  {post.frontmatter.category.toUpperCase()}
+                </Link>
               </div>
-              <Button
-                type="circle"
-                color="pink"
-                onClick={() => this.handleReadPost(post.fields.slug)}
-              >
-                READ
-              </Button>
+              <div className="read-more">
+                <Button type="circle" color="pink">
+                  <Link to={post.fields.slug}>READ</Link>
+                </Button>
+              </div>
             </div>
           </div>
         ))}

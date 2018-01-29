@@ -4,6 +4,7 @@ import { Icon } from 'components'
 import Link from 'gatsby-link'
 import { events, query as domQuery } from 'dom-helpers'
 import { scrollTop, isMobile } from 'utils/common'
+import { throttle } from 'lodash'
 import cx from 'classnames'
 
 import 'styles/prism.css'
@@ -16,6 +17,7 @@ export default class IndexLayout extends Component {
     this.state = {
       menu: false,
       transparent: true,
+      scale: 1,
       cover: '',
       title: '',
     }
@@ -23,6 +25,8 @@ export default class IndexLayout extends Component {
     if (typeof window !== 'undefined') {
       this.smoothScroll = window.smoothScroll
     }
+
+    this._handleScroll = throttle(this.handleScroll, 300)
   }
 
   componentDidMount() {
@@ -46,6 +50,12 @@ export default class IndexLayout extends Component {
     const scrollTop = domQuery.scrollTop(e.target)
     const height = window.innerHeight
     const { transparent } = this.state
+
+    if (scrollTop <= height) {
+      this.setState({
+        scale: 1 + scrollTop / (2 * height),
+      })
+    }
 
     if (scrollTop >= height - 50 && transparent) {
       this.setState({
@@ -113,7 +123,7 @@ export default class IndexLayout extends Component {
   }
 
   render() {
-    const { menu, transparent } = this.state
+    const { menu, transparent, scale } = this.state
     const { children, data: { site: { siteMetadata: metaData } } } = this.props
     const { title, description, nickname, slogan, socials, links } = metaData
 
@@ -196,6 +206,7 @@ export default class IndexLayout extends Component {
         <div className="layout-cover">
           <div
             style={{
+              transform: `scale(${scale})`,
               background: `url("${this.state.cover}") 50% 50% / cover`,
             }}
             className="fullscreen"

@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { Icon, Button, PostList } from 'components'
+import Link from 'gatsby-link'
 import { isMobile } from 'utils/common'
 import axios from 'axios'
 
@@ -10,7 +11,7 @@ const NAMESPACE = 'UNSPLASH_IMG__BL0G_INDEX_PAGE'
 export default class IndexPage extends Component {
   componentDidMount() {
     const mobile = isMobile()
-    const width = mobile ? '600' : '1800'
+    const width = mobile ? '600' : '1200'
 
     if (this.shouldFetchUnsplashPhoto()) {
       // 需要更新
@@ -75,13 +76,6 @@ export default class IndexPage extends Component {
       .catch(errCb)
   }
 
-  // 查看更多文章
-  handleMoreBtn = () => {
-    const { history } = this.props
-
-    history.push('/archive/')
-  }
-
   render() {
     const { data: { allMarkdownRemark: { edges } } } = this.props
     const posts = edges.map(edge => edge.node)
@@ -91,8 +85,8 @@ export default class IndexPage extends Component {
         <h2>RECENT</h2>
         <PostList posts={posts} history={this.props.history} />
         <div className="more-section">
-          <Button type="circle" color="pink" onClick={this.handleMoreBtn}>
-            MORE
+          <Button type="circle" color="pink">
+            <Link to="/archive/">MORE</Link>
           </Button>
         </div>
       </div>
