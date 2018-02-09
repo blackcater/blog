@@ -61,7 +61,7 @@ export default class IndexLayout extends Component {
 
     if (scrollTop <= height) {
       state.transformY = -scrollTop / 4
-      state.scale = 1 + scrollTop / (4 * height)
+      state.scale = 1 + scrollTop / (8 * height)
     }
 
     if (scrollTop >= height - 192) {
