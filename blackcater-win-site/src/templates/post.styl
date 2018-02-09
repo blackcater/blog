@@ -208,10 +208,12 @@
 
         h2, h3, h4, h5, h6
           word-break break-all
+          &::before
+            margin-right 10px
+            content "#"
+            color color-pink
           a.anchor
-            float none
-          svg
-            fill color-pink
+            display none
 
         h2
           font-size 2.5rem
@@ -346,6 +348,8 @@
         &.index-item-6
           margin-left 4em
           font-size 1.2em
+        &.active
+          color #fff
         &:hover
           color #fff
 

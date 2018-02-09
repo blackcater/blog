@@ -34,11 +34,12 @@
   "license": "MIT",
   "main": "n/a",
   "scripts": {
-    "build": "gatsby build",
-    "develop": "gatsby develop",
-    "deploy": "sh deploy.sh",
-    "format": "prettier --write \"src/**/*.js\"",
+    "start": "npm run dev",
+    "dev": "gatsby develop",
+    "pro": "gatsby build",
     "test": "echo \"Error: no test specified\" && exit 1",
+    "deploy": "sh deploy.sh",
+    "prettier": "prettier --write \"src/**/*.js\"",
     "precommit": "lint-staged"
   },
   "devDependencies": {

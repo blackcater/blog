@@ -35,7 +35,7 @@ export default class PostTemplate extends Component {
     })
 
     setCover(post.frontmatter.cover)
-    setTitle(post.frontmatter.title)
+    setTitle('')
 
     gitment.render('comments')
 
@@ -45,6 +45,8 @@ export default class PostTemplate extends Component {
 
   componentWillUnmount() {
     events.off(window.document, 'scroll', this.handleScroll)
+
+    this.props.enableHideHeader(true)
   }
 
   // 滚动事件
@@ -53,17 +55,23 @@ export default class PostTemplate extends Component {
     const height = window.innerHeight
     const { transparent } = this.state
 
-    if (scrollTop > height - 50 && transparent) {
+    if (scrollTop > height - 192 && transparent) {
       this.setState({ transparent: false })
     }
 
-    if (scrollTop <= height - 50 && !transparent) {
+    if (scrollTop <= height - 192 && !transparent) {
       this.setState({ transparent: true })
     }
   }
 
   // 切换侧边栏
   handleToggleCollapse = () => {
+    if (!this.state.collapse) {
+      this.props.enableHideHeader(false)
+    } else {
+      this.props.enableHideHeader(true)
+    }
+
     this.setState({
       collapse: !this.state.collapse,
     })
@@ -99,6 +107,9 @@ export default class PostTemplate extends Component {
     const { prevPost, nextPost, category, tags = [] } = this.props.pathContext
     const prev = prevPost || post
     const next = nextPost || post
+    const hash = window.location.hash
+      ? decodeURIComponent(window.location.hash.slice(1))
+      : ''
 
     return (
       <div className={cx({ 'template-post': true, collapse })}>
@@ -224,7 +235,11 @@ export default class PostTemplate extends Component {
             {post.headings.map(heading => (
               <li
                 key={heading.value}
-                className={`index-item index-item-${heading.depth}`}
+                className={cx({
+                  'index-item': true,
+                  [`index-item-${heading.depth}`]: true,
+                  active: heading.value === hash,
+                })}
                 onClick={() => this.props.scrollTo(heading.value)}
               >
                 {heading.value}

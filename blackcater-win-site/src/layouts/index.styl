@@ -11,9 +11,12 @@
     left 0
     right 0
     line-height 50px
+    height 50px
     background-color color-bg-light
     transition all .2s ease-in-out-quad
     z-index 1000
+    &.hide
+      top -50px
     &.transparent
       line-height 120px
       background-color transparent
@@ -146,7 +149,7 @@
 
 
   .layout-content
-    margin 100vh 0 0
+    margin calc(100vh - 142px) 0 0
     padding-bottom 20px
     background-color color-bg
     color color-text
@@ -241,8 +244,6 @@
       width 40px
       height 40px
       cursor pointer
-      &:hover
-        animation FloatAnimation .8s infinite alternate
 
 
 // animation

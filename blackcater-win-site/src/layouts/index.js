@@ -16,11 +16,15 @@ export default class IndexLayout extends Component {
 
     this.state = {
       menu: false,
+      header: true,
+      enableHideHeader: true,
       transparent: true,
+      transformY: 0,
       scale: 1,
       cover: '',
       title: '',
     }
+    this.lastScrollTop = 0
 
     if (typeof window !== 'undefined') {
       this.smoothScroll = window.smoothScroll
@@ -50,24 +54,43 @@ export default class IndexLayout extends Component {
     const scrollTop = domQuery.scrollTop(e.target)
     const height = window.innerHeight
     const { transparent } = this.state
+    const scrollDirection = scrollTop > this.lastScrollTop
+    const state = {}
+
+    this.lastScrollTop = scrollTop
 
     if (scrollTop <= height) {
-      this.setState({
-        scale: 1 + scrollTop / (2 * height),
-      })
+      state.transformY = -scrollTop / 4
+      state.scale = 1 + scrollTop / (4 * height)
     }
 
-    if (scrollTop >= height - 50 && transparent) {
-      this.setState({
-        transparent: false,
-      })
+    if (scrollTop >= height - 192) {
+      if (scrollDirection && this.state.header) {
+        // 向下滚动，影藏 header
+        state.header = false
+      }
+
+      if (!scrollDirection && !this.state.header) {
+        // 向上滚动，显示 header
+        state.header = true
+      }
+
+      if (transparent) {
+        state.transparent = false
+      }
     }
 
-    if (scrollTop <= height - 50 && !transparent) {
-      this.setState({
-        transparent: true,
-      })
+    if (scrollTop <= height - 192) {
+      if (!this.state.header) {
+        state.header = true
+      }
+
+      if (!transparent) {
+        state.transparent = true
+      }
     }
+
+    this.setState(state)
   }
 
   // 切换 菜单栏显隐
@@ -96,6 +119,12 @@ export default class IndexLayout extends Component {
     })
   }
 
+  enableHideHeader = enable => {
+    this.setState({
+      enableHideHeader: enable,
+    })
+  }
+
   // 滚动到顶部
   scrollTo = hash => {
     if (!hash) {
@@ -116,16 +145,24 @@ export default class IndexLayout extends Component {
     this.smoothScroll.animateScroll(
       window.document.querySelector(`[id='${value}']`),
       null,
-      { offset: 60, easing: 'easeInOutCubic' }
+      { offset: 50, easing: 'easeInOutCubic' }
     )
 
     window.location.hash = `#${encodeURIComponent(value)}`
   }
 
   render() {
-    const { menu, transparent, scale } = this.state
+    const {
+      menu,
+      header,
+      enableHideHeader,
+      transparent,
+      transformY,
+      scale,
+    } = this.state
     const { children, data: { site: { siteMetadata: metaData } } } = this.props
     const { title, description, nickname, slogan, socials, links } = metaData
+    const showHeader = !enableHideHeader || header
 
     return (
       <div className="layout" ref={ele => (this.layout = ele)}>
@@ -147,6 +184,7 @@ export default class IndexLayout extends Component {
         <div
           className={cx({
             'layout-header': true,
+            hide: !showHeader,
             transparent,
           })}
         >
@@ -155,9 +193,12 @@ export default class IndexLayout extends Component {
             <div id="title" className="title">
               {this.state.title || title}
             </div>
-            <div className="icon" onClick={() => this.toggleMenu(menu)}>
+            <div
+              className="icon"
+              onClick={() => this.toggleMenu(showHeader && menu)}
+            >
               <Icon
-                type={menu ? 'x' : 'menu'}
+                type={showHeader && menu ? 'x' : 'menu'}
                 style={{
                   color: transparent ? '#ffffff' : '#758db0',
                   fontSize: '20px',
@@ -168,7 +209,7 @@ export default class IndexLayout extends Component {
           <div
             className={cx({
               'menu-list': true,
-              active: menu,
+              active: showHeader && menu,
             })}
           >
             <div
@@ -206,7 +247,7 @@ export default class IndexLayout extends Component {
         <div className="layout-cover">
           <div
             style={{
-              transform: `scale(${scale})`,
+              transform: `scale(${scale}) translateY(${transformY}px)`,
               background: `url("${this.state.cover}") 50% 50% / cover`,
             }}
             className="fullscreen"
@@ -230,6 +271,7 @@ export default class IndexLayout extends Component {
             setCover: this.setCover,
             setTitle: this.setTitle,
             scrollTo: this.scrollTo,
+            enableHideHeader: this.enableHideHeader,
           })}
         </div>
         <div className="layout-footer">
