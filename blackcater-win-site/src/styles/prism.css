@@ -112,3 +112,10 @@ code[class*="language-"] {
 .token.deleted {
   color: #ff5063;
 }
+
+.token.boolean,
+.token.keyword,
+.token.operator,
+.token.punctuation {
+  font-weight: bolder;
+}

@@ -37,6 +37,7 @@ export default class IndexLayout extends Component {
     const hash = decodeURIComponent(window.location.hash)
 
     events.on(window.document, 'scroll', this.handleScroll)
+    events.on(window, 'hashchange', this.handleHashChange)
 
     this.handleScroll({ target: window.document.body })
 
@@ -45,8 +46,15 @@ export default class IndexLayout extends Component {
 
   componentWillUnmount() {
     events.off(window.document, 'scroll', this.handleScroll)
+    events.off(window, 'hashchange', this.handleHashChange)
 
     this.smoothScroll.destroy()
+  }
+
+  handleHashChange = () => {
+    const hash = decodeURIComponent(window.location.hash)
+
+    if (hash) this.scrollTo(hash)
   }
 
   // 滚动事件
