@@ -631,6 +631,33 @@ HLS 延迟高，RTMP 延迟低。我们的场景对延迟要求苛刻，所以�
 
 为何要写这个？在我们开发课程详情页的时候，向下滚动会导致页面十分的卡。由于 onPageScroll 频繁调用，造成频繁的 `wx.createSelectorQuery()` 和 `setData` 性能十分低下。所以，我们对 onPageScroll 进行了节流，和对 `wx.createSelectorQuery()` 的结果进行了缓存。
 
+#### wx.createSelectorQuery
+
+`wx.createSelectorQuery`很强大，具体用法可以查看[官方文档](https://mp.weixin.qq.com/debug/wxadoc/dev/api/wxml-nodes-info.html)。在复杂页面，比如有定位的页面，可能都会用到 `wx.createSelectorQuery` 来计算展示的样式。
+
+```javascript
+Page({
+  onPageScroll() {
+    const query = wx.createSelectorQuery().in(this)
+    
+    query.select('#id').boundingClientRect((rect) => {
+      const { width, height, top, left, right, bottom } = rect
+      // 单位 px
+      
+      // width, height 是 width + padding, height + padding 不包括 margin
+      // top 距离顶部值
+      // left 距离左侧边框值
+      // right 距离右侧边框值
+      // bottom 距离底部边框值
+    }).exec()
+  }
+})
+```
+
+![wx.createSelectorQuery](/images/2018/02/08/createSelectorQuery-1.png)
+
+对于上图，banner 的 top 值为 B 区域的高度。最近，微信小程序[配置项](https://mp.weixin.qq.com/debug/wxadoc/dev/framework/config.html)添加了新参数--navigationStyle。navigationStyle 默认为 default。表示展示 A 区域。当 navigationStyle 值为 custom 时，不会展示 A 区域，其余其余会向上移动。因此此时 banner 的 top 值依旧为 B 区域的高度。
+
 #### wx:for
 
 [wx:for](https://mp.weixin.qq.com/debug/wxadoc/dev/framework/view/wxml/list.html) 也是性能优化的一个点。所以，使用中需要小心。
