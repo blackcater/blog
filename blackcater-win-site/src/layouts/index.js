@@ -15,6 +15,20 @@ export default class IndexLayout extends Component {
   constructor(props) {
     super(props)
 
+    const socialMap = {}
+
+    this.props.data.socials.edges.forEach(({ node }) => {
+      const { id, sizes } = node
+      const idReg = /([^\/]*?)\.([^\/\s]*)/
+      const [, name, ext] = idReg.exec(id)
+
+      socialMap[name] = {
+        name,
+        ext,
+        sizes,
+      }
+    })
+
     this.state = {
       menu: false,
       header: true,
@@ -24,6 +38,7 @@ export default class IndexLayout extends Component {
       scale: 1,
       cover: '',
       title: '',
+      socialMap,
     }
     this.lastScrollTop = 0
 
@@ -155,7 +170,11 @@ export default class IndexLayout extends Component {
       transformY,
       scale,
     } = this.state
-    const { children, data: { site: { siteMetadata: metaData } } } = this.props
+    const {
+      children,
+      data: { site: { siteMetadata: metaData }, rocket },
+    } = this.props
+    const { socialMap } = this.state
     const { title, description, nickname, slogan, socials, links } = metaData
     const showHeader = !enableHideHeader || header
 
@@ -250,7 +269,7 @@ export default class IndexLayout extends Component {
               <img src={this.state.cover} alt="header" />
             ) : (
               <Img
-                style={{ width: '100vh', height: 'calc(100vh - 142px)' }}
+                style={{ width: '100vw', height: 'calc(100vh - 142px)' }}
                 sizes={this.state.cover.sizes}
                 alt="header"
               />
@@ -289,9 +308,9 @@ export default class IndexLayout extends Component {
                 {socials.map(social => (
                   <div key={social.type} className="social-item">
                     <a href={social.url} target="_blank">
-                      <img
+                      <Img
                         style={{ width: '14px', height: '14px' }}
-                        src={null}
+                        sizes={socialMap[social.type].sizes}
                         alt={social.type}
                       />
                     </a>
@@ -324,7 +343,11 @@ export default class IndexLayout extends Component {
           </div>
         </div>
         <div className={cx({ rocket: true, show: !transparent })}>
-          <img src={null} alt="rocket" onClick={() => this.scrollTo()} />
+          <img
+            src={rocket.sizes.src}
+            alt="rocket"
+            onClick={() => this.scrollTo()}
+          />
         </div>
       </div>
     )
@@ -348,6 +371,21 @@ export const query = graphql`
           name
           link
         }
+      }
+    }
+    socials: allImageSharp(filter: { id: { regex: "/images/socials//" } }) {
+      edges {
+        node {
+          id
+          sizes(maxWidth: 28) {
+            ...GatsbyImageSharpSizes
+          }
+        }
+      }
+    }
+    rocket: imageSharp(id: { regex: "/images/rocket\\.png/" }) {
+      sizes(maxWidth: 80) {
+        ...GatsbyImageSharpSizes
       }
     }
   }
