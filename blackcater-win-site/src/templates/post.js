@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import Modal from 'react-modal'
 import Link from 'gatsby-link'
+import Img from 'gatsby-image'
 import { Icon } from 'components'
 import cx from 'classnames'
 import { events, query as domQuery } from 'dom-helpers'
@@ -13,9 +14,24 @@ export default class PostTemplate extends Component {
   constructor(props) {
     super(props)
 
+    const rewardMap = {}
+
+    this.props.data.rewards.edges.forEach(({ node }) => {
+      const { id, sizes } = node
+      const idReg = /([^\/]*?)\.([^\/\s]*)/
+      const [, name, ext] = idReg.exec(id)
+
+      rewardMap[name] = {
+        name,
+        ext,
+        sizes,
+      }
+    })
+
     this.state = {
+      rewardMap,
       rewardModalOpen: false,
-      rewardImageSrc: '',
+      rewardImageSrc: {},
       collapse: false,
       transparent: true,
       anchors: [],
@@ -24,7 +40,7 @@ export default class PostTemplate extends Component {
 
   componentDidMount() {
     const { setCover, setTitle } = this.props
-    const { markdownRemark: post, imageSharp: header } = this.props.data
+    const { post, header } = this.props.data
     const gitment = new Gitment({
       id: post.frontmatter.title,
       owner: 'blackcater',
@@ -155,10 +171,12 @@ export default class PostTemplate extends Component {
 
   // 打赏点击
   handleRewardClick = way => {
+    const { rewardMap } = this.state
+
     if (way === 'zhifubao') {
       this.setState({
         rewardModalOpen: true,
-        rewardImageSrc: null,
+        rewardImageSrc: rewardMap['zhifubao_qrcode'].sizes,
       })
 
       return
@@ -167,7 +185,7 @@ export default class PostTemplate extends Component {
     if (way === 'weixin') {
       this.setState({
         rewardModalOpen: true,
-        rewardImageSrc: null,
+        rewardImageSrc: rewardMap['weixin_qrcode'].sizes,
       })
     }
   }
@@ -179,8 +197,9 @@ export default class PostTemplate extends Component {
       collapse,
       transparent,
     } = this.state
-    const { markdownRemark: post } = this.props.data
+    const { post } = this.props.data
     const { prevPost, nextPost, category, tags = [] } = this.props.pathContext
+    const { rewardMap } = this.state
     const prev = prevPost || post
     const next = nextPost || post
 
@@ -212,9 +231,9 @@ export default class PostTemplate extends Component {
             ))}
           </div>
           <div className="reward">
-            <img
+            <Img
               className="reward-image"
-              src={null}
+              sizes={rewardMap['img'].sizes}
               alt="创作不易，如果你觉得文章不错，来点打赏吧！"
             />
             <div className="pay-list">
@@ -222,14 +241,14 @@ export default class PostTemplate extends Component {
                 className="pay pay-zhifubao"
                 onClick={() => this.handleRewardClick('zhifubao')}
               >
-                <img src={null} alt="支付宝" />
+                <Img sizes={rewardMap['zhifubao'].sizes} alt="支付宝" />
                 支付宝
               </div>
               <div
                 className="pay pay-weixin"
                 onClick={() => this.handleRewardClick('weixin')}
               >
-                <img src={null} alt="支付宝" />
+                <Img sizes={rewardMap['weixin'].sizes} alt="微信" />
                 微信
               </div>
             </div>
@@ -279,6 +298,7 @@ export default class PostTemplate extends Component {
             isOpen={rewardModalOpen}
             style={{
               content: {
+                padding: 0,
                 marginLeft: '-200px',
                 top: '100px',
                 left: '50%',
@@ -290,11 +310,14 @@ export default class PostTemplate extends Component {
             }}
             onRequestClose={() => this.setState({ rewardModalOpen: false })}
           >
-            <div className="modal--reward">
-              <img
-                src={rewardImageSrc}
+            <div
+              className="modal--reward"
+              onClick={() => this.setState({ rewardModalOpen: false })}
+            >
+              <Img
+                style={{ width: '400px' }}
+                sizes={rewardImageSrc}
                 alt="扫一扫打赏"
-                onClick={() => this.setState({ rewardModalOpen: false })}
               />
             </div>
           </Modal>
@@ -323,7 +346,7 @@ export default class PostTemplate extends Component {
 
 export const query = graphql`
   query PostQuery($slug: String!, $useHeader: Boolean!, $headerGlob: String!) {
-    markdownRemark(fields: { slug: { eq: $slug } }) {
+    post: markdownRemark(fields: { slug: { eq: $slug } }) {
       fields {
         slug
       }
@@ -346,9 +369,19 @@ export const query = graphql`
       }
       html
     }
-    imageSharp(id: { glob: $headerGlob }) @include(if: $useHeader) {
+    header: imageSharp(id: { glob: $headerGlob }) @include(if: $useHeader) {
       sizes(maxWidth: 1200) {
         ...GatsbyImageSharpSizes
+      }
+    }
+    rewards: allImageSharp(filter: { id: { regex: "/images/rewards//" } }) {
+      edges {
+        node {
+          id
+          sizes(maxWidth: 600) {
+            ...GatsbyImageSharpSizes
+          }
+        }
       }
     }
   }
