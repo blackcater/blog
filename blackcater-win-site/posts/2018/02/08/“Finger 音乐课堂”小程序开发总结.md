@@ -1,6 +1,6 @@
 ---
 title: “Finger 音乐课堂”小程序开发总结
-cover: https://image.finger66.com/website-banner1.jpg
+header: header.jpg
 date: 2018-02-08
 tags: [小程序]
 category: tech
@@ -92,7 +92,7 @@ wx.getUserInfo({
 
 **开发者要注意不应该直接把 session_key、openid 等字段作为用户的标识或者 session 的标识，而应该自己派发一个 session 登录态（请参考登录时序图）。对于开发者自己生成的 session，应该保证其安全性且不应该设置较长的过期时间。session 派发到小程序客户端之后，可将其存储在 storage ，用于后续通信使用。**
 
-![微信官方 登录时序图](https://mp.weixin.qq.com/debug/wxadoc/dev/image/login.png?t=201828)
+![微信官方 登录时序图](img/login-1.png)
 
 
 ```javascript

@@ -24,7 +24,7 @@ export default class PostTemplate extends Component {
 
   componentDidMount() {
     const { setCover, setTitle } = this.props
-    const { markdownRemark: post } = this.props.data
+    const { markdownRemark: post, imageSharp: header } = this.props.data
     const gitment = new Gitment({
       id: post.frontmatter.title,
       owner: 'blackcater',
@@ -36,7 +36,7 @@ export default class PostTemplate extends Component {
     })
     const hash = decodeURIComponent(window.location.hash)
 
-    setCover(post.frontmatter.cover)
+    setCover(post.frontmatter.cover || header.sizes.src)
     setTitle('')
 
     gitment.render('comments')
@@ -322,7 +322,7 @@ export default class PostTemplate extends Component {
 }
 
 export const query = graphql`
-  query PostQuery($slug: String!) {
+  query PostQuery($slug: String!, $useHeader: Boolean!, $headerGlob: String!) {
     markdownRemark(fields: { slug: { eq: $slug } }) {
       fields {
         slug
@@ -345,6 +345,11 @@ export const query = graphql`
         depth
       }
       html
+    }
+    imageSharp(id: { glob: $headerGlob }) @include(if: $useHeader) {
+      sizes(maxWidth: 1200) {
+        ...GatsbyImageSharpSizes
+      }
     }
   }
 `

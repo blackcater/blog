@@ -52,6 +52,9 @@ exports.createPages = ({ graphql, boundActionCreators }) => {
               frontmatter {
                 title
                 cover
+                header {
+                  relativePath
+                }
                 date
                 edate: date(formatString: "MMMM DD, YYYY")
                 tags
@@ -83,8 +86,9 @@ exports.createPages = ({ graphql, boundActionCreators }) => {
         edges.forEach(({ node }, index) => {
           const {
             fields: { slug },
-            frontmatter: { date, tags, category },
+            frontmatter: { header, date, tags, category },
           } = node
+          const useHeader = !!header
 
           // 每个帖子的详情页
           createPage({
@@ -93,6 +97,8 @@ exports.createPages = ({ graphql, boundActionCreators }) => {
             context: {
               // 你可以在 graphql 中使用该参数
               slug,
+              headerGlob: `**/${(header || {}).relativePath || ''}*`,
+              useHeader,
               nextPost: index === 0 ? null : edges[index - 1].node,
               prevPost:
                 index === edges.length - 1 ? null : edges[index + 1].node,
