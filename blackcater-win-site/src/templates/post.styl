@@ -312,43 +312,27 @@
       text-align center
 
     .index-list
-      margin 0 20px
-      list-style none
-
-      .index-item
+      margin 0 15px
+      font-size 1.4em
+      ul
+        margin 0 0 0.2em 0.8em
+        list-style none
+      li
         position relative
-        margin 5px 0
-        font-size 1.4em
-        cursor pointer
-        text-align justify
+        margin-bottom 0.1em
+        white-space word-wrap
+        word-break break-all
+      a
+        text-indent 1em
+        &.active
+          color #ffffff
         &::before
           position absolute
-          left -12px
           top 0
-          content "#"
-          font-size 14px
+          left -2em
+          content "# "
           color color-pink
-        &.index-item-1
-          margin-left 0
-        &.index-item-2
-          margin-top 15px
-          margin-left 0.8em
-        &.index-item-3
-          margin-left 1.6em
-          font-size 1.2em
-        &.index-item-4
-          margin-left 2.4em
-          font-size 1.2em
-        &.index-item-5
-          margin-left 3.2em
-          font-size 1.2em
-        &.index-item-6
-          margin-left 4em
-          font-size 1.2em
-        &.active
-          color #fff
-        &:hover
-          color #fff
+
 
   .collapse-icon
     padding 8px

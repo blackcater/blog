@@ -18,6 +18,7 @@ export default class PostTemplate extends Component {
       rewardImageSrc: '',
       collapse: false,
       transparent: true,
+      anchors: [],
     }
   }
 
@@ -33,6 +34,7 @@ export default class PostTemplate extends Component {
         client_secret: '0ae847d4b789be4450e503948a8155a413349f7b',
       },
     })
+    const hash = decodeURIComponent(window.location.hash)
 
     setCover(post.frontmatter.cover)
     setTitle('')
@@ -41,19 +43,66 @@ export default class PostTemplate extends Component {
 
     // 监听滚动事件
     events.on(window.document, 'scroll', this.handleScroll)
+    events.on(window, 'hashchange', this.handleHashChange)
+
+    if (hash) this.props.scrollTo(hash)
+    this.dealWithCategory()
   }
 
   componentWillUnmount() {
     events.off(window.document, 'scroll', this.handleScroll)
+    events.off(window, 'hashchange', this.handleHashChange)
 
     this.props.enableHideHeader(true)
+  }
+
+  handleHashChange = () => {
+    const hash = decodeURIComponent(window.location.hash)
+
+    if (hash) this.props.scrollTo(hash)
+  }
+
+  // 处理目录，获取一些数据信息
+  dealWithCategory() {
+    const anchorList = this.$category.querySelectorAll('a')
+    const anchors = []
+
+    for (let i = 0, len = anchorList.length; i < len; i++) {
+      const anchor = anchorList[i]
+      const { hash } = anchor
+      const hashValue = hash[0] === '#' ? hash : `#${hash}`
+      const id = decodeURIComponent(hashValue.slice(1))
+
+      events.on(anchor, 'click', e => {
+        e.preventDefault()
+
+        if (history.pushState) {
+          history.pushState(null, null, hashValue)
+
+          this.props.scrollTo(id)
+        } else {
+          window.location.hash = hashValue
+        }
+
+        return false
+      })
+
+      anchors.push({
+        id,
+        hash: hashValue,
+        rect: document.querySelector(`#${id}`).getBoundingClientRect(),
+        anchor,
+      })
+    }
+
+    this.setState({ anchors })
   }
 
   // 滚动事件
   handleScroll = e => {
     const scrollTop = domQuery.scrollTop(e.target)
     const height = window.innerHeight
-    const { transparent } = this.state
+    const { transparent, anchors } = this.state
 
     if (scrollTop > height - 192 && transparent) {
       this.setState({ transparent: false })
@@ -61,6 +110,33 @@ export default class PostTemplate extends Component {
 
     if (scrollTop <= height - 192 && !transparent) {
       this.setState({ transparent: true })
+    }
+
+    // 滚动位置检测
+    let index = 0
+
+    anchors.forEach((anchor, idx) => {
+      const { rect, anchor: a } = anchor
+
+      if (idx === index) {
+        if (scrollTop > rect.top - 50) {
+          index++
+        } else {
+          index--
+        }
+      }
+
+      a.classList.remove('active')
+    })
+
+    if (index <= 0) {
+      // 取第一个
+      anchors[0].anchor.classList.add('active')
+    } else if (index >= anchors.length) {
+      // 取最后一个
+      anchors[anchors.length - 1].anchor.classList.add('active')
+    } else {
+      anchors[index].anchor.classList.add('active')
     }
   }
 
@@ -107,9 +183,6 @@ export default class PostTemplate extends Component {
     const { prevPost, nextPost, category, tags = [] } = this.props.pathContext
     const prev = prevPost || post
     const next = nextPost || post
-    const hash = window.location.hash
-      ? decodeURIComponent(window.location.hash.slice(1))
-      : ''
 
     return (
       <div className={cx({ 'template-post': true, collapse })}>
@@ -231,21 +304,11 @@ export default class PostTemplate extends Component {
         </div>
         <div className={cx({ headings: true, fixed: !transparent })}>
           <div className="index-title">INDEX</div>
-          <ul className="index-list">
-            {post.headings.map(heading => (
-              <li
-                key={heading.value}
-                className={cx({
-                  'index-item': true,
-                  [`index-item-${heading.depth}`]: true,
-                  active: heading.value === hash,
-                })}
-                onClick={() => this.props.scrollTo(heading.value)}
-              >
-                {heading.value}
-              </li>
-            ))}
-          </ul>
+          <div
+            ref={el => (this.$category = el)}
+            className="index-list"
+            dangerouslySetInnerHTML={{ __html: post.tableOfContents }}
+          />
         </div>
         <div
           className={cx({ 'collapse-icon': true, show: !transparent })}
