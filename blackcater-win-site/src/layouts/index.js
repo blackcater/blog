@@ -30,7 +30,7 @@ export default class IndexLayout extends Component {
       this.smoothScroll = window.smoothScroll
     }
 
-    this._handleScroll = throttle(this.handleScroll, 300)
+    // this._handleScroll = throttle(this.handleScroll, 300)
   }
 
   componentDidMount() {
