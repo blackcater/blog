@@ -281,7 +281,7 @@ export default class IndexLayout extends Component {
                     <a href={social.url} target="_blank">
                       <img
                         style={{ width: '14px', height: '14px' }}
-                        src={require(`images/links/${social.type}.png`)}
+                        src={null}
                         alt={social.type}
                       />
                     </a>
@@ -314,11 +314,7 @@ export default class IndexLayout extends Component {
           </div>
         </div>
         <div className={cx({ rocket: true, show: !transparent })}>
-          <img
-            src={require('images/rocket.png')}
-            alt="rocket"
-            onClick={() => this.scrollTo()}
-          />
+          <img src={null} alt="rocket" onClick={() => this.scrollTo()} />
         </div>
       </div>
     )

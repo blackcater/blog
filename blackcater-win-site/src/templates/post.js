@@ -119,7 +119,7 @@ export default class PostTemplate extends Component {
       const { rect, anchor: a } = anchor
 
       if (idx === index) {
-        if (scrollTop > rect.top - 50) {
+        if (scrollTop > rect.top - 100) {
           index++
         } else {
           index--
@@ -158,7 +158,7 @@ export default class PostTemplate extends Component {
     if (way === 'zhifubao') {
       this.setState({
         rewardModalOpen: true,
-        rewardImageSrc: require('images/rewards/zhifubao_qrcode.jpg'),
+        rewardImageSrc: null,
       })
 
       return
@@ -167,7 +167,7 @@ export default class PostTemplate extends Component {
     if (way === 'weixin') {
       this.setState({
         rewardModalOpen: true,
-        rewardImageSrc: require('images/rewards/weixin_qrcode.jpg'),
+        rewardImageSrc: null,
       })
     }
   }
@@ -214,7 +214,7 @@ export default class PostTemplate extends Component {
           <div className="reward">
             <img
               className="reward-image"
-              src={require('images/rewards/img.png')}
+              src={null}
               alt="创作不易，如果你觉得文章不错，来点打赏吧！"
             />
             <div className="pay-list">
@@ -222,17 +222,14 @@ export default class PostTemplate extends Component {
                 className="pay pay-zhifubao"
                 onClick={() => this.handleRewardClick('zhifubao')}
               >
-                <img
-                  src={require('images/rewards/zhifubao.png')}
-                  alt="支付宝"
-                />
+                <img src={null} alt="支付宝" />
                 支付宝
               </div>
               <div
                 className="pay pay-weixin"
                 onClick={() => this.handleRewardClick('weixin')}
               >
-                <img src={require('images/rewards/weixin.png')} alt="支付宝" />
+                <img src={null} alt="支付宝" />
                 微信
               </div>
             </div>

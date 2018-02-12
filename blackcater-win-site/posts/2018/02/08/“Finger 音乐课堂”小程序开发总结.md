@@ -8,7 +8,7 @@ category: tech
 
 > 小程序已经有1年多时间了吧！从刚出来我就在关注，当时小程序写个组件，需要使用 `<template is="" data="" />` 这样的形式来复用组件。非常的不直观。从 1.6.3 之后，小程序已经支持了新的[自定义组件](https://mp.weixin.qq.com/debug/wxadoc/dev/framework/custom-component/)的方式，这也使得小程序的开发更为简单了。依托于微信强大的用户数量，微信小程序很有可能成为新的一端（前端，iOS端，Android端）。
 
-<p align="center"><img style="width: 129px; height: 129px;" src="/images/2018/02/08/miniprogram.jpg" /></p>
+<p align="center"><img style="width: 129px; height: 129px;" src="img/miniprogram.jpg" /></p>
 <p align="center"><strong>微信扫描👆二维码，立即查看效果</strong></p>
 
 
@@ -477,7 +477,7 @@ Mixin({
 
 腾讯有两种账号登录集成方式：**独立模式**和**托管模式**。具体区别请参考[官方文档](https://cloud.tencent.com/document/product/268/7653)。
 
-![im 配置](/images/2018/02/08/im-1.png)
+![im 配置](img/im-1.png)
 
 使用前，你需要进行一些配置，从而可以连接到腾讯 IM 服务器。如果你是托管模式，除了需要导入 `webim.js` 文件外，还需要导入一个 `tls.js` 文件（[选择 IM Web 平台 SDK](https://cloud.tencent.com/product/im)）。
 
@@ -578,7 +578,7 @@ mixin 大致结构如上。你只需要处理 `onMsgNotify` 和 `onBigGroupMsgNo
 
 HLS 延迟高，RTMP 延迟低。我们的场景对延迟要求苛刻，所以最终用的 `<live-player>`。该组件，需要手动开通权限。
 
-![im 配置](/images/2018/02/08/live-1.png)
+![im 配置](img/live-1.png)
 
 在开发中遇到了一些问题：
 
@@ -654,7 +654,7 @@ Page({
 })
 ```
 
-![wx.createSelectorQuery](/images/2018/02/08/createSelectorQuery-1.png)
+![wx.createSelectorQuery](img/createSelectorQuery-1.png)
 
 对于上图，banner 的 top 值为 B 区域的高度。最近，微信小程序[配置项](https://mp.weixin.qq.com/debug/wxadoc/dev/framework/config.html)添加了新参数--navigationStyle。navigationStyle 默认为 default。表示展示 A 区域。当 navigationStyle 值为 custom 时，不会展示 A 区域，其余其余会向上移动。因此此时 banner 的 top 值依旧为 B 区域的高度。
 

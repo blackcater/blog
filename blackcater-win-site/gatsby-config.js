@@ -74,9 +74,33 @@ module.exports = {
       },
     },
     {
+      resolve: 'gatsby-source-filesystem',
+      options: {
+        name: 'images',
+        path: `${__dirname}/images/`,
+      },
+    },
+    {
+      resolve: 'gatsby-source-filesystem',
+      options: {
+        name: 'datas',
+        path: `${__dirname}/datas/`,
+      },
+    },
+    `gatsby-transformer-sharp`,
+    `gatsby-plugin-sharp`,
+    {
       resolve: `gatsby-transformer-remark`,
       options: {
         plugins: [
+          `gatsby-plugin-sharp`,
+          {
+            resolve: `gatsby-remark-images`,
+            options: {
+              maxWidth: 660,
+              backgroundColor: '#647b9c',
+            },
+          },
           {
             resolve: `gatsby-remark-prismjs`,
             options: {
