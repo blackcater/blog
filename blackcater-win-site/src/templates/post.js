@@ -36,7 +36,7 @@ export default class PostTemplate extends Component {
     })
     const hash = decodeURIComponent(window.location.hash)
 
-    setCover(post.frontmatter.cover || header.sizes.src)
+    setCover(post.frontmatter.cover || header)
     setTitle('')
 
     gitment.render('comments')

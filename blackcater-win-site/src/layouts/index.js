@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { Helmet } from 'react-helmet'
 import { Icon } from 'components'
 import Link from 'gatsby-link'
+import Img from 'gatsby-image'
 import { events, query as domQuery } from 'dom-helpers'
 import { scrollTop, isMobile } from 'utils/common'
 import { throttle } from 'lodash'
@@ -242,10 +243,19 @@ export default class IndexLayout extends Component {
           <div
             style={{
               transform: `scale(${scale}) translateY(${transformY}px)`,
-              background: `url("${this.state.cover}") 50% 50% / cover`,
             }}
             className="fullscreen"
-          />
+          >
+            {typeof this.state.cover === 'string' ? (
+              <img src={this.state.cover} alt="header" />
+            ) : (
+              <Img
+                style={{ width: '100vh', height: 'calc(100vh - 142px)' }}
+                sizes={this.state.cover.sizes}
+                alt="header"
+              />
+            )}
+          </div>
           <div className="fullscreen-by">
             PROVIDED BY{' '}
             <a href="https://unsplash.com" target="_blank">
