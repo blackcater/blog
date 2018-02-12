@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-yarn build
+yarn pro
 
 cd ./public/
 
