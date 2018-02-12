@@ -119,7 +119,7 @@ export default class PostTemplate extends Component {
       const { rect, anchor: a } = anchor
 
       if (idx === index) {
-        if (scrollTop > rect.top - 100) {
+        if (scrollTop > rect.top - 60) {
           index++
         } else {
           index--
