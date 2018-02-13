@@ -143,7 +143,6 @@ exports.createPages = ({ graphql, boundActionCreators }) => {
             context: {
               // 你可以在 graphql 中使用该参数
               slug,
-              post,
               nextPost: index === 0 ? null : posts[index - 1],
               prevPost: index === posts.length - 1 ? null : posts[index + 1],
               tags: tags.map(tag => ({

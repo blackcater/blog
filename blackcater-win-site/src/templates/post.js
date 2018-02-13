@@ -7,6 +7,7 @@ import cx from 'classnames'
 import { events, query as domQuery } from 'dom-helpers'
 import Gitment from 'gitment'
 import { throttle } from 'lodash'
+import { convertGraphqlPostResult } from 'utils/common'
 
 import 'styles/gitment.css'
 import './post.styl'
@@ -43,7 +44,7 @@ export default class PostTemplate extends Component {
 
   componentDidMount() {
     const { setCover, setTitle } = this.props
-    const { post } = this.props.pathContext
+    const post = convertGraphqlPostResult(this.props.data.post)
     const gitment = new Gitment({
       id: post.frontmatter.title,
       owner: 'blackcater',
@@ -148,14 +149,16 @@ export default class PostTemplate extends Component {
       a.classList.remove('active')
     })
 
-    if (index <= 0) {
-      // 取第一个
-      anchors[0].anchor.classList.add('active')
-    } else if (index >= anchors.length) {
-      // 取最后一个
-      anchors[anchors.length - 1].anchor.classList.add('active')
-    } else {
-      anchors[index].anchor.classList.add('active')
+    if (anchors.length > 0) {
+      if (index <= 0) {
+        // 取第一个
+        anchors[0].anchor.classList.add('active')
+      } else if (index >= anchors.length) {
+        // 取最后一个
+        anchors[anchors.length - 1].anchor.classList.add('active')
+      } else {
+        anchors[index].anchor.classList.add('active')
+      }
     }
   }
 
@@ -197,17 +200,12 @@ export default class PostTemplate extends Component {
     const {
       rewardModalOpen,
       rewardImageSrc,
+      rewardMap,
       collapse,
       transparent,
     } = this.state
-    const {
-      post,
-      prevPost,
-      nextPost,
-      category,
-      tags = [],
-    } = this.props.pathContext
-    const { rewardMap } = this.state
+    const { prevPost, nextPost, category, tags = [] } = this.props.pathContext
+    const post = convertGraphqlPostResult(this.props.data.post)
     const prev = prevPost || post
     const next = nextPost || post
 
@@ -353,7 +351,43 @@ export default class PostTemplate extends Component {
 }
 
 export const query = graphql`
-  query PostQuery {
+  query PostQuery($slug: String) {
+    post: markdownRemark(fields: { slug: { eq: $slug } }) {
+      fields {
+        slug
+      }
+      frontmatter {
+        title
+        header {
+          ... on File {
+            childImageSharp {
+              sizes(maxWidth: 1200) {
+                base64
+                aspectRatio
+                src
+                srcSet
+                sizes
+              }
+            }
+          }
+        }
+        date
+        edate: date(formatString: "MMMM DD, YYYY")
+        tags
+        category
+      }
+      tableOfContents
+      timeToRead
+      wordCounts: wordCount {
+        words
+      }
+      headings {
+        value
+        depth
+      }
+      excerpt
+      html
+    }
     rewards: allImageSharp(filter: { id: { regex: "/images/rewards//" } }) {
       edges {
         node {

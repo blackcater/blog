@@ -13,6 +13,20 @@ export function isEmptyObject(obj = {}) {
   return true
 }
 
+export function convertGraphqlPostResult(post) {
+  const { frontmatter: { header } } = post
+  const isCover = typeof header === 'string'
+
+  return {
+    ...post,
+    frontmatter: {
+      ...post.frontmatter,
+      cover: isCover ? header : header.childImageSharp.sizes.src,
+      header: isCover ? null : header.childImageSharp,
+    },
+  }
+}
+
 // 设备宽度小于 600 默认为 移动设备
 export function isMobile() {
   const regexp = /(iphone|ipod|android|adr)/i
