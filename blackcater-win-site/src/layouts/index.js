@@ -37,7 +37,6 @@ export default class IndexLayout extends Component {
       header: true,
       enableHideHeader: true,
       transparent: true,
-      transformY: 0,
       scale: 1,
       cover: '',
       title: '',
@@ -76,8 +75,7 @@ export default class IndexLayout extends Component {
     this.lastScrollTop = scrollTop
 
     if (scrollTop <= height) {
-      state.transformY = -scrollTop / 4
-      state.scale = 1 + scrollTop / (8 * height)
+      state.scale = 1 + scrollTop / (2 * height)
     }
 
     if (scrollTop >= height - 192) {
@@ -244,14 +242,7 @@ export default class IndexLayout extends Component {
   }
 
   render() {
-    const {
-      menu,
-      header,
-      enableHideHeader,
-      transparent,
-      transformY,
-      scale,
-    } = this.state
+    const { menu, header, enableHideHeader, transparent, scale } = this.state
     const {
       children,
       data: { site: { siteMetadata: metaData }, rocket },
@@ -343,7 +334,7 @@ export default class IndexLayout extends Component {
         <div className="layout-cover">
           <div
             style={{
-              transform: `scale(${scale}) translateY(${transformY}px)`,
+              transform: `scale(${scale})`,
             }}
             className="fullscreen"
           >

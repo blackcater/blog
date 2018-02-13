@@ -51,9 +51,18 @@ exports.createPages = ({ graphql, boundActionCreators }) => {
               }
               frontmatter {
                 title
-                cover
                 header {
-                  relativePath
+                  ... on File {
+                    childImageSharp {
+                      sizes(maxWidth: 1200) {
+                        base64
+                        aspectRatio
+                        src
+                        srcSet
+                        sizes
+                      }
+                    }
+                  }
                 }
                 date
                 edate: date(formatString: "MMMM DD, YYYY")
@@ -76,136 +85,112 @@ exports.createPages = ({ graphql, boundActionCreators }) => {
         }
       }
     `)
-      .then(({ data }) => {
+      .then(({ data, errors }) => {
+        if (errors) {
+          console.error(errors)
+
+          process.exit(1)
+        }
+
         const { edges } = data.allMarkdownRemark
-        const headerPromises = []
+        const posts = []
 
         edges.forEach(({ node }) => {
-          const { frontmatter: { header } } = node
-          const useHeader = !!header
-          const headerGlob = `**/${(header || {}).relativePath || ''}*`
+          const { frontmatter: { title, header } } = node
+          const isCover = typeof header === 'string'
 
-          headerPromises.push(
-            graphql(`
-            query PostHeader {
-              header: imageSharp(id: { glob: "${headerGlob}" }) @include(if: ${useHeader}) {
-                sizes(maxWidth: 1200) {
-                  base64
-                  aspectRatio
-                  src
-                  srcSet
-                  sizes
-                }
-              }
-            }
-          `)
-          )
+          if (!header) {
+            throw new Error(`"${title}" should have a \`header\` frontmatter`)
+          }
+
+          posts.push({
+            ...node,
+            frontmatter: {
+              ...node.frontmatter,
+              cover: isCover ? header : header.childImageSharp.sizes.src,
+              header: isCover ? null : header.childImageSharp,
+            },
+          })
         })
 
-        Promise.all(headerPromises)
-          .then(headers => headers.map(x => x.data.header))
-          .then(headers => {
-            const posts = edges.map(({ node }, index) => {
-              const { frontmatter: { title, cover } } = node
+        const weappPosts = posts.slice(0, 10)
+        const tagMap = {}
+        const archiveMap = {}
+        const categoryMap = {}
 
-              if (!cover && !headers[index]) {
-                throw new Error(
-                  `"${title}" should have a \`cover\` or \`header\` frontmatter`
-                )
-              }
+        createPage({
+          path: '/',
+          component: path.resolve(__dirname, 'src/templates/index.js'),
+          context: {
+            posts: posts.slice(0, 5),
+          },
+        })
 
-              return {
-                ...node,
-                frontmatter: {
-                  ...node.frontmatter,
-                  cover: cover || headers[index].sizes.src,
-                  header: headers[index],
-                },
-              }
-            })
-            const weappPosts = posts.slice(0, 10)
-            const tagMap = {}
-            const archiveMap = {}
-            const categoryMap = {}
+        posts.forEach((post, index) => {
+          const {
+            fields: { slug },
+            frontmatter: { date, tags, category },
+          } = post
 
-            createPage({
-              path: '/',
-              component: path.resolve(__dirname, 'src/templates/index.js'),
-              context: {
-                posts: posts.slice(0, 5),
+          // 每个帖子的详情页
+          createPage({
+            path: slug,
+            component: path.resolve(__dirname, 'src/templates/post.js'),
+            context: {
+              // 你可以在 graphql 中使用该参数
+              slug,
+              post,
+              nextPost: index === 0 ? null : posts[index - 1],
+              prevPost: index === posts.length - 1 ? null : posts[index + 1],
+              tags: tags.map(tag => ({
+                name: tag,
+                slug: `/tag/${tag}/`,
+              })),
+              category: {
+                name: category,
+                slug: `/category/${category}/`,
               },
-            })
-
-            posts.forEach((post, index) => {
-              const {
-                fields: { slug },
-                frontmatter: { date, tags, category },
-              } = post
-
-              // 每个帖子的详情页
-              createPage({
-                path: slug,
-                component: path.resolve(__dirname, 'src/templates/post.js'),
-                context: {
-                  // 你可以在 graphql 中使用该参数
-                  slug,
-                  post,
-                  nextPost: index === 0 ? null : posts[index - 1],
-                  prevPost:
-                    index === posts.length - 1 ? null : posts[index + 1],
-                  tags: tags.map(tag => ({
-                    name: tag,
-                    slug: `/tag/${tag}/`,
-                  })),
-                  category: {
-                    name: category,
-                    slug: `/category/${category}/`,
-                  },
-                },
-              })
-
-              // 分类
-              if (category) {
-                categoryMap[category] = (categoryMap[category] || []).concat(
-                  post
-                )
-              }
-
-              // 标签
-              if (tags) {
-                ;(tags || []).forEach(tag => {
-                  tagMap[tag] = (tagMap[tag] || []).concat(post)
-                })
-              }
-
-              // 归档
-              if (date) {
-                const date$ = new Date(date)
-                const year = date$.getUTCFullYear()
-                const month = date$.getUTCMonth() + 1
-                const day = date$.getUTCDay()
-
-                archiveMap.default = (archiveMap.default || []).concat(post)
-                archiveMap[year] = archiveMap[year] || {}
-                archiveMap[year][month] = archiveMap[year][month] || {}
-                archiveMap[year][month][day] = (
-                  archiveMap[year][month][day] || []
-                ).concat(post)
-              }
-            })
-
-            // 生成 weapp 帖子数据资源文件
-            createWeappPostJSFile(weappPosts)
-            // 生成标签分页
-            createTagPagination(tagMap, createPage)
-            // 生成归档分页
-            createArchivePagination(archiveMap, createPage)
-            // 生成目录分页
-            createCategoryPagination(categoryMap, createPage)
-
-            resolve()
+            },
           })
-          .catch(reject)
+
+          // 分类
+          if (category) {
+            categoryMap[category] = (categoryMap[category] || []).concat(post)
+          }
+
+          // 标签
+          if (tags) {
+            ;(tags || []).forEach(tag => {
+              tagMap[tag] = (tagMap[tag] || []).concat(post)
+            })
+          }
+
+          // 归档
+          if (date) {
+            const date$ = new Date(date)
+            const year = date$.getUTCFullYear()
+            const month = date$.getUTCMonth() + 1
+            const day = date$.getUTCDay()
+
+            archiveMap.default = (archiveMap.default || []).concat(post)
+            archiveMap[year] = archiveMap[year] || {}
+            archiveMap[year][month] = archiveMap[year][month] || {}
+            archiveMap[year][month][day] = (
+              archiveMap[year][month][day] || []
+            ).concat(post)
+          }
+        })
+
+        // 生成 weapp 帖子数据资源文件
+        createWeappPostJSFile(weappPosts)
+        // 生成标签分页
+        createTagPagination(tagMap, createPage)
+        // 生成归档分页
+        createArchivePagination(archiveMap, createPage)
+        // 生成目录分页
+        createCategoryPagination(categoryMap, createPage)
+
+        resolve()
       })
       .catch(reject)
   })
