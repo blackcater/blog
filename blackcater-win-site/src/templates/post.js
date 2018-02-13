@@ -40,7 +40,7 @@ export default class PostTemplate extends Component {
 
   componentDidMount() {
     const { setCover, setTitle } = this.props
-    const { post, header } = this.props.data
+    const { post } = this.props.pathContext
     const gitment = new Gitment({
       id: post.frontmatter.title,
       owner: 'blackcater',
@@ -52,7 +52,7 @@ export default class PostTemplate extends Component {
     })
     const hash = decodeURIComponent(window.location.hash)
 
-    setCover(post.frontmatter.cover || header)
+    setCover(post.frontmatter.header || post.frontmatter.cover)
     setTitle('')
 
     gitment.render('comments')
@@ -197,8 +197,13 @@ export default class PostTemplate extends Component {
       collapse,
       transparent,
     } = this.state
-    const { post } = this.props.data
-    const { prevPost, nextPost, category, tags = [] } = this.props.pathContext
+    const {
+      post,
+      prevPost,
+      nextPost,
+      category,
+      tags = [],
+    } = this.props.pathContext
     const { rewardMap } = this.state
     const prev = prevPost || post
     const next = nextPost || post
@@ -215,7 +220,7 @@ export default class PostTemplate extends Component {
           <div className="time">{post.frontmatter.edate}</div>
           <div className="info">
             <div className="time-to-read">{post.timeToRead}</div>
-            <div className="words-count">{post.wordCount.words}</div>
+            <div className="words-count">{post.wordCounts.words}</div>
           </div>
           <div className="content">
             <div
@@ -345,35 +350,7 @@ export default class PostTemplate extends Component {
 }
 
 export const query = graphql`
-  query PostQuery($slug: String!, $useHeader: Boolean!, $headerGlob: String!) {
-    post: markdownRemark(fields: { slug: { eq: $slug } }) {
-      fields {
-        slug
-      }
-      frontmatter {
-        title
-        cover
-        date
-        edate: date(formatString: "MMMM DD, YYYY")
-        tags
-        category
-      }
-      tableOfContents
-      timeToRead
-      wordCount {
-        words
-      }
-      headings {
-        value
-        depth
-      }
-      html
-    }
-    header: imageSharp(id: { glob: $headerGlob }) @include(if: $useHeader) {
-      sizes(maxWidth: 1200) {
-        ...GatsbyImageSharpSizes
-      }
-    }
+  query PostQuery {
     rewards: allImageSharp(filter: { id: { regex: "/images/rewards//" } }) {
       edges {
         node {
