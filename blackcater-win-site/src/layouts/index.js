@@ -4,12 +4,15 @@ import { Icon } from 'components'
 import Link from 'gatsby-link'
 import Img from 'gatsby-image'
 import { events, query as domQuery } from 'dom-helpers'
-import { scrollTop, isMobile } from 'utils/common'
+import { scrollTop, isMobile, isEmptyObject } from 'utils/common'
 import { throttle } from 'lodash'
+import axios from 'axios'
 import cx from 'classnames'
 
 import 'styles/prism.css'
 import './index.styl'
+
+const NAMESPACE = 'UNSPLASH_IMG__BL0G_INDEX_PAGE'
 
 export default class IndexLayout extends Component {
   constructor(props) {
@@ -46,17 +49,17 @@ export default class IndexLayout extends Component {
       this.smoothScroll = window.smoothScroll
     }
 
-    // this._handleScroll = throttle(this.handleScroll, 300)
+    this._handleScroll = throttle(this.handleScroll, 200)
   }
 
   componentDidMount() {
-    events.on(window.document, 'scroll', this.handleScroll)
+    events.on(window.document, 'scroll', this._handleScroll)
 
     this.handleScroll({ target: window.document.body })
   }
 
   componentWillUnmount() {
-    events.off(window.document, 'scroll', this.handleScroll)
+    events.off(window.document, 'scroll', this._handleScroll)
 
     this.smoothScroll.destroy()
   }
@@ -67,6 +70,7 @@ export default class IndexLayout extends Component {
     const height = window.innerHeight
     const { transparent } = this.state
     const scrollDirection = scrollTop > this.lastScrollTop
+    const scrollDistance = Math.abs(scrollTop - this.lastScrollTop)
     const state = {}
 
     this.lastScrollTop = scrollTop
@@ -77,12 +81,12 @@ export default class IndexLayout extends Component {
     }
 
     if (scrollTop >= height - 192) {
-      if (scrollDirection && this.state.header) {
+      if (scrollDirection && scrollDistance >= 20 && this.state.header) {
         // 向下滚动，影藏 header
         state.header = false
       }
 
-      if (!scrollDirection && !this.state.header) {
+      if (!scrollDirection && scrollDistance >= 20 && !this.state.header) {
         // 向上滚动，显示 header
         state.header = true
       }
@@ -102,7 +106,7 @@ export default class IndexLayout extends Component {
       }
     }
 
-    this.setState(state)
+    if (!isEmptyObject(state)) this.setState(state)
   }
 
   // 切换 菜单栏显隐
@@ -112,11 +116,89 @@ export default class IndexLayout extends Component {
     })
   }
 
-  // 滚动
-  handleMoveDown = () => {
-    // this.setState({
-    //   transparent: false,
-    // })
+  // 判断是否需要更新图片
+  shouldFetchUnsplashPhoto = () => {
+    const { date } = JSON.parse(window.localStorage.getItem(NAMESPACE) || '{}')
+    const now = new Date()
+
+    if (!date) return true
+
+    const past = new Date(date)
+
+    return !(
+      past.getFullYear() === now.getFullYear() &&
+      past.getMonth() === now.getMonth() &&
+      past.getDay() === now.getDay()
+    )
+  }
+
+  // 获取 unsplash 图片
+  fetchUnsplashPhoto = (cb, errCb) => {
+    const mobile = isMobile()
+    const orientation = mobile ? 'portrait' : 'landscape'
+
+    axios
+      .get('https://api.unsplash.com/photos/random', {
+        params: {
+          query: 'landscape',
+          orientation,
+        },
+        headers: {
+          'Accept-Version': 'v1',
+          Authorization:
+            'Client-ID 2293f4e76a8b62a4e5c08a6d05f74d0f12c4cc9e84dc697736d50a422d9a541c',
+        },
+      })
+      .then(({ data }) => {
+        if (cb) cb(data.urls)
+      })
+      .catch(errCb)
+  }
+
+  setUnsplashCover = () => {
+    const mobile = isMobile()
+    const width = mobile ? '600' : '1200'
+
+    if (this.shouldFetchUnsplashPhoto()) {
+      // 需要更新
+      this.fetchUnsplashPhoto(urls => {
+        window.localStorage.setItem(
+          NAMESPACE,
+          JSON.stringify({
+            date: Date.now(),
+            urls,
+          })
+        )
+
+        const coverSrc = `${urls.full}&w=${width}`
+        const image = new Image()
+
+        image.src = coverSrc
+
+        image.onload = () => {
+          this.setCover(coverSrc)
+        }
+
+        this.setCover(urls.thumb)
+      })
+    } else {
+      const { urls } = JSON.parse(
+        window.localStorage.getItem(NAMESPACE) || '{}'
+      )
+
+      const coverSrc = `${urls.full}&w=${width}`
+      const image = new Image()
+
+      image.src = coverSrc
+
+      image.onload = () => {
+        this.setCover(coverSrc)
+      }
+
+      this.setCover(urls.thumb)
+    }
+
+    this.setTitle(this.props.data.site.siteMetadata.title)
   }
 
   setCover = cover => {
@@ -205,7 +287,7 @@ export default class IndexLayout extends Component {
           <div className="title-section">
             <div className="avatar" />
             <div id="title" className="title">
-              {this.state.title || title}
+              {this.state.title || ''}
             </div>
             <div
               className="icon"
@@ -294,6 +376,7 @@ export default class IndexLayout extends Component {
             setCover: this.setCover,
             setTitle: this.setTitle,
             scrollTo: this.scrollTo,
+            setUnsplashCover: this.setUnsplashCover,
             enableHideHeader: this.enableHideHeader,
           })}
         </div>

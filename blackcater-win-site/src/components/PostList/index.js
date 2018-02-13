@@ -41,9 +41,11 @@ export default class PostList extends Component {
                 </Link>
               </div>
               <div className="read-more">
-                <Button type="circle" color="pink">
-                  <Link to={post.fields.slug}>READ</Link>
-                </Button>
+                <Link to={post.fields.slug}>
+                  <Button type="circle" color="pink">
+                    READ
+                  </Button>
+                </Link>
               </div>
             </div>
           </div>

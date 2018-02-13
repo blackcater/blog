@@ -6,6 +6,7 @@ import { Icon } from 'components'
 import cx from 'classnames'
 import { events, query as domQuery } from 'dom-helpers'
 import Gitment from 'gitment'
+import { throttle } from 'lodash'
 
 import 'styles/gitment.css'
 import './post.styl'
@@ -36,6 +37,8 @@ export default class PostTemplate extends Component {
       transparent: true,
       anchors: [],
     }
+
+    this._handleScroll = throttle(this.handleScroll, 200)
   }
 
   componentDidMount() {
@@ -58,7 +61,7 @@ export default class PostTemplate extends Component {
     gitment.render('comments')
 
     // 监听滚动事件
-    events.on(window.document, 'scroll', this.handleScroll)
+    events.on(window.document, 'scroll', this._handleScroll)
     events.on(window, 'hashchange', this.handleHashChange)
 
     if (hash) this.props.scrollTo(hash)
@@ -66,7 +69,7 @@ export default class PostTemplate extends Component {
   }
 
   componentWillUnmount() {
-    events.off(window.document, 'scroll', this.handleScroll)
+    events.off(window.document, 'scroll', this._handleScroll)
     events.off(window, 'hashchange', this.handleHashChange)
 
     this.props.enableHideHeader(true)
@@ -106,7 +109,7 @@ export default class PostTemplate extends Component {
       anchors.push({
         id,
         hash: hashValue,
-        rect: document.querySelector(`#${id}`).getBoundingClientRect(),
+        rect: document.getElementById(id).getBoundingClientRect(),
         anchor,
       })
     }

@@ -5,6 +5,14 @@ export function scrollTop() {
   return (typeof t.scrollTop === 'number' ? t : window.document.body).scrollTop
 }
 
+export function isEmptyObject(obj = {}) {
+  for (const key in obj) {
+    return false
+  }
+
+  return true
+}
+
 // 设备宽度小于 600 默认为 移动设备
 export function isMobile() {
   const regexp = /(iphone|ipod|android|adr)/i

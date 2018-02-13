@@ -142,8 +142,6 @@ exports.createPages = ({ graphql, boundActionCreators }) => {
                 frontmatter: { date, tags, category },
               } = post
 
-              console.dir(slug)
-
               // 每个帖子的详情页
               createPage({
                 path: slug,
