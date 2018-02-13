@@ -340,13 +340,13 @@ export default class IndexLayout extends Component {
           >
             {typeof this.state.cover === 'string' ? (
               <img src={this.state.cover} alt="header" />
-            ) : (
+            ) : this.state.cover ? (
               <Img
                 style={{ width: '100vw', height: 'calc(100vh - 142px)' }}
                 sizes={this.state.cover.sizes}
                 alt="header"
               />
-            )}
+            ) : null}
           </div>
           <div className="fullscreen-by">
             PROVIDED BY{' '}

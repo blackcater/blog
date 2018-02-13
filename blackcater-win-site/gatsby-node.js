@@ -89,19 +89,23 @@ exports.createPages = ({ graphql, boundActionCreators }) => {
         if (errors) {
           console.error(errors)
 
-          process.exit(1)
+          reject('occur some errors ')
+
+          return
         }
 
         const { edges } = data.allMarkdownRemark
         const posts = []
 
-        edges.forEach(({ node }) => {
-          const { frontmatter: { title, header } } = node
-          const isCover = typeof header === 'string'
+        if (edges.some(({ node }) => !node.frontmatter.header)) {
+          reject(`some post hasn't a \`header\` frontmatter`)
 
-          if (!header) {
-            throw new Error(`"${title}" should have a \`header\` frontmatter`)
-          }
+          return
+        }
+
+        edges.forEach(({ node }) => {
+          const { frontmatter: { header } } = node
+          const isCover = typeof header === 'string'
 
           posts.push({
             ...node,

@@ -1,6 +1,7 @@
 import React, { Component, PropTypes } from 'react'
 import { Button } from 'components'
 import Link from 'gatsby-link'
+import Img from 'gatsby-image'
 
 import './index.styl'
 
@@ -18,12 +19,20 @@ export default class PostList extends Component {
       <div className="wbi--post-list">
         {posts.map((post, index) => (
           <div key={`${index}`} className="post">
-            <div
-              style={{
-                backgroundImage: `url('${post.frontmatter.cover}')`,
-              }}
-              className="cover"
-            />
+            <div className="cover">
+              {post.frontmatter.header ? (
+                <Img
+                  style={{ width: '100%', height: '100%' }}
+                  sizes={post.frontmatter.header.sizes}
+                  alt={post.frontmatter.title}
+                />
+              ) : (
+                <img
+                  src={post.frontmatter.cover}
+                  alt={post.frontmatter.title}
+                />
+              )}
+            </div>
             <div className="content">
               <div className="title">{post.frontmatter.title}</div>
               <div className="time">{post.frontmatter.edate}</div>
