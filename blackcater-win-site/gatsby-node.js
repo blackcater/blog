@@ -128,11 +128,21 @@ exports.createPages = ({ graphql, boundActionCreators }) => {
             const archiveMap = {}
             const categoryMap = {}
 
+            createPage({
+              path: '/',
+              component: path.resolve(__dirname, 'src/templates/index.js'),
+              context: {
+                posts: posts.slice(0, 5),
+              },
+            })
+
             posts.forEach((post, index) => {
               const {
                 fields: { slug },
                 frontmatter: { date, tags, category },
               } = post
+
+              console.dir(slug)
 
               // 每个帖子的详情页
               createPage({
@@ -230,7 +240,7 @@ function createTagPagination(tagMap, createPage) {
     createPagination({
       data: tagMap[tag.name],
       base: `/tag/${tag.name}/`,
-      size: 20,
+      size: 5,
       component: path.resolve(__dirname, 'src/templates/tag.js'),
       context: {
         tag,
@@ -253,7 +263,7 @@ function createArchivePagination(archiveMap, createPage) {
   createPagination({
     data: posts,
     base: '/archive/',
-    size: 20,
+    size: 5,
     component: path.resolve(__dirname, 'src/templates/archive.js'),
     context: {},
     createPage,
@@ -273,7 +283,7 @@ function createCategoryPagination(categoryMap, createPage) {
     createPagination({
       data: categoryMap[category],
       base: `/category/${category}/`,
-      size: 20,
+      size: 5,
       component: path.resolve(__dirname, 'src/templates/category.js'),
       context: {
         category,
@@ -288,7 +298,7 @@ function createPagination(opts = {}) {
   const options = {
     data: [],
     base: '/',
-    size: 20,
+    size: 5,
     component: null,
     context: {},
     ...opts,

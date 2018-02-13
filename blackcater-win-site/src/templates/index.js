@@ -77,13 +77,12 @@ export default class IndexPage extends Component {
   }
 
   render() {
-    const { data: { allMarkdownRemark: { edges } } } = this.props
-    const posts = edges.map(edge => edge.node)
+    const { posts = [] } = this.props.pathContext
 
     return (
       <div className="page-index">
         <h2>RECENT</h2>
-        <PostList posts={posts} history={this.props.history} />
+        <PostList posts={posts || []} history={this.props.history} />
         <div className="more-section">
           <Button type="circle" color="pink">
             <Link to="/archive/">MORE</Link>
@@ -96,27 +95,6 @@ export default class IndexPage extends Component {
 
 export const query = graphql`
   query IndexPage {
-    allMarkdownRemark(
-      sort: { fields: [frontmatter___date], order: DESC }
-      limit: 9
-    ) {
-      edges {
-        node {
-          fields {
-            slug
-          }
-          frontmatter {
-            title
-            cover
-            date
-            edate: date(formatString: "MMMM DD, YYYY")
-            tags
-            category
-          }
-          excerpt
-        }
-      }
-    }
     site {
       siteMetadata {
         title
