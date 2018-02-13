@@ -207,24 +207,26 @@ export default {
 import Mixin from 'utils/mixin'
 import customMixin from 'mixins/customMixin'
 
-Mixin({
-  data: {
-    myData: [],
-  },
-  mixins: [customMixin],
-  someMethod() {
-    // 访问数据
-    console.dir(this.data.mixinData)
-
-    this.setData({
-      // 更新数据
-      'mixinData[0]': true,
-    })
-    
-    // 调用 mixin 中方法
-    this.mixinMethods()
-  },
-})
+Page(
+  Mixin({
+    data: {
+      myData: [],
+    },
+    mixins: [customMixin],
+    someMethod() {
+      // 访问数据
+      console.dir(this.data.mixinData)
+  
+      this.setData({
+        // 更新数据
+        'mixinData[0]': true,
+      })
+      
+      // 调用 mixin 中方法
+      this.mixinMethods()
+    },
+  })
+)
 ```
 
 ***注意：写 mixin 时，方法不要使用 `=>` 书写方式，会导致 `this` 不正确。[你可以参考](https://segmentfault.com/a/1190000003781467#articleHeader2)***
@@ -236,7 +238,7 @@ Mixin({
 page-loading 是一个自定义组件，也会暴露一个 mixin。该 mixin 中会暴露一些 data 和 公众方法。
 
 ```javascript
-// mixin/pageLoadingMixin.js
+// mixins/pageLoadingMixin.js
 export default {
   data: {
     // 请求状态
@@ -445,30 +447,32 @@ export default {
 import Mixin from 'utils/mixin'
 import networkMixin, { NETWORK_STATUS } from 'mixins/networkMixin'
 
-Mixin({
-  data: {},
-  mixins: [networkMixin],
-  onLoad() {
-    // 开始进行网络检测
-    this.$onNetworkStatusChange(this._networkChangeHandler)
-  },
-  
-  // 网络变化处理
-  _networkChangeHandler(currentNetworkType, lastNetworkType) {
-    if (currentNetworkType !== NETWORK_STATUS.WIFI && lastNetworkType === NETWORK_STATUS.WIFI) {
-      // 网络波动，给出警告
-      wx.showModal({
-        content: '当前为非 wifi 状态，您是否要继续播放？',
-        showCancel: false,
-        success: ({ confirm }) => {
-          if (confirm !== true) {
-            wx.navigateBack()
-          }
-        },
-      })
+Page(
+  Mixin({
+    data: {},
+    mixins: [networkMixin],
+    onLoad() {
+      // 开始进行网络检测
+      this.$onNetworkStatusChange(this._networkChangeHandler)
     },
-  },
-})
+    
+    // 网络变化处理
+    _networkChangeHandler(currentNetworkType, lastNetworkType) {
+      if (currentNetworkType !== NETWORK_STATUS.WIFI && lastNetworkType === NETWORK_STATUS.WIFI) {
+        // 网络波动，给出警告
+        wx.showModal({
+          content: '当前为非 wifi 状态，您是否要继续播放？',
+          showCancel: false,
+          success: ({ confirm }) => {
+            if (confirm !== true) {
+              wx.navigateBack()
+            }
+          },
+        })
+      },
+    },
+  })
+)
 ```
 
 ### IM
