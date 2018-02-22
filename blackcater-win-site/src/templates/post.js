@@ -277,7 +277,7 @@ export default class PostTemplate extends Component {
                     <Icon type="arrow-up" />
                   )}
                   <div className="tip">PREV POST</div>
-                  <div className="title">{prev.frontmatter.title}</div>
+                  <div className="head">{prev.frontmatter.title}</div>
                 </div>
               </Link>
             </div>
@@ -296,7 +296,7 @@ export default class PostTemplate extends Component {
                     <Icon type="arrow-up" />
                   )}
                   <div className="tip">NEXT POST</div>
-                  <div className="title">{next.frontmatter.title}</div>
+                  <div className="head">{next.frontmatter.title}</div>
                 </div>
               </Link>
             </div>

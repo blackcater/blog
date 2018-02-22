@@ -103,9 +103,7 @@ module.exports = {
           },
           {
             resolve: `gatsby-remark-prismjs`,
-            options: {
-              classPrefix: 'language-',
-            },
+            options: {},
           },
           `gatsby-remark-autolink-headers`,
         ],

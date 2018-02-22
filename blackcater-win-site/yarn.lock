@@ -3763,8 +3763,8 @@ gatsby-cli@^1.1.40:
     yurnalist "^0.2.1"
 
 gatsby-image@^1.0.36:
-  version "1.0.36"
-  resolved "http://registry.npm.taobao.org/gatsby-image/download/gatsby-image-1.0.36.tgz#7aeace1c9e463ad9a145c94cf20be8cca9c0e382"
+  version "1.0.38"
+  resolved "http://registry.npm.taobao.org/gatsby-image/download/gatsby-image-1.0.38.tgz#1d01e2defe9b5dc9eb304479f21922dae2096831"
   dependencies:
     babel-runtime "^6.26.0"
     prop-types "^15.6.0"
@@ -3827,9 +3827,9 @@ gatsby-plugin-react-helmet@^2.0.5:
   dependencies:
     babel-runtime "^6.26.0"
 
-gatsby-plugin-sharp@^1.6.28:
-  version "1.6.28"
-  resolved "http://registry.npm.taobao.org/gatsby-plugin-sharp/download/gatsby-plugin-sharp-1.6.28.tgz#4f485f4be15d2e64a7876455aea1fc9ed80b05a7"
+gatsby-plugin-sharp@^1.6.28, gatsby-plugin-sharp@^1.6.32:
+  version "1.6.32"
+  resolved "http://registry.npm.taobao.org/gatsby-plugin-sharp/download/gatsby-plugin-sharp-1.6.32.tgz#023ae785663ee7599a278536cf4f3861752cc0af"
   dependencies:
     async "^2.1.2"
     babel-runtime "^6.26.0"
@@ -3885,12 +3885,12 @@ gatsby-remark-copy-linked-files@^1.5.27:
     unist-util-visit "^1.1.1"
 
 gatsby-remark-images@^1.5.44:
-  version "1.5.44"
-  resolved "http://registry.npm.taobao.org/gatsby-remark-images/download/gatsby-remark-images-1.5.44.tgz#19c0cdbb8fbe49c2b3f3e76d02994af8bb57d586"
+  version "1.5.48"
+  resolved "http://registry.npm.taobao.org/gatsby-remark-images/download/gatsby-remark-images-1.5.48.tgz#f126496d9854fe1678c29244a63a29d9c22346bf"
   dependencies:
     babel-runtime "^6.26.0"
     cheerio "^1.0.0-rc.2"
-    gatsby-plugin-sharp "^1.6.28"
+    gatsby-plugin-sharp "^1.6.32"
     is-relative-url "^2.0.0"
     lodash "^4.17.4"
     slash "^1.0.0"
@@ -3956,8 +3956,8 @@ gatsby-transformer-remark@^1.7.32:
     unist-util-visit "^1.1.1"
 
 gatsby-transformer-sharp@^1.6.19:
-  version "1.6.19"
-  resolved "http://registry.npm.taobao.org/gatsby-transformer-sharp/download/gatsby-transformer-sharp-1.6.19.tgz#56bd464a1bc9cfa0511a12c4d121e0478193761c"
+  version "1.6.20"
+  resolved "http://registry.npm.taobao.org/gatsby-transformer-sharp/download/gatsby-transformer-sharp-1.6.20.tgz#5b152bf9b3f93b937c8f6595372a935ab89ab62d"
   dependencies:
     babel-runtime "^6.26.0"
     bluebird "^3.5.0"
@@ -7328,8 +7328,8 @@ pleeease-filters@^3.0.0:
     postcss "^5.0.4"
 
 pngjs@^3.0.0:
-  version "3.3.1"
-  resolved "http://registry.npm.taobao.org/pngjs/download/pngjs-3.3.1.tgz#8e14e6679ee7424b544334c3b2d21cea6d8c209a"
+  version "3.3.2"
+  resolved "http://registry.npm.taobao.org/pngjs/download/pngjs-3.3.2.tgz#097c3c2a75feb223eadddea6bc9f0050cf830bc3"
 
 pngquant-bin@^3.0.0:
   version "3.1.1"
@@ -9986,8 +9986,8 @@ tar@^2.2.1:
     inherits "2"
 
 tar@^4.2.0:
-  version "4.3.3"
-  resolved "http://registry.npm.taobao.org/tar/download/tar-4.3.3.tgz#e03823dbde4e8060f606fef7d09f92ce06c1064b"
+  version "4.4.0"
+  resolved "http://registry.npm.taobao.org/tar/download/tar-4.4.0.tgz#3aaf8c29b6b800a8215f33efb4df1c95ce2ac2f5"
   dependencies:
     chownr "^1.0.1"
     fs-minipass "^1.2.3"
