@@ -37,7 +37,6 @@ export default class PostTemplate extends Component {
       collapse: false,
       transparent: true,
       anchors: [],
-      isMobile: isMobile(),
     }
 
     this._handleScroll = throttle(this.handleScroll, 200)
@@ -66,7 +65,7 @@ export default class PostTemplate extends Component {
     events.on(window.document, 'scroll', this._handleScroll)
     events.on(window, 'hashchange', this.handleHashChange)
 
-    if (!this.state.isMobile) this.dealWithCategory()
+    if (!isMobile()) this.dealWithCategory()
     if (hash) this.props.scrollTo(hash)
   }
 
@@ -204,7 +203,6 @@ export default class PostTemplate extends Component {
       rewardMap,
       collapse,
       transparent,
-      isMobile,
     } = this.state
     const { prevPost, nextPost, category, tags = [] } = this.props.pathContext
     const post = convertGraphqlPostResult(this.props.data.post)
@@ -330,7 +328,7 @@ export default class PostTemplate extends Component {
             </div>
           </Modal>
         </div>
-        {!isMobile ? (
+        {!isMobile() ? (
           <div className={cx({ headings: true, fixed: !transparent })}>
             <div className="index-title">INDEX</div>
             <div
@@ -340,7 +338,7 @@ export default class PostTemplate extends Component {
             />
           </div>
         ) : null}
-        {!isMobile ? (
+        {!isMobile() ? (
           <div
             className={cx({ 'collapse-icon': true, show: !transparent })}
             onClick={this.handleToggleCollapse}

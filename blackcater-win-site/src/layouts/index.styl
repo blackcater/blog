@@ -227,13 +227,17 @@
         display block
 
     .info
-      margin 30px 25px 0
+      margin 30px auto 50px
+      max-width 1200px
       display flex
       flex-direction row
       justify-content space-between
 
+      .left
+        margin 0 25px 10px
+
       .right
-        margin-bottom 20px
+        margin 0 25px 10px
 
     +below(600px)
       .info

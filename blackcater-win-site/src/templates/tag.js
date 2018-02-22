@@ -5,6 +5,7 @@ import './tag.styl'
 
 export default class TagTemplate extends Component {
   componentDidMount() {
+    this.props.setUnsplashCover()
     this.props.setTitle(`TAG: ${this.props.pathContext.tag.name.toUpperCase()}`)
   }
 

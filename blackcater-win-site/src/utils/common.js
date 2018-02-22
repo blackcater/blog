@@ -31,7 +31,11 @@ export function convertGraphqlPostResult(post) {
 export function isMobile() {
   const regexp = /(iphone|ipod|android|adr)/i
 
-  return regexp.test(window.navigator.appVersion)
+  if (typeof window !== 'undefined') {
+    return regexp.test(window ? window.navigator.appVersion : '')
+  } else {
+    return false
+  }
 }
 
 export function isDesktop() {}

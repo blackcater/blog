@@ -431,10 +431,10 @@ export default class IndexLayout extends Component {
             </div>
           </div>
           <div className="info">
-            <div className="right">
+            <div className="left">
               {nickname.toUpperCase()} &copy; ALL RIGHT RESERVED.
             </div>
-            <div className="tool">POWERED BY GATSBY</div>
+            <div className="right">POWERED BY GATSBY</div>
           </div>
         </div>
         <div

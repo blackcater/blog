@@ -5,6 +5,7 @@ import './category.styl'
 
 export default class CategoryTemplate extends Component {
   componentDidMount() {
+    this.props.setUnsplashCover()
     this.props.setTitle(
       `CATEGORY: ${this.props.pathContext.category.toUpperCase()}`
     )

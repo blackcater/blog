@@ -5,6 +5,7 @@ import './archive.styl'
 
 export default class ArchiveTemplate extends Component {
   componentDidMount() {
+    this.props.setUnsplashCover()
     this.props.setTitle('ARCHIVE')
   }
 

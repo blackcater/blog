@@ -5,6 +5,7 @@ import './tag-index.styl'
 
 export default class TagIndexTemplate extends Component {
   componentDidMount() {
+    this.props.setUnsplashCover()
     this.props.setTitle('TAGS')
   }
 
