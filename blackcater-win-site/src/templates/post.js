@@ -35,6 +35,7 @@ export default class PostTemplate extends Component {
       rewardModalOpen: false,
       rewardImageSrc: {},
       collapse: false,
+      collapseFirst: true,
       transparent: true,
       anchors: [],
     }
@@ -65,7 +66,6 @@ export default class PostTemplate extends Component {
     events.on(window.document, 'scroll', this._handleScroll)
     events.on(window, 'hashchange', this.handleHashChange)
 
-    if (!isMobile()) this.dealWithCategory()
     if (hash) this.props.scrollTo(hash)
   }
 
@@ -83,7 +83,8 @@ export default class PostTemplate extends Component {
   }
 
   // 处理目录，获取一些数据信息
-  dealWithCategory() {
+  dealWithCategory(cb) {
+    const scrollTop = domQuery.scrollTop(window)
     const anchorList = this.$category.querySelectorAll('a')
     const anchors = []
 
@@ -92,6 +93,7 @@ export default class PostTemplate extends Component {
       const { hash } = anchor
       const hashValue = hash[0] === '#' ? hash : `#${hash}`
       const id = decodeURIComponent(hashValue.slice(1))
+      const rect = document.getElementById(id).getBoundingClientRect()
 
       events.on(anchor, 'click', e => {
         e.preventDefault()
@@ -110,17 +112,17 @@ export default class PostTemplate extends Component {
       anchors.push({
         id,
         hash: hashValue,
-        rect: document.getElementById(id).getBoundingClientRect(),
+        top: rect.top + scrollTop,
         anchor,
       })
     }
 
-    this.setState({ anchors })
+    this.setState({ anchors }, cb)
   }
 
   // 滚动事件
   handleScroll = e => {
-    const scrollTop = domQuery.scrollTop(e.target)
+    const scrollTop = domQuery.scrollTop(e ? e.target : window)
     const height = window.innerHeight
     const { transparent, anchors } = this.state
 
@@ -136,10 +138,10 @@ export default class PostTemplate extends Component {
     let index = 0
 
     anchors.forEach((anchor, idx) => {
-      const { rect, anchor: a } = anchor
+      const { top, anchor: a } = anchor
 
       if (idx === index) {
-        if (scrollTop > rect.top - 60) {
+        if (scrollTop > top - 60) {
           index++
         } else {
           index--
@@ -170,8 +172,13 @@ export default class PostTemplate extends Component {
       this.props.enableHideHeader(true)
     }
 
+    if (this.state.collapseFirst) {
+      if (!isMobile()) this.dealWithCategory(this._handleScroll)
+    }
+
     this.setState({
       collapse: !this.state.collapse,
+      collapseFirst: false,
     })
   }
 
