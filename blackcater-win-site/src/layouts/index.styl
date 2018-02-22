@@ -241,20 +241,44 @@
 
 
 .layout
-  .rocket
+  .totop
+    display inline-flex
+    flex-direction row
     position fixed
+    padding 8px
+    width 50px
+    height 24px
     right 25px
     bottom -100px
     transition all .2s ease-in-out
+    border-radius 20px
+    box-shadow 0 0 20px color-bg
+    background-color color-bg-light
+    overflow hidden
+    cursor pointer
+
+    i
+      flex-basis 24px
+      z-index 2
+
+    .progress
+      color #fff
+      flex-basis 26px
+      text-align right
+      line-height 24px
+      z-index 2
+
+    .bg
+      position absolute
+      left 0
+      right 0
+      bottom 0
+      height 100%
+      background-color color-pink
+      transition all .2s ease-in-out
 
     &.show
       bottom 40px
-
-    img
-      position relative
-      width 40px
-      height 40px
-      cursor pointer
 
 
 // animation

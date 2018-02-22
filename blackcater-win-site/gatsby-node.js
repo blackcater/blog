@@ -39,11 +39,16 @@ exports.onCreateNode = ({ node, getNode, boundActionCreators }) => {
 
 exports.createPages = ({ graphql, boundActionCreators }) => {
   const { createPage } = boundActionCreators
+  const dateSorter = `sort: { fields: [frontmatter___date], order: DESC }`
+  const draftFilter =
+    process.env.NODE_ENV === 'production'
+      ? `, filter: { frontmatter: { draft: { eq: false } } }`
+      : ''
 
   return new Promise((resolve, reject) => {
     graphql(`
       {
-        allMarkdownRemark(sort: { fields: [frontmatter___date], order: DESC }) {
+        allMarkdownRemark(${dateSorter}${draftFilter}) {
           edges {
             node {
               fields {

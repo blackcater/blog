@@ -4,6 +4,7 @@ header: header.jpg
 date: 2018-02-08
 tags: [小程序]
 category: tech
+draft: false
 ---
 
 > 小程序已经有1年多时间了吧！从刚出来我就在关注，当时小程序写个组件，需要使用 `<template is="" data="" />` 这样的形式来复用组件。非常的不直观。从 1.6.3 之后，小程序已经支持了新的[自定义组件](https://mp.weixin.qq.com/debug/wxadoc/dev/framework/custom-component/)的方式，这也使得小程序的开发更为简单了。依托于微信强大的用户数量，微信小程序很有可能成为新的一端（前端，iOS端，Android端）。

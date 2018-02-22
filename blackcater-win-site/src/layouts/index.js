@@ -41,6 +41,7 @@ export default class IndexLayout extends Component {
       cover: '',
       title: '',
       socialMap,
+      progress: 0,
     }
     this.lastScrollTop = 0
 
@@ -66,8 +67,11 @@ export default class IndexLayout extends Component {
   // 滚动事件
   handleScroll = e => {
     const scrollTop = domQuery.scrollTop(e.target)
+    const scrollHeight =
+      window.document.documentElement.scrollHeight ||
+      window.document.body.scrollHeight
     const height = window.innerHeight
-    const { transparent } = this.state
+    const { transparent, progress } = this.state
     const scrollDirection = scrollTop > this.lastScrollTop
     const scrollDistance = Math.abs(scrollTop - this.lastScrollTop)
     const state = {}
@@ -92,6 +96,12 @@ export default class IndexLayout extends Component {
       if (transparent) {
         state.transparent = false
       }
+
+      state.progress = (
+        (scrollTop - height + 192) /
+        (scrollHeight - height + 192 - height) *
+        100
+      ).toFixed(0)
     }
 
     if (scrollTop <= height - 192) {
@@ -101,6 +111,10 @@ export default class IndexLayout extends Component {
 
       if (!transparent) {
         state.transparent = true
+      }
+
+      if (progress) {
+        state.progress = 0
       }
     }
 
@@ -242,7 +256,14 @@ export default class IndexLayout extends Component {
   }
 
   render() {
-    const { menu, header, enableHideHeader, transparent, scale } = this.state
+    const {
+      menu,
+      header,
+      enableHideHeader,
+      transparent,
+      scale,
+      progress,
+    } = this.state
     const {
       children,
       data: { site: { siteMetadata: metaData }, rocket },
@@ -338,7 +359,7 @@ export default class IndexLayout extends Component {
             }}
             className="fullscreen"
           >
-            {typeof this.state.cover === 'string' ? (
+            {typeof this.state.cover === 'string' && this.state.cover ? (
               <img src={this.state.cover} alt="header" />
             ) : this.state.cover ? (
               <Img
@@ -416,12 +437,13 @@ export default class IndexLayout extends Component {
             <div className="tool">POWERED BY GATSBY</div>
           </div>
         </div>
-        <div className={cx({ rocket: true, show: !transparent })}>
-          <img
-            src={rocket.sizes.src}
-            alt="rocket"
-            onClick={() => this.scrollTo()}
-          />
+        <div
+          className={cx({ totop: true, show: !transparent })}
+          onClick={() => this.scrollTo()}
+        >
+          <Icon type="arrow-up" style={{ color: '#fff', fontSize: '24px' }} />
+          <span className="progress">{progress}%</span>
+          <div className="bg" style={{ height: `${progress}%` }} />
         </div>
       </div>
     )

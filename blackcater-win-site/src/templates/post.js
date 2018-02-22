@@ -7,7 +7,7 @@ import cx from 'classnames'
 import { events, query as domQuery } from 'dom-helpers'
 import Gitment from 'gitment'
 import { throttle } from 'lodash'
-import { convertGraphqlPostResult } from 'utils/common'
+import { isMobile, convertGraphqlPostResult } from 'utils/common'
 
 import 'styles/gitment.css'
 import './post.styl'
@@ -37,6 +37,7 @@ export default class PostTemplate extends Component {
       collapse: false,
       transparent: true,
       anchors: [],
+      isMobile: isMobile(),
     }
 
     this._handleScroll = throttle(this.handleScroll, 200)
@@ -65,8 +66,8 @@ export default class PostTemplate extends Component {
     events.on(window.document, 'scroll', this._handleScroll)
     events.on(window, 'hashchange', this.handleHashChange)
 
+    if (!this.state.isMobile) this.dealWithCategory()
     if (hash) this.props.scrollTo(hash)
-    this.dealWithCategory()
   }
 
   componentWillUnmount() {
@@ -203,6 +204,7 @@ export default class PostTemplate extends Component {
       rewardMap,
       collapse,
       transparent,
+      isMobile,
     } = this.state
     const { prevPost, nextPost, category, tags = [] } = this.props.pathContext
     const post = convertGraphqlPostResult(this.props.data.post)
@@ -328,23 +330,27 @@ export default class PostTemplate extends Component {
             </div>
           </Modal>
         </div>
-        <div className={cx({ headings: true, fixed: !transparent })}>
-          <div className="index-title">INDEX</div>
+        {!isMobile ? (
+          <div className={cx({ headings: true, fixed: !transparent })}>
+            <div className="index-title">INDEX</div>
+            <div
+              ref={el => (this.$category = el)}
+              className="index-list"
+              dangerouslySetInnerHTML={{ __html: post.tableOfContents }}
+            />
+          </div>
+        ) : null}
+        {!isMobile ? (
           <div
-            ref={el => (this.$category = el)}
-            className="index-list"
-            dangerouslySetInnerHTML={{ __html: post.tableOfContents }}
-          />
-        </div>
-        <div
-          className={cx({ 'collapse-icon': true, show: !transparent })}
-          onClick={this.handleToggleCollapse}
-        >
-          <Icon
-            type={collapse ? 'arrow-left' : 'arrow-right'}
-            style={{ color: '#fff', fontSize: '24px' }}
-          />
-        </div>
+            className={cx({ 'collapse-icon': true, show: !transparent })}
+            onClick={this.handleToggleCollapse}
+          >
+            <Icon
+              type={collapse ? 'arrow-left' : 'arrow-right'}
+              style={{ color: '#fff', fontSize: '24px' }}
+            />
+          </div>
+        ) : null}
       </div>
     )
   }
