@@ -7,7 +7,8 @@ import cx from 'classnames'
 import { events, query as domQuery } from 'dom-helpers'
 import Gitment from 'gitment'
 import { throttle } from 'lodash'
-import { isMobile, convertGraphqlPostResult } from 'utils/common'
+import { isMobile } from 'utils/common'
+import { formatGraphqlPost } from 'utils/format'
 
 import 'styles/gitment.css'
 import './post.styl'
@@ -45,7 +46,7 @@ export default class PostTemplate extends Component {
 
   componentDidMount() {
     const { setCover, setTitle } = this.props
-    const post = convertGraphqlPostResult(this.props.data.post)
+    const post = formatGraphqlPost(this.props.data.post)
     const gitment = new Gitment({
       id: post.frontmatter.title,
       owner: 'blackcater',
@@ -211,8 +212,10 @@ export default class PostTemplate extends Component {
       collapse,
       transparent,
     } = this.state
-    const { prevPost, nextPost, category, tags = [] } = this.props.pathContext
-    const post = convertGraphqlPostResult(this.props.data.post)
+    const { category, tags = [] } = this.props.pathContext
+    const post = formatGraphqlPost(this.props.data.post)
+    const prevPost = formatGraphqlPost(this.props.data.prevPost)
+    const nextPost = formatGraphqlPost(this.props.data.nextPost)
     const prev = prevPost || post
     const next = nextPost || post
 
@@ -362,8 +365,8 @@ export default class PostTemplate extends Component {
 }
 
 export const query = graphql`
-  query PostQuery($slug: String) {
-    post: markdownRemark(fields: { slug: { eq: $slug } }) {
+  query PostQuery($curr: String, $prev: String, $next: String) {
+    post: markdownRemark(fields: { slug: { eq: $curr } }) {
       fields {
         slug
       }
@@ -398,6 +401,48 @@ export const query = graphql`
       }
       excerpt
       html
+    }
+    prevPost: markdownRemark(fields: { slug: { eq: $prev } }) {
+      fields {
+        slug
+      }
+      frontmatter {
+        title
+        header {
+          ... on File {
+            childImageSharp {
+              sizes(maxWidth: 1200) {
+                base64
+                aspectRatio
+                src
+                srcSet
+                sizes
+              }
+            }
+          }
+        }
+      }
+    }
+    nextPost: markdownRemark(fields: { slug: { eq: $next } }) {
+      fields {
+        slug
+      }
+      frontmatter {
+        title
+        header {
+          ... on File {
+            childImageSharp {
+              sizes(maxWidth: 1200) {
+                base64
+                aspectRatio
+                src
+                srcSet
+                sizes
+              }
+            }
+          }
+        }
+      }
     }
     rewards: allImageSharp(filter: { id: { regex: "/images/rewards//" } }) {
       edges {

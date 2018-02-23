@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { Icon, Button, PostList } from 'components'
 import Link from 'gatsby-link'
+import { formatGraphqlPostList } from 'utils/format'
 
 import './index.styl'
 
@@ -11,7 +12,7 @@ export default class IndexPage extends Component {
   }
 
   render() {
-    const { posts = [] } = this.props.pathContext
+    const posts = formatGraphqlPostList(this.props.data.posts)
 
     return (
       <div className="page-index">
@@ -30,10 +31,54 @@ export default class IndexPage extends Component {
 }
 
 export const query = graphql`
-  query IndexPage {
+  query IndexTemplate {
     site {
       siteMetadata {
         title
+      }
+    }
+    posts: allMarkdownRemark(
+      sort: { fields: [frontmatter___date], order: DESC }
+      skip: 0
+      limit: 5
+    ) {
+      edges {
+        node {
+          fields {
+            slug
+          }
+          frontmatter {
+            title
+            header {
+              ... on File {
+                childImageSharp {
+                  sizes(maxWidth: 1200) {
+                    base64
+                    aspectRatio
+                    src
+                    srcSet
+                    sizes
+                  }
+                }
+              }
+            }
+            date
+            edate: date(formatString: "MMMM DD, YYYY")
+            tags
+            category
+          }
+          tableOfContents
+          timeToRead
+          wordCounts: wordCount {
+            words
+          }
+          headings {
+            value
+            depth
+          }
+          excerpt
+          html
+        }
       }
     }
   }

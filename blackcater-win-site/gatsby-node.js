@@ -45,13 +45,16 @@ exports.createPages = ({ graphql, boundActionCreators }) => {
   const dateSorter = `sort: { fields: [frontmatter___date], order: DESC }`
   const draftFilter =
     process.env.NODE_ENV === 'production'
-      ? `, filter: { frontmatter: { draft: { eq: false } } }`
+      ? `filter: { frontmatter: { draft: { eq: false } } }`
       : ''
 
   return new Promise((resolve, reject) => {
     graphql(`
       {
-        rawPosts: allMarkdownRemark(${dateSorter}${draftFilter}) {
+        rawPosts: allMarkdownRemark(
+          ${dateSorter}
+          ${draftFilter}
+        ) {
           edges {
             node {
               fields {
@@ -77,7 +80,12 @@ exports.createPages = ({ graphql, boundActionCreators }) => {
             }
           }
         }
-        miniRawPosts: allMarkdownRemark(${dateSorter}${draftFilter}, skip: 0, limit: 10) {
+        miniRawPosts: allMarkdownRemark(
+          ${dateSorter}
+          ${draftFilter}
+          skip: 0
+          limit: 10
+        ) {
           edges {
             node {
               fields {
