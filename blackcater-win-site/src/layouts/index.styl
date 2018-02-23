@@ -43,10 +43,10 @@
         background-size cover
         background-image url("/favicon.png")
         transform scale(1) rotate(0)
+        transition transform .8s ease-in-out
         cursor pointer
         &:hover
           transform scale(1.5) rotate(360deg)
-          animation AvatarRotateAnimation .8s
 
       .title
         font-size 2rem
@@ -150,13 +150,15 @@
       right 0
       bottom 142px
       height 45px
-      line-height 45px
       text-align center
       background-color transparent
 
-      .wbi
-        position relative
-        animation FloatAnimation .8s infinite alternate
+      .down
+        margin 12.5px
+        display inline-block
+        width 20px
+        height 20px
+        cursor pointer
 
 
   .layout-content
@@ -295,16 +297,7 @@
   }
 }
 
-// avatar
-@keyframes AvatarRotateAnimation {
-  from {
-    transform scale(1) rotate(0)
-  }
-  to {
-    transform scale(1.5) rotate(360deg)
-  }
-}
-
+// @Deprecated
 @keyframes CoverSlideDownAnimation {
   from {
     transform translate(0, -100%)
@@ -314,6 +307,7 @@
   }
 }
 
+// @Deprecated
 @keyframes CoverSlideUpAnimation {
   from {
     transform translate(0, 0)

@@ -4716,7 +4716,7 @@ hoek@4.x.x:
   version "4.2.0"
   resolved "http://registry.npm.taobao.org/hoek/download/hoek-4.2.0.tgz#72d9d0754f7fe25ca2d01ad8f8f9a9449a89526d"
 
-hoist-non-react-statics@^2.3.0:
+hoist-non-react-statics@2.3.1, hoist-non-react-statics@^2.3.0:
   version "2.3.1"
   resolved "http://registry.npm.taobao.org/hoist-non-react-statics/download/hoist-non-react-statics-2.3.1.tgz#343db84c6018c650778898240135a1420ee22ce0"
 
@@ -4744,6 +4744,12 @@ html-comment-regex@^1.1.0:
 html-entities@^1.2.0:
   version "1.2.1"
   resolved "http://registry.npm.taobao.org/html-entities/download/html-entities-1.2.1.tgz#0df29351f0721163515dfb9e5543e5f6eed5162f"
+
+html-parse-stringify2@2.0.1:
+  version "2.0.1"
+  resolved "http://registry.npm.taobao.org/html-parse-stringify2/download/html-parse-stringify2-2.0.1.tgz#dc5670b7292ca158b7bc916c9a6735ac8872834a"
+  dependencies:
+    void-elements "^2.0.1"
 
 html-void-elements@^1.0.0, html-void-elements@^1.0.1:
   version "1.0.2"
@@ -4829,6 +4835,14 @@ husky@^0.14.3:
     is-ci "^1.0.10"
     normalize-path "^1.0.0"
     strip-indent "^2.0.0"
+
+i18next-browser-languagedetector@^2.1.0:
+  version "2.1.0"
+  resolved "http://registry.npm.taobao.org/i18next-browser-languagedetector/download/i18next-browser-languagedetector-2.1.0.tgz#1b0e17b09507f84e7a1fa761539a07544f92a0df"
+
+i18next@^10.4.1:
+  version "10.4.1"
+  resolved "http://registry.npm.taobao.org/i18next/download/i18next-10.4.1.tgz#90b0ac1683b0a5874a38588c6aaf1831360b460f"
 
 iconv-lite@0.4.19, iconv-lite@^0.4.17, iconv-lite@~0.4.13:
   version "0.4.19"
@@ -8249,6 +8263,14 @@ react-hot-loader@^3.0.0-beta.6:
     redbox-react "^1.3.6"
     source-map "^0.6.1"
 
+react-i18next@^7.4.0:
+  version "7.4.0"
+  resolved "http://registry.npm.taobao.org/react-i18next/download/react-i18next-7.4.0.tgz#07a336e49fc8f2599d08136d73134e3dc4830b49"
+  dependencies:
+    hoist-non-react-statics "2.3.1"
+    html-parse-stringify2 "2.0.1"
+    prop-types "^15.6.0"
+
 react-modal@^3.1.10:
   version "3.1.10"
   resolved "http://registry.npm.taobao.org/react-modal/download/react-modal-3.1.10.tgz#8898b5cc4ebba78adbb8dea4c55a69818aa682cc"
@@ -10645,6 +10667,10 @@ vm-browserify@0.0.4:
   resolved "http://registry.npm.taobao.org/vm-browserify/download/vm-browserify-0.0.4.tgz#5d7ea45bbef9e4a6ff65f95438e0a87c357d5a73"
   dependencies:
     indexof "0.0.1"
+
+void-elements@^2.0.1:
+  version "2.0.1"
+  resolved "http://registry.npm.taobao.org/void-elements/download/void-elements-2.0.1.tgz#c066afb582bb1cb4128d60ea92392e94d5e9dbec"
 
 walker@~1.0.5:
   version "1.0.7"

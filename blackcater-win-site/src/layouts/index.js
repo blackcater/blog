@@ -42,6 +42,7 @@ export default class IndexLayout extends Component {
       title: '',
       socialMap,
       progress: 0,
+      isUnsplash: false,
     }
     this.lastScrollTop = 0
 
@@ -188,10 +189,10 @@ export default class IndexLayout extends Component {
         image.src = coverSrc
 
         image.onload = () => {
-          this.setCover(coverSrc)
+          this.setCover(coverSrc, true)
         }
 
-        this.setCover(urls.thumb)
+        this.setCover(urls.thumb, true)
       })
     } else {
       const { urls } = JSON.parse(
@@ -204,18 +205,19 @@ export default class IndexLayout extends Component {
       image.src = coverSrc
 
       image.onload = () => {
-        this.setCover(coverSrc)
+        this.setCover(coverSrc, true)
       }
 
-      this.setCover(urls.thumb)
+      this.setCover(urls.thumb, true)
     }
 
     this.setTitle(this.props.data.site.siteMetadata.title)
   }
 
-  setCover = cover => {
+  setCover = (cover, isUnsplash = false) => {
     this.setState({
       cover,
+      isUnsplash,
     })
   }
 
@@ -263,12 +265,10 @@ export default class IndexLayout extends Component {
       transparent,
       scale,
       progress,
+      socialMap,
+      isUnsplash,
     } = this.state
-    const {
-      children,
-      data: { site: { siteMetadata: metaData }, rocket },
-    } = this.props
-    const { socialMap } = this.state
+    const { children, data: { site: { siteMetadata: metaData } } } = this.props
     const { title, description, nickname, slogan, socials, links } = metaData
     const showHeader = !enableHideHeader || header
 
@@ -297,7 +297,7 @@ export default class IndexLayout extends Component {
           })}
         >
           <div className="title-section">
-            <div className="avatar" />
+            <Link className="avatar" to="/resume/" />
             <div id="title" className="title">
               {this.state.title || ''}
             </div>
@@ -369,17 +369,21 @@ export default class IndexLayout extends Component {
               />
             ) : null}
           </div>
-          <div className="fullscreen-by">
-            PROVIDED BY{' '}
-            <a href="https://unsplash.com" target="_blank">
-              Unsplash
-            </a>
-          </div>
+          {isUnsplash ? (
+            <div className="fullscreen-by">
+              PROVIDED BY{' '}
+              <a href="https://unsplash.com" target="_blank">
+                Unsplash
+              </a>
+            </div>
+          ) : null}
           <div className="more-btn" onClick={this.handleMoveDown}>
-            <Icon
-              type="arrow-down"
-              style={{ color: '#fff', fontSize: '20px' }}
-            />
+            <div className="down">
+              <Icon
+                type="arrow-down"
+                style={{ color: '#fff', fontSize: '20px' }}
+              />
+            </div>
           </div>
         </div>
         <div className="layout-content">
@@ -477,11 +481,6 @@ export const query = graphql`
             ...GatsbyImageSharpSizes
           }
         }
-      }
-    }
-    rocket: imageSharp(id: { regex: "/images/rocket\\.png/" }) {
-      sizes(maxWidth: 80) {
-        ...GatsbyImageSharpSizes
       }
     }
   }
