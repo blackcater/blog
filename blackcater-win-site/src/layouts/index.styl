@@ -80,7 +80,7 @@
     .menu-list
       display inline-block
       position absolute
-      top 50%
+      top 40%
       left 50%
       transform translate(-50%, -50%)
       .menu-item
@@ -99,6 +99,23 @@
           a
             color color-pink
             border 2px solid color-pink
+
+    .locale-list
+      display flex
+      flex-direction row
+      position absolute
+      left 50%
+      bottom 40px
+      transform translate(-50%, 0)
+      border 1px solid color-pink
+      cursor pointer
+      .locale-item
+        width 75px
+        height 30px
+        line-height 30px
+        color color-text-white
+        &.active
+          background-color color-pink
 
 
 // content

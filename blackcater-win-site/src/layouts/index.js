@@ -18,7 +18,41 @@ const NAMESPACE = 'UNSPLASH_IMG__BL0G_INDEX_PAGE'
 
 translate.setI18n(i18n)
 
-export default class IndexLayout extends Component {
+const locales = [{ locale: 'en', name: 'en' }, { locale: 'zh', name: '中' }]
+
+const query = graphql`
+  query IndexLayoutQuery {
+    site {
+      siteMetadata {
+        title
+        description
+        nickname
+        slogan
+        email
+        socials {
+          type
+          url
+        }
+        links {
+          name
+          link
+        }
+      }
+    }
+    socials: allImageSharp(filter: { id: { regex: "/images/socials//" } }) {
+      edges {
+        node {
+          id
+          sizes(maxWidth: 28) {
+            ...GatsbyImageSharpSizes
+          }
+        }
+      }
+    }
+  }
+`
+
+class IndexLayout extends Component {
   constructor(props) {
     super(props)
 
@@ -267,6 +301,15 @@ export default class IndexLayout extends Component {
     )
   }
 
+  changeLanguage = () => {
+    const { language } = this.props.i18n
+    const languages = locales.map(x => x.locale)
+
+    this.props.i18n.changeLanguage(
+      languages[(languages.indexOf(language) + 1) % languages.length]
+    )
+  }
+
   render() {
     const {
       menu,
@@ -278,9 +321,14 @@ export default class IndexLayout extends Component {
       socialMap,
       isUnsplash,
     } = this.state
-    const { children, data: { site: { siteMetadata: metaData } } } = this.props
+    const {
+      children,
+      data: { site: { siteMetadata: metaData } },
+      t,
+    } = this.props
     const { title, description, nickname, slogan, socials, links } = metaData
     const showHeader = !enableHideHeader || header
+    const { language } = this.props.i18n
 
     return (
       <div className="layout" ref={ele => (this.layout = ele)}>
@@ -333,23 +381,36 @@ export default class IndexLayout extends Component {
         >
           <div className="menu-list">
             <div className="menu-item" onClick={() => this.toggleMenu(true)}>
-              <Link to="/">HOME</Link>
+              <Link to="/">{t('home')}</Link>
             </div>
             <div className="menu-item" onClick={() => this.toggleMenu(true)}>
-              <Link to="/tag/">TAG</Link>
+              <Link to="/tag/">{t('tag')}</Link>
             </div>
             <div className="menu-item" onClick={() => this.toggleMenu(true)}>
-              <Link to="/category/">COLUMN</Link>
+              <Link to="/category/">{t('column')}</Link>
             </div>
             <div className="menu-item" onClick={() => this.toggleMenu(true)}>
-              <Link to="/archive/">ARCHIVE</Link>
+              <Link to="/archive/">{t('archive')}</Link>
             </div>
             <div className="menu-item" onClick={() => this.toggleMenu(true)}>
-              <Link to="/resume/">RESUME</Link>
+              <Link to="/resume/">{t('resume')}</Link>
             </div>
             <div className="menu-item" onClick={() => this.toggleMenu(true)}>
-              <Link to="/about/">ABOUT</Link>
+              <Link to="/about/">{t('about')}</Link>
             </div>
+          </div>
+          <div className="locale-list" onClick={this.changeLanguage}>
+            {locales.map(({ locale, name }) => (
+              <div
+                key={locale}
+                className={cx({
+                  'locale-item': true,
+                  active: locale === language,
+                })}
+              >
+                {name}
+              </div>
+            ))}
           </div>
         </div>
         <div className="layout-cover">
@@ -377,7 +438,7 @@ export default class IndexLayout extends Component {
               </a>
             </div>
           ) : null}
-          <div className="more-btn" onClick={this.handleMoveDown}>
+          <div className="more-btn">
             <div className="down">
               <Icon
                 type="arrow-down"
@@ -454,34 +515,5 @@ export default class IndexLayout extends Component {
   }
 }
 
-export const query = graphql`
-  query IndexLayoutQuery {
-    site {
-      siteMetadata {
-        title
-        description
-        nickname
-        slogan
-        email
-        socials {
-          type
-          url
-        }
-        links {
-          name
-          link
-        }
-      }
-    }
-    socials: allImageSharp(filter: { id: { regex: "/images/socials//" } }) {
-      edges {
-        node {
-          id
-          sizes(maxWidth: 28) {
-            ...GatsbyImageSharpSizes
-          }
-        }
-      }
-    }
-  }
-`
+export default translate('translation')(IndexLayout)
+export { query }
