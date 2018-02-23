@@ -128,6 +128,12 @@ export default class IndexLayout extends Component {
 
   // 切换 菜单栏显隐
   toggleMenu = menu => {
+    if (!menu) {
+      window.document.documentElement.classList.add('disabled')
+    } else {
+      window.document.documentElement.classList.remove('disabled')
+    }
+
     this.setState({
       menu: !menu,
     })
@@ -318,40 +324,30 @@ export default class IndexLayout extends Component {
               />
             </div>
           </div>
-          <div
-            className={cx({
-              'menu-list': true,
-              active: showHeader && menu,
-            })}
-          >
-            <div
-              className="menu-item"
-              onClick={() => this.setState({ menu: false })}
-            >
+        </div>
+        <div
+          className={cx({
+            'layout-menu': true,
+            active: showHeader && menu,
+          })}
+        >
+          <div className="menu-list">
+            <div className="menu-item" onClick={() => this.toggleMenu(true)}>
               <Link to="/">HOME</Link>
             </div>
-            <div
-              className="menu-item"
-              onClick={() => this.setState({ menu: false })}
-            >
+            <div className="menu-item" onClick={() => this.toggleMenu(true)}>
               <Link to="/tag/">TAG</Link>
             </div>
-            <div
-              className="menu-item"
-              onClick={() => this.setState({ menu: false })}
-            >
+            <div className="menu-item" onClick={() => this.toggleMenu(true)}>
+              <Link to="/category/">COLUMN</Link>
+            </div>
+            <div className="menu-item" onClick={() => this.toggleMenu(true)}>
               <Link to="/archive/">ARCHIVE</Link>
             </div>
-            <div
-              className="menu-item"
-              onClick={() => this.setState({ menu: false })}
-            >
+            <div className="menu-item" onClick={() => this.toggleMenu(true)}>
               <Link to="/resume/">RESUME</Link>
             </div>
-            <div
-              className="menu-item"
-              onClick={() => this.setState({ menu: false })}
-            >
+            <div className="menu-item" onClick={() => this.toggleMenu(true)}>
               <Link to="/about/">ABOUT</Link>
             </div>
           </div>

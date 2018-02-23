@@ -17,7 +17,6 @@
     &.hide
       top -50px
     &.transparent
-      line-height 120px
       background-color transparent
 
       .title-section
@@ -56,25 +55,39 @@
         margin-right 30px
         cursor pointer
 
-    .menu-list
-      display flex
-      flex-direction row
-      justify-content center
-      height 0
-      opacity 0
-      overflow hidden
-      transform: translate(-100%, 0)
-      transition all .2s ease-in-out-quad
-      &.active
-        height auto
-        opacity 1
-        transform: translate(0, 0)
 
+// menu
+.layout
+  .layout-menu
+    position fixed
+    top 50%
+    left 50%
+    right 50%
+    bottom 50%
+    text-align center
+    background-color color-bg-light
+    transition all .4s ease-in-out-quad
+    opacity 0
+    overflow hidden
+    z-index 100
+    &.active
+      top 0
+      right 0
+      bottom 0
+      left 0
+      opacity 1
+
+    .menu-list
+      display inline-block
+      position absolute
+      top 50%
+      left 50%
+      transform translate(-50%, -50%)
       .menu-item
-        padding 0 35px
-        height 80px
+        padding 0 20px
+        height 60px
         line-height 80px
-        font-size 1.2rem
+        font-size 2rem
         font-weight bolder
         color color-text-white
         cursor pointer
@@ -84,18 +97,8 @@
           transition all .2s ease-in-out
         &:hover
           a
-            color color-primary
-            border 2px solid color-primary
-
-    +below(600px)
-      .menu-list
-        display block
-        text-align center
-
-        .menu-item
-          font-size 2rem
-          display block
-          border-bottom 0.5px solid color-bg
+            color color-pink
+            border 2px solid color-pink
 
 
 // content
