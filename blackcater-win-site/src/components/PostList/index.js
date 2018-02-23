@@ -1,11 +1,12 @@
 import React, { Component, PropTypes } from 'react'
+import { translate } from 'react-i18next'
 import { Button } from 'components'
 import Link from 'gatsby-link'
 import Img from 'gatsby-image'
 
 import './index.styl'
 
-export default class PostList extends Component {
+class PostList extends Component {
   constructor(props) {
     super(props)
 
@@ -72,3 +73,5 @@ PostList.propTypes = {
 PostList.defaultProps = {
   posts: [],
 }
+
+export default translate('translation')(PostList)

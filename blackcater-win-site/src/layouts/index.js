@@ -3,8 +3,10 @@ import { Helmet } from 'react-helmet'
 import { Icon } from 'components'
 import Link from 'gatsby-link'
 import Img from 'gatsby-image'
+import { translate } from 'react-i18next'
 import { events, query as domQuery } from 'dom-helpers'
 import { scrollTop, isMobile, isEmptyObject } from 'utils/common'
+import i18n from 'utils/i18n'
 import { throttle } from 'lodash'
 import axios from 'axios'
 import cx from 'classnames'
@@ -13,6 +15,8 @@ import 'styles/prism.css'
 import './index.styl'
 
 const NAMESPACE = 'UNSPLASH_IMG__BL0G_INDEX_PAGE'
+
+translate.setI18n(i18n)
 
 export default class IndexLayout extends Component {
   constructor(props) {

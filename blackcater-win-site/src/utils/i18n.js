@@ -1,27 +1,38 @@
 import { merge } from 'lodash'
 import i18n from 'i18next'
 import LanguageDetector from 'i18next-browser-languagedetector'
+import { reactI18nextModule } from 'react-i18next'
 
 const loadResources = langs => {
   const resources = {}
 
   for (const l of langs) {
-    const lc = require(`./locales/${l}`)
+    const lc = require(`../locales/${l}`)
+
     merge(resources, { [l]: lc })
   }
 
   return resources
 }
 
-const instance = i18n.createInstance()
+i18n
+  .use(LanguageDetector)
+  .use(reactI18nextModule)
+  .init({
+    debug: process.env.NODE_ENV === 'development',
 
-instance.use(LanguageDetector).init({
-  fallbackLng: 'zh',
-  lng: 'zh',
-  resources: loadResources(['en', 'zh']),
-  react: {
-    wait: true,
-  },
-})
+    fallbackLng: 'en',
+    lng: 'en',
 
-export default instance
+    resources: loadResources(['en', 'zh']),
+
+    interpolation: {
+      escapeValue: false, // not needed for react!!
+    },
+
+    react: {
+      wait: true,
+    },
+  })
+
+export default i18n
