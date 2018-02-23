@@ -1,9 +1,10 @@
 import React, { Component } from 'react'
+import { translate } from 'react-i18next'
 import { Icon, Button } from 'components'
 
 import './tag-index.styl'
 
-export default class TagIndexTemplate extends Component {
+class TagIndexTemplate extends Component {
   componentDidMount() {
     this.props.setUnsplashCover()
     this.props.setTitle('TAGS')
@@ -17,11 +18,12 @@ export default class TagIndexTemplate extends Component {
   }
 
   render() {
+    const { t } = this.props
     const { tags = [] } = this.props.pathContext
 
     return (
       <div className="template-tag-index">
-        <h2>TAGS</h2>
+        <h2>{t('tag')}</h2>
         <div className="tag-list">
           {tags.map((tag, index) => (
             <div
@@ -37,3 +39,5 @@ export default class TagIndexTemplate extends Component {
     )
   }
 }
+
+export default translate('translation')(TagIndexTemplate)

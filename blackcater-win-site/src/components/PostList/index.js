@@ -14,7 +14,7 @@ class PostList extends Component {
   }
 
   render() {
-    const { posts } = this.props
+    const { posts, t } = this.props
 
     return (
       <div className="wbi--post-list">
@@ -53,7 +53,7 @@ class PostList extends Component {
               <div className="read-more">
                 <Link to={post.fields.slug}>
                   <Button type="circle" color="pink">
-                    READ
+                    {t('read')}
                   </Button>
                 </Link>
               </div>

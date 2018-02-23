@@ -308,6 +308,7 @@ class IndexLayout extends Component {
     this.props.i18n.changeLanguage(
       languages[(languages.indexOf(language) + 1) % languages.length]
     )
+    this.toggleMenu(true)
   }
 
   render() {
@@ -461,7 +462,7 @@ class IndexLayout extends Component {
           <div className="section">
             <div className="left">
               <div className="slogan">
-                <div className="title">SLOGAN</div>
+                <div className="title">{t('slogan')}</div>
                 <p>{slogan}</p>
               </div>
               <div className="social-list">
@@ -481,7 +482,7 @@ class IndexLayout extends Component {
             <div className="right">
               {links.length > 0 ? (
                 <div className="section-list">
-                  <div className="title">LINKS</div>
+                  <div className="title">{t('links')}</div>
                   <div className="link-list">
                     {links.map(link => (
                       <div key={link.name} className="link-item">

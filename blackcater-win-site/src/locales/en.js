@@ -6,7 +6,22 @@ export const translation = {
   archive: 'ARCHIVE',
   resume: 'RESUME',
   about: 'ABOUT',
-  prev: 'prev',
-  next: 'next',
+
+  slogan: 'SLOGAN',
+  links: 'LINKS',
+
+  recent: 'RECENT',
+  more: 'MORE',
+
+  read: 'READ',
+
+  index: 'INDEX',
+
+  zhifubao: 'AliPay',
+  wechat: 'WeChat',
+
+  prev: 'PREV POST',
+  next: 'NEXT POST',
+
   reward: 'reward',
 }

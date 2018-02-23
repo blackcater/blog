@@ -4,39 +4,7 @@ import { formatGraphqlPostList } from 'utils/format'
 
 import './tag.styl'
 
-export default class TagTemplate extends Component {
-  componentDidMount() {
-    this.props.setUnsplashCover()
-    this.props.setTitle(`TAG: ${this.props.pathContext.tag.toUpperCase()}`)
-  }
-
-  // 分页处理
-  handlePagination = index => {
-    const { history } = this.props
-
-    history.push(`/tag/${this.props.pathContext.tag}/${index}`)
-  }
-
-  render() {
-    const posts = formatGraphqlPostList(this.props.data.posts || [])
-    const { tag, pageIndex, pageSize, totalPage } = this.props.pathContext
-
-    return (
-      <div className="template-tag">
-        <h2>{tag.toUpperCase()}</h2>
-        <PostList posts={posts} history={this.props.history} />
-        <Pagination
-          current={pageIndex}
-          size={pageSize}
-          count={totalPage}
-          onPagination={this.handlePagination}
-        />
-      </div>
-    )
-  }
-}
-
-export const query = graphql`
+const query = graphql`
   query TagTemplateQuery($tag: String, $skip: Int, $limit: Int) {
     posts: allMarkdownRemark(
       sort: { fields: [frontmatter___date], order: DESC }
@@ -85,3 +53,38 @@ export const query = graphql`
     }
   }
 `
+
+class TagTemplate extends Component {
+  componentDidMount() {
+    this.props.setUnsplashCover()
+    this.props.setTitle(`TAG: ${this.props.pathContext.tag.toUpperCase()}`)
+  }
+
+  // 分页处理
+  handlePagination = index => {
+    const { history } = this.props
+
+    history.push(`/tag/${this.props.pathContext.tag}/${index}`)
+  }
+
+  render() {
+    const posts = formatGraphqlPostList(this.props.data.posts || [])
+    const { tag, pageIndex, pageSize, totalPage } = this.props.pathContext
+
+    return (
+      <div className="template-tag">
+        <h2>{tag.toUpperCase()}</h2>
+        <PostList posts={posts} history={this.props.history} />
+        <Pagination
+          current={pageIndex}
+          size={pageSize}
+          count={totalPage}
+          onPagination={this.handlePagination}
+        />
+      </div>
+    )
+  }
+}
+
+export { query }
+export default TagTemplate

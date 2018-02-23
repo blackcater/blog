@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import { translate } from 'react-i18next'
 import Modal from 'react-modal'
 import Link from 'gatsby-link'
 import Img from 'gatsby-image'
@@ -13,7 +14,100 @@ import { formatGraphqlPost } from 'utils/format'
 import 'styles/gitment.css'
 import './post.styl'
 
-export default class PostTemplate extends Component {
+const query = graphql`
+  query PostTemplateQuery($curr: String, $prev: String, $next: String) {
+    post: markdownRemark(fields: { slug: { eq: $curr } }) {
+      fields {
+        slug
+      }
+      frontmatter {
+        title
+        header {
+          ... on File {
+            childImageSharp {
+              sizes(maxWidth: 1200) {
+                base64
+                aspectRatio
+                src
+                srcSet
+                sizes
+              }
+            }
+          }
+        }
+        date
+        edate: date(formatString: "MMMM DD, YYYY")
+        tags
+        category
+      }
+      tableOfContents
+      timeToRead
+      wordCounts: wordCount {
+        words
+      }
+      headings {
+        value
+        depth
+      }
+      excerpt
+      html
+    }
+    prevPost: markdownRemark(fields: { slug: { eq: $prev } }) {
+      fields {
+        slug
+      }
+      frontmatter {
+        title
+        header {
+          ... on File {
+            childImageSharp {
+              sizes(maxWidth: 1200) {
+                base64
+                aspectRatio
+                src
+                srcSet
+                sizes
+              }
+            }
+          }
+        }
+      }
+    }
+    nextPost: markdownRemark(fields: { slug: { eq: $next } }) {
+      fields {
+        slug
+      }
+      frontmatter {
+        title
+        header {
+          ... on File {
+            childImageSharp {
+              sizes(maxWidth: 1200) {
+                base64
+                aspectRatio
+                src
+                srcSet
+                sizes
+              }
+            }
+          }
+        }
+      }
+    }
+    rewards: allImageSharp(filter: { id: { regex: "/images/rewards//" } }) {
+      edges {
+        node {
+          id
+          sizes(maxWidth: 600) {
+            ...GatsbyImageSharpSizes
+          }
+        }
+      }
+    }
+  }
+`
+
+class PostTemplate extends Component {
   constructor(props) {
     super(props)
 
@@ -212,6 +306,7 @@ export default class PostTemplate extends Component {
       collapse,
       transparent,
     } = this.state
+    const { t } = this.props
     const { category, tags = [] } = this.props.pathContext
     const post = formatGraphqlPost(this.props.data.post)
     const prevPost = formatGraphqlPost(this.props.data.prevPost)
@@ -258,14 +353,14 @@ export default class PostTemplate extends Component {
                 onClick={() => this.handleRewardClick('zhifubao')}
               >
                 <Img sizes={rewardMap['zhifubao'].sizes} alt="支付宝" />
-                支付宝
+                {t('zhifubao')}
               </div>
               <div
                 className="pay pay-weixin"
                 onClick={() => this.handleRewardClick('weixin')}
               >
                 <Img sizes={rewardMap['weixin'].sizes} alt="微信" />
-                微信
+                {t('wechat')}
               </div>
             </div>
           </div>
@@ -284,7 +379,7 @@ export default class PostTemplate extends Component {
                   ) : (
                     <Icon type="arrow-up" />
                   )}
-                  <div className="tip">PREV POST</div>
+                  <div className="tip">{t('prev')}</div>
                   <div className="head">{prev.frontmatter.title}</div>
                 </div>
               </Link>
@@ -303,7 +398,7 @@ export default class PostTemplate extends Component {
                   ) : (
                     <Icon type="arrow-up" />
                   )}
-                  <div className="tip">NEXT POST</div>
+                  <div className="tip">{t('next')}</div>
                   <div className="head">{next.frontmatter.title}</div>
                 </div>
               </Link>
@@ -340,7 +435,7 @@ export default class PostTemplate extends Component {
         </div>
         {!isMobile() ? (
           <div className={cx({ headings: true, fixed: !transparent })}>
-            <div className="index-title">INDEX</div>
+            <div className="index-title">{t('index')}</div>
             <div
               ref={el => (this.$category = el)}
               className="index-list"
@@ -364,95 +459,5 @@ export default class PostTemplate extends Component {
   }
 }
 
-export const query = graphql`
-  query PostTemplateQuery($curr: String, $prev: String, $next: String) {
-    post: markdownRemark(fields: { slug: { eq: $curr } }) {
-      fields {
-        slug
-      }
-      frontmatter {
-        title
-        header {
-          ... on File {
-            childImageSharp {
-              sizes(maxWidth: 1200) {
-                base64
-                aspectRatio
-                src
-                srcSet
-                sizes
-              }
-            }
-          }
-        }
-        date
-        edate: date(formatString: "MMMM DD, YYYY")
-        tags
-        category
-      }
-      tableOfContents
-      timeToRead
-      wordCounts: wordCount {
-        words
-      }
-      headings {
-        value
-        depth
-      }
-      excerpt
-      html
-    }
-    prevPost: markdownRemark(fields: { slug: { eq: $prev } }) {
-      fields {
-        slug
-      }
-      frontmatter {
-        title
-        header {
-          ... on File {
-            childImageSharp {
-              sizes(maxWidth: 1200) {
-                base64
-                aspectRatio
-                src
-                srcSet
-                sizes
-              }
-            }
-          }
-        }
-      }
-    }
-    nextPost: markdownRemark(fields: { slug: { eq: $next } }) {
-      fields {
-        slug
-      }
-      frontmatter {
-        title
-        header {
-          ... on File {
-            childImageSharp {
-              sizes(maxWidth: 1200) {
-                base64
-                aspectRatio
-                src
-                srcSet
-                sizes
-              }
-            }
-          }
-        }
-      }
-    }
-    rewards: allImageSharp(filter: { id: { regex: "/images/rewards//" } }) {
-      edges {
-        node {
-          id
-          sizes(maxWidth: 600) {
-            ...GatsbyImageSharpSizes
-          }
-        }
-      }
-    }
-  }
-`
+export { query }
+export default translate('translation')(PostTemplate)

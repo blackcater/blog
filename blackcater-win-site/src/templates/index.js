@@ -1,36 +1,12 @@
 import React, { Component } from 'react'
+import { translate } from 'react-i18next'
 import { Icon, Button, PostList } from 'components'
 import Link from 'gatsby-link'
 import { formatGraphqlPostList } from 'utils/format'
 
 import './index.styl'
 
-export default class IndexPage extends Component {
-  componentDidMount() {
-    this.props.setUnsplashCover()
-    this.props.setTitle(this.props.data.site.siteMetadata.title)
-  }
-
-  render() {
-    const posts = formatGraphqlPostList(this.props.data.posts)
-
-    return (
-      <div className="page-index">
-        <h2>RECENT</h2>
-        <PostList posts={posts || []} history={this.props.history} />
-        <div className="more-section">
-          <Link to="/archive/">
-            <Button type="circle" color="pink">
-              MORE
-            </Button>
-          </Link>
-        </div>
-      </div>
-    )
-  }
-}
-
-export const query = graphql`
+const query = graphql`
   query IndexTemplateQuery {
     site {
       siteMetadata {
@@ -83,3 +59,32 @@ export const query = graphql`
     }
   }
 `
+
+class IndexPage extends Component {
+  componentDidMount() {
+    this.props.setUnsplashCover()
+    this.props.setTitle(this.props.data.site.siteMetadata.title)
+  }
+
+  render() {
+    const { t } = this.props
+    const posts = formatGraphqlPostList(this.props.data.posts)
+
+    return (
+      <div className="page-index">
+        <h2>{t('recent')}</h2>
+        <PostList posts={posts || []} history={this.props.history} />
+        <div className="more-section">
+          <Link to="/archive/">
+            <Button type="circle" color="pink">
+              {t('more')}
+            </Button>
+          </Link>
+        </div>
+      </div>
+    )
+  }
+}
+
+export { query }
+export default translate('translation')(IndexPage)
