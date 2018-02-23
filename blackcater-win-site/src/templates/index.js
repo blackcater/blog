@@ -31,7 +31,7 @@ export default class IndexPage extends Component {
 }
 
 export const query = graphql`
-  query IndexTemplate {
+  query IndexTemplateQuery {
     site {
       siteMetadata {
         title

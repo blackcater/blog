@@ -1,0 +1,63 @@
+@import "~styles/util.styl"
+
+.wbi--archive-list
+  position relative
+  margin 0 auto
+  max-width 840px
+
+  .wbi--archive-item
+    margin 0 40px
+    padding 1em 0
+
+  .wbi--archive-title
+    position relative
+    font-size 3rem
+    font-weight bolder
+    color color-pink
+    &::before
+      position absolute
+      left -25px
+      top 50%
+      display block
+      content ''
+      width 10px
+      height 10px
+      border-radius 5px
+      background-color color-pink
+      transform translate(0, -50%)
+      z-index 2
+
+  .wbi--archive-post-list
+    margin-top 1em
+    list-style none
+    .wbi--archive-post-item
+      margin 0 0 1em 0
+      padding-bottom 1em
+      position relative
+      left 0
+      display flex
+      flex-direction row
+      font-size 1.5rem
+      border-bottom 1px dashed
+      line-height 30px
+      transition all .2s ease-in-out
+      cursor pointer
+      &:hover
+        left 10px
+        color color-pink
+        border-bottom 1px solid color-pink
+      .date
+        flex-basis 60px
+        font-size 1.2em
+        font-weight bolder
+      .title
+        flex 1
+
+  .line
+    position absolute
+    left 18px
+    top 0
+    bottom 0
+    width 4px
+    border-radius 2px
+    background-color color-bg-lightest

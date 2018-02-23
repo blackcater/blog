@@ -459,7 +459,7 @@ export default class IndexLayout extends Component {
 }
 
 export const query = graphql`
-  query LayoutData {
+  query IndexLayoutQuery {
     site {
       siteMetadata {
         title

@@ -37,7 +37,7 @@ export default class TagTemplate extends Component {
 }
 
 export const query = graphql`
-  query TagTemplate($tag: String, $skip: Int, $limit: Int) {
+  query TagTemplateQuery($tag: String, $skip: Int, $limit: Int) {
     posts: allMarkdownRemark(
       sort: { fields: [frontmatter___date], order: DESC }
       filter: { frontmatter: { tags: { in: [$tag] } } }

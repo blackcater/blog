@@ -365,7 +365,7 @@ export default class PostTemplate extends Component {
 }
 
 export const query = graphql`
-  query PostQuery($curr: String, $prev: String, $next: String) {
+  query PostTemplateQuery($curr: String, $prev: String, $next: String) {
     post: markdownRemark(fields: { slug: { eq: $curr } }) {
       fields {
         slug

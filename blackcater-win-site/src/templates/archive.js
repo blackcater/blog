@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
-import { Icon, Button, PostList, Pagination } from 'components'
+import { Icon, Button, ArchiveList, Pagination } from 'components'
+import { formatGraphqlGroupPostList } from 'utils/format'
 
 import './archive.styl'
 
@@ -23,11 +24,12 @@ export default class ArchiveTemplate extends Component {
       pageSize,
       totalPage,
     } = this.props.pathContext
+    const groups = formatGraphqlGroupPostList(this.props.data.groupPosts)
 
     return (
       <div className="template-archive">
         <h2>ARCHIVE</h2>
-        <PostList posts={posts} history={this.props.history} />
+        <ArchiveList groups={groups} />
         <Pagination
           current={pageIndex}
           size={pageSize}
@@ -38,3 +40,28 @@ export default class ArchiveTemplate extends Component {
     )
   }
 }
+
+export const query = graphql`
+  query ArchiveTemplateQuery($skip: Int, $limit: Int) {
+    groupPosts: allMarkdownRemark(
+      sort: { fields: [frontmatter___date], order: DESC }
+      skip: $skip
+      limit: $limit
+    ) {
+      groups: group(field: fields___year) {
+        title: fieldValue
+        posts: edges {
+          node {
+            fields {
+              slug
+            }
+            frontmatter {
+              title
+              date: date(formatString: "MM-DD")
+            }
+          }
+        }
+      }
+    }
+  }
+`
