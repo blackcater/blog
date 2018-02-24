@@ -178,7 +178,9 @@ exports.createPages = ({ graphql, boundActionCreators }) => {
         createPage({
           path: '/',
           component: path.resolve(__dirname, 'src/templates/index.js'),
-          context: {},
+          context: {
+            filterDraft: process.env.NODE_ENV === 'production' ? true : null,
+          },
         })
 
         // 遍历所有文章页面
@@ -250,7 +252,9 @@ function createArchivePagination(posts, createPage) {
     total: posts.length,
     size: 20,
     component: path.resolve(__dirname, 'src/templates/archive.js'),
-    context: {},
+    context: {
+      filterDraft: process.env.NODE_ENV === 'production' ? true : null,
+    },
     createPage,
   })
 }
@@ -274,7 +278,10 @@ function createCategoryPagination(categoryMap, createPage) {
     total: categories.reduce((num, category) => num + category.num, 0),
     size: 20,
     component: path.resolve(__dirname, 'src/templates/category-index.js'),
-    context: { categories },
+    context: {
+      categories,
+      filterDraft: process.env.NODE_ENV === 'production' ? true : null,
+    },
     createPage,
   })
 
@@ -286,6 +293,7 @@ function createCategoryPagination(categoryMap, createPage) {
       component: path.resolve(__dirname, 'src/templates/category.js'),
       context: {
         category: category.name,
+        filterDraft: process.env.NODE_ENV === 'production' ? true : null,
       },
       createPage,
     })
@@ -320,6 +328,7 @@ function createTagPagination(tagMap, createPage) {
       component: path.resolve(__dirname, 'src/templates/tag.js'),
       context: {
         tag: tag.name,
+        filterDraft: process.env.NODE_ENV === 'production' ? true : null,
       },
       createPage,
     })

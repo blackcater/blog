@@ -33,7 +33,7 @@ class IndexPage extends Component {
 }
 
 export const query = graphql`
-  query IndexTemplateQuery {
+  query IndexTemplateQuery($filterDraft: Boolean) {
     site {
       siteMetadata {
         title
@@ -41,6 +41,7 @@ export const query = graphql`
     }
     posts: allMarkdownRemark(
       sort: { fields: [frontmatter___date], order: DESC }
+      filter: { frontmatter: { draft: { ne: $filterDraft } } }
       skip: 0
       limit: 5
     ) {

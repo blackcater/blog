@@ -39,9 +39,10 @@ class ArchiveTemplate extends Component {
 }
 
 export const query = graphql`
-  query ArchiveTemplateQuery($skip: Int, $limit: Int) {
+  query ArchiveTemplateQuery($filterDraft: Boolean, $skip: Int, $limit: Int) {
     groupPosts: allMarkdownRemark(
       sort: { fields: [frontmatter___date], order: DESC }
+      filter: { frontmatter: { draft: { ne: $filterDraft } } }
       skip: $skip
       limit: $limit
     ) {

@@ -42,10 +42,20 @@ class CategoryTemplate extends Component {
 }
 
 export const query = graphql`
-  query CategoryTemplateQuery($category: String, $skip: Int, $limit: Int) {
+  query CategoryTemplateQuery(
+    $filterDraft: Boolean
+    $category: String
+    $skip: Int
+    $limit: Int
+  ) {
     posts: allMarkdownRemark(
       sort: { fields: [frontmatter___date], order: DESC }
-      filter: { frontmatter: { category: { eq: $category } } }
+      filter: {
+        frontmatter: {
+          category: { eq: $category }
+          draft: { ne: $filterDraft }
+        }
+      }
       skip: $skip
       limit: $limit
     ) {

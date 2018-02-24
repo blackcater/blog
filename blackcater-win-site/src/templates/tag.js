@@ -40,10 +40,17 @@ class TagTemplate extends Component {
 }
 
 export const query = graphql`
-  query TagTemplateQuery($tag: String, $skip: Int, $limit: Int) {
+  query TagTemplateQuery(
+    $filterDraft: Boolean
+    $tag: String
+    $skip: Int
+    $limit: Int
+  ) {
     posts: allMarkdownRemark(
       sort: { fields: [frontmatter___date], order: DESC }
-      filter: { frontmatter: { tags: { in: [$tag] } } }
+      filter: {
+        frontmatter: { tags: { in: [$tag] }, draft: { ne: $filterDraft } }
+      }
       skip: $skip
       limit: $limit
     ) {
