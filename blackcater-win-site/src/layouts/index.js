@@ -1,9 +1,9 @@
 import React, { Component } from 'react'
+import { translate } from 'react-i18next'
 import { Helmet } from 'react-helmet'
 import { Icon } from 'components'
 import Link from 'gatsby-link'
 import Img from 'gatsby-image'
-import { translate } from 'react-i18next'
 import { events, query as domQuery } from 'dom-helpers'
 import { scrollTop, isMobile, isEmptyObject } from 'utils/common'
 import i18n from 'utils/i18n'
@@ -20,43 +20,13 @@ translate.setI18n(i18n)
 
 const locales = [{ locale: 'en', name: 'en' }, { locale: 'zh', name: '中' }]
 
-const query = graphql`
-  query IndexLayoutQuery {
-    site {
-      siteMetadata {
-        title
-        description
-        nickname
-        slogan
-        email
-        socials {
-          type
-          url
-        }
-        links {
-          name
-          link
-        }
-      }
-    }
-    socials: allImageSharp(filter: { id: { regex: "/images/socials//" } }) {
-      edges {
-        node {
-          id
-          sizes(maxWidth: 28) {
-            ...GatsbyImageSharpSizes
-          }
-        }
-      }
-    }
-  }
-`
-
 class IndexLayout extends Component {
   constructor(props) {
     super(props)
 
     const socialMap = {}
+
+    console.dir(this.props)
 
     this.props.data.socials.edges.forEach(({ node }) => {
       const { id, sizes } = node
@@ -516,5 +486,35 @@ class IndexLayout extends Component {
   }
 }
 
+export const query = graphql`
+  query IndexLayoutQuery {
+    site {
+      siteMetadata {
+        title
+        description
+        nickname
+        slogan
+        email
+        socials {
+          type
+          url
+        }
+        links {
+          name
+          link
+        }
+      }
+    }
+    socials: allImageSharp(filter: { id: { regex: "/images/socials/" } }) {
+      edges {
+        node {
+          id
+          sizes(maxWidth: 28) {
+            ...GatsbyImageSharpSizes
+          }
+        }
+      }
+    }
+  }
+`
 export default translate('translation')(IndexLayout)
-export { query }

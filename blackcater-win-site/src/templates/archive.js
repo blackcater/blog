@@ -5,31 +5,6 @@ import { formatGraphqlGroupPostList } from 'utils/format'
 
 import './archive.styl'
 
-const query = graphql`
-  query ArchiveTemplateQuery($skip: Int, $limit: Int) {
-    groupPosts: allMarkdownRemark(
-      sort: { fields: [frontmatter___date], order: DESC }
-      skip: $skip
-      limit: $limit
-    ) {
-      groups: group(field: fields___year) {
-        title: fieldValue
-        posts: edges {
-          node {
-            fields {
-              slug
-            }
-            frontmatter {
-              title
-              date: date(formatString: "MM-DD")
-            }
-          }
-        }
-      }
-    }
-  }
-`
-
 class ArchiveTemplate extends Component {
   componentDidMount() {
     this.props.setUnsplashCover()
@@ -68,5 +43,28 @@ class ArchiveTemplate extends Component {
   }
 }
 
-export { query }
+export const query = graphql`
+  query ArchiveTemplateQuery($skip: Int, $limit: Int) {
+    groupPosts: allMarkdownRemark(
+      sort: { fields: [frontmatter___date], order: DESC }
+      skip: $skip
+      limit: $limit
+    ) {
+      groups: group(field: fields___year) {
+        title: fieldValue
+        posts: edges {
+          node {
+            fields {
+              slug
+            }
+            frontmatter {
+              title
+              date: date(formatString: "MM-DD")
+            }
+          }
+        }
+      }
+    }
+  }
+`
 export default translate('translation')(ArchiveTemplate)

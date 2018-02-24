@@ -14,99 +14,6 @@ import { formatGraphqlPost } from 'utils/format'
 import 'styles/gitment.css'
 import './post.styl'
 
-const query = graphql`
-  query PostTemplateQuery($curr: String, $prev: String, $next: String) {
-    post: markdownRemark(fields: { slug: { eq: $curr } }) {
-      fields {
-        slug
-      }
-      frontmatter {
-        title
-        header {
-          ... on File {
-            childImageSharp {
-              sizes(maxWidth: 1200) {
-                base64
-                aspectRatio
-                src
-                srcSet
-                sizes
-              }
-            }
-          }
-        }
-        date
-        edate: date(formatString: "MMMM DD, YYYY")
-        tags
-        category
-      }
-      tableOfContents
-      timeToRead
-      wordCounts: wordCount {
-        words
-      }
-      headings {
-        value
-        depth
-      }
-      excerpt
-      html
-    }
-    prevPost: markdownRemark(fields: { slug: { eq: $prev } }) {
-      fields {
-        slug
-      }
-      frontmatter {
-        title
-        header {
-          ... on File {
-            childImageSharp {
-              sizes(maxWidth: 1200) {
-                base64
-                aspectRatio
-                src
-                srcSet
-                sizes
-              }
-            }
-          }
-        }
-      }
-    }
-    nextPost: markdownRemark(fields: { slug: { eq: $next } }) {
-      fields {
-        slug
-      }
-      frontmatter {
-        title
-        header {
-          ... on File {
-            childImageSharp {
-              sizes(maxWidth: 1200) {
-                base64
-                aspectRatio
-                src
-                srcSet
-                sizes
-              }
-            }
-          }
-        }
-      }
-    }
-    rewards: allImageSharp(filter: { id: { regex: "/images/rewards//" } }) {
-      edges {
-        node {
-          id
-          sizes(maxWidth: 600) {
-            ...GatsbyImageSharpSizes
-          }
-        }
-      }
-    }
-  }
-`
-
 class PostTemplate extends Component {
   constructor(props) {
     super(props)
@@ -459,5 +366,96 @@ class PostTemplate extends Component {
   }
 }
 
-export { query }
+export const query = graphql`
+  query PostTemplateQuery($curr: String, $prev: String, $next: String) {
+    post: markdownRemark(fields: { slug: { eq: $curr } }) {
+      fields {
+        slug
+      }
+      frontmatter {
+        title
+        header {
+          ... on File {
+            childImageSharp {
+              sizes(maxWidth: 1200) {
+                base64
+                aspectRatio
+                src
+                srcSet
+                sizes
+              }
+            }
+          }
+        }
+        date
+        edate: date(formatString: "MMMM DD, YYYY")
+        tags
+        category
+      }
+      tableOfContents
+      timeToRead
+      wordCounts: wordCount {
+        words
+      }
+      headings {
+        value
+        depth
+      }
+      excerpt
+      html
+    }
+    prevPost: markdownRemark(fields: { slug: { eq: $prev } }) {
+      fields {
+        slug
+      }
+      frontmatter {
+        title
+        header {
+          ... on File {
+            childImageSharp {
+              sizes(maxWidth: 1200) {
+                base64
+                aspectRatio
+                src
+                srcSet
+                sizes
+              }
+            }
+          }
+        }
+      }
+    }
+    nextPost: markdownRemark(fields: { slug: { eq: $next } }) {
+      fields {
+        slug
+      }
+      frontmatter {
+        title
+        header {
+          ... on File {
+            childImageSharp {
+              sizes(maxWidth: 1200) {
+                base64
+                aspectRatio
+                src
+                srcSet
+                sizes
+              }
+            }
+          }
+        }
+      }
+    }
+    rewards: allImageSharp(filter: { id: { regex: "/images/rewards//" } }) {
+      edges {
+        node {
+          id
+          sizes(maxWidth: 600) {
+            ...GatsbyImageSharpSizes
+          }
+        }
+      }
+    }
+  }
+`
 export default translate('translation')(PostTemplate)

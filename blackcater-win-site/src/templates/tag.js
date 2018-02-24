@@ -1,10 +1,45 @@
 import React, { Component } from 'react'
+import { translate } from 'react-i18next'
 import { Icon, Button, PostList, Pagination } from 'components'
 import { formatGraphqlPostList } from 'utils/format'
 
 import './tag.styl'
 
-const query = graphql`
+class TagTemplate extends Component {
+  componentDidMount() {
+    this.props.setUnsplashCover()
+    this.props.setTitle(
+      `${this.props.t('tag')}: ${this.props.pathContext.tag.toUpperCase()}`
+    )
+  }
+
+  // 分页处理
+  handlePagination = index => {
+    const { history } = this.props
+
+    history.push(`/tag/${this.props.pathContext.tag}/${index}`)
+  }
+
+  render() {
+    const posts = formatGraphqlPostList(this.props.data.posts || [])
+    const { tag, pageIndex, pageSize, totalPage } = this.props.pathContext
+
+    return (
+      <div className="template-tag">
+        <h2>{tag.toUpperCase()}</h2>
+        <PostList posts={posts} history={this.props.history} />
+        <Pagination
+          current={pageIndex}
+          size={pageSize}
+          count={totalPage}
+          onPagination={this.handlePagination}
+        />
+      </div>
+    )
+  }
+}
+
+export const query = graphql`
   query TagTemplateQuery($tag: String, $skip: Int, $limit: Int) {
     posts: allMarkdownRemark(
       sort: { fields: [frontmatter___date], order: DESC }
@@ -53,38 +88,4 @@ const query = graphql`
     }
   }
 `
-
-class TagTemplate extends Component {
-  componentDidMount() {
-    this.props.setUnsplashCover()
-    this.props.setTitle(`TAG: ${this.props.pathContext.tag.toUpperCase()}`)
-  }
-
-  // 分页处理
-  handlePagination = index => {
-    const { history } = this.props
-
-    history.push(`/tag/${this.props.pathContext.tag}/${index}`)
-  }
-
-  render() {
-    const posts = formatGraphqlPostList(this.props.data.posts || [])
-    const { tag, pageIndex, pageSize, totalPage } = this.props.pathContext
-
-    return (
-      <div className="template-tag">
-        <h2>{tag.toUpperCase()}</h2>
-        <PostList posts={posts} history={this.props.history} />
-        <Pagination
-          current={pageIndex}
-          size={pageSize}
-          count={totalPage}
-          onPagination={this.handlePagination}
-        />
-      </div>
-    )
-  }
-}
-
-export { query }
-export default TagTemplate
+export default translate('translation')(TagTemplate)

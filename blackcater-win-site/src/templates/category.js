@@ -1,13 +1,17 @@
 import React, { Component } from 'react'
+import { translate } from 'react-i18next'
 import { Icon, Button, PostList, Pagination } from 'components'
+import { formatGraphqlPostList } from 'utils/format'
 
 import './category.styl'
 
-export default class CategoryTemplate extends Component {
+class CategoryTemplate extends Component {
   componentDidMount() {
     this.props.setUnsplashCover()
     this.props.setTitle(
-      `CATEGORY: ${this.props.pathContext.category.toUpperCase()}`
+      `${this.props.t(
+        'category'
+      )}: ${this.props.pathContext.category.toUpperCase()}`
     )
   }
 
@@ -19,13 +23,8 @@ export default class CategoryTemplate extends Component {
   }
 
   render() {
-    const {
-      pageData: posts = [],
-      category,
-      pageIndex,
-      pageSize,
-      totalPage,
-    } = this.props.pathContext
+    const { category, pageIndex, pageSize, totalPage } = this.props.pathContext
+    const posts = formatGraphqlPostList(this.props.data.posts)
 
     return (
       <div className="template-category">
@@ -41,3 +40,54 @@ export default class CategoryTemplate extends Component {
     )
   }
 }
+
+export const query = graphql`
+  query CategoryTemplateQuery($category: String, $skip: Int, $limit: Int) {
+    posts: allMarkdownRemark(
+      sort: { fields: [frontmatter___date], order: DESC }
+      filter: { frontmatter: { category: { eq: $category } } }
+      skip: $skip
+      limit: $limit
+    ) {
+      edges {
+        node {
+          fields {
+            slug
+          }
+          frontmatter {
+            title
+            header {
+              ... on File {
+                childImageSharp {
+                  sizes(maxWidth: 1200) {
+                    base64
+                    aspectRatio
+                    src
+                    srcSet
+                    sizes
+                  }
+                }
+              }
+            }
+            date
+            edate: date(formatString: "MMMM DD, YYYY")
+            tags
+            category
+          }
+          tableOfContents
+          timeToRead
+          wordCounts: wordCount {
+            words
+          }
+          headings {
+            value
+            depth
+          }
+          excerpt
+          html
+        }
+      }
+    }
+  }
+`
+export default translate('translation')(CategoryTemplate)

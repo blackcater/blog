@@ -6,7 +6,33 @@ import { formatGraphqlPostList } from 'utils/format'
 
 import './index.styl'
 
-const query = graphql`
+class IndexPage extends Component {
+  componentDidMount() {
+    this.props.setUnsplashCover()
+    this.props.setTitle(this.props.data.site.siteMetadata.title)
+  }
+
+  render() {
+    const { t } = this.props
+    const posts = formatGraphqlPostList(this.props.data.posts)
+
+    return (
+      <div className="page-index">
+        <h2>{t('recent')}</h2>
+        <PostList posts={posts || []} history={this.props.history} />
+        <div className="more-section">
+          <Link to="/archive/">
+            <Button type="circle" color="pink">
+              {t('more')}
+            </Button>
+          </Link>
+        </div>
+      </div>
+    )
+  }
+}
+
+export const query = graphql`
   query IndexTemplateQuery {
     site {
       siteMetadata {
@@ -59,32 +85,4 @@ const query = graphql`
     }
   }
 `
-
-class IndexPage extends Component {
-  componentDidMount() {
-    this.props.setUnsplashCover()
-    this.props.setTitle(this.props.data.site.siteMetadata.title)
-  }
-
-  render() {
-    const { t } = this.props
-    const posts = formatGraphqlPostList(this.props.data.posts)
-
-    return (
-      <div className="page-index">
-        <h2>{t('recent')}</h2>
-        <PostList posts={posts || []} history={this.props.history} />
-        <div className="more-section">
-          <Link to="/archive/">
-            <Button type="circle" color="pink">
-              {t('more')}
-            </Button>
-          </Link>
-        </div>
-      </div>
-    )
-  }
-}
-
-export { query }
 export default translate('translation')(IndexPage)
