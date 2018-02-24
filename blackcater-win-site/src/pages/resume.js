@@ -1,19 +1,24 @@
 import React, { Component } from 'react'
+import { translate } from 'react-i18next'
 import { isMobile } from 'utils/common'
 
 import './resume.styl'
 
-export default class ResumePage extends Component {
+class ResumePage extends Component {
   componentDidMount() {
     this.props.setUnsplashCover()
-    this.props.setTitle('RESUME')
+    this.props.setTitle(this.props.t('resume'))
   }
 
   render() {
+    const { t } = this.props
+
     return (
       <div className="page-resume">
-        <h2>RESUME</h2>
+        <h2>{t('resume')}</h2>
       </div>
     )
   }
 }
+
+export default translate('translation')(ResumePage)

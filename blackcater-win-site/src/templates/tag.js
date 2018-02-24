@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { translate } from 'react-i18next'
-import { Icon, Button, PostList, Pagination } from 'components'
+import { PostList, Pagination } from 'components'
 import { formatGraphqlPostList } from 'utils/format'
 
 import './tag.styl'

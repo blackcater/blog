@@ -1,13 +1,12 @@
 import React, { Component } from 'react'
 import { translate } from 'react-i18next'
-import { Icon, Button } from 'components'
 
 import './tag-index.styl'
 
 class TagIndexTemplate extends Component {
   componentDidMount() {
     this.props.setUnsplashCover()
-    this.props.setTitle('TAGS')
+    this.props.setTitle(this.props.t('tag'))
   }
 
   // 标签点击事件

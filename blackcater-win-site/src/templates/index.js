@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { translate } from 'react-i18next'
-import { Icon, Button, PostList } from 'components'
+import { Button, PostList } from 'components'
 import Link from 'gatsby-link'
 import { formatGraphqlPostList } from 'utils/format'
 

@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { translate } from 'react-i18next'
-import { Icon, Button, ArchiveList, Pagination } from 'components'
+import { ArchiveList, Pagination } from 'components'
 import { formatGraphqlGroupPostList } from 'utils/format'
 
 import './archive.styl'
@@ -8,7 +8,7 @@ import './archive.styl'
 class ArchiveTemplate extends Component {
   componentDidMount() {
     this.props.setUnsplashCover()
-    this.props.setTitle('ARCHIVE')
+    this.props.setTitle(this.props.t('archive'))
   }
 
   // 分页处理
@@ -20,12 +20,7 @@ class ArchiveTemplate extends Component {
 
   render() {
     const { t } = this.props
-    const {
-      pageData: posts = [],
-      pageIndex,
-      pageSize,
-      totalPage,
-    } = this.props.pathContext
+    const { pageIndex, pageSize, totalPage } = this.props.pathContext
     const groups = formatGraphqlGroupPostList(this.props.data.groupPosts)
 
     return (

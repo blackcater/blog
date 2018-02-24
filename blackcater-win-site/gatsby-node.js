@@ -271,7 +271,7 @@ function createCategoryPagination(categoryMap, createPage) {
 
   createPagination({
     base: '/category/',
-    total: categories.reduce((category, num) => num + category.num, 0),
+    total: categories.reduce((num, category) => num + category.num, 0),
     size: 20,
     component: path.resolve(__dirname, 'src/templates/category-index.js'),
     context: { categories },
