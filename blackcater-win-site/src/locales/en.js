@@ -24,4 +24,6 @@ export const translation = {
   next: 'NEXT POST',
 
   reward: 'reward',
+
+  '404': 'NOT FOUND',
 }

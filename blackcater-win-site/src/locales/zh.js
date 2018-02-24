@@ -24,4 +24,6 @@ export const translation = {
   next: '后一篇',
 
   reward: '打赏',
+
+  '404': '页面不存在',
 }
