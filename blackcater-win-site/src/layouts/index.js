@@ -26,8 +26,6 @@ class IndexLayout extends Component {
 
     const socialMap = {}
 
-    console.dir(this.props)
-
     this.props.data.socials.edges.forEach(({ node }) => {
       const { id, sizes } = node
       const idReg = /([^\/]*?)\.([^\/\s]*)/
