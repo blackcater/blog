@@ -25,5 +25,24 @@ export const translation = {
 
   reward: '打赏',
 
+  contact: '联系方式',
+  application: '应聘岗位',
+  selfAppraisal: '我热爱开发，乐于开源。虽然我很笨，但我很努力！',
+  resumeInfos: [
+    {
+      title: 'SKILLS',
+      data: [
+        {
+          name: 'JavaScript',
+          exp: 80,
+        },
+        {
+          name: 'Node.js',
+          exp: 70,
+        },
+      ],
+    },
+  ],
+
   '404': '页面不存在',
 }

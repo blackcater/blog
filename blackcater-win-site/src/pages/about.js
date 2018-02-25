@@ -16,6 +16,16 @@ class AboutPage extends Component {
     return (
       <div className="page-about">
         <h2>{t('about')}</h2>
+        <div className="section section-me" />
+        <div className="section">
+          <div className="title">座右铭</div>
+        </div>
+        <div className="section">
+          <div className="title">兴趣爱好</div>
+        </div>
+        <div className="section">
+          <div className="title">开源项目</div>
+        </div>
       </div>
     )
   }

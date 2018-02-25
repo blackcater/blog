@@ -12,6 +12,9 @@ class ResumePage extends Component {
 
   render() {
     const { t } = this.props
+    const resumeInfos = t('resumeInfos', { returnObjects: true })
+
+    console.dir(resumeInfos)
 
     return (
       <div className="page-resume">
