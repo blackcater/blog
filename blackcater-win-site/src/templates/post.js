@@ -49,7 +49,7 @@ class PostTemplate extends Component {
     const { setCover, setTitle } = this.props
     const post = formatGraphqlPost(this.props.data.post)
     const gitment = new Gitment({
-      id: post.frontmatter.title,
+      id: `${new Date(post.frontmatter.date).getTime()}`,
       owner: 'blackcater',
       repo: 'blackcater.github.io',
       oauth: {
