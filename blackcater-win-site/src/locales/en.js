@@ -26,8 +26,17 @@ export const translation = {
   reward: 'reward',
 
   resumeInfos: {
-    contact: 'Contact',
-    application: 'Application',
+    contact: {
+      title: 'Contact',
+      data: {
+        phone: '+86 17681820960',
+        mail: 'blackcater2015@gmail.com',
+      },
+    },
+    application: {
+      title: 'Application',
+      data: 'Front-End Engineer',
+    },
     selfAppraisal:
       'I love programming and dedicate to open source. Although I am a little stupid, but I work very hard.',
     basic: {
