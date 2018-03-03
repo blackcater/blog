@@ -13,9 +13,10 @@ class ResumePage extends Component {
 
   render() {
     const { t } = this.props
-    const resumeInfos = t('resumeInfos', { returnObjects: true })
-
-    console.dir(resumeInfos)
+    const { contact, application, basic, experience, projects, skills } = t(
+      'resumeInfos',
+      { returnObjects: true }
+    )
 
     return (
       <div className="page-resume">
@@ -26,9 +27,7 @@ class ResumePage extends Component {
               <img src="/favicon.png" alt="blackcater" />
             </div>
             <div className="contact-section">
-              <h3 className="title">
-                {resumeInfos.contact.title.toUpperCase()}
-              </h3>
+              <h3 className="title">{contact.title.toUpperCase()}</h3>
               <div className="contact-item mail">
                 <Icon
                   type="mail"
@@ -38,7 +37,7 @@ class ResumePage extends Component {
                     marginRight: '0.6em',
                   }}
                 />
-                {resumeInfos.contact.data.mail}
+                {contact.mail}
               </div>
               <div className="contact-item phone">
                 <Icon
@@ -49,17 +48,77 @@ class ResumePage extends Component {
                     marginRight: '0.6em',
                   }}
                 />
-                {resumeInfos.contact.data.phone}
+                {contact.phone}
               </div>
             </div>
             <div className="application-section">
-              <h3 className="title">
-                {resumeInfos.application.title.toUpperCase()}
-              </h3>
-              <div className="application">{resumeInfos.application.data}</div>
+              <h3 className="title">{application.title.toUpperCase()}</h3>
+              <div className="application">{application.data}</div>
             </div>
           </div>
-          <div className="right" />
+          <div className="right">
+            <div className="section">
+              <h3 className="title">{basic.title.toUpperCase()}</h3>
+              <div className="basic-section">
+                <div className="info-item name">
+                  <span>{basic.name.key}</span>
+                  {basic.name.value}
+                </div>
+                <div className="info-item nickname">
+                  <span>{basic.nickname.key}</span>
+                  {basic.nickname.value}
+                </div>
+                <div className="info-item age">
+                  <span>{basic.age.key}</span>
+                  {basic.age.value}
+                </div>
+                <div className="info-item gender">
+                  <span>{basic.gender.key}</span>
+                  {basic.gender.value}
+                </div>
+                <div className="info-item school">
+                  <span>{basic.school.key}</span>
+                  {basic.school.value}
+                </div>
+                <div className="info-item blog">
+                  <span>{basic.blog.key}</span>
+                  <a href={basic.blog.link} target="__blank">
+                    {basic.blog.value}
+                  </a>
+                </div>
+                <div className="info-item github">
+                  <span>{basic.github.key}</span>
+                  <a href={basic.github.link} target="__blank">
+                    {basic.github.value}
+                  </a>
+                </div>
+              </div>
+            </div>
+            <div className="section">
+              <h3 className="title">{experience.title.toUpperCase()}</h3>
+              <div className="experience-section">
+                {experience.data.map(({ logo, name, time, link, projects }) => (
+                  <div key={name + time} className="experience-item">
+                    <div className="title">
+                      <a href={link} target="__blank">
+                        <img src={logo} alt={name} />
+                        {name}
+                        {time}
+                      </a>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+            <div className="section">
+              <h3 className="title">{projects.title.toUpperCase()}</h3>
+              <div className="project-section" />
+            </div>
+            <div className="section">
+              <h3 className="title">{skills.title.toUpperCase()}</h3>
+              <div className="skill-section" />
+            </div>
+          </div>
         </div>
       </div>
     )

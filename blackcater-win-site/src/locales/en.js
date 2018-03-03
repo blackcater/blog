@@ -28,59 +28,54 @@ export const translation = {
   resumeInfos: {
     contact: {
       title: 'Contact',
-      data: {
-        phone: '+86 17681820960',
-        mail: 'blackcater2015@gmail.com',
-      },
+      phone: '+86 17681820960',
+      mail: 'blackcater2015@gmail.com',
     },
     application: {
       title: 'Application',
       data: 'Front-End Engineer',
     },
-    selfAppraisal:
-      'I love programming and dedicate to open source. Although I am a little stupid, but I work very hard.',
     basic: {
       title: 'Basic',
-      data: {
-        name: {
-          key: 'Name',
-          value: 'Tom Tang',
-        },
-        age: {
-          key: 'Age',
-          value: 22,
-        },
-        gender: {
-          key: 'Gender',
-          value: 'man',
-        },
-        school: {
-          key: 'Graduate from',
-          value: 'NEU (China)',
-        },
-        nickname: {
-          key: 'Nickname',
-          value: 'blackcater',
-        },
-        blog: {
-          key: 'Blog',
-          value: 'http://www.blackcater.win',
-          link: 'http://www.blackcater.win',
-        },
-        github: {
-          key: 'Github',
-          value: 'https://www.github.com/blackcater',
-          link: 'https://www.github.com/blackcater',
-        },
+      name: {
+        key: 'Name',
+        value: 'Tom Tang',
+      },
+      age: {
+        key: 'Age',
+        value: 22,
+      },
+      gender: {
+        key: 'Gender',
+        value: 'man',
+      },
+      school: {
+        key: 'Graduate from',
+        value: 'NEU (China)',
+      },
+      nickname: {
+        key: 'Nickname',
+        value: 'blackcater',
+      },
+      blog: {
+        key: 'Blog',
+        value: 'http://www.blackcater.win',
+        link: 'http://www.blackcater.win',
+      },
+      github: {
+        key: 'Github',
+        value: 'https://www.github.com/blackcater',
+        link: 'https://www.github.com/blackcater',
       },
     },
     experience: {
       title: 'Experience',
       data: [
         {
-          logo: '',
-          name: 'China, Hangzhou Tuotuo Inc.',
+          logo: '/resume/experience/finger-logo.png',
+          name: 'Tuotuo Inc.',
           time: '(2017.8 - Now)',
+          link: 'https://www.finger66.com',
           projects: [
             {
               name: 'Operation Management System(OMS)',
