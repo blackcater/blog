@@ -79,19 +79,20 @@ export const translation = {
           projects: [
             {
               name: 'Operation Management System(OMS)',
-              desc: ``,
-            },
-            {
-              name: 'Teacher Management System(TMS)',
-              desc: ``,
+              desc: `
+              <p>负责项目的功能开发与维护。OMS 囊括了移动 APP 运营需要的各种功能，以及 APP 页面配置的功能。</p>
+              <p>项目采用 React 框架，flux 进行状态管理，webpack 进行项目打包构建。</p>
+              `,
             },
             {
               name: 'Rich-text Editor',
-              desc: ``,
+              desc: `
+              <p>负责整个项目的开发与维护。项目基于 React 框架，和 draft.js 富文本编辑器框架进行开发。支持文件，图片添加，字体颜色，大小等行内样式。以及支持其他信息的添加：帖子，曲谱等。</p>
+              `,
             },
             {
               name: 'Miniprogram',
-              desc: ``,
+              desc: `<p>负责整个小程序项目的开发与维护。负责的功能包括统一请求处理，用户登录，全局搜索，直播 IM 等。</p>`,
             },
           ],
         },
@@ -102,21 +103,9 @@ export const translation = {
       projects: [
         {
           title: 'My blog',
-          desc: '',
-          source: 'source code',
-          sourceUrl: '',
-          demoUrl: '',
-        },
-        {
-          title: 'Promise',
-          desc: '',
-          source: 'source code',
-          sourceUrl: '',
-          demoUrl: '',
-        },
-        {
-          title: 'Taopiaopiao App',
-          desc: '',
+          desc: `
+          <p>根据 gatsby 开发的个人博客。</p>
+          `,
           source: 'source code',
           sourceUrl: '',
           demoUrl: '',

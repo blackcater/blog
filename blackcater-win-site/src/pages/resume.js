@@ -11,6 +11,30 @@ class ResumePage extends Component {
     this.props.setTitle(this.props.t('resume'))
   }
 
+  renderDesc(desc = []) {
+    if (
+      Object.prototype.toString.call(desc).toLowerCase() !== '[object array]'
+    ) {
+      desc = [{ type: 'text', value: desc }]
+    }
+
+    return desc.map(({ type, value }) => {
+      if (type === 'text') {
+        return <p key={value}>{value}</p>
+      }
+
+      if (type === 'img' || type === 'image' || type === 'pic') {
+        return (
+          <p key={value}>
+            <img src={value} alt={value} />
+          </p>
+        )
+      }
+
+      return null
+    })
+  }
+
   render() {
     const { t } = this.props
     const { contact, application, basic, experience, projects, skills } = t(
@@ -106,6 +130,19 @@ class ResumePage extends Component {
                         {time}
                       </a>
                     </div>
+                    {projects && projects.length > 0 ? (
+                      <ul className="project-list">
+                        {projects.map(project => (
+                          <li key={project.name} className="project-item">
+                            <div className="pname">{project.name}</div>
+                            <div
+                              className="pdesc"
+                              dangerouslySetInnerHTML={{ __html: project.desc }}
+                            />
+                          </li>
+                        ))}
+                      </ul>
+                    ) : null}
                   </div>
                 ))}
               </div>
