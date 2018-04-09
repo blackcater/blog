@@ -43,6 +43,7 @@
     "start": "npm run dev",
     "dev": "gatsby develop",
     "pro": "gatsby build",
+    "clean": "rm -rf .cache && rm -rf public",
     "test": "echo \"Error: no test specified\" && exit 1",
     "deploy": "sh deploy.sh",
     "prettier": "prettier --write \"src/**/*.js\"",
