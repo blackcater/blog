@@ -109,7 +109,7 @@ export const translation = {
               name: '用户管理后台',
               desc: `
                 <p>基于 Vue 开发的用户管理后台，具有细粒度的权限控制体系。整体基于 Vue 全家桶和 iview 框架进行开发。</p>
-                <p>借鉴 Ant Design Pro，开发了对应 iview 版本的组件。</p>
+                <p>借鉴 Ant Design Pro 组件，开发了对应一系列的 iview 版本的组件。</p>
                 <p><img src="/resume/experience/5-1.png"/></p>
               `,
             },
@@ -119,8 +119,6 @@ export const translation = {
     },
     projects: {
       title: '个人项目',
-      source: 'code',
-      demo: 'demo',
       data: [
         {
           logo: '/resume/project/blog-logo.png',
