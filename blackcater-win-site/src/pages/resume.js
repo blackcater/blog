@@ -149,7 +149,32 @@ class ResumePage extends Component {
             </div>
             <div className="section">
               <h3 className="title">{projects.title.toUpperCase()}</h3>
-              <div className="project-section" />
+              <div className="project-section">
+                {projects.data.map(
+                  ({ logo, title, sourceUrl, demoUrl, desc }) => (
+                    <div className="project-item">
+                      <div className="title">
+                        {logo ? <img src={logo} alt={title} /> : null}
+                        {title}
+                        {sourceUrl ? (
+                          <a href={sourceUrl} target="_blank">
+                            <Icon type="github" />
+                          </a>
+                        ) : null}
+                        {demoUrl ? (
+                          <a href={demoUrl} target="_blank">
+                            <Icon type="box" />
+                          </a>
+                        ) : null}
+                      </div>
+                      <div
+                        className="desc"
+                        dangerouslySetInnerHTML={{ __html: desc }}
+                      />
+                    </div>
+                  )
+                )}
+              </div>
             </div>
             <div className="section">
               <h3 className="title">{skills.title.toUpperCase()}</h3>

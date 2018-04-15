@@ -88,14 +88,14 @@ export const translation = {
               name: '富文本编辑器开发',
               desc: `
               <p>负责整个项目的开发与维护。项目基于 React 框架，和 draft.js 富文本编辑器框架进行开发。支持文件，图片添加，字体颜色，大小等行内样式。以及支持其他信息的添加：帖子，曲谱等。</p>
-              <p><img src="/resume/experience/1-2-1.png"/></p>
+              <p><img src="/resume/experience/2-1.png"/></p>
               `,
             },
             {
               name: '"Finger 音乐课堂" 小程序开发',
               desc: `
                 <p>负责整个小程序项目的开发与维护。功能包括用户登录，全局搜索，商品详情页，购买支付流程，直播 IM 等。</p>
-                <p><img src="/resume/experience/1-3-1.png"/></p>
+                <p><img src="/resume/experience/3-1.png"/></p>
               `,
             },
             {
@@ -110,7 +110,7 @@ export const translation = {
               desc: `
                 <p>基于 Vue 开发的用户管理后台，具有细粒度的权限控制体系。整体基于 Vue 全家桶和 iview 框架进行开发。</p>
                 <p>借鉴 Ant Design Pro，开发了对应 iview 版本的组件。</p>
-                <p><img src="/resume/experience/1-5-1.png"/></p>
+                <p><img src="/resume/experience/5-1.png"/></p>
               `,
             },
           ],
@@ -118,16 +118,19 @@ export const translation = {
       ],
     },
     projects: {
-      title: 'Personal Projects',
-      projects: [
+      title: '个人项目',
+      source: 'code',
+      demo: 'demo',
+      data: [
         {
-          title: 'My blog',
+          logo: '/resume/project/blog-logo.png',
+          title: '我的博客',
           desc: `
-          <p>根据 gatsby 开发的个人博客。</p>
+            <p>使用 Gatsby 工具开发的静态博客，存放在 Github。</p>
+            <p><img src="/resume/project/2-1.png"/></p>
           `,
-          source: 'source code',
-          sourceUrl: '',
-          demoUrl: '',
+          sourceUrl: 'https://github.com/blackcater/blog',
+          demoUrl: 'http://www.blackcater.win',
         },
       ],
     },

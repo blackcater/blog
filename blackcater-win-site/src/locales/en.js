@@ -100,7 +100,7 @@ export const translation = {
     },
     projects: {
       title: 'Personal Projects',
-      projects: [
+      data: [
         {
           title: 'My blog',
           desc: `
