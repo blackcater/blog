@@ -176,10 +176,6 @@ class ResumePage extends Component {
                 )}
               </div>
             </div>
-            <div className="section">
-              <h3 className="title">{skills.title.toUpperCase()}</h3>
-              <div className="skill-section" />
-            </div>
           </div>
         </div>
       </div>

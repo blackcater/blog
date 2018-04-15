@@ -21,8 +21,8 @@ i18n
   .init({
     debug: process.env.NODE_ENV === 'development',
 
-    fallbackLng: 'zh',
-    lng: 'zh',
+    fallbackLng: 'en',
+    lng: 'en',
 
     resources: loadResources(['en', 'zh']),
 

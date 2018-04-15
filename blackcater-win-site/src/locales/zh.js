@@ -132,62 +132,6 @@ export const translation = {
         },
       ],
     },
-    skills: {
-      title: 'Skills',
-      data: [
-        {
-          title: 'Front End',
-          sections: [
-            {
-              title: 'HTML / CSS',
-              desc: `
-                <p>Can write semantic HTML, modular CSS, and complete complex layout</p>
-                <p>Skill preprocessing and modular tools like Less, Sass, Stylus and Postcss</p>
-              `,
-            },
-            {
-              title: 'JavaScript',
-              desc: `
-                <p>Skill native JavaScript, can code without jQuery and other library</p>
-                <p>Skill modular and object-oriented programming</p>
-                <p>Skill React and Vue framework</p>
-              `,
-            },
-            {
-              title: 'Others',
-              desc: `
-                <p>Skill front-end automation tools like Webpack, Rollup and Gulp</p>
-                <p>Understand security and performance optimization of front-end</p>
-              `,
-            },
-          ],
-        },
-        {
-          title: 'Back End',
-          sections: [
-            {
-              title: 'Node.js',
-              desc: `
-                <p>Understand Node.js web development, front-end separation, and crawler</p>
-                <p>Can develop complex miniprogram and rich-text editor</p>
-              `,
-            },
-          ],
-        },
-        {
-          title: 'Others',
-          sections: [
-            {
-              desc: `
-                <p>Dedicate to open source</p>
-                <p>Be interested in all technologies</p>
-                <p>Have patient and perseverance</p>
-              `,
-            },
-          ],
-        },
-      ],
-    },
   },
   aboutInfos: {},
 
