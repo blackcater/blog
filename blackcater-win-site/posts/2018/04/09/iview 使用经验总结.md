@@ -4,7 +4,7 @@ header: header.png
 date: 2018-04-09
 tags: [vue, iview]
 category: tech
-draft: true
+draft: false
 ---
 
 > 最近开始接触 vue 和 iview。这次将最近使用的经验总结给大家，希望对刚接触 iview 的开发者有一定的帮助。
@@ -282,8 +282,112 @@ export default {
 
 ## 在 iview 基础之上封装自己的业务组件
 
-iView 很像 Ant Design。Ant Design 有一个著名的项目——[Pro Ant Design](https://pro.ant.design/index-cn)，基于 Ant Design 封装了一系列高级组件。
+iView 很像 Ant Design。Ant Design 有一个著名的项目——[Ant Design Pro](https://pro.ant.design/index-cn)，基于 Ant Design 封装了一系列高级组件。
 
-为了使得我们运营后台开发的更为简单和高校，我也根据`Pro Ant Design`仿写了一系列的 vue 版本组件。
+为了让开发更为高效和便捷，我也根据`Ant Design Pro`仿写了一系列的 vue 版本组件。
 
 ![已实现的组件列表](img/2.png)
+
+下面我对一些组件进行简单说明。
+
+### pl-media
+
+`pl-media` 是自定义的一个组件，用于监听页面的响应式，从而控制展示样式。其核心代码抽离为了一个项目：[vue-media-query](https://github.com/blackcater/vue-media-query)。
+
+### pl-loader
+
+`pl-loader` 是实现区域内容加载。核心代码来源于开源项目：[vue-content-loader](https://github.com/egoist/vue-content-loader)
+
+### pl-form
+
+表单是运营后台开发中最常用的组件之一，`pl-form`是所有自定义组件中的核心组件之一，许多组件都是在`pl-form`基础之上封装而成，或者与`pl-form`有关联。
+
+iview 在实现表单数据收集，十分的复杂。提升表单收集效率，我们在`<Form>`和`<FormItem>`之上封装了一层。只需要简单的配置，就会自动的渲染出一个表单。
+
+```html
+<!-- template -->
+<pl-form :fields="fields" :fetch="login"></pl-form>
+```
+
+```javascript
+// javascript
+import Emitter from 'Emitter'
+import { Input } from 'iview'
+
+const MyOwnPassword = {
+  props: {
+    value: String
+  },
+  
+  mixins: [Emitter],
+    
+  render() {
+    return (
+      <Input
+        value={this.value}
+        {...this.$attrs}
+        on-on-change={this._onChange}
+      ></Input>
+    )
+  },
+  
+  methods: {
+    _onChange(val) {
+      this.$emit('input', val)
+      this.$emit('on-change', val)
+      this.dispatch('FormItem', 'on-form-change', val)
+    }
+  }
+}
+
+export default {
+  data() {
+    return {
+      fields: [
+        {
+          name: 'username',
+          type: 'Input',
+          label: '用户名',
+          props: { placeholder: '请输入用户名' },
+          rules: { required: true, message: '用户名不能为空' },
+        },
+        {
+          name: 'password',
+          label: '密码',
+          component: MyOwnPassword,
+          props: { placeholder: '请输入用户名' },
+          rules: { required: true, message: '用户名不能为空' },
+        },
+      ],
+    }
+  },
+  
+  methods: {
+    // 登录请求
+    login(data) {
+      // data 为由 pl-form 收集到的数据
+      
+      // $http 为 vue-resource 实例，你也可以使用其他请求库
+      this.$http.post('/oauth2', data)
+        .then(() => this.$Message.success('登录成功'))
+        .then(() => this.$Message.error('登录失败'))
+    },
+  },
+}
+```
+
+上面就是`pl-form`的简单使用示例。既支持iview原生实现的组件，通过`type`指定；也可以支持自定义表单组件，通过`component`指定。
+
+![pl-form 示例一](img/3.png)
+
+![pl-form 示例二](img/4.png)
+
+![pl-form 示例三](img/5.png)
+
+上面示例的实现，都是基于`pl-form`实现的。
+
+## 总结
+
+iview 很不错，但是实际使用中问题也较多。毕竟该项目不是大企业专门团队在维护。虽然坑多，但不影响其成为一个不错的选择。
+
+你在怀疑我这句话？不妨看看官方的例子[iview-admin](https://github.com/iview/iview-admin)。
