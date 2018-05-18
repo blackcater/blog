@@ -1,5 +1,5 @@
 ---
-title: 让你的静态博客支持 https
+title: 让你的静态页面支持 https
 header: header.png
 date: 2018-05-18
 tags: [blog, https, github]
