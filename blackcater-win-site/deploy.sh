@@ -1,9 +1,22 @@
-#!/usr/bin/env bash
+#!/usr/bin/env sh
 
-yarn pro
+# abort on errors
+set -e
 
-cd ./public/
+# build
+npm run pro
 
-git add .
-git commit -m 'v2.0-beta20'
-git push
+# navigate into the build output directory
+cd public
+
+git init
+
+git add -A
+
+time=$(date "+%Y/%m/%d-%H:%M:%S")
+
+git commit -m "deploy on ${time}"
+
+git push -f https://github.com/blackcater/blackcater.github.io.git master:master
+
+cd -
