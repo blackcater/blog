@@ -1,4 +1,0 @@
-<!--pages/home/home.wxml-->
-<view class="page">
-    <view class="h1"><text>RECENT</text></view>
-</view>
