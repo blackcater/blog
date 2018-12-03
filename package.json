@@ -1,0 +1,35 @@
+{
+  "name": "blog",
+  "version": "3.0.0",
+  "description": "基于 gatsby 构建的博客系统",
+  "main": "index.js",
+  "repository": "https://github.com/blackcater/blog.git",
+  "author": "blackcater <blackcater2015@gmail.com>",
+  "license": "MIT",
+  "keywords": [
+    "gatsby"
+  ],
+  "scripts": {
+    "serve": "gatsby develop",
+    "build": "gatsby build",
+    "format": "prettier --write \"src/**/*.js\"",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "devDependencies": {
+    "gatsby-cli": "^2.4.6",
+    "prettier": "^1.15.3"
+  },
+  "dependencies": {
+    "gatsby": "^2.0.60",
+    "gatsby-image": "^2.0.22",
+    "gatsby-plugin-manifest": "^2.0.11",
+    "gatsby-plugin-offline": "^2.0.18",
+    "gatsby-plugin-react-helmet": "^3.0.4",
+    "gatsby-plugin-sharp": "^2.0.14",
+    "gatsby-source-filesystem": "^2.0.10",
+    "gatsby-transformer-sharp": "^2.1.9",
+    "react": "16.7.0-alpha.2",
+    "react-dom": "16.7.0-alpha.2",
+    "react-helmet": "^5.2.0"
+  }
+}
