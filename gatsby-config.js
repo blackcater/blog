@@ -1,9 +1,13 @@
 module.exports = {
+  pathPrefix: '/',
   siteMetadata: {
     title: 'Gatsby Default Starter',
   },
   plugins: [
+    // https://www.npmjs.com/package/gatsby-plugin-react-helmet
     'gatsby-plugin-react-helmet',
+
+    // https://www.npmjs.com/package/gatsby-source-filesystem
     {
       resolve: `gatsby-source-filesystem`,
       options: {
@@ -11,8 +15,20 @@ module.exports = {
         path: `${__dirname}/src/images`,
       },
     },
+
+    // https://www.npmjs.com/package/gatsby-transformer-remark
+    'gatsby-transformer-remark',
+
+    // https://www.npmjs.com/package/gatsby-transformer-sharp
     'gatsby-transformer-sharp',
+    // https://www.npmjs.com/package/gatsby-plugin-sharp
     'gatsby-plugin-sharp',
+
+    // http://lesscss.org/
+    'gatsby-plugin-less',
+    'gatsby-plugin-remove-trailing-slashes',
+
+    // https://www.npmjs.com/package/gatsby-plugin-manifest
     {
       resolve: `gatsby-plugin-manifest`,
       options: {
@@ -22,11 +38,11 @@ module.exports = {
         background_color: '#663399',
         theme_color: '#663399',
         display: 'minimal-ui',
-        icon: 'src/images/gatsby-icon.png', // This path is relative to the root of the site.
+        icon: 'src/images/gatsby-icon.png',
       },
     },
-    // this (optional) plugin enables Progressive Web App + Offline functionality
-    // To learn more, visit: https://gatsby.app/offline
+
+    // https://gatsby.app/offline
     // 'gatsby-plugin-offline',
   ],
 };
