@@ -22,7 +22,7 @@ Github 允许你存放静态页面，从而让其他人看到。但是如果你�
 
 默认情况下，你将文件上传到项目的 `gh-pages` 分支即可。很多项目都是这么做的。但是 Github 也支持其他的方式：
 
-![Github 对 Github Pages 进行配置](./img/1.png)
+![Github 对 Github Pages 进行配置](img/1.png)
 
 前往项目的**设置**目录下，你会看到有一个 `source` 选项：
 
@@ -88,11 +88,11 @@ MX 记录也叫邮件路由记录，用户可以将该域名下的邮件服务�
 
 [CloundFire](https://www.cloudflare.com/) 是国外 DNS 服务提供商。我们需要靠他才能让我们的页面支持 HTTPS。
 
-- 首先，我们创建一个账号。![Create an account for CloudFire](./img/2.png)
-- 创建一个项目，这里填写自己购买的域名。![Create a project](./img/3.png)
-- 创建之后会进行 DNS 查询，可能会查询失败，失败之后需要我们手动添加一下。![Search DNS](./img/4.png)
-- 之后我们获取到了两个 DNS 地址 ![Get two DNS address](./img/5.png)
-- 由于我的域名在 西部数码 购买的，所以这里我以西部数码为例对 DNS服务器进行修改 ![Change DNS Server](./img/6.png)
+- 首先，我们创建一个账号。![Create an account for CloudFire](img/2.png)
+- 创建一个项目，这里填写自己购买的域名。![Create a project](img/3.png)
+- 创建之后会进行 DNS 查询，可能会查询失败，失败之后需要我们手动添加一下。![Search DNS](img/4.png)
+- 之后我们获取到了两个 DNS 地址 ![Get two DNS address](img/5.png)
+- 由于我的域名在 西部数码 购买的，所以这里我以西部数码为例对 DNS服务器进行修改 ![Change DNS Server](img/6.png)
 - 点击下一步之后，我们就等待几个小时就行了（可能几分钟就行了）。
 
 现在，我们地址以 `https` 开头进行访问，是不是已经可以看到自己的网站了？Cool！
@@ -104,7 +104,7 @@ MX 记录也叫邮件路由记录，用户可以将该域名下的邮件服务�
 
 在项目的设置页面下，我们可以找到一个 `Enforce HTTPS` 选项，我们勾选上它，等待一会~
 
-![Enforce HTTPS](./img/7.png)
+![Enforce HTTPS](img/7.png)
 
 现在访问 `http` 地址试试？是不是立即就跳转到 `https` 去了？
 

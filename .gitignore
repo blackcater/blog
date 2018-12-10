@@ -75,7 +75,9 @@ typings/
 .serverless
 
 # editor
+.vscode/
 .idea/
 
 # gatsby
+public/
 .cache/

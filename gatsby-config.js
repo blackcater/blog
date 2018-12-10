@@ -1,7 +1,13 @@
 module.exports = {
   pathPrefix: '/',
   siteMetadata: {
-    title: 'Gatsby Default Starter',
+    title: 'blackcater',
+    description: "blackcater's personal website",
+    website: 'http://www.blackcater.win',
+    siteUrl: 'http://www.blackcater.win',
+    nickname: 'blackcater',
+    slogan: 'Stay hungry, stay foolish',
+    email: 'blackcater2015@gmail.com',
   },
   plugins: [
     // https://www.npmjs.com/package/gatsby-plugin-react-helmet
@@ -11,10 +17,27 @@ module.exports = {
     {
       resolve: `gatsby-source-filesystem`,
       options: {
+        name: `posts`,
+        path: `${__dirname}/src/posts`,
+      },
+    },
+    {
+      resolve: `gatsby-source-filesystem`,
+      options: {
         name: `images`,
         path: `${__dirname}/src/images`,
       },
     },
+    {
+      resolve: `gatsby-source-filesystem`,
+      options: {
+        name: `data`,
+        path: `${__dirname}/src/data`,
+      },
+    },
+
+    // https://www.npmjs.com/package/gatsby-transformer-json
+    'gatsby-transformer-json',
 
     // https://www.npmjs.com/package/gatsby-transformer-remark
     'gatsby-transformer-remark',
@@ -26,6 +49,8 @@ module.exports = {
 
     // http://lesscss.org/
     'gatsby-plugin-less',
+
+    // https://www.npmjs.com/package/gatsby-plugin-remove-trailing-slashes
     'gatsby-plugin-remove-trailing-slashes',
 
     // https://www.npmjs.com/package/gatsby-plugin-manifest
@@ -43,6 +68,19 @@ module.exports = {
     },
 
     // https://gatsby.app/offline
-    // 'gatsby-plugin-offline',
+    'gatsby-plugin-offline',
+
+    // https://www.npmjs.com/package/gatsby-plugin-feed
+    'gatsby-plugin-feed',
+
+    // https://www.npmjs.com/package/gatsby-plugin-google-analytics
+    {
+      resolve: `gatsby-plugin-google-analytics`,
+      options: {
+        trackingId: 'UA-111803122-1',
+        // Setting this parameter is optional
+        anonymize: true,
+      },
+    },
   ],
 };
