@@ -34,6 +34,7 @@
     "gatsby-transformer-json": "^2.1.6",
     "gatsby-transformer-remark": "^2.1.17",
     "gatsby-transformer-sharp": "^2.1.9",
+    "less": "^3.9.0",
     "prop-types": "^15.6.2",
     "react": "16.7.0",
     "react-dom": "16.7.0",
