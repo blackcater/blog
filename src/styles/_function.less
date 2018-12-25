@@ -11,3 +11,9 @@
   font-family: 'Lucida Grande', 'Lucida Sans Unicode', 'Lucida Sans', Geneva,
     Arial, sans-serif;
 }
+
+.transition(@properties: color, background-color; @duration: 0.4s; @timing-function: ease-in-out) {
+  transition-property: @properties;
+  transition-duration: @duration;
+  transition-timing-function: @timing-function;
+}

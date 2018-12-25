@@ -1,17 +1,19 @@
-@import '_variable';
-@import '_function';
-@import '_font';
-@import '_reset';
+@import 'common';
 
-html,
 body {
-  .contentFF();
   width: 100%;
   min-height: 100%;
+  color: @text-color;
   background-color: @content-bg-color;
+
+  .contentFF();
+  .transition();
 }
 
 // theme
 [data-theme='dark'] {
-  background-color: @d-content-bg-color;
+  body {
+    color: @d-text-color;
+    background-color: @d-content-bg-color;
+  }
 }

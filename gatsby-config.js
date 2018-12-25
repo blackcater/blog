@@ -11,9 +11,6 @@ module.exports = {
     email: 'blackcater2015@gmail.com',
   },
   plugins: [
-    // https://www.npmjs.com/package/gatsby-plugin-react-helmet
-    'gatsby-plugin-react-helmet',
-
     // https://www.npmjs.com/package/gatsby-source-filesystem
     {
       resolve: `gatsby-source-filesystem`,

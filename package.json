@@ -20,7 +20,9 @@
     "prettier": "^1.15.3"
   },
   "dependencies": {
-    "gatsby": "^2.0.75",
+    "classnames": "^2.2.6",
+    "dom-lib": "^1.1.0",
+    "gatsby": "^2.0.76",
     "gatsby-image": "^2.0.25",
     "gatsby-plugin-feed": "^2.0.11",
     "gatsby-plugin-google-analytics": "^2.0.8",
@@ -35,9 +37,9 @@
     "gatsby-transformer-remark": "^2.1.17",
     "gatsby-transformer-sharp": "^2.1.9",
     "less": "^3.9.0",
+    "popper.js": "^1.14.6",
     "prop-types": "^15.6.2",
     "react": "16.7.0",
-    "react-dom": "16.7.0",
-    "react-helmet": "^5.2.0"
+    "react-dom": "16.7.0"
   }
 }

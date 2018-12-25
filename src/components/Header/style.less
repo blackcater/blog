@@ -1,4 +1,4 @@
-@import "~styles/index.less";
+@import '~styles/common';
 
 .header {
   position: absolute;
@@ -9,60 +9,87 @@
   z-index: @header-zindex;
   background-color: @header-bg-color;
   box-shadow: @header-shadow;
-}
 
-.header__content {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  align-items: center;
-  margin: 0 auto;
-  padding: 0 65px;
-  max-width: 1224px;
-  height: 65px;
+  @properties: background-color, box-shadow;
+  .transition(@properties);
 
-  .header__content__left {
+  &__content {
     display: flex;
     flex-direction: row;
+    justify-content: space-between;
     align-items: center;
-    height: 35px;
+    margin: 0 auto;
+    padding: 0 65px;
+    max-width: 1224px;
+    height: 65px;
 
-    .logo {
-      padding-right: 10px;
-      position: relative;
-      font-size: 24px;
-      font-weight: 900;
-      .titleFF();
+    &__left {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      height: 35px;
 
-      &::after {
-        position: absolute;
-        content: "";
-        top: 3px;
-        bottom: 3px;
-        right: 0;
-        width: 1px;
-        background-color: @line-color;
+      .logo {
+        padding-right: 10px;
+        position: relative;
+        color: @title-color;
+        font-size: 24px;
+        font-weight: 900;
+
+        .titleFF();
+        .transition(@properties: color);
+
+        &::after {
+          position: absolute;
+          content: '';
+          top: 3px;
+          bottom: 3px;
+          right: 0;
+          width: 1px;
+          background-color: @line-color;
+
+          .transition(@properties: background-color);
+        }
+      }
+
+      .title {
+        padding: 7px 0 0 10px;
+        color: @title-color;
+        font-size: 20px;
+        font-weight: 400;
+
+        .secondFF();
+        .transition(@properties: color);
       }
     }
 
-    .title {
-      padding: 7px 0 0 10px;
-      font-size: 20px;
-      font-weight: 400;
-      .secondFF();
+    &__right {
+      height: 35px;
     }
-  }
-
-  .header__content__right {
-    height: 35px;
   }
 }
 
 // theme
-[data-theme="dark"] {
+[data-theme='dark'] {
   .header {
     background-color: @d-header-bg-color;
     box-shadow: @d-header-shadow;
+
+    &__content {
+      &__left {
+        .logo {
+          color: @d-title-color;
+
+          &::after {
+            background-color: @d-line-color;
+          }
+        }
+
+        .title {
+          color: @d-title-color;
+        }
+      }
+    }
   }
 }
 
