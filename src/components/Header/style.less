@@ -30,11 +30,17 @@
 
       .logo {
         padding-right: 10px;
-        color: @title-color;
         font-size: 24px;
         font-weight: 900;
+        user-select: none;
+        cursor: pointer;
 
         .titleFF();
+
+        a {
+          color: @title-color;
+          text-decoration: none;
+        }
       }
 
       .title {
@@ -88,6 +94,7 @@
         li {
           word-break: keep-all;
           margin-right: 16px;
+          cursor: pointer;
 
           a {
             color: @gray-color;
@@ -153,7 +160,9 @@
     &__content {
       &__left {
         .logo {
-          color: @d-title-color;
+          a {
+            color: @d-title-color;
+          }
         }
 
         .title {
