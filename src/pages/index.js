@@ -2,7 +2,7 @@ import React from 'react';
 
 import Layout from 'components/Layout';
 import Header from 'components/Header';
-import { Popover } from 'components/common';
+import { Dropdown } from 'components/common';
 
 import { getAttribute, setAttribute } from 'utils/attribute';
 
@@ -26,9 +26,21 @@ const IndexPage = () => (
     <Header title="Home" />
     <div style={{ marginTop: 100 }}>hello world</div>
     <button onClick={toggleTheme}>更换主题</button>
-    <Popover reference={<div style={{ margin: 100 }}>show</div>}>
-      <div>hahaha</div>
-    </Popover>
+    <div style={{ marginLeft: 50 }}>
+      <Dropdown reference={<button>我</button>} placement="bottom-end">
+        <Dropdown.Item name="1">Become a member</Dropdown.Item>
+        <Dropdown.Line />
+        <Dropdown.Item name="2">New stories</Dropdown.Item>
+        <Dropdown.Item name="3">Stories</Dropdown.Item>
+        <Dropdown.Item name="4">Series</Dropdown.Item>
+        <Dropdown.Item name="5">Stats</Dropdown.Item>
+        <Dropdown.Line />
+        <Dropdown.Item name="6">Profile</Dropdown.Item>
+        <Dropdown.Item name="7">Setting</Dropdown.Item>
+        <Dropdown.Item name="8">Help</Dropdown.Item>
+        <Dropdown.Item name="9">Logout</Dropdown.Item>
+      </Dropdown>
+    </div>
   </Layout>
 );
 

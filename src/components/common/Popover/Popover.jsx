@@ -157,6 +157,7 @@ class Popover extends Component {
   render() {
     const { visible } = this.state;
     const {
+      namespace,
       reference,
       arrow,
       children,
@@ -166,10 +167,14 @@ class Popover extends Component {
     } = this.props;
 
     return (
-      <div className={cls(['popover', className])}>
+      <div className={cls(['popover', className, namespace && `${namespace}`])}>
         <div
           ref={this.$reference}
-          className={cls(['popover__reference', referenceClassName])}
+          className={cls([
+            'popover__reference',
+            referenceClassName,
+            namespace && `${namespace}__reference`,
+          ])}
         >
           {reference}
         </div>
@@ -181,13 +186,24 @@ class Popover extends Component {
                 'popover__popper',
                 arrow && 'popover__popper--arrow',
                 popperClassName,
+                namespace && `${namespace}__popper`,
               ])}
             >
               <div
                 style={{ ...transitionStyles[state] }}
-                className="popover__popper__wrapper"
+                className={cls([
+                  'popover__popper__wrapper',
+                  namespace && `${namespace}__popper__wrapper`,
+                ])}
               >
-                <div className="popover__popper__content">{children}</div>
+                <div
+                  className={cls([
+                    'popover__popper__content',
+                    namespace && `${namespace}__popper__content`,
+                  ])}
+                >
+                  {children}
+                </div>
                 {arrow && (
                   <div ref={this.$arrow} className="popover__popper__arrow" />
                 )}
@@ -201,6 +217,7 @@ class Popover extends Component {
 }
 
 Popover.propTypes = {
+  namespace: PropTypes.string,
   trigger: PropTypes.oneOf(['click', 'hover', 'active']),
   placement: PropTypes.oneOf(PopperJS.placements),
   reference: PropTypes.node,
@@ -210,6 +227,7 @@ Popover.propTypes = {
 };
 
 Popover.defaultProps = {
+  namespace: '',
   trigger: 'click',
   placement: 'bottom',
   arrow: true,

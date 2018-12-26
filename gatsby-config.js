@@ -3,11 +3,11 @@ module.exports = {
   siteMetadata: {
     title: 'blackcater',
     description: "blackcater's personal website",
-    keywords: 'blackcater,blog,blackcater\'s blog,',
+    keywords: "blackcater,blog,blackcater's blog,",
     website: 'http://www.blackcater.win',
     siteUrl: 'http://www.blackcater.win',
     nickname: 'blackcater',
-    slogan: 'Stay hungry, stay foolish',
+    slogan: '求知若饥，虚心若愚 (Stay hungry, stay foolish)',
     email: 'blackcater2015@gmail.com',
   },
   plugins: [
@@ -17,6 +17,13 @@ module.exports = {
       options: {
         name: `posts`,
         path: `${__dirname}/src/posts`,
+      },
+    },
+    {
+      resolve: `gatsby-source-filesystem`,
+      options: {
+        name: `series`,
+        path: `${__dirname}/src/series`,
       },
     },
     {
@@ -58,8 +65,8 @@ module.exports = {
         name: 'gatsby-starter-default',
         short_name: 'starter',
         start_url: '/',
-        background_color: '#663399',
-        theme_color: '#663399',
+        background_color: '#03a87c',
+        theme_color: '#03a87c',
         display: 'minimal-ui',
         icon: 'src/images/avatar.png',
       },

@@ -12,12 +12,17 @@
       background-color: @content-bg-color;
       border-radius: 3px;
       box-shadow: @popover-shadow;
+
+      @properties: background-color, box-shadow;
+      .transition(@properties);
     }
 
     &__arrow {
       position: absolute;
       transform: rotate(45deg) translate(6px, 6px);
       color: @text-color;
+
+      .transition(@properties: color);
 
       &::after {
         content: '';
@@ -26,6 +31,9 @@
         height: 14px;
         background: @content-bg-color;
         box-shadow: @popover-arrow-shadow;
+
+        @properties: background, box-shadow;
+        .transition(@properties);
       }
     }
 
@@ -69,6 +77,25 @@
       .popover__popper__arrow {
         right: -6px;
         transform: rotate(135deg);
+      }
+    }
+  }
+}
+
+// theme
+[data-theme='dark'] {
+  .popover__popper {
+    &__wrapper {
+      background-color: @d-content-bg-color;
+      box-shadow: @d-popover-shadow;
+    }
+
+    &__arrow {
+      color: @d-text-color;
+
+      &::after {
+        background: @d-content-bg-color;
+        box-shadow: @d-popover-arrow-shadow;
       }
     }
   }

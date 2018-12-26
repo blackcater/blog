@@ -1,0 +1,39 @@
+@import '~styles/common';
+
+.dropdown {
+  &__popper__content {
+    padding: 8px 0;
+    width: 230px;
+  }
+
+  &__item {
+    padding: 7px 25px;
+    font-size: 14px;
+    line-height: 1.4;
+    cursor: pointer;
+
+    &:hover {
+      color: @title-color;
+    }
+  }
+
+  &__line {
+    margin: 10px 0;
+    border-top: 1px solid @separator-color;
+  }
+}
+
+// theme
+[data-theme='dark'] {
+  .dropdown {
+    &__item {
+      &:hover {
+        color: @d-title-color;
+      }
+    }
+
+    &__line {
+      border-top-color: @d-separator-color;
+    }
+  }
+}
