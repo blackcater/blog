@@ -1,0 +1,75 @@
+@import '~styles/common';
+
+.popover {
+  display: inline-block;
+
+  &__reference {
+    display: inline-block;
+  }
+
+  &__popper {
+    &__wrapper {
+      background-color: @content-bg-color;
+      border-radius: 3px;
+      box-shadow: @popover-shadow;
+    }
+
+    &__arrow {
+      position: absolute;
+      transform: rotate(45deg) translate(6px, 6px);
+      color: @text-color;
+
+      &::after {
+        content: '';
+        display: block;
+        width: 14px;
+        height: 14px;
+        background: @content-bg-color;
+        box-shadow: @popover-arrow-shadow;
+      }
+    }
+
+    &[x-placement^='top'] {
+      &.popover__popper--arrow {
+        margin-bottom: 15px;
+      }
+
+      .popover__popper__arrow {
+        bottom: -6px;
+        transform: rotate(-135deg);
+      }
+    }
+
+    &[x-placement^='right'] {
+      &.popover__popper--arrow {
+        margin-left: 15px;
+      }
+
+      .popover__popper__arrow {
+        left: -6px;
+        transform: rotate(-45deg);
+      }
+    }
+
+    &[x-placement^='bottom'] {
+      &.popover__popper--arrow {
+        margin-top: 15px;
+      }
+
+      .popover__popper__arrow {
+        top: -14px;
+      }
+    }
+
+    &[x-placement^='left'] {
+      &.popover__popper--arrow {
+        margin-right: 15px;
+      }
+
+      .popover__popper__arrow {
+        right: -6px;
+        transform: rotate(135deg);
+      }
+    }
+  }
+}

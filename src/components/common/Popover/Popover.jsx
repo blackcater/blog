@@ -1,10 +1,18 @@
 import React, { Component, PureComponent } from 'react';
 import ReactDOM from 'react-dom';
+import { Transition } from 'react-transition-group';
 import PropTypes from 'prop-types';
-import PopperJS, { Placement } from 'popper.js';
+import PopperJS from 'popper.js';
 import cls from 'classnames';
+import { on, off } from 'dom-lib';
+
+import './style.less';
 
 const $root = document.getElementById('popover-root');
+const transitionStyles = {
+  exited: { display: 'none' },
+  entered: { display: 'block' },
+};
 
 class Popper extends PureComponent {
   constructor(props) {
@@ -13,16 +21,25 @@ class Popper extends PureComponent {
     const { className } = props;
 
     this.$container = document.createElement('div');
-    this.$container.className = cls(['popover__popper', className]);
+    this.$container.className = className;
   }
 
   componentDidMount() {
     $root && $root.appendChild(this.$container);
+
+    on(this.$container, 'click', this._handleClick);
   }
 
   componentWillUnmount() {
     $root && $root.removeChild(this.$container);
+
+    off(this.$container, 'click', this._handleClick);
   }
+
+  _handleClick = e => {
+    e.preventDefault();
+    e.stopPropagation();
+  };
 
   render() {
     const { children } = this.props;
@@ -35,15 +52,65 @@ class Popover extends Component {
   constructor(props) {
     super(props);
 
+    this.state = {
+      visible: false,
+    };
+
     this.$reference = React.createRef();
     this.$popper = React.createRef();
     this.$arrow = React.createRef();
     this.popperJS = null;
   }
 
+  static getDerivedStateFromProps(props, state) {
+    if (state.trigger === props.trigger) {
+      return null;
+    }
+
+    return {
+      trigger: props.trigger,
+    };
+  }
+
   componentDidMount() {
+    this._addTriggerEvent(this.state.trigger);
+    this._updatePopper();
+
+    on(document, 'click', this.hide);
+  }
+
+  componentDidUpdate(prevProps, prevState) {
+    if (prevState.trigger !== this.state.trigger) {
+      this._removeTriggerEvent(prevState.trigger);
+      this._addTriggerEvent(this.state.trigger);
+    }
+
     this._updatePopper();
   }
+
+  componentWillUnmount() {
+    off(document, 'click', this.hide);
+  }
+
+  hide = () => {
+    this.setState({ visible: false });
+  };
+
+  show = () => {
+    this.setState({ visible: true });
+  };
+
+  _addTriggerEvent = trigger => {
+    if (trigger === 'click') {
+      on(this.$reference.current, 'click', this._handleClickEvent);
+    }
+  };
+
+  _removeTriggerEvent = trigger => {
+    if (trigger === 'click') {
+      off(this.$reference.current, 'click', this._handleClickEvent);
+    }
+  };
 
   _updatePopper = () => {
     if (this.popperJS) {
@@ -61,7 +128,7 @@ class Popover extends Component {
     if (!$reference || !$popper) return;
 
     let options = {
-      placement: this.props.placement || 'auto',
+      placement: this.props.placement,
       onCreate: this._handleCreate,
       // onUpdate: this._handleUpdate,
     };
@@ -77,13 +144,18 @@ class Popover extends Component {
     }
 
     this.popperJS = new PopperJS($reference, $popper, options);
-
-    console.dir(this.popperJS);
   };
 
   _handleCreate = () => {};
 
+  _handleClickEvent = e => {
+    e.stopPropagation();
+
+    this.setState(state => ({ visible: !state.visible }));
+  };
+
   render() {
+    const { visible } = this.state;
     const {
       reference,
       arrow,
@@ -101,24 +173,46 @@ class Popover extends Component {
         >
           {reference}
         </div>
-        <Popper ref={this.$popper} className={popperClassName}>
-          <div className="content">{children}</div>
-          {arrow && (
-            <div ref={this.$arrow} className="arrow">
-              {arrow}
-            </div>
+        <Transition in={visible} timeout={16.67}>
+          {state => (
+            <Popper
+              ref={this.$popper}
+              className={cls([
+                'popover__popper',
+                arrow && 'popover__popper--arrow',
+                popperClassName,
+              ])}
+            >
+              <div
+                style={{ ...transitionStyles[state] }}
+                className="popover__popper__wrapper"
+              >
+                <div className="popover__popper__content">{children}</div>
+                {arrow && (
+                  <div ref={this.$arrow} className="popover__popper__arrow" />
+                )}
+              </div>
+            </Popper>
           )}
-        </Popper>
+        </Transition>
       </div>
     );
   }
 }
 
 Popover.propTypes = {
+  trigger: PropTypes.oneOf(['click', 'hover', 'active']),
+  placement: PropTypes.oneOf(PopperJS.placements),
   reference: PropTypes.node,
-  arrow: PropTypes.node,
+  arrow: PropTypes.bool,
   referenceClassName: PropTypes.string,
   popperClassName: PropTypes.string,
+};
+
+Popover.defaultProps = {
+  trigger: 'click',
+  placement: 'bottom',
+  arrow: true,
 };
 
 export default Popover;

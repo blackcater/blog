@@ -26,7 +26,7 @@ const IndexPage = () => (
     <Header title="Home" />
     <div style={{ marginTop: 100 }}>hello world</div>
     <button onClick={toggleTheme}>更换主题</button>
-    <Popover>
+    <Popover reference={<div style={{ margin: 100 }}>show</div>}>
       <div>hahaha</div>
     </Popover>
   </Layout>
