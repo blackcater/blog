@@ -1,4 +1,4 @@
-function pick(data, keyPath) {
+export default function pick(data, keyPath) {
   if (!data || !keyPath) return data;
 
   const keys = keyPath.split(/[.[\]]/).filter(x => !!x);
@@ -16,5 +16,3 @@ function pick(data, keyPath) {
 
   return result;
 }
-
-export default pick;

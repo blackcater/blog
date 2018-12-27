@@ -84,6 +84,9 @@ class Slider extends PureComponent {
                   alt={pick(edge, 'node.frontmatter.title')}
                 />
               </div>
+              <div className="slider__slide__title">
+                {pick(edge, 'node.frontmatter.title')}
+              </div>
             </div>
           ))}
         </div>

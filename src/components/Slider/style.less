@@ -13,9 +13,18 @@
   }
 
   &__slide {
-    margin: 0 auto;
+    margin: 0 auto 16px;
     max-width: 1200px;
     overflow: hidden;
+
+    &__title {
+      font-size: 24px;
+      font-weight: 600;
+      color: @title-color;
+      text-align: center;
+
+      .titleFF();
+    }
 
     &__wrapper {
       float: left;
