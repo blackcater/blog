@@ -10,7 +10,7 @@ import './style.less';
 
 class Layout extends PureComponent {
   render() {
-    const { title, children } = this.props;
+    const { children, ...rest } = this.props;
 
     return (
       <StaticQuery
@@ -26,7 +26,7 @@ class Layout extends PureComponent {
         `}
         render={data => (
           <div className="layout">
-            <Header title={title} />
+            <Header {...rest} />
             {children}
           </div>
         )}
@@ -36,7 +36,6 @@ class Layout extends PureComponent {
 }
 
 Layout.propTypes = {
-  title: PropTypes.string,
   children: PropTypes.node.isRequired,
 };
 

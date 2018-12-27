@@ -8,10 +8,13 @@
   min-height: 65px;
   z-index: @header-zindex;
   background-color: @header-bg-color;
-  box-shadow: @header-shadow;
 
   @properties: background-color, box-shadow;
   .transition(@properties);
+
+  &--shadow {
+    box-shadow: @header-shadow;
+  }
 
   &__content {
     display: flex;
@@ -19,7 +22,6 @@
     align-items: center;
     margin: 0 auto;
     padding: 0 65px;
-    max-width: 1224px;
     height: 65px;
 
     &__left {
@@ -155,7 +157,10 @@
 [data-theme='dark'] {
   .header {
     background-color: @d-header-bg-color;
-    box-shadow: @d-header-shadow;
+
+    &--shadow {
+      box-shadow: @d-header-shadow;
+    }
 
     &__content {
       &__left {

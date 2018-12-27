@@ -1,0 +1,66 @@
+@import '~styles/common';
+
+.slider {
+  width: 100%;
+  overflow-x: hidden;
+
+  &__slides {
+    transition: transform 0.4s ease-in-out;
+
+    &::after {
+      .clearfix();
+    }
+  }
+
+  &__slide {
+    margin: 0 auto;
+    max-width: 1200px;
+    overflow: hidden;
+
+    &__wrapper {
+      float: left;
+      padding: 0 16px;
+      box-sizing: border-box;
+    }
+  }
+
+  &__dots {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    margin: 24px 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  &__dot {
+    display: inline-block;
+    margin: 0 6px;
+    width: 24px;
+    height: 6px;
+    border-radius: 4px;
+    background-color: @green-bg-color;
+    cursor: pointer;
+
+    .transition(@properties: background-color);
+
+    &--active {
+      background-color: @primary-color;
+
+      .transition(@properties: background-color);
+    }
+  }
+}
+
+// theme
+[data-theme='dark'] {
+  .slider {
+    &__dot {
+      background-color: @d-green-bg-color;
+
+      &--active {
+        background-color: @d-primary-color;
+      }
+    }
+  }
+}

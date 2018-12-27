@@ -2,6 +2,7 @@ import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import { Link, StaticQuery, graphql } from 'gatsby';
 import Img from 'gatsby-image';
+import cls from 'classnames';
 import pick from 'utils/pick';
 import { getAttribute, setAttribute } from 'utils/attribute';
 
@@ -38,7 +39,7 @@ class Header extends PureComponent {
 
   render() {
     const { theme } = this.state;
-    const { title } = this.props;
+    const { title, shadow, maxWidth } = this.props;
 
     return (
       <StaticQuery
@@ -66,8 +67,8 @@ class Header extends PureComponent {
         `}
         render={data => (
           <>
-            <div className="header">
-              <div className="header__content">
+            <div className={cls(['header', shadow && 'header--shadow'])}>
+              <div className="header__content" style={{ maxWidth }}>
                 <div className="header__content__left">
                   <div className="logo">
                     <Link to="/">Blog</Link>
@@ -132,7 +133,14 @@ class Header extends PureComponent {
 
 Header.propTypes = {
   title: PropTypes.string,
+  shadow: PropTypes.bool,
+  maxWidth: PropTypes.number,
   children: PropTypes.node,
+};
+
+Header.defaultProps = {
+  shadow: true,
+  maxWidth: 1224,
 };
 
 export default Header;
