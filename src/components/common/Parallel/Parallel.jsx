@@ -3,14 +3,19 @@ import PropTypes from 'prop-types';
 import cls from 'classnames';
 import { on, off, getOffset, animation } from 'dom-lib';
 import getDisplayName from 'utils/getDisplayName';
+import { isArray } from 'utils/isType';
 
 import './style.less';
+
+function toArray(children) {
+  return isArray(children) ? children : [children];
+}
 
 class Parallel extends PureComponent {
   constructor(props) {
     super(props);
 
-    const components = this.props.children.filter(
+    const components = toArray(this.props.children).filter(
       x => getDisplayName(x) === 'ParallelLine'
     );
 
@@ -25,6 +30,26 @@ class Parallel extends PureComponent {
     };
     this.$parallel = React.createRef();
     this.waiting = false;
+  }
+
+  static getDerivedStateFromProps(props, state) {
+    const components = toArray(props.children).filter(
+      x => getDisplayName(x) === 'ParallelLine'
+    );
+
+    if (components.length !== state.translateList.length) {
+      return {
+        translateList: components.map(comp => ({
+          x: 0,
+          y: 0,
+          height: 0,
+          width: comp.props.width || 0,
+          fixed: false,
+        })),
+      };
+    }
+
+    return null;
   }
 
   componentDidMount() {
@@ -114,12 +139,16 @@ class Parallel extends PureComponent {
     });
   };
 
-  _handleResize = () => {};
+  _handleResize = () => {
+    this._handleScroll();
+  };
 
   render() {
     const { translateList } = this.state;
     const { offset, className, children } = this.props;
-    const lines = children.filter(x => getDisplayName(x) === 'ParallelLine');
+    const lines = toArray(children).filter(
+      x => getDisplayName(x) === 'ParallelLine'
+    );
 
     return (
       <div ref={this.$parallel} className={cls(['parallel', className])}>

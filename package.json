@@ -26,6 +26,7 @@
     "gatsby-plugin-offline": "^2.0.20",
     "gatsby-plugin-remove-trailing-slashes": "^2.0.6",
     "gatsby-plugin-sharp": "^2.0.16",
+    "gatsby-plugin-typography": "^2.2.4",
     "gatsby-source-filesystem": "^2.0.12",
     "gatsby-transformer-json": "^2.1.6",
     "gatsby-transformer-remark": "^2.1.17",
@@ -40,6 +41,10 @@
     "prop-types": "^15.6.2",
     "react": "16.7.0",
     "react-dom": "16.7.0",
-    "react-transition-group": "^2.5.2"
+    "react-media": "^1.9.2",
+    "react-transition-group": "^2.5.2",
+    "react-typography": "^0.16.18",
+    "typography": "^0.16.18",
+    "typography-theme-bootstrap": "^0.16.18"
   }
 }

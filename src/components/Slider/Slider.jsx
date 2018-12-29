@@ -115,7 +115,7 @@ Slider.propTypes = {
 
 Slider.defaultProps = {
   auto: true,
-  interval: 5000,
+  interval: 7000,
   list: [],
 };
 

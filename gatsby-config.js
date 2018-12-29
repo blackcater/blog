@@ -15,15 +15,15 @@ module.exports = {
     {
       resolve: `gatsby-source-filesystem`,
       options: {
-        name: `posts`,
-        path: `${__dirname}/src/posts`,
+        name: `data`,
+        path: `${__dirname}/content/data`,
       },
     },
     {
       resolve: `gatsby-source-filesystem`,
       options: {
-        name: `series`,
-        path: `${__dirname}/src/series`,
+        name: `posts`,
+        path: `${__dirname}/content/posts`,
       },
     },
     {
@@ -31,13 +31,6 @@ module.exports = {
       options: {
         name: `images`,
         path: `${__dirname}/src/images`,
-      },
-    },
-    {
-      resolve: `gatsby-source-filesystem`,
-      options: {
-        name: `data`,
-        path: `${__dirname}/src/data`,
       },
     },
 
@@ -54,6 +47,15 @@ module.exports = {
 
     // http://lesscss.org/
     'gatsby-plugin-less',
+
+    // https://www.npmjs.com/package/gatsby-plugin-typography
+    {
+      resolve: `gatsby-plugin-typography`,
+      options: {
+        pathToConfigModule: `src/utils/typography.js`,
+        // omitGoogleFont: true,
+      },
+    },
 
     // https://www.npmjs.com/package/gatsby-plugin-remove-trailing-slashes
     'gatsby-plugin-remove-trailing-slashes',
@@ -88,4 +90,8 @@ module.exports = {
       },
     },
   ],
+  mapping: {
+    'MarkdownRemark.frontmatter.author': `AuthorJson`,
+    'MarkdownRemark.frontmatter.series': `SeriesJson`,
+  },
 };
