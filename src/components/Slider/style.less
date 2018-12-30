@@ -7,18 +7,16 @@
   &__slides {
     transition: transform 2s ease-in-out;
 
-    &::after {
-      .clearfix();
-    }
+    .clearfix();
   }
 
   &__slide {
     margin: 0 auto 16px;
     max-width: 1200px;
     overflow: hidden;
-    //background-color: @gray-bg-color;
-    //
-    //.transition(@properties: background-color);
+    background-color: @gray-bg-color;
+
+    .transition(@properties: background-color);
 
     &__title {
       font-size: 24px;
@@ -68,7 +66,7 @@
 [data-theme='dark'] {
   .slider {
     &__slide {
-      //background-color: @d-gray-bg-color;
+      background-color: @d-gray-bg-color;
 
       &__title {
         color: @d-title-color;

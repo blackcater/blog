@@ -14,9 +14,11 @@
 
 // utils
 .clearfix() {
-  display: table;
-  content: '';
-  clear: both;
+  &::after {
+    display: table;
+    content: '';
+    clear: both;
+  }
 }
 
 .transition(@properties: color, background-color; @duration: 0.4s; @timing-function: ease-in-out) {
