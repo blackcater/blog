@@ -71,21 +71,18 @@ class Slider extends PureComponent {
         >
           {list.map(edge => (
             <div
-              key={pick(edge, 'node.id')}
+              key={pick(edge, 'id')}
               className="slider__slide__wrapper"
               style={{ width: `${100 / list.length}%` }}
             >
               <div className="slider__slide">
                 <Img
-                  fluid={pick(
-                    edge,
-                    'node.frontmatter.header.childImageSharp.fluid'
-                  )}
-                  alt={pick(edge, 'node.frontmatter.title')}
+                  fluid={pick(edge, 'frontmatter.cover.childImageSharp.fluid')}
+                  alt={pick(edge, 'frontmatter.title')}
                 />
               </div>
               <div className="slider__slide__title">
-                {pick(edge, 'node.frontmatter.title')}
+                {pick(edge, 'frontmatter.title')}
               </div>
             </div>
           ))}
@@ -93,7 +90,7 @@ class Slider extends PureComponent {
         <ul className="slider__dots">
           {list.map((edge, index) => (
             <li
-              key={pick(edge, 'node.id')}
+              key={pick(edge, 'id')}
               className={cls([
                 'slider__dot',
                 index === curr && 'slider__dot--active',

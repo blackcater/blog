@@ -1,4 +1,5 @@
 import React, { PureComponent } from 'react';
+import { graphql } from 'gatsby';
 import Img from 'gatsby-image';
 import PropTypes from 'prop-types';
 import pick from 'utils/pick';
@@ -11,13 +12,9 @@ class PostBig extends PureComponent {
 
     return (
       <div className="post-big">
-        <Img
-          fluid={pick(post, 'node.frontmatter.header.childImageSharp.fluid')}
-        />
-        <div className="post-big__title">
-          {pick(post, 'node.frontmatter.title')}
-        </div>
-        <div className="post-big__excerpt">{pick(post, 'node.excerpt')}</div>
+        <Img fluid={pick(post, 'frontmatter.cover.childImageSharp.fluid')} />
+        <div className="post-big__title">{pick(post, 'frontmatter.title')}</div>
+        <div className="post-big__excerpt">{pick(post, 'excerpt')}</div>
       </div>
     );
   }
@@ -30,5 +27,38 @@ PostBig.propTypes = {
 PostBig.defaultProps = {
   post: {},
 };
+
+export const postBigQuery = graphql`
+  fragment PostBig on MarkdownRemark {
+    id
+    excerpt
+    frontmatter {
+      title
+      cover {
+        ... on File {
+          childImageSharp {
+            fluid(maxWidth: 1200, maxHeight: 500) {
+              ...GatsbyImageSharpFluid
+            }
+          }
+        }
+      }
+      date: date(formatString: "MMMM DD, YYYY")
+      author {
+        id
+        nickname
+        avatar {
+          ... on File {
+            childImageSharp {
+              resize(width: 80, height: 80, cropFocus: CENTER) {
+                src
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+`;
 
 export default PostBig;

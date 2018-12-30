@@ -48,15 +48,6 @@ module.exports = {
     // http://lesscss.org/
     'gatsby-plugin-less',
 
-    // https://www.npmjs.com/package/gatsby-plugin-typography
-    {
-      resolve: `gatsby-plugin-typography`,
-      options: {
-        pathToConfigModule: `src/utils/typography.js`,
-        // omitGoogleFont: true,
-      },
-    },
-
     // https://www.npmjs.com/package/gatsby-plugin-remove-trailing-slashes
     'gatsby-plugin-remove-trailing-slashes',
 
