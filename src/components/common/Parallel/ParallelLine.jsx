@@ -15,7 +15,7 @@ class ParallelLine extends PureComponent {
     const styles = { ...style };
 
     if (width) {
-      styles.flexBasis = width;
+      styles.width = width;
     } else if (flex) {
       styles.flex = flex;
     }

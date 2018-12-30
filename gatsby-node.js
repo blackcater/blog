@@ -218,8 +218,6 @@ exports.createPages = ({ page, graphql, actions }) => {
         // 生成归档相关页面
         createArchivePage(createPage);
 
-        console.log(require('util').inspect(store));
-
         resolve();
       })
       .catch(reject);
@@ -255,9 +253,9 @@ function createPostPage(createPage) {
     component: pathResolve('src/templates/index/page.js'),
     context: {
       posts: posts.slice(0, pageSize).map(x => x.id),
-      tags: tags.splice(0, 5),
-      series: series.splice(0, 5).map(x => x.id),
-      authors: authors.splice(0, 5).map(x => x.id),
+      tags: tags.slice(0, 5),
+      series: series.slice(0, 5).map(x => x.id),
+      authors: authors.slice(0, 5).map(x => x.id),
     },
   });
 
@@ -265,12 +263,12 @@ function createPostPage(createPage) {
   createPaginationPage(
     {
       data: posts.slice(pageSize),
-      prefix: '/',
+      prefix: '/list/',
       component: pathResolve('src/templates/post-list/page.js'),
       context: {
-        tags: tags.splice(0, 5),
-        series: series.splice(0, 5).map(x => x.id),
-        authors: authors.splice(0, 5).map(x => x.id),
+        tags: tags.slice(0, 5),
+        series: series.slice(0, 5).map(x => x.id),
+        authors: authors.slice(0, 5).map(x => x.id),
       },
     },
     createPage

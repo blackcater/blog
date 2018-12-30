@@ -4,7 +4,6 @@ cover: cover.png
 author: blackcater
 date: 2018-04-11
 tags: [vue]
-category: 技术总结
 draft: true
 ---
 

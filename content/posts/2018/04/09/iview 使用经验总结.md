@@ -4,7 +4,6 @@ cover: cover.png
 author: blackcater
 date: 2018-04-09
 tags: [vue]
-category: 技术总结
 ---
 
 > 最近开始接触 vue 和 iview。这次将最近使用的经验总结给大家，希望对刚接触 iview 的开发者有一定的帮助。

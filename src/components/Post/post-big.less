@@ -1,7 +1,8 @@
 @import '~styles/common';
 
 .post-big {
-  padding: 20px 0 25px;
+  margin-bottom: 20px;
+  padding: 0 0 25px;
   border-bottom: 1px solid @separator-color;
 
   & > a {
@@ -86,12 +87,28 @@
 // theme
 [data-theme='dark'] {
   .post-big {
+    border-bottom-color: @d-separator-color;
+
     &__title {
       color: @d-title-color;
     }
 
     &__excerpt {
       color: @d-gray-color;
+    }
+
+    &__author {
+      &__avatar {
+        background-color: @d-gray-bg-color;
+      }
+
+      &__nickname {
+        color: @d-title-color;
+      }
+
+      &__external {
+        color: @d-gray-color;
+      }
     }
   }
 }

@@ -1,6 +1,7 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import { StaticQuery, graphql } from 'gatsby';
+import cls from 'classnames';
 
 import Header from 'components/Header';
 
@@ -10,7 +11,7 @@ import './style.less';
 
 class Layout extends PureComponent {
   render() {
-    const { children, ...rest } = this.props;
+    const { className, children, ...rest } = this.props;
 
     return (
       <StaticQuery
@@ -24,8 +25,8 @@ class Layout extends PureComponent {
             }
           }
         `}
-        render={data => (
-          <div className="layout">
+        render={() => (
+          <div className={cls(['layout', className])}>
             <Header {...rest} />
             {children}
           </div>

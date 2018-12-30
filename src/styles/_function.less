@@ -21,6 +21,12 @@
   }
 }
 
+.ellipsis() {
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+
 .transition(@properties: color, background-color; @duration: 0.4s; @timing-function: ease-in-out) {
   transition-property: @properties;
   transition-duration: @duration;

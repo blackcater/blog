@@ -3,7 +3,6 @@ title: 让你的静态页面支持 https
 cover: cover.png
 author: blackcater
 date: 2018-05-18
-category: 技术总结
 ---
 
 ## 什么是静态页面？

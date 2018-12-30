@@ -3,8 +3,7 @@ title: 搭建私有npm镜像
 cover: cover.png
 author: blackcater
 date: 2018-03-01
-tags: [npm, docker]
-category: 技术总结
+tags: [docker]
 ---
 
 当公司到达一定程度，为了提高前端的开发效率，公司内部会创造一系列的框架或者工具库。这些包肯定是不可以暴露到外网之外的，所以你可以搭建一个私有的 npm。如果你们公司较为富有，其实直接用 npm 的企业版也是很不错的。

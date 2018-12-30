@@ -84,7 +84,9 @@ class Parallel extends PureComponent {
       for (let i = 0, len = $parallelLines.length; i < len; i++) {
         const $line = $parallelLines[i];
         const { width, height } = getOffset($line);
-        const { width: w, height: h, x, y } = this.state.translateList[i];
+        const { fixed, width: w, height: h, x, y } = this.state.translateList[
+          i
+        ];
 
         translateList[i] = { width: w || width, height: h || height };
 
@@ -110,23 +112,23 @@ class Parallel extends PureComponent {
           continue;
         }
 
-        if (scrollY < pTop + y) {
-          translateList[i] = {
-            ...translateList[i],
-            x: 0,
-            y: scrollY - pTop,
-            fixed: 'top',
-          };
-
-          continue;
-        }
-
-        if (scrollY + windowH > pTop + y + height) {
+        if (fixed !== 'top' && scrollY + windowH >= pTop + y + height) {
           translateList[i] = {
             ...translateList[i],
             x: 0,
             y: scrollY + windowH - pTop - height,
             fixed: 'bottom',
+          };
+
+          continue;
+        }
+
+        if (fixed !== 'bottom' && scrollY <= pTop + y) {
+          translateList[i] = {
+            ...translateList[i],
+            x: 0,
+            y: scrollY - pTop,
+            fixed: 'top',
           };
 
           continue;

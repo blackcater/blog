@@ -1,5 +1,6 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
+import { Link } from 'gatsby';
 import Img from 'gatsby-image';
 import cls from 'classnames';
 import pick from 'utils/pick';
@@ -76,13 +77,20 @@ class Slider extends PureComponent {
               style={{ width: `${100 / list.length}%` }}
             >
               <div className="slider__slide">
-                <Img
-                  fluid={pick(edge, 'frontmatter.cover.childImageSharp.fluid')}
-                  alt={pick(edge, 'frontmatter.title')}
-                />
+                <Link to={pick(edge, 'fields.slug')}>
+                  <Img
+                    fluid={pick(
+                      edge,
+                      'frontmatter.cover.childImageSharp.fluid'
+                    )}
+                    alt={pick(edge, 'frontmatter.title')}
+                  />
+                </Link>
               </div>
               <div className="slider__slide__title">
-                {pick(edge, 'frontmatter.title')}
+                <Link to={pick(edge, 'fields.slug')}>
+                  {pick(edge, 'frontmatter.title')}
+                </Link>
               </div>
             </div>
           ))}

@@ -1,25 +1,232 @@
 @import '~styles/common';
 
 .index {
-  &__title {
-    height: 46px;
-    line-height: 46px;
-    font-size: 15px;
-    color: @title-color;
+  &__separator {
+    margin: 32px auto;
+    padding: 0 16px;
+    max-width: 1024px;
+    height: 1px;
+    background-color: @separator-color;
   }
 
   &__parallel {
     max-width: 1024px;
-    margin: 64px auto;
+    margin: 0 auto 64px;
     padding: 0 16px;
+  }
+
+  &__series-list {
+    background-color: @gray-bg-color;
+
+    .transition(@properties: background-color);
+
+    &__header {
+      position: relative;
+      padding: 8px;
+      height: 120px;
+      background-color: @green-bg-color;
+    }
+
+    &__title {
+      position: absolute;
+      max-width: 135px;
+      left: 8px;
+      bottom: 8px;
+      padding: 16px;
+      color: @title-color;
+      font-size: 24px;
+      font-weight: 600;
+      z-index: 2;
+    }
+
+    &__cover {
+      width: 180px;
+      height: 120px;
+    }
+
+    &__content {
+      padding: 24px;
+
+      & > a {
+        text-decoration: none;
+      }
+
+      .series {
+        margin-bottom: 24px;
+
+        .clearfix();
+
+        &:last-child {
+          margin-bottom: 0;
+        }
+
+        &__cover {
+          float: left;
+          width: 40px;
+          border-radius: 2px;
+        }
+
+        &__wrapper {
+          margin-left: 56px;
+        }
+
+        &__title {
+          margin-bottom: 4px;
+          color: @title-color;
+          font-size: 16px;
+          font-weight: 600;
+        }
+
+        &__desc {
+          color: @title-color;
+          font-size: 13px;
+
+          .ellipsis();
+        }
+      }
+    }
+  }
+
+  &__tag-list {
+    &__header {
+      margin: 24px 24px 0;
+      padding-bottom: 16px;
+      line-height: 28px;
+      color: @title-color;
+      font-size: 24px;
+      font-weight: 600;
+      border-bottom: 1px solid @separator-color;
+    }
+
+    &__content {
+      padding: 24px;
+
+      .tag {
+        margin-bottom: 24px;
+        line-height: 28px;
+
+        .clearfix();
+
+        .index {
+          float: left;
+          color: @line-color;
+          font-size: 24px;
+        }
+
+        .title {
+          margin-left: 45px;
+          color: @title-color;
+          font-size: 16px;
+          font-weight: 600;
+
+          .ellipsis();
+
+          &:hover {
+            text-decoration: underline;
+          }
+
+          a {
+            color: inherit;
+            text-decoration: none;
+          }
+        }
+      }
+    }
+  }
+
+  &__author-list {
+    background-color: @gray-bg-color;
+
+    .transition(@properties: background-color);
+
+    &__header {
+      position: relative;
+      padding: 8px;
+      height: 120px;
+      background-color: @yellow-bg-color;
+    }
+
+    &__title {
+      position: absolute;
+      max-width: 135px;
+      left: 8px;
+      bottom: 8px;
+      padding: 16px;
+      color: @title-color;
+      font-size: 24px;
+      font-weight: 600;
+      z-index: 2;
+    }
+
+    &__cover {
+      width: 180px;
+      height: 120px;
+    }
+
+    &__content {
+      padding: 24px;
+
+      & > a {
+        text-decoration: none;
+      }
+
+      .author {
+        margin-bottom: 24px;
+
+        .clearfix();
+
+        &:last-child {
+          margin-bottom: 0;
+        }
+
+        &__avatar {
+          float: left;
+          width: 40px;
+          height: 40px;
+          border-radius: 20px;
+        }
+
+        &__wrapper {
+          margin-left: 56px;
+        }
+
+        &__title {
+          margin-bottom: 4px;
+          color: @title-color;
+          font-size: 16px;
+          font-weight: 600;
+        }
+
+        &__desc {
+          color: @title-color;
+          font-size: 13px;
+
+          .ellipsis();
+        }
+      }
+    }
   }
 }
 
 // theme
 [data-theme='dark'] {
   .index {
-    &__title {
-      color: @d-title-color;
+    &__separator {
+      background-color: @d-separator-color;
+    }
+
+    &__series-list {
+      background-color: @d-gray-bg-color;
+
+      .series {
+        &__title {
+          color: @d-title-color;
+        }
+
+        &__desc {
+          color: @d-title-color;
+        }
+      }
     }
   }
 }
