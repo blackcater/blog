@@ -38,7 +38,29 @@ module.exports = {
     'gatsby-transformer-json',
 
     // https://www.npmjs.com/package/gatsby-transformer-remark
-    'gatsby-transformer-remark',
+    {
+      resolve: `gatsby-transformer-remark`,
+      options: {
+        plugins: [
+          'gatsby-remark-images',
+          'gatsby-remark-abbr',
+          'gatsby-remark-emoji',
+          {
+            resolve: `gatsby-remark-prismjs`,
+            options: {
+              classPrefix: 'language-',
+            },
+          },
+          {
+            resolve: 'gatsby-remark-embed-gist',
+            options: {
+              username: 'blackcater',
+              includeDefaultCss: true,
+            },
+          },
+        ],
+      },
+    },
 
     // https://www.npmjs.com/package/gatsby-transformer-sharp
     'gatsby-transformer-sharp',

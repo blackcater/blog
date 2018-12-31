@@ -22,7 +22,7 @@ class ParallelLine extends PureComponent {
 
     return (
       <div className={cls(['parallel__line', className])} style={styles}>
-        <div style={wrapperStyle}>{children}</div>
+        <div style={{ padding: '1px', ...wrapperStyle }}>{children}</div>
       </div>
     );
   }

@@ -13,15 +13,15 @@ import './style.less';
 
 function AuthorList({ list, cover }) {
   return (
-    <div className="index__author-list">
-      <div className="index__author-list__header">
-        <div className="index__author-list__title">Popular Authors</div>
+    <div className="index-page__author-list">
+      <div className="index-page__author-list__header">
+        <div className="index-page__author-list__title">Popular Authors</div>
         <Img
-          className="index__author-list__cover"
+          className="index-page__author-list__cover"
           fluid={pick(cover, 'childImageSharp.fluid')}
         />
       </div>
-      <div className="index__author-list__content">
+      <div className="index-page__author-list__content">
         {list.map(author => (
           <Link key={author.id} to={`/author/${author.id}`}>
             <div className="author">
@@ -44,15 +44,15 @@ function AuthorList({ list, cover }) {
 
 function SeriesList({ list, cover }) {
   return (
-    <div className="index__series-list">
-      <div className="index__series-list__header">
-        <div className="index__series-list__title">Popular Series</div>
+    <div className="index-page__series-list">
+      <div className="index-page__series-list__header">
+        <div className="index-page__series-list__title">Popular Series</div>
         <Img
-          className="index__series-list__cover"
+          className="index-page__series-list__cover"
           fluid={pick(cover, 'childImageSharp.fluid')}
         />
       </div>
-      <div className="index__series-list__content">
+      <div className="index-page__series-list__content">
         {list.map(series => (
           <Link key={series.id} to={`/series/${series.id}`}>
             <div className="series">
@@ -75,9 +75,9 @@ function SeriesList({ list, cover }) {
 
 function TagList({ list }) {
   return (
-    <div className="index__tag-list">
-      <div className="index__tag-list__header">Popular Tags</div>
-      <div className="index__tag-list__content">
+    <div className="index-page__tag-list">
+      <div className="index-page__tag-list__header">Popular Tags</div>
+      <div className="index-page__tag-list__content">
         {list.map((tag, index) => (
           <div className="tag" key={tag}>
             <div className="index">
@@ -99,27 +99,25 @@ export default ({ data, pageContext }) => {
   const authors = pick(data, 'authors.edges').map(x => x.node) || [];
   const tags = pageContext.tags || [];
 
-  console.dir(data);
-  console.dir(pageContext);
-
   return (
-    <Layout className="index">
+    <Layout className="index-page">
       <Slider list={posts.slice(0, 3)} />
-      <div className="index__separator" />
+      <div className="index-page__separator" />
       <Media query="(max-width: 1000px)">
         {matches =>
           matches ? (
-            <Parallel className="index__parallel">
+            <Parallel className="index-page__parallel">
               <Parallel.Line>
                 {posts.slice(3).map(node => (
                   <PostBig key={node.id} post={node} />
                 ))}
-                <div className="index__title">SERIES</div>
-                <div>haha</div>
+                <SeriesList list={series} cover={data.seriesCover} />
+                <TagList list={tags} />
+                <AuthorList list={authors} cover={data.authorsCover} />
               </Parallel.Line>
             </Parallel>
           ) : (
-            <Parallel className="index__parallel">
+            <Parallel className="index-page__parallel">
               <Parallel.Line style={{ marginRight: 64 }}>
                 {posts.slice(3).map(node => (
                   <PostBig key={node.id} post={node} />

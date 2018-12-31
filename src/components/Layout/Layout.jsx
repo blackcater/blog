@@ -4,6 +4,7 @@ import { StaticQuery, graphql } from 'gatsby';
 import cls from 'classnames';
 
 import Header from 'components/Header';
+import Footer from 'components/Footer';
 
 import 'styles/index.less';
 
@@ -29,6 +30,7 @@ class Layout extends PureComponent {
           <div className={cls(['layout', className])}>
             <Header {...rest} />
             {children}
+            <Footer />
           </div>
         )}
       />

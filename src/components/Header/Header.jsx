@@ -132,7 +132,7 @@ class Header extends PureComponent {
 }
 
 Header.propTypes = {
-  title: PropTypes.string,
+  title: PropTypes.node,
   shadow: PropTypes.bool,
   maxWidth: PropTypes.number,
   children: PropTypes.node,

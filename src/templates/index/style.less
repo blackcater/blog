@@ -1,6 +1,6 @@
 @import '~styles/common';
 
-.index {
+.index-page {
   &__separator {
     margin: 32px auto;
     padding: 0 16px;
@@ -210,7 +210,7 @@
 
 // theme
 [data-theme='dark'] {
-  .index {
+  .index-page {
     &__separator {
       background-color: @d-separator-color;
     }
@@ -225,6 +225,39 @@
 
         &__desc {
           color: @d-title-color;
+        }
+      }
+    }
+
+    &__tag-list {
+      &__header {
+        color: @d-title-color;
+        border-bottom-color: @d-separator-color;
+      }
+
+      &__content {
+        .index {
+          color: @d-line-color;
+        }
+
+        .title {
+          color: @d-title-color;
+        }
+      }
+    }
+
+    &__author-list {
+      background-color: @d-gray-bg-color;
+
+      &__content {
+        .author {
+          &__title {
+            color: @d-title-color;
+          }
+
+          &__desc {
+            color: @d-title-color;
+          }
         }
       }
     }

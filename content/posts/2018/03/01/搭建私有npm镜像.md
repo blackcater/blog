@@ -52,7 +52,7 @@ verdaccio 是支持 docker 的。
 # warn --- http address - http://0.0.0.0:4873/ - verdaccio/2.7.4
 ```
 
-![bash-1](img/bash-1.png)
+![bash-1](./img/bash-1.png)
 
 访问 `http://0.0.0.0:4873/#/` 你会看到如下页面：
 

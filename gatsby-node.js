@@ -241,8 +241,8 @@ function createPostPage(createPage) {
       component: pathResolve('src/templates/post/page.js'),
       context: {
         id: post.id,
-        prevId: prevPost && prevPost.id,
-        nextId: nextPost && nextPost.id,
+        prevSlug: (prevPost && prevPost.fields.slug) || '',
+        nextSlug: (nextPost && nextPost.fields.slug) || '',
       },
     });
   });
