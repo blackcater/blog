@@ -1,19 +1,58 @@
 import React, { PureComponent } from 'react';
 import { Link, graphql } from 'gatsby';
 import Img from 'gatsby-image';
+import cls from 'classnames';
 import pick from 'utils/pick';
 
 import Layout from 'components/Layout';
 
 import './style.less';
 
-export default ({ data, pageContext }) => {
+function PostBigInfo({
+  id,
+  fields,
+  excerpt,
+  timeToRead,
+  frontmatter,
+  title,
+  reverse,
+}) {
+  return (
+    <div className={cls(['post-page__big-info', reverse && 'reverse'])}>
+      <div className="post-page__big-info__cover">
+        <Link to={fields.slug}>
+          <Img fluid={pick(frontmatter, 'cover.childImageSharp.fluid')} />
+        </Link>
+      </div>
+      <div className="post-page__big-info__content">
+        <div className="post-page__big-info__link">
+          <Link to={fields.slug}>{title}</Link>
+        </div>
+        <Link to={fields.slug}>
+          <div className="post-page__big-info__title">{frontmatter.title}</div>
+          <div className="post-page__big-info__desc">{excerpt}</div>
+        </Link>
+        <div className="post-page__big-info__footer">
+          <div className="nickname">
+            <Link to={`/author/${pick(frontmatter, 'author.id')}`}>
+              {pick(frontmatter, 'author.nickname')}
+            </Link>
+          </div>
+          <div className="date">{pick(frontmatter, 'date')}</div>
+          <div className="ttr">{timeToRead}min read</div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+export default ({ data }) => {
   const { post, prevPost, nextPost } = data;
   const tags = pick(post, 'frontmatter.tags') || [];
   const series = pick(post, 'frontmatter.series');
 
-  console.dir(data);
-  console.dir(pageContext);
+  console.dir(prevPost);
+  console.dir(nextPost);
 
   return (
     <Layout
@@ -66,6 +105,10 @@ export default ({ data, pageContext }) => {
         className="post-page__content"
         dangerouslySetInnerHTML={{ __html: pick(post, 'html') }}
       />
+      {prevPost && (
+        <PostBigInfo {...prevPost} title="READ PREV" reverse={true} />
+      )}
+      {nextPost && <PostBigInfo {...nextPost} title="READ NEXT" />}
     </Layout>
   );
 };

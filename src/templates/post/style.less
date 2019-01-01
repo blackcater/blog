@@ -101,7 +101,7 @@
   }
 
   &__content {
-    margin: 0 auto;
+    margin: 0 auto 50px;
     max-width: 700px;
     font-size: 17px;
     text-align: justify;
@@ -194,6 +194,91 @@
     }
 
     .prismjs();
+  }
+
+  &__big-info {
+    display: flex;
+    flex-direction: row;
+    margin: 0 auto 24px;
+    padding: 20px 16px;
+    max-width: 1224px;
+    border-top: 1px solid @separator-color;
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    &.reverse {
+      flex-direction: row-reverse;
+
+      .post-page__big-info__content {
+        margin-left: 0;
+        margin-right: 24px;
+      }
+    }
+
+    &__cover {
+      width: 50%;
+
+      .gatsby-image-wrapper {
+        height: 350px;
+      }
+    }
+
+    &__content {
+      margin-left: 24px;
+      margin-right: 0;
+      width: 50%;
+      box-sizing: border-box;
+    }
+
+    &__link {
+      margin-bottom: 24px;
+      color: #03a87c;
+      font-size: 14px;
+      font-weight: 600;
+    }
+
+    &__title {
+      margin-bottom: 16px;
+      color: @title-color;
+      font-size: 38px;
+      font-weight: 500;
+
+      .titleFF();
+    }
+
+    &__desc {
+      margin-bottom: 32px;
+      color: @gray-color;
+      font-size: 18px;
+      text-align: justify;
+    }
+
+    &__footer {
+      display: flex;
+      flex-direction: row;
+      font-size: 14px;
+      font-weight: 500;
+      color: @title-color;
+
+      .nickname {
+        a:hover {
+          text-decoration: underline;
+        }
+
+        &::after {
+          margin: 0 4px;
+          content: '·';
+        }
+      }
+
+      .date::after {
+        margin: 0 4px;
+        content: '·';
+      }
+    }
   }
 }
 
