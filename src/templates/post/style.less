@@ -45,7 +45,7 @@
       color: @title-color;
       line-height: 1.1;
       font-size: 48px;
-      font-weight: 500;
+      font-weight: 600;
       text-align: justify;
 
       .titleFF();
@@ -101,6 +101,99 @@
   }
 
   &__content {
+    margin: 0 auto;
+    max-width: 700px;
+    font-size: 17px;
+    text-align: justify;
+
+    .contentFF();
+
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
+      color: @title-color;
+      font-weight: 600;
+
+      .titleFF();
+    }
+
+    h2 {
+      margin-top: 54px;
+    }
+
+    h3 {
+      margin-top: 30px;
+    }
+
+    h4 {
+      margin-top: 24px;
+    }
+
+    h5 {
+      margin-top: 16px;
+    }
+
+    blockquote {
+      margin-left: 0;
+      margin-right: 0;
+      padding-left: 20px;
+      border-left: 3px solid @primary-color;
+      font-style: italic;
+
+      .titleFF();
+    }
+
+    p {
+      line-height: 1.8em;
+    }
+
+    ol,
+    ul {
+      margin-bottom: 1.5rem;
+    }
+
+    ol ol,
+    ul ul {
+      list-style: disc;
+      margin-bottom: 0;
+    }
+
+    li {
+      margin-bottom: 5px;
+    }
+
+    a {
+      color: #00ab6b;
+      transition: all 0.2s;
+    }
+
+    a:hover {
+      color: #038252;
+      text-decoration: none;
+    }
+
+    pre {
+      -moz-box-sizing: border-box;
+      box-sizing: border-box;
+      margin: 0 0 1.75em 0;
+      border: 1px solid #e3edf3;
+      width: 100%;
+      padding: 10px;
+      font-family: monospace, sans-serif;
+      font-size: 14px;
+      white-space: pre;
+      overflow: auto;
+      border-radius: 3px;
+    }
+
+    :not(pre) > code {
+      border: 1px solid #e3edf3;
+    }
+
+    .prismjs();
   }
 }
 
@@ -130,6 +223,10 @@
         font-size: 34px;
       }
     }
+
+    &__content {
+      padding: 0 16px;
+    }
   }
 }
 
@@ -150,6 +247,28 @@
           color: @d-gray-color;
         }
       }
+    }
+
+    &__content {
+      h1,
+      h2,
+      h3,
+      h4,
+      h5,
+      h6 {
+        color: @d-title-color;
+      }
+
+      blockquote {
+        border-left-color: @d-primary-color;
+      }
+
+      pre,
+      :not(pre) > code {
+        border-color: @d-gray-bg-color;
+      }
+
+      .prismjs-dark();
     }
   }
 }

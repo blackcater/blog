@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { PureComponent } from 'react';
 import { Link, graphql } from 'gatsby';
 import Img from 'gatsby-image';
 import pick from 'utils/pick';
