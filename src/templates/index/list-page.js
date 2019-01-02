@@ -1,98 +1,15 @@
 import React from 'react';
-import Media from 'react-media';
-import { Link, graphql } from 'gatsby';
-import Img from 'gatsby-image';
-
-import Layout from 'components/Layout';
-import Slider from 'components/Slider';
-import Pagination from 'components/Pagination';
-import { PostBig } from 'components/Post';
-import { Parallel } from 'components/common';
+import { graphql } from 'gatsby';
 import pick from 'utils/pick';
 
+import Media from 'react-media';
+import Parallel from 'components/common/Parallel';
+import PostBig from 'components/Post/PostBig';
+import Layout from 'components/Layout';
+
+import { SeriesList, AuthorList, TagList } from './page';
+
 import './style.less';
-
-export function AuthorList({ list, cover }) {
-  return (
-    <div className="index-page__author-list">
-      <div className="index-page__author-list__header">
-        <div className="index-page__author-list__title">Popular Authors</div>
-        <Img
-          className="index-page__author-list__cover"
-          fluid={pick(cover, 'childImageSharp.fluid')}
-        />
-      </div>
-      <div className="index-page__author-list__content">
-        {list.map(author => (
-          <Link key={author.id} to={`/author/${author.id}`}>
-            <div className="author">
-              <img
-                className="author__avatar"
-                src={pick(author, 'avatar.childImageSharp.resize.src')}
-                alt={author.id}
-              />
-              <div className="author__wrapper">
-                <div className="author__title">{author.nickname}</div>
-                <div className="author__desc">{author.slogan}</div>
-              </div>
-            </div>
-          </Link>
-        ))}
-      </div>
-    </div>
-  );
-}
-
-export function SeriesList({ list, cover }) {
-  return (
-    <div className="index-page__series-list">
-      <div className="index-page__series-list__header">
-        <div className="index-page__series-list__title">Popular Series</div>
-        <Img
-          className="index-page__series-list__cover"
-          fluid={pick(cover, 'childImageSharp.fluid')}
-        />
-      </div>
-      <div className="index-page__series-list__content">
-        {list.map(series => (
-          <Link key={series.id} to={`/series/${series.id}`}>
-            <div className="series">
-              <img
-                className="series__cover"
-                src={pick(series, 'cover.childImageSharp.resize.src')}
-                alt={series.id}
-              />
-              <div className="series__wrapper">
-                <div className="series__title">{series.name}</div>
-                <div className="series__desc">{series.description}</div>
-              </div>
-            </div>
-          </Link>
-        ))}
-      </div>
-    </div>
-  );
-}
-
-export function TagList({ list }) {
-  return (
-    <div className="index-page__tag-list">
-      <div className="index-page__tag-list__header">Popular Tags</div>
-      <div className="index-page__tag-list__content">
-        {list.map((tag, index) => (
-          <div className="tag" key={tag}>
-            <div className="index">
-              {index + 1 < 10 ? `0${index + 1}` : index + 1}
-            </div>
-            <div className="title">
-              <Link to={`/tag/${tag}`}>{tag}</Link>
-            </div>
-          </div>
-        ))}
-      </div>
-    </div>
-  );
-}
 
 export default ({ data, pageContext }) => {
   const posts = pick(data, 'posts.edges').map(x => x.node) || [];
@@ -102,30 +19,26 @@ export default ({ data, pageContext }) => {
 
   return (
     <Layout className="index-page">
-      <Slider list={posts.slice(0, 3)} />
-      <div className="index-page__separator" />
       <div className="index-page__title">FEATURED</div>
       <Media query="(max-width: 1000px)">
         {matches =>
           matches ? (
             <Parallel className="index-page__parallel">
               <Parallel.Line>
-                {posts.slice(3).map(node => (
+                {posts.map(node => (
                   <PostBig key={node.id} post={node} />
                 ))}
                 <SeriesList list={series} cover={data.seriesCover} />
                 <TagList list={tags} />
                 <AuthorList list={authors} cover={data.authorsCover} />
-                <Pagination {...pageContext} />
               </Parallel.Line>
             </Parallel>
           ) : (
             <Parallel className="index-page__parallel">
               <Parallel.Line style={{ marginRight: 64 }}>
-                {posts.slice(3).map(node => (
+                {posts.map(node => (
                   <PostBig key={node.id} post={node} />
                 ))}
-                <Pagination {...pageContext} />
               </Parallel.Line>
               <Parallel.Line width={328}>
                 <SeriesList list={series} cover={data.seriesCover} />
@@ -141,7 +54,7 @@ export default ({ data, pageContext }) => {
 };
 
 export const query = graphql`
-  query IndexPageQuery(
+  query PostListPageQuery(
     $posts: [String]
     $series: [String]
     $authors: [String]

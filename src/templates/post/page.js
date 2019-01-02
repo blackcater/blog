@@ -1,4 +1,4 @@
-import React, { PureComponent } from 'react';
+import React from 'react';
 import { Link, graphql } from 'gatsby';
 import Img from 'gatsby-image';
 import cls from 'classnames';
@@ -50,9 +50,6 @@ export default ({ data }) => {
   const { post, prevPost, nextPost } = data;
   const tags = pick(post, 'frontmatter.tags') || [];
   const series = pick(post, 'frontmatter.series');
-
-  console.dir(prevPost);
-  console.dir(nextPost);
 
   return (
     <Layout

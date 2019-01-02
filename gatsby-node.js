@@ -247,24 +247,19 @@ function createPostPage(createPage) {
     });
   });
 
-  // 首页
-  createPage({
-    path: '/',
-    component: pathResolve('src/templates/index/page.js'),
-    context: {
-      posts: posts.slice(0, pageSize).map(x => x.id),
-      tags: tags.slice(0, 5),
-      series: series.slice(0, 5).map(x => x.id),
-      authors: authors.slice(0, 5).map(x => x.id),
-    },
-  });
-
   // 分页
   createPaginationPage(
     {
-      data: posts.slice(pageSize),
+      data: posts,
+      map: {
+        // 首页
+        0: {
+          path: '/',
+          component: pathResolve('src/templates/index/page.js'),
+        },
+      },
       prefix: '/list/',
-      component: pathResolve('src/templates/post-list/page.js'),
+      component: pathResolve('src/templates/index/list-page.js'),
       context: {
         tags: tags.slice(0, 5),
         series: series.slice(0, 5).map(x => x.id),
@@ -281,20 +276,17 @@ function createTagPage(createPage) {
   tags.forEach(tag => {
     const posts = tagsMap[tag];
 
-    // 标签首页
-    createPage({
-      path: `/tag/${tag}`,
-      component: pathResolve('src/templates/tag/page.js'),
-      context: {
-        posts: posts.slice(0, pageSize).map(x => x.id),
-        tag,
-      },
-    });
-
     // 分页
     createPaginationPage(
       {
-        data: posts.slice(pageSize),
+        data: posts,
+        map: {
+          // 标签首页
+          0: {
+            path: `/tag/${tag}`,
+            component: pathResolve('src/templates/tag/page.js'),
+          },
+        },
         prefix: `/tag/${tag}/`,
         component: pathResolve('src/templates/tag/page.js'),
         context: { tag },
@@ -310,20 +302,17 @@ function createSeriesPage(createPage) {
   series.forEach(series => {
     const posts = seriesMap[series.id];
 
-    // 系列首页
-    createPage({
-      path: `/series/${series.id}`,
-      component: pathResolve('src/templates/series/page.js'),
-      context: {
-        posts: posts.slice(0, pageSize).map(x => x.id),
-        series: series.id,
-      },
-    });
-
     // 分页
     createPaginationPage(
       {
-        data: posts.slice(pageSize),
+        data: posts,
+        map: {
+          // 系列首页
+          0: {
+            path: `/series/${series.id}`,
+            component: pathResolve('src/templates/series/page.js'),
+          },
+        },
         prefix: `/series/${series.id}/`,
         component: pathResolve('src/templates/series/page.js'),
         context: { series: series.id },
@@ -339,20 +328,17 @@ function createAuthorPage(createPage) {
   authors.forEach(author => {
     const posts = authorsMap[author.id];
 
-    // 作者首页
-    createPage({
-      path: `/author/${author.id}`,
-      component: pathResolve('src/templates/author/page.js'),
-      context: {
-        posts: posts.slice(0, pageSize).map(x => x.id),
-        author: author.id,
-      },
-    });
-
     // 分页
     createPaginationPage(
       {
-        data: posts.slice(pageSize),
+        data: posts,
+        map: {
+          // 作者首页
+          0: {
+            path: `/author/${author.id}`,
+            component: pathResolve('src/templates/author/page.js'),
+          },
+        },
         prefix: `/author/${author.id}/`,
         component: pathResolve('src/templates/author/page.js'),
         context: { author: author.id },
@@ -368,20 +354,17 @@ function createArchivePage(createPage) {
   archive.forEach(year => {
     const posts = archiveMap[year];
 
-    // 归档首页
-    createPage({
-      path: `/archive/${year}`,
-      component: pathResolve('src/templates/archive/page.js'),
-      context: {
-        posts: posts.slice(0, pageSize).map(x => x.id),
-        year,
-      },
-    });
-
     // 分页
     createPaginationPage(
       {
-        data: posts.slice(pageSize),
+        data: posts,
+        map: {
+          // 归档首页
+          0: {
+            path: `/archive/${year}`,
+            component: pathResolve('src/templates/archive/page.js'),
+          },
+        },
         prefix: `/archive/${year}/`,
         component: pathResolve('src/templates/archive/page.js'),
         context: { year },
@@ -392,17 +375,30 @@ function createArchivePage(createPage) {
 }
 
 function createPaginationPage(options, createPage) {
-  const { data = [], prefix = '/', component, context = {} } = options;
+  const {
+    data = [],
+    map = {},
+    prefix = '/',
+    component,
+    context = {},
+  } = options;
   const total = Math.ceil(data.length / pageSize);
 
   if (total <= 0) return;
 
   for (let i = 0; i < total; i++) {
+    const p = (map[i] && map[i].path) || path.join(prefix, `${i + 1}`);
+    const pe = (map[i - 1] && map[i - 1].path) || path.join(prefix, `${i}`);
+    const nx = (map[i + 1] && map[i + 1].path) || path.join(prefix, `${i + 2}`);
+    const c = (map[i] && map[i].component) || component;
+
     createPage({
-      path: path.join(prefix, i + 1),
-      component,
+      path: p,
+      component: c,
       context: {
         ...context,
+        prev: i - 1 >= 0 ? pe : null,
+        next: i + 1 < total ? nx : null,
         curr: i,
         total,
         posts: data

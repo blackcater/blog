@@ -9,6 +9,15 @@
     background-color: @separator-color;
   }
 
+  &__title {
+    margin: 16px auto;
+    padding: 0 16px;
+    max-width: 1024px;
+    color: @title-color;
+    font-size: 14px;
+    font-weight: 600;
+  }
+
   &__parallel {
     max-width: 1024px;
     margin: 0 auto 64px;
@@ -25,6 +34,8 @@
       padding: 8px;
       height: 120px;
       background-color: @green-bg-color;
+
+      .clearfix();
     }
 
     &__title {
@@ -40,6 +51,7 @@
     }
 
     &__cover {
+      float: right;
       width: 180px;
       height: 120px;
     }
@@ -144,6 +156,8 @@
       padding: 8px;
       height: 120px;
       background-color: @yellow-bg-color;
+
+      .clearfix();
     }
 
     &__title {
@@ -159,6 +173,7 @@
     }
 
     &__cover {
+      float: right;
       width: 180px;
       height: 120px;
     }
@@ -204,6 +219,16 @@
           .ellipsis();
         }
       }
+    }
+  }
+
+  &__more {
+    margin: 32px 0;
+    text-align: center;
+
+    a {
+      color: @primary-color;
+      text-decoration: none;
     }
   }
 }
