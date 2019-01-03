@@ -80,12 +80,12 @@ export function TagList({ list }) {
       <div className="index-page__tag-list__header">Popular Tags</div>
       <div className="index-page__tag-list__content">
         {list.map((tag, index) => (
-          <div className="tag" key={tag}>
+          <div className="tag" key={tag.id}>
             <div className="index">
               {index + 1 < 10 ? `0${index + 1}` : index + 1}
             </div>
             <div className="title">
-              <Link to={`/tag/${tag}`}>{tag}</Link>
+              <Link to={`/tag/${tag.id}`}>{tag.name}</Link>
             </div>
           </div>
         ))}
@@ -98,7 +98,7 @@ export default ({ data, pageContext }) => {
   const posts = pick(data, 'posts.edges').map(x => x.node) || [];
   const series = pick(data, 'series.edges').map(x => x.node) || [];
   const authors = pick(data, 'authors.edges').map(x => x.node) || [];
-  const tags = pageContext.tags || [];
+  const tags = pick(data, 'tags.edges').map(x => x.node) || [];
 
   return (
     <Layout className="index-page">
@@ -143,6 +143,7 @@ export default ({ data, pageContext }) => {
 export const query = graphql`
   query IndexPageQuery(
     $posts: [String]
+    $tags: [String]
     $series: [String]
     $authors: [String]
   ) {
@@ -153,6 +154,14 @@ export const query = graphql`
       edges {
         node {
           ...PostBig
+        }
+      }
+    }
+    tags: allTagJson(filter: { id: { in: $tags } }) {
+      edges {
+        node {
+          id
+          name
         }
       }
     }

@@ -83,7 +83,9 @@ exports.createPages = ({ page, graphql, actions }) => {
                 author {
                   id
                 }
-                tags
+                tags {
+                  id
+                }
                 series {
                   id
                 }
@@ -126,15 +128,17 @@ exports.createPages = ({ page, graphql, actions }) => {
           // 标签
           if (tags) {
             tags.forEach(tag => {
-              if (!store.tags.some(t => t === tag)) {
+              const { id } = tag;
+
+              if (!store.tags.some(t => t.id === id)) {
                 store.tags.push(tag);
               }
 
-              if (!store.tagsMap[tag]) {
-                store.tagsMap[tag] = [];
+              if (!store.tagsMap[id]) {
+                store.tagsMap[id] = [];
               }
 
-              store.tagsMap[tag].push(post);
+              store.tagsMap[id].push(post);
             });
           }
 
@@ -183,8 +187,8 @@ exports.createPages = ({ page, graphql, actions }) => {
         // tags 排序
         store.tags = store.tags.sort((x, y) => {
           const { tagsMap } = store;
-          const xLen = tagsMap[x].length;
-          const yLen = tagsMap[y].length;
+          const xLen = tagsMap[x.id].length;
+          const yLen = tagsMap[y.id].length;
 
           return xLen === yLen ? 0 : xLen < yLen ? 1 : -1;
         });
@@ -233,8 +237,8 @@ function createPostPage(createPage) {
 
   // 帖子详情页
   posts.forEach((post, index) => {
-    const prevPost = index - 1 < 0 ? null : posts[index - 1];
-    const nextPost = index + 1 >= posts.length ? null : posts[index + 1];
+    const nextPost = index - 1 < 0 ? null : posts[index - 1];
+    const prevPost = index + 1 >= posts.length ? null : posts[index + 1];
 
     createPage({
       path: post.fields.slug,
@@ -259,9 +263,9 @@ function createPostPage(createPage) {
         },
       },
       prefix: '/list/',
-      component: pathResolve('src/templates/index/list-page.js'),
+      component: pathResolve('src/templates/index/page.js'),
       context: {
-        tags: tags.slice(0, 5),
+        tags: tags.slice(0, 5).map(x => x.id),
         series: series.slice(0, 5).map(x => x.id),
         authors: authors.slice(0, 5).map(x => x.id),
       },
@@ -274,7 +278,7 @@ function createTagPage(createPage) {
   const { tags, tagsMap } = store;
 
   tags.forEach(tag => {
-    const posts = tagsMap[tag];
+    const posts = tagsMap[tag.id];
 
     // 分页
     createPaginationPage(
@@ -283,13 +287,13 @@ function createTagPage(createPage) {
         map: {
           // 标签首页
           0: {
-            path: `/tag/${tag}`,
+            path: `/tag/${tag.id}`,
             component: pathResolve('src/templates/tag/page.js'),
           },
         },
-        prefix: `/tag/${tag}/`,
+        prefix: `/tag/${tag.id}/`,
         component: pathResolve('src/templates/tag/page.js'),
-        context: { tag },
+        context: { tag: tag.id },
       },
       createPage
     );

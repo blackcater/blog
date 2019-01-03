@@ -63,8 +63,8 @@ export default ({ data }) => {
           {tags.length > 0 && (
             <div className="post-page__header__tags">
               {tags.map(tag => (
-                <span key={tag}>
-                  <Link to={`/tag/${tag}`}>{tag}</Link>
+                <span key={tag.id}>
+                  <Link to={`/tag/${tag.id}`}>{tag.name}</Link>
                 </span>
               ))}
             </div>
@@ -108,15 +108,15 @@ export default ({ data }) => {
         {matches =>
           matches ? (
             <div className="post-page__footer">
-              {prevPost && <PostBig post={prevPost} />}
               {nextPost && <PostBig post={nextPost} />}
+              {prevPost && <PostBig post={prevPost} />}
             </div>
           ) : (
             <div className="post-page__footer">
+              {nextPost && <PostBigInfo {...nextPost} title="READ NEXT" />}
               {prevPost && (
                 <PostBigInfo {...prevPost} title="READ PREV" reverse={true} />
               )}
-              {nextPost && <PostBigInfo {...nextPost} title="READ NEXT" />}
             </div>
           )
         }
@@ -210,7 +210,10 @@ export const query = graphql`
             }
           }
         }
-        tags
+        tags {
+          id
+          name
+        }
         series {
           id
           name

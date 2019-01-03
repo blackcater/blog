@@ -107,5 +107,6 @@ module.exports = {
   mapping: {
     'MarkdownRemark.frontmatter.author': `AuthorJson`,
     'MarkdownRemark.frontmatter.series': `SeriesJson`,
+    'MarkdownRemark.frontmatter.tags': `TagJson`,
   },
 };
