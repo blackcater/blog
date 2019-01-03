@@ -1,0 +1,19 @@
+@import '~styles/common';
+
+.pagination {
+  padding: 16px 0;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+
+  &__prev,
+  &__next {
+    color: @primary-color;
+    font-weight: 600;
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+  }
+}

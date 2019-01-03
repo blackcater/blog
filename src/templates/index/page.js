@@ -102,7 +102,7 @@ export default ({ data, pageContext }) => {
 
   return (
     <Layout className="index-page">
-      <Slider list={posts.slice(0, 3)} />
+      {!pageContext.prev && <Slider list={posts.slice(0, 3)} />}
       <div className="index-page__separator" />
       <div className="index-page__title">FEATURED</div>
       <Media query="(max-width: 1000px)">

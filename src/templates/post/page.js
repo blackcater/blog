@@ -1,10 +1,12 @@
 import React from 'react';
+import Media from 'react-media';
 import { Link, graphql } from 'gatsby';
 import Img from 'gatsby-image';
 import cls from 'classnames';
 import pick from 'utils/pick';
 
 import Layout from 'components/Layout';
+import { PostBig } from 'components/Post';
 
 import './style.less';
 
@@ -102,10 +104,23 @@ export default ({ data }) => {
         className="post-page__content"
         dangerouslySetInnerHTML={{ __html: pick(post, 'html') }}
       />
-      {prevPost && (
-        <PostBigInfo {...prevPost} title="READ PREV" reverse={true} />
-      )}
-      {nextPost && <PostBigInfo {...nextPost} title="READ NEXT" />}
+      <Media query="(max-width: 768px)">
+        {matches =>
+          matches ? (
+            <div className="post-page__footer">
+              {prevPost && <PostBig post={prevPost} />}
+              {nextPost && <PostBig post={nextPost} />}
+            </div>
+          ) : (
+            <div className="post-page__footer">
+              {prevPost && (
+                <PostBigInfo {...prevPost} title="READ PREV" reverse={true} />
+              )}
+              {nextPost && <PostBigInfo {...nextPost} title="READ NEXT" />}
+            </div>
+          )
+        }
+      </Media>
     </Layout>
   );
 };
