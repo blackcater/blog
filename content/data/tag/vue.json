@@ -1,6 +1,12 @@
 {
   "id": "vue",
   "name": "Vue",
-  "description": "",
-  "cover": ""
+  "description": "渐进式 JavaScript 框架",
+  "cover": "cover/vue-logo.jpg",
+  "links": [
+    {
+      "icon": "github",
+      "url": "https://github.com/vuejs/vue"
+    }
+  ]
 }

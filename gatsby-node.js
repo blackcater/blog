@@ -259,7 +259,6 @@ function createPostPage(createPage) {
         // 首页
         0: {
           path: '/',
-          component: pathResolve('src/templates/index/page.js'),
         },
       },
       prefix: '/list/',
@@ -288,7 +287,6 @@ function createTagPage(createPage) {
           // 标签首页
           0: {
             path: `/tag/${tag.id}`,
-            component: pathResolve('src/templates/tag/page.js'),
           },
         },
         prefix: `/tag/${tag.id}/`,
@@ -314,7 +312,6 @@ function createSeriesPage(createPage) {
           // 系列首页
           0: {
             path: `/series/${series.id}`,
-            component: pathResolve('src/templates/series/page.js'),
           },
         },
         prefix: `/series/${series.id}/`,
@@ -340,7 +337,6 @@ function createAuthorPage(createPage) {
           // 作者首页
           0: {
             path: `/author/${author.id}`,
-            component: pathResolve('src/templates/author/page.js'),
           },
         },
         prefix: `/author/${author.id}/`,
@@ -366,7 +362,6 @@ function createArchivePage(createPage) {
           // 归档首页
           0: {
             path: `/archive/${year}`,
-            component: pathResolve('src/templates/archive/page.js'),
           },
         },
         prefix: `/archive/${year}/`,

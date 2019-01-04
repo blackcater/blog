@@ -2,5 +2,6 @@
   "id": "life",
   "name": "生活",
   "description": "",
-  "cover": ""
+  "cover": "cover/life-logo.jpeg",
+  "links": []
 }
