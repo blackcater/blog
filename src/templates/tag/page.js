@@ -17,9 +17,6 @@ export default ({ data, pageContext }) => {
   const header = posts[0];
   const list = posts.slice(1);
 
-  console.dir(data);
-  console.dir(pageContext);
-
   return (
     <Layout title={tag.name} className="tag-page">
       <div className="tag-page__content">
