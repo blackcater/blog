@@ -6,11 +6,15 @@ function useNativeLink(to) {
   return typeof to === 'string' && /^http/.test(to);
 }
 
-const LinkAdvance = ({ to, ...rest }) => {
+const LinkAdvance = ({ to, children, ...rest }) => {
   return useNativeLink(to) ? (
-    <a href={to} {...rest} />
+    <a href={to} {...rest}>
+      {children}
+    </a>
   ) : (
-    <Link to={to} {...rest} />
+    <Link to={to} {...rest}>
+      {children}
+    </Link>
   );
 };
 
