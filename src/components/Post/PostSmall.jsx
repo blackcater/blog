@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link } from 'gatsby';
+import { graphql, Link } from 'gatsby';
 import PropTypes from 'prop-types';
 
 import pick from 'utils/pick';
@@ -43,5 +43,33 @@ PostSmall.propTypes = {
 PostSmall.defaultProps = {
   post: {},
 };
+
+export const postSmallQuery = graphql`
+  fragment PostSmall on MarkdownRemark {
+    id
+    fields {
+      slug
+    }
+    excerpt
+    timeToRead
+    frontmatter {
+      title
+      cover {
+        ... on File {
+          childImageSharp {
+            fluid(maxWidth: 500, maxHeight: 500) {
+              ...GatsbyImageSharpFluid
+            }
+          }
+        }
+      }
+      date: date(formatString: "MMM D")
+      author {
+        id
+        nickname
+      }
+    }
+  }
+`;
 
 export default PostSmall;

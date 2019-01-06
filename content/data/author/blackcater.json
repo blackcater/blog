@@ -5,8 +5,14 @@
   "nickname": "blackcater",
   "avatar": "avatar/blackcater.png",
   "slogan": "求知若饥，虚心若愚 (Stay hungry, stay foolish)",
-  "socials": {
-    "twitter": "https://www.twitter.com/tomtang2015",
-    "github": "https://www.github.com/github"
-  }
+  "links": [
+    {
+      "icon": "github",
+      "url": "https://www.github.com/blackcater"
+    },
+    {
+      "icon": "twitter",
+      "url": "https://www.twitter.com/tomtang2015"
+    }
+  ]
 }
