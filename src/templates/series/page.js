@@ -1,4 +1,5 @@
 import React from 'react';
+import Media from 'react-media';
 import { graphql } from 'gatsby';
 import Img from 'gatsby-image';
 import pick from 'utils/pick';
@@ -19,6 +20,20 @@ export default ({ data, pageContext }) => {
     <Layout title={series.name} className="series-page">
       <div className="series-page__content">
         <div className="series-page__posts">
+          <Media query="(max-width: 768px)">
+            {matches =>
+              matches && (
+                <div className="series-page__section">
+                  <Img
+                    className="series-page__logo"
+                    fluid={pick(series, 'cover.childImageSharp.fluid')}
+                  />
+                  <div className="series-page__title">{series.name}</div>
+                  <div className="series-page__desc">{series.description}</div>
+                </div>
+              )
+            }
+          </Media>
           <div className="series-page__header-post">
             {posts[0] && <PostBig post={header} />}
           </div>
@@ -29,14 +44,20 @@ export default ({ data, pageContext }) => {
           </div>
           <Pagination {...pageContext} />
         </div>
-        <div className="series-page__section">
-          <Img
-            className="series-page__logo"
-            fluid={pick(series, 'cover.childImageSharp.fluid')}
-          />
-          <div className="series-page__title">{series.name}</div>
-          <div className="series-page__desc">{series.description}</div>
-        </div>
+        <Media query="(max-width: 768px)">
+          {matches =>
+            !matches && (
+              <div className="series-page__section">
+                <Img
+                  className="series-page__logo"
+                  fluid={pick(series, 'cover.childImageSharp.fluid')}
+                />
+                <div className="series-page__title">{series.name}</div>
+                <div className="series-page__desc">{series.description}</div>
+              </div>
+            )
+          }
+        </Media>
       </div>
     </Layout>
   );

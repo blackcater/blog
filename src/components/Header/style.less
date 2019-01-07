@@ -199,19 +199,15 @@
 }
 
 // media query
-@media (max-width: @tablet-break-point - 1px) {
+@media (max-width: @tablet-break-point) {
   .header {
     & &__menu {
       display: none;
     }
-
-    & > &__menu {
-      display: block;
-    }
   }
 }
 
-@media (max-width: @desktop-break-point - 1px) {
+@media (max-width: @desktop-break-point) {
   .header__content {
     padding: 0 16px;
   }

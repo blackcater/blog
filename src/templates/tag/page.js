@@ -1,9 +1,10 @@
 import React from 'react';
+import Media from 'react-media';
 import { graphql } from 'gatsby';
 import Img from 'gatsby-image';
 import pick from 'utils/pick';
 
-import Icon from 'components/Icon';
+import { Icon } from 'components/common';
 import Link from 'components/Link';
 import Layout from 'components/Layout';
 import Pagination from 'components/Pagination';
@@ -21,6 +22,31 @@ export default ({ data, pageContext }) => {
     <Layout title={tag.name} className="tag-page">
       <div className="tag-page__content">
         <div className="tag-page__posts">
+          <Media query="(max-width: 768px)">
+            {matches =>
+              matches && (
+                <div className="tag-page__section">
+                  <Img
+                    className="tag-page__logo"
+                    fluid={pick(tag, 'cover.childImageSharp.fluid')}
+                  />
+                  <div className="tag-page__title">{tag.name}</div>
+                  <div className="tag-page__desc">{tag.description}</div>
+                  <div className="tag-page__links">
+                    {(tag.links || []).map(link => (
+                      <Link
+                        className="tag-page__link"
+                        key={link.url}
+                        to={link.url}
+                      >
+                        <Icon icon={link.icon} />
+                      </Link>
+                    ))}
+                  </div>
+                </div>
+              )
+            }
+          </Media>
           <div className="tag-page__header-post">
             {posts[0] && <PostBig post={header} />}
           </div>
@@ -31,21 +57,31 @@ export default ({ data, pageContext }) => {
           </div>
           <Pagination {...pageContext} />
         </div>
-        <div className="tag-page__section">
-          <Img
-            className="tag-page__logo"
-            fluid={pick(tag, 'cover.childImageSharp.fluid')}
-          />
-          <div className="tag-page__title">{tag.name}</div>
-          <div className="tag-page__desc">{tag.description}</div>
-          <div className="tag-page__links">
-            {(tag.links || []).map(link => (
-              <Link className="tag-page__link" key={link.url} to={link.url}>
-                <Icon icon={link.icon} />
-              </Link>
-            ))}
-          </div>
-        </div>
+        <Media query="(max-width: 768px)">
+          {matches =>
+            !matches && (
+              <div className="tag-page__section">
+                <Img
+                  className="tag-page__logo"
+                  fluid={pick(tag, 'cover.childImageSharp.fluid')}
+                />
+                <div className="tag-page__title">{tag.name}</div>
+                <div className="tag-page__desc">{tag.description}</div>
+                <div className="tag-page__links">
+                  {(tag.links || []).map(link => (
+                    <Link
+                      className="tag-page__link"
+                      key={link.url}
+                      to={link.url}
+                    >
+                      <Icon icon={link.icon} />
+                    </Link>
+                  ))}
+                </div>
+              </div>
+            )
+          }
+        </Media>
       </div>
     </Layout>
   );

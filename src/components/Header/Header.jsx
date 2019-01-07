@@ -1,4 +1,5 @@
 import React, { PureComponent } from 'react';
+import Media from 'react-media';
 import PropTypes from 'prop-types';
 import { Link, StaticQuery, graphql } from 'gatsby';
 import Img from 'gatsby-image';
@@ -17,6 +18,7 @@ class Header extends PureComponent {
     super(props);
 
     this.state = {
+      showMenu: false,
       theme: getAttribute($html, 'theme', 'light'),
     };
   }
@@ -37,8 +39,12 @@ class Header extends PureComponent {
     this.setState({ theme: newTheme });
   };
 
+  toggleMenu = () => {
+    this.setState({ showMenu: !this.state.showMenu });
+  };
+
   render() {
-    const { theme } = this.state;
+    const { theme, showMenu } = this.state;
     const { title, shadow, maxWidth } = this.props;
 
     return (
@@ -88,6 +94,19 @@ class Header extends PureComponent {
                   </nav>
                   <div className="header__content__custom">
                     <ul>
+                      <Media query="(max-width: 768px)">
+                        {matches =>
+                          matches && (
+                            <li onClick={this.toggleMenu}>
+                              {showMenu ? (
+                                <Icon icon="close" size={20} />
+                              ) : (
+                                <Icon icon="menu" size={20} />
+                              )}
+                            </li>
+                          )
+                        }
+                      </Media>
                       <li>
                         <Link to="/search">
                           <Icon icon="search" size={20} />
@@ -113,16 +132,23 @@ class Header extends PureComponent {
                   </div>
                 </div>
               </div>
-              <nav className="header__menu">
-                <ul>
-                  <li>
-                    <Link to="/series">合集</Link>
-                  </li>
-                  <li>
-                    <Link to="/archive">归档</Link>
-                  </li>
-                </ul>
-              </nav>
+              <Media query="(max-width: 768px)">
+                {matches => (
+                  <nav
+                    className="header__menu"
+                    style={{ display: matches && showMenu ? 'block' : 'none' }}
+                  >
+                    <ul>
+                      <li>
+                        <Link to="/series">合集</Link>
+                      </li>
+                      <li>
+                        <Link to="/archive">归档</Link>
+                      </li>
+                    </ul>
+                  </nav>
+                )}
+              </Media>
             </div>
           </>
         )}

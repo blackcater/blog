@@ -3,7 +3,7 @@ import { graphql } from 'gatsby';
 import Img from 'gatsby-image';
 import pick from 'utils/pick';
 
-import Icon from 'components/Icon';
+import { Icon } from 'components/common';
 import Link from 'components/Link';
 import Layout from 'components/Layout';
 import Pagination from 'components/Pagination';
