@@ -121,7 +121,7 @@ class Header extends PureComponent {
                         />
                       </li>
                       <li>
-                        <Link to="/resume">
+                        <Link to="/">
                           <Img
                             style={{ width: 32, height: 32, borderRadius: 16 }}
                             fixed={pick(data, 'avatar.childImageSharp.fixed')}
