@@ -1,0 +1,94 @@
+@import '~styles/common';
+
+.archive-page {
+  &__content {
+    margin: 50px auto;
+    padding: 0 24px;
+    max-width: 740px;
+  }
+
+  &__year {
+    &__title {
+      margin-bottom: 16px;
+      padding-bottom: 16px;
+      color: @title-color;
+      font-size: 32px;
+      font-weight: 600;
+      border-bottom: 1px dashed @title-color;
+
+      .titleFF();
+    }
+  }
+
+  &__post {
+    display: flex;
+    flex-direction: row;
+    font-size: 18px;
+    line-height: 32px;
+
+    &__date {
+      width: 80px;
+      font-size: 16px;
+      color: @gray-color;
+
+      .titleFF();
+    }
+
+    &__title {
+      color: @title-color;
+      cursor: pointer;
+      border-bottom: 1px dashed @title-color;
+
+      .titleFF();
+      .transition(@properties: text-indent);
+
+      &:hover {
+        text-indent: 1em;
+        border-bottom-style: solid;
+      }
+    }
+
+    &__author {
+      flex: 1;
+      text-align: right;
+      font-size: 14px;
+      font-style: italic;
+      cursor: pointer;
+
+      &:hover {
+        text-decoration: underline;
+      }
+
+      &::before {
+        content: '@';
+      }
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+  }
+}
+
+[data-theme='dark'] {
+  .archive-page {
+    &__year {
+      &__title {
+        color: @d-title-color;
+        border-bottom-color: @d-title-color;
+      }
+    }
+
+    &__post {
+      &__date {
+        color: @d-gray-color;
+      }
+
+      &__title {
+        color: @d-title-color;
+        border-bottom-color: @d-title-color;
+      }
+    }
+  }
+}

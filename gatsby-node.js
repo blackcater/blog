@@ -18,11 +18,8 @@ const store = {
   // 作者
   authors: [],
   authorsMap: {},
-  // 归档
-  archive: [],
-  archiveMap: {},
 };
-const pageSize = 10;
+const PAGE_SIZE = 10;
 
 // custom webpack configuration
 exports.onCreateWebpackConfig = ({ stage, actions }) => {
@@ -121,7 +118,6 @@ exports.createPages = ({ page, graphql, actions }) => {
             id,
             frontmatter: { date, author, tags, series },
           } = post;
-          const year = new Date(date).getFullYear();
 
           store.postsMap[id] = post;
 
@@ -171,17 +167,6 @@ exports.createPages = ({ page, graphql, actions }) => {
 
             store.authorsMap[id].push(post);
           }
-
-          // 归档
-          if (!store.archive.some(y => y === year)) {
-            store.archive.push(year);
-          }
-
-          if (!store.archiveMap[year]) {
-            store.archiveMap[year] = [];
-          }
-
-          store.archiveMap[year].push(post);
         });
 
         // tags 排序
@@ -349,28 +334,25 @@ function createAuthorPage(createPage) {
 }
 
 function createArchivePage(createPage) {
-  const { archive, archiveMap } = store;
+  const { posts } = store;
 
-  archive.forEach(year => {
-    const posts = archiveMap[year];
-
-    // 分页
-    createPaginationPage(
-      {
-        data: posts,
-        map: {
-          // 归档首页
-          0: {
-            path: `/archive/${year}`,
-          },
+  // 分页
+  createPaginationPage(
+    {
+      data: posts,
+      map: {
+        // 归档首页
+        0: {
+          path: `/archive`,
         },
-        prefix: `/archive/${year}/`,
-        component: pathResolve('src/templates/archive/page.js'),
-        context: { year },
       },
-      createPage
-    );
-  });
+      prefix: `/archive/`,
+      component: pathResolve('src/templates/archive/page.js'),
+      pageSize: 50,
+      context: {},
+    },
+    createPage
+  );
 }
 
 function createPaginationPage(options, createPage) {
@@ -379,6 +361,7 @@ function createPaginationPage(options, createPage) {
     map = {},
     prefix = '/',
     component,
+    pageSize = PAGE_SIZE,
     context = {},
   } = options;
   const total = Math.ceil(data.length / pageSize);
