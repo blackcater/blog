@@ -38,8 +38,10 @@
       color: @title-color;
       cursor: pointer;
       border-bottom: 1px dashed @title-color;
+      max-width: 480px;
 
       .titleFF();
+      .ellipsis();
       .transition(@properties: text-indent);
 
       &:hover {
@@ -67,6 +69,21 @@
     a {
       color: inherit;
       text-decoration: none;
+    }
+  }
+}
+
+@media (max-width: 600px) {
+  .archive-page {
+    &__post {
+      position: relative;
+      display: block;
+
+      &__author {
+        position: absolute;
+        top: 0;
+        right: 0;
+      }
     }
   }
 }
