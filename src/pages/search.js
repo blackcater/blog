@@ -69,6 +69,8 @@ export default class SearchPage extends PureComponent {
     this.setState(
       {
         activeTab: tab.value,
+        loading: true,
+        [tab.value]: [],
       },
       () => this._searchByAlgolia()
     );
@@ -142,7 +144,7 @@ export default class SearchPage extends PureComponent {
     return (
       <div className="search-page__posts">
         {loading && (
-          <ContentLoader width={800} height={363}>
+          <ContentLoader width={800} height={383}>
             <rect x="0" y="0" rx="0" ry="0" width="800" height="220" />
             <rect x="0" y="241" rx="3" ry="3" width="700" height="32" />
             <rect x="0" y="289" rx="3" ry="3" width="800" height="16" />
@@ -177,11 +179,11 @@ export default class SearchPage extends PureComponent {
     return (
       <div className="search-page__series">
         {loading && (
-          <ContentLoader width={800} height={500}>
+          <ContentLoader width={800} height={160}>
             <rect x="0" y="0" rx="5" ry="5" width="120" height="160" />
-            <rect x="180" y="21" rx="3" ry="3" width="300" height="32" />
-            <rect x="180" y="102" rx="3" ry="3" width="660" height="20" />
-            <rect x="180" y="126" rx="3" ry="3" width="400" height="20" />
+            <rect x="140" y="21" rx="3" ry="3" width="300" height="32" />
+            <rect x="140" y="102" rx="3" ry="3" width="660" height="20" />
+            <rect x="140" y="126" rx="3" ry="3" width="400" height="20" />
           </ContentLoader>
         )}
         {hitSeries.map(series => (
@@ -207,9 +209,34 @@ export default class SearchPage extends PureComponent {
   };
 
   _renderAuthors = () => {
+    const { loading, hitAuthors } = this.state;
+
     return (
       <div className="search-page__authors">
-        authors
+        {loading && (
+          <ContentLoader width={800} height={120}>
+            <rect x="0" y="0" rx="60" ry="60" width="120" height="120" />
+            <rect x="140" y="21" rx="3" ry="3" width="300" height="32" />
+            <rect x="140" y="86" rx="3" ry="3" width="500" height="20" />
+          </ContentLoader>
+        )}
+        {hitAuthors.map(author => (
+          <div className="search-page__author-item" key={author.objectID}>
+            <Link to={author.slug}>
+              <div className="search-page__author-item__cover">
+                <div style={{ backgroundImage: `url(${author.cover})` }} />
+              </div>
+              <div className="search-page__author-item__content">
+                <div className="search-page__author-item__nickname">
+                  {author.nickname}
+                </div>
+                <div className="search-page__author-item__slogan">
+                  {author.slogan}
+                </div>
+              </div>
+            </Link>
+          </div>
+        ))}
         {this._renderPagination()}
       </div>
     );

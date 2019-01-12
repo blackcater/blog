@@ -39,6 +39,10 @@
   // posts
   &__posts {
     margin: 20px 0;
+
+    svg {
+      vertical-align: middle;
+    }
   }
 
   &__post {
@@ -95,6 +99,10 @@
   // series
   &__series {
     margin: 20px 0;
+
+    svg {
+      vertical-align: middle;
+    }
   }
 
   &__series-item {
@@ -144,5 +152,75 @@
       font-size: 20px;
       line-height: 24px;
     }
+  }
+
+  // author
+  &__authors {
+    margin: 20px 0;
+
+    svg {
+      vertical-align: middle;
+    }
+  }
+
+  &__author-item {
+    margin-bottom: 40px;
+
+    a {
+      color: inherit;
+      text-decoration: none;
+
+      .clearfix();
+    }
+
+    &__cover {
+      float: left;
+      width: 120px;
+      height: 120px;
+      border-radius: 60px;
+      background-color: @gray-bg-color;
+      overflow: hidden;
+
+      & div {
+        width: 100%;
+        height: 100%;
+        background-size: cover;
+      }
+    }
+
+    &__content {
+      margin-left: 140px;
+      min-height: 120px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    &__nickname {
+      margin-top: 13px;
+      color: @title-color;
+      font-size: 32px;
+      font-weight: 600;
+      line-height: 48px;
+    }
+
+    &__slogan {
+      margin-bottom: 12px;
+      color: @gray-color;
+      font-size: 20px;
+      line-height: 24px;
+    }
+  }
+
+  // tag
+  &__tags {
+    margin: 20px 0;
+
+    svg {
+      vertical-align: middle;
+    }
+  }
+
+  &__tag-iem {
   }
 }
