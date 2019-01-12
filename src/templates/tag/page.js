@@ -106,7 +106,7 @@ export const query = graphql`
       cover {
         ... on File {
           childImageSharp {
-            fluid(maxWidth: 120, maxHeight: 120) {
+            fluid(cropFocus: CENTER) {
               ...GatsbyImageSharpFluid
             }
           }

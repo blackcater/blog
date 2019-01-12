@@ -15,16 +15,14 @@ export default ({ data, pageContext }) => {
   const { author } = data;
   const posts = pick(data, 'posts.edges').map(x => x.node) || [];
 
-  console.dir(author);
-  console.dir(posts);
-
   return (
     <Layout className="author-page">
       <div className="author-page__content">
         <div className="author-page__header">
-          <div className="author-page__avatar">
-            <Img fluid={pick(author, 'avatar.childImageSharp.fluid')} />
-          </div>
+          <Img
+            className="author-page__avatar"
+            fluid={pick(author, 'avatar.childImageSharp.fluid')}
+          />
           <div className="author-page__info">
             <div className="author-page__info-top">
               <div className="author-page__nickname">
@@ -78,7 +76,7 @@ export const query = graphql`
       avatar {
         ... on File {
           childImageSharp {
-            fluid(maxWidth: 240, maxHeight: 240) {
+            fluid(cropFocus: CENTER) {
               ...GatsbyImageSharpFluid
             }
           }

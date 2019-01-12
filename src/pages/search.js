@@ -22,10 +22,10 @@ const tagsDB = client.initIndex('tag');
 const seriesDB = client.initIndex('series');
 
 const TABS = {
-  POSTS: 'hitPosts',
-  AUTHORS: 'hitAuthors',
-  TAGS: 'hitTags',
-  SERIES: 'hitSeries',
+  POSTS: 'posts',
+  AUTHORS: 'authors',
+  TAGS: 'tags',
+  SERIES: 'series',
 };
 const PAGE_SIZE = 2;
 
@@ -47,10 +47,10 @@ export default class SearchPage extends PureComponent {
         { label: 'Authors', value: TABS.AUTHORS },
         { label: 'Tags', value: TABS.TAGS },
       ],
-      hitPosts: [],
-      hitAuthors: [],
-      hitTags: [],
-      hitSeries: [],
+      posts: [],
+      authors: [],
+      tags: [],
+      series: [],
       pagination: {},
     };
 
@@ -90,6 +90,11 @@ export default class SearchPage extends PureComponent {
       hitsPerPage: PAGE_SIZE,
     };
     let db = null;
+
+    if (!searchVal) {
+      this.setState({ loading: false });
+      return;
+    }
 
     if (activeTab === TABS.POSTS) {
       db = postsDB;
@@ -139,7 +144,7 @@ export default class SearchPage extends PureComponent {
   }
 
   _renderPosts = () => {
-    const { loading, hitPosts } = this.state;
+    const { loading, posts } = this.state;
 
     return (
       <div className="search-page__posts">
@@ -153,7 +158,8 @@ export default class SearchPage extends PureComponent {
             <rect x="720" y="345" rx="3" ry="3" width="80" height="18" />
           </ContentLoader>
         )}
-        {hitPosts.map(post => (
+        {posts.length === 0 && this._renderEmpty()}
+        {posts.map(post => (
           <div className="search-page__post" key={post.objectID}>
             <Link to={post.slug}>
               <div className="search-page__post__cover">
@@ -174,7 +180,7 @@ export default class SearchPage extends PureComponent {
   };
 
   _renderSeries = () => {
-    const { loading, hitSeries } = this.state;
+    const { loading, series } = this.state;
 
     return (
       <div className="search-page__series">
@@ -186,7 +192,8 @@ export default class SearchPage extends PureComponent {
             <rect x="140" y="126" rx="3" ry="3" width="400" height="20" />
           </ContentLoader>
         )}
-        {hitSeries.map(series => (
+        {series.length === 0 && this._renderEmpty()}
+        {series.map(series => (
           <div className="search-page__series-item" key={series.objectID}>
             <Link to={series.slug}>
               <div className="search-page__series-item__cover">
@@ -209,7 +216,7 @@ export default class SearchPage extends PureComponent {
   };
 
   _renderAuthors = () => {
-    const { loading, hitAuthors } = this.state;
+    const { loading, authors } = this.state;
 
     return (
       <div className="search-page__authors">
@@ -220,11 +227,12 @@ export default class SearchPage extends PureComponent {
             <rect x="140" y="86" rx="3" ry="3" width="500" height="20" />
           </ContentLoader>
         )}
-        {hitAuthors.map(author => (
+        {authors.length === 0 && this._renderEmpty()}
+        {authors.map(author => (
           <div className="search-page__author-item" key={author.objectID}>
             <Link to={author.slug}>
               <div className="search-page__author-item__cover">
-                <div style={{ backgroundImage: `url(${author.cover})` }} />
+                <div style={{ backgroundImage: `url(${author.avatar})` }} />
               </div>
               <div className="search-page__author-item__content">
                 <div className="search-page__author-item__nickname">
@@ -243,12 +251,42 @@ export default class SearchPage extends PureComponent {
   };
 
   _renderTags = () => {
+    const { loading, tags } = this.state;
+
     return (
       <div className="search-page__tags">
-        tags
+        {loading && (
+          <ContentLoader width={800} height={120}>
+            <rect x="0" y="0" rx="60" ry="60" width="120" height="120" />
+            <rect x="140" y="21" rx="3" ry="3" width="300" height="32" />
+            <rect x="140" y="86" rx="3" ry="3" width="500" height="20" />
+          </ContentLoader>
+        )}
+        {tags.length === 0 && this._renderEmpty()}
+        {tags.map(tag => (
+          <div className="search-page__tag-item" key={tag.objectID}>
+            <Link to={tag.slug}>
+              <div className="search-page__tag-item__cover">
+                <div style={{ backgroundImage: `url(${tag.cover})` }} />
+              </div>
+              <div className="search-page__tag-item__content">
+                <div className="search-page__tag-item__name">{tag.name}</div>
+                <div className="search-page__tag-item__desc">
+                  {tag.description}
+                </div>
+              </div>
+            </Link>
+          </div>
+        ))}
         {this._renderPagination()}
       </div>
     );
+  };
+
+  _renderEmpty = () => {
+    const { loading } = this.state;
+
+    return !loading && <div className="search-page__placeholder">Empty</div>;
   };
 
   _renderPagination = () => {

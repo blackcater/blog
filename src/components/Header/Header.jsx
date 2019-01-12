@@ -60,7 +60,7 @@ class Header extends PureComponent {
           query HeaderComponentQuery {
             avatar: file(relativePath: { eq: "avatar.png" }) {
               childImageSharp {
-                fixed(width: 64, height: 64) {
+                fixed(width: 64, height: 64, cropFocus: CENTER) {
                   ...GatsbyImageSharpFixed
                 }
               }
@@ -91,9 +91,6 @@ class Header extends PureComponent {
                 <div className="header__content__right">
                   <nav className="header__menu">
                     <ul>
-                      <li>
-                        <Link to="/series">合集</Link>
-                      </li>
                       <li>
                         <Link to="/archive">归档</Link>
                       </li>

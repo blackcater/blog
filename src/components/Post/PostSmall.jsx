@@ -57,7 +57,7 @@ export const postSmallQuery = graphql`
       cover {
         ... on File {
           childImageSharp {
-            fluid(maxWidth: 500, maxHeight: 500) {
+            fluid(maxWidth: 500, maxHeight: 500, cropFocus: CENTER) {
               ...GatsbyImageSharpFluid
             }
           }

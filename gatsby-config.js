@@ -129,7 +129,7 @@ module.exports = {
                         title
                         cover {
                           childImageSharp {
-                            original {
+                            fluid(maxWidth: 1200, maxHeight: 500, cropFocus: CENTER) {
                               src
                             }
                           }
@@ -147,9 +147,7 @@ module.exports = {
                 objectID: node.id,
                 slug: node.fields.slug,
                 title: node.frontmatter.title,
-                cover: `${process.env.GATSBY_DOMAIN}${
-                  node.frontmatter.cover.childImageSharp.original.src
-                }`,
+                cover: node.frontmatter.cover.childImageSharp.fluid.src,
                 date: node.frontmatter.date,
                 excerpt: node.excerpt,
                 timeToRead: node.timeToRead,
@@ -166,7 +164,7 @@ module.exports = {
                       name
                       avatar {
                         childImageSharp {
-                          original {
+                          fluid(cropFocus: CENTER) {
                             src
                           }
                         }
@@ -183,9 +181,7 @@ module.exports = {
                 objectID: node.id,
                 slug: `/author/${node.id}`,
                 name: node.name,
-                avatar: `${process.env.GATSBY_DOMAIN}${
-                  node.avatar.childImageSharp.original.src
-                }`,
+                avatar: node.avatar.childImageSharp.fluid.src,
                 email: node.email,
                 nickname: node.nickname,
                 slogan: node.slogan,
@@ -203,7 +199,7 @@ module.exports = {
                       description
                       cover {
                         childImageSharp {
-                          original {
+                          fluid(cropFocus: CENTER) {
                             src
                           }
                         }
@@ -218,9 +214,7 @@ module.exports = {
                 slug: `/tag/${node.id}`,
                 name: node.name,
                 description: node.description,
-                cover: `${process.env.GATSBY_DOMAIN}${
-                  node.cover.childImageSharp.original.src
-                }`,
+                cover: node.cover.childImageSharp.fluid.src,
               })),
             indexName: 'tag',
           },
@@ -235,7 +229,7 @@ module.exports = {
                       description
                       cover {
                         childImageSharp {
-                          original {
+                          fluid(cropFocus: CENTER) {
                             src
                           }
                         }
@@ -250,9 +244,7 @@ module.exports = {
                 slug: `/series/${node.id}`,
                 name: node.name,
                 description: node.description,
-                cover: `${process.env.GATSBY_DOMAIN}${
-                  node.cover.childImageSharp.original.src
-                }`,
+                cover: node.cover.childImageSharp.fluid.src,
               })),
             indexName: 'series',
           },

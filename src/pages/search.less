@@ -36,6 +36,16 @@
     }
   }
 
+  &__placeholder {
+    color: @gray-color;
+    font-size: 40px;
+    font-style: italic;
+    line-height: 3em;
+    text-align: center;
+
+    .titleFF();
+  }
+
   // posts
   &__posts {
     margin: 20px 0;
@@ -62,6 +72,7 @@
         width: 100%;
         height: 100%;
         background-size: cover;
+        background-position: center;
       }
     }
 
@@ -127,6 +138,7 @@
         width: 100%;
         height: 100%;
         background-size: cover;
+        background-position: center;
       }
     }
 
@@ -185,6 +197,7 @@
         width: 100%;
         height: 100%;
         background-size: cover;
+        background-position: center;
       }
     }
 
@@ -221,6 +234,136 @@
     }
   }
 
-  &__tag-iem {
+  &__tag-item {
+    margin-bottom: 40px;
+
+    a {
+      color: inherit;
+      text-decoration: none;
+
+      .clearfix();
+    }
+
+    &__cover {
+      float: left;
+      width: 120px;
+      height: 120px;
+      border-radius: 60px;
+      background-color: @gray-bg-color;
+      overflow: hidden;
+
+      & div {
+        width: 100%;
+        height: 100%;
+        background-size: cover;
+        background-position: center;
+      }
+    }
+
+    &__content {
+      margin-left: 140px;
+      min-height: 120px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    &__name {
+      margin-top: 13px;
+      color: @title-color;
+      font-size: 32px;
+      font-weight: 600;
+      line-height: 48px;
+    }
+
+    &__desc {
+      margin-bottom: 12px;
+      color: @gray-color;
+      font-size: 20px;
+      line-height: 24px;
+    }
+  }
+}
+
+// dark theme
+[data-theme='dark'] {
+  .search-page {
+    &__tabs {
+      color: @d-gray-color;
+      border-bottom-color: @d-separator-color;
+    }
+    &__tab {
+      &--active {
+        color: @d-title-color;
+      }
+
+      &:hover {
+        color: @d-text-color;
+      }
+    }
+
+    // posts
+    &__post {
+      &__cover {
+        background-color: @d-gray-bg-color;
+      }
+
+      &__title {
+        color: @d-title-color;
+      }
+
+      &__excerpt {
+        color: @d-gray-color;
+      }
+
+      &__footer {
+        color: @d-gray-color;
+      }
+    }
+
+    // series
+    &__series-item {
+      &__cover {
+        background-color: @d-gray-bg-color;
+      }
+
+      &__title {
+        color: @d-title-color;
+      }
+
+      &__desc {
+        color: @d-gray-color;
+      }
+    }
+
+    // author
+    &__author-item {
+      &__cover {
+        background-color: @d-gray-bg-color;
+      }
+
+      &__nickname {
+        color: @d-title-color;
+      }
+
+      &__slogan {
+        color: @d-gray-color;
+      }
+    }
+
+    // tag
+    &__tag-item {
+      &__cover {
+        background-color: @d-gray-bg-color;
+      }
+
+      &__name {
+        color: @d-title-color;
+      }
+
+      &__desc {
+        color: @d-gray-color;
+      }
+    }
   }
 }

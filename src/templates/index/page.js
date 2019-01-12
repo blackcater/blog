@@ -188,6 +188,7 @@ export const query = graphql`
         childImageSharp {
           fluid(
             maxHeight: 118
+            cropFocus: CENTER
             traceSVG: { color: "#d7efee" }
             duotone: { highlight: "#d7efee", shadow: "#192550" }
           ) {
@@ -219,6 +220,7 @@ export const query = graphql`
         childImageSharp {
           fluid(
             maxHeight: 118
+            cropFocus: CENTER
             traceSVG: { color: "#D1EFFB" }
             duotone: { highlight: "#0ec4f1", shadow: "#192550", opacity: 25 }
           ) {
