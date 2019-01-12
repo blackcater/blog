@@ -16,9 +16,11 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "devDependencies": {
+    "dotenv": "^6.2.0",
     "gatsby": "^2.0.91",
     "gatsby-cli": "^2.4.8",
     "gatsby-image": "^2.0.26",
+    "gatsby-plugin-algolia": "^0.3.0",
     "gatsby-plugin-feed": "^2.0.11",
     "gatsby-plugin-google-analytics": "^2.0.9",
     "gatsby-plugin-less": "^2.0.8",
@@ -40,6 +42,7 @@
     "prettier": "^1.15.3"
   },
   "dependencies": {
+    "algoliasearch": "^3.32.0",
     "classnames": "^2.2.6",
     "dom-lib": "^1.1.0",
     "popper.js": "^1.14.6",

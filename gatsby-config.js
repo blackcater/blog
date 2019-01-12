@@ -1,3 +1,7 @@
+require('dotenv').config({
+  path: `.env.${process.env.NODE_ENV}`,
+});
+
 module.exports = {
   pathPrefix: '/',
   siteMetadata: {
@@ -98,9 +102,175 @@ module.exports = {
     {
       resolve: `gatsby-plugin-google-analytics`,
       options: {
-        trackingId: 'UA-111803122-1',
+        trackingId: process.env.GATSBY_GOOGLE_ANALYTICS_TRACKINGID,
         // Setting this parameter is optional
         anonymize: true,
+      },
+    },
+
+    // https://www.npmjs.com/package/gatsby-plugin-algolia
+    {
+      resolve: `gatsby-plugin-algolia`,
+      options: {
+        appId: process.env.GATSBY_ALGOLIA_APPID,
+        apiKey: process.env.GATSBY_ALGOLIA_APPKEY,
+        queries: [
+          {
+            query: `
+              {
+                allMarkdownRemark {
+                  edges {
+                    node {
+                      id
+                      fields {
+                        slug
+                      }
+                      frontmatter {
+                        title
+                        cover {
+                          childImageSharp {
+                            original {
+                              src
+                            }
+                          }
+                        }
+                        author {
+                          name
+                          email
+                          nickname
+                          slogan
+                        }
+                        tags {
+                          name
+                          description
+                        }
+                        series {
+                          name
+                          description
+                        }
+                      }
+                      excerpt(format: PLAIN)
+                    }
+                  }
+                }
+              }`,
+            transformer: ({ data }) =>
+              data.allMarkdownRemark.edges.map(({ node }) => ({
+                objectID: node.id,
+                slug: node.fields.slug,
+                title: node.frontmatter.title,
+                cover: `${process.env.GATSBY_DOMAIN}${
+                  node.frontmatter.cover.childImageSharp.original.src
+                }`,
+                excerpt: node.excerpt,
+                author: node.frontmatter.author,
+                tags: node.frontmatter.tags,
+                series: node.frontmatter.series,
+              })),
+            indexName: 'posts',
+          },
+          {
+            query: `
+              {
+                allAuthorJson {
+                  edges {
+                    node {
+                      id
+                      name
+                      avatar {
+                        childImageSharp {
+                          original {
+                            src
+                          }
+                        }
+                      }
+                      email
+                      nickname
+                      slogan
+                    }
+                  }
+                }
+              }`,
+            transformer: ({ data }) =>
+              data.allAuthorJson.edges.map(({ node }) => ({
+                objectID: node.id,
+                slug: `/author/${node.id}`,
+                name: node.name,
+                avatar: `${process.env.GATSBY_DOMAIN}${
+                  node.avatar.childImageSharp.original.src
+                }`,
+                email: node.email,
+                nickname: node.nickname,
+                slogan: node.slogan,
+              })),
+            indexName: 'author',
+          },
+          {
+            query: `
+              {
+                allTagJson {
+                  edges {
+                    node {
+                      id
+                      name
+                      description
+                      cover {
+                        childImageSharp {
+                          original {
+                            src
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }`,
+            transformer: ({ data }) =>
+              data.allTagJson.edges.map(({ node }) => ({
+                objectID: node.id,
+                slug: `/tag/${node.id}`,
+                name: node.name,
+                description: node.description,
+                cover: `${process.env.GATSBY_DOMAIN}${
+                  node.cover.childImageSharp.original.src
+                }`,
+              })),
+            indexName: 'tag',
+          },
+          {
+            query: `
+              {
+                allSeriesJson {
+                  edges {
+                    node {
+                      id
+                      name
+                      description
+                      cover {
+                        childImageSharp {
+                          original {
+                            src
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }`,
+            transformer: ({ data }) =>
+              data.allSeriesJson.edges.map(({ node }) => ({
+                objectID: node.id,
+                slug: `/series/${node.id}`,
+                name: node.name,
+                description: node.description,
+                cover: `${process.env.GATSBY_DOMAIN}${
+                  node.cover.childImageSharp.original.src
+                }`,
+              })),
+            indexName: 'series',
+          },
+        ],
+        chunkSize: 10000,
       },
     },
   ],

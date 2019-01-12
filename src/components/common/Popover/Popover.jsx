@@ -8,11 +8,15 @@ import { on, off } from 'dom-lib';
 
 import './style.less';
 
-const $root = document.getElementById('popover-root');
 const transitionStyles = {
   exited: { display: 'none' },
   entered: { display: 'block' },
 };
+let $root;
+
+if (typeof window !== `undefined`) {
+  $root = document.getElementById('popover-root');
+}
 
 class Popper extends PureComponent {
   constructor(props) {

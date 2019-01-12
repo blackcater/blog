@@ -11,7 +11,12 @@ import { Icon } from 'components/common';
 
 import './style.less';
 
-const $html = document.getElementsByTagName('html')[0];
+const DEFAULT_THEME = 'light';
+let $html;
+
+if (typeof window !== 'undefined') {
+  $html = document.getElementsByTagName('html')[0];
+}
 
 class Header extends PureComponent {
   constructor(props) {
@@ -19,7 +24,9 @@ class Header extends PureComponent {
 
     this.state = {
       showMenu: false,
-      theme: getAttribute($html, 'theme', 'light'),
+      theme: $html
+        ? getAttribute($html, 'theme', DEFAULT_THEME)
+        : DEFAULT_THEME,
     };
   }
 
