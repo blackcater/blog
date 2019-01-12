@@ -36,6 +36,7 @@
     }
   }
 
+  // posts
   &__posts {
     margin: 20px 0;
   }
@@ -88,6 +89,60 @@
       .ttr {
         float: right;
       }
+    }
+  }
+
+  // series
+  &__series {
+    margin: 20px 0;
+  }
+
+  &__series-item {
+    margin-bottom: 40px;
+
+    a {
+      color: inherit;
+      text-decoration: none;
+
+      .clearfix();
+    }
+
+    &__cover {
+      float: left;
+      width: 120px;
+      height: 160px;
+      border-radius: 5px;
+      background-color: @gray-bg-color;
+      overflow: hidden;
+
+      & div {
+        width: 100%;
+        height: 100%;
+        background-size: cover;
+      }
+    }
+
+    &__content {
+      margin-left: 140px;
+      min-height: 160px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    &__title {
+      margin-top: 13px;
+      color: @title-color;
+      font-size: 32px;
+      font-weight: 600;
+      line-height: 48px;
+    }
+
+    &__desc {
+      margin-bottom: 12px;
+      color: @gray-color;
+      font-size: 20px;
+      line-height: 24px;
     }
   }
 }

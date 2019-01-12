@@ -137,12 +137,12 @@ export default class SearchPage extends PureComponent {
   }
 
   _renderPosts = () => {
-    const { loading, hitPosts, pagination } = this.state;
+    const { loading, hitPosts } = this.state;
 
     return (
       <div className="search-page__posts">
         {loading && (
-          <ContentLoader width={800} height={500}>
+          <ContentLoader width={800} height={363}>
             <rect x="0" y="0" rx="0" ry="0" width="800" height="220" />
             <rect x="0" y="241" rx="3" ry="3" width="700" height="32" />
             <rect x="0" y="289" rx="3" ry="3" width="800" height="16" />
@@ -166,21 +166,68 @@ export default class SearchPage extends PureComponent {
             </div>
           </div>
         ))}
-        {!loading && <Pagination {...pagination} />}
+        {this._renderPagination()}
       </div>
     );
   };
 
   _renderSeries = () => {
-    return <div className="search-page__series">series</div>;
+    const { loading, hitSeries } = this.state;
+
+    return (
+      <div className="search-page__series">
+        {loading && (
+          <ContentLoader width={800} height={500}>
+            <rect x="0" y="0" rx="5" ry="5" width="120" height="160" />
+            <rect x="180" y="21" rx="3" ry="3" width="300" height="32" />
+            <rect x="180" y="102" rx="3" ry="3" width="660" height="20" />
+            <rect x="180" y="126" rx="3" ry="3" width="400" height="20" />
+          </ContentLoader>
+        )}
+        {hitSeries.map(series => (
+          <div className="search-page__series-item" key={series.objectID}>
+            <Link to={series.slug}>
+              <div className="search-page__series-item__cover">
+                <div style={{ backgroundImage: `url(${series.cover})` }} />
+              </div>
+              <div className="search-page__series-item__content">
+                <div className="search-page__series-item__title">
+                  {series.name}
+                </div>
+                <div className="search-page__series-item__desc">
+                  {series.description}
+                </div>
+              </div>
+            </Link>
+          </div>
+        ))}
+        {this._renderPagination()}
+      </div>
+    );
   };
 
   _renderAuthors = () => {
-    return <div className="search-page__authors">authors</div>;
+    return (
+      <div className="search-page__authors">
+        authors
+        {this._renderPagination()}
+      </div>
+    );
   };
 
   _renderTags = () => {
-    return <div className="search-page__tags">tags</div>;
+    return (
+      <div className="search-page__tags">
+        tags
+        {this._renderPagination()}
+      </div>
+    );
+  };
+
+  _renderPagination = () => {
+    const { loading, pagination } = this.state;
+
+    return !loading && <Pagination {...pagination} />;
   };
 
   render() {
