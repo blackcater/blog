@@ -147,9 +147,6 @@ class Header extends PureComponent {
                   >
                     <ul>
                       <li>
-                        <Link to="/series">合集</Link>
-                      </li>
-                      <li>
                         <Link to="/archive">归档</Link>
                       </li>
                     </ul>

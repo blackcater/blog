@@ -1,0 +1,69 @@
+@import '~styles/common';
+
+.search {
+  position: relative;
+  overflow: hidden;
+
+  input {
+    width: 100%;
+    height: 80px;
+    border: none;
+    outline: none;
+    font-size: 36px;
+    line-height: 80px;
+    color: @title-color;
+    border-bottom: 1px solid @line-color;
+    background-color: @content-bg-color;
+
+    .transition();
+    .titleFF();
+
+    &::placeholder {
+      color: @gray-color;
+    }
+  }
+
+  &__loading-line {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    height: 2px;
+    background-color: @primary-color;
+    transform: translateX(-100%);
+    animation: searchLoadingLine 2s ease-in-out 0s infinite running;
+
+    .transition();
+  }
+}
+
+@keyframes searchLoadingLine {
+  0% {
+    transform: translateX(-100%);
+  }
+  50% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(100%);
+  }
+}
+
+// dark theme
+[data-theme='dark'] {
+  .search {
+    input {
+      color: @d-title-color;
+      border-bottom-color: @d-line-color;
+      background-color: @d-content-bg-color;
+
+      &::placeholder {
+        color: @d-gray-color;
+      }
+    }
+  }
+
+  &__loading-line {
+    background-color: @d-primary-color;
+  }
+}

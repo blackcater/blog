@@ -134,21 +134,9 @@ module.exports = {
                             }
                           }
                         }
-                        author {
-                          name
-                          email
-                          nickname
-                          slogan
-                        }
-                        tags {
-                          name
-                          description
-                        }
-                        series {
-                          name
-                          description
-                        }
+                        date: date(formatString: "MMM D")
                       }
+                      timeToRead
                       excerpt(format: PLAIN)
                     }
                   }
@@ -162,10 +150,9 @@ module.exports = {
                 cover: `${process.env.GATSBY_DOMAIN}${
                   node.frontmatter.cover.childImageSharp.original.src
                 }`,
+                date: node.frontmatter.date,
                 excerpt: node.excerpt,
-                author: node.frontmatter.author,
-                tags: node.frontmatter.tags,
-                series: node.frontmatter.series,
+                timeToRead: node.timeToRead,
               })),
             indexName: 'posts',
           },
