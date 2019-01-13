@@ -13,6 +13,7 @@
     "serve": "gatsby develop",
     "build": "gatsby build",
     "format": "prettier --write \"src/**/*.js\"",
+    "deploy": "sh deploy.sh",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "devDependencies": {
