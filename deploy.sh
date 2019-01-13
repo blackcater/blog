@@ -4,7 +4,7 @@
 set -e
 
 # build
-npm run pro
+yarn build
 
 # navigate into the build output directory
 cd public

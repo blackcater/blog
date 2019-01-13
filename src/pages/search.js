@@ -95,7 +95,7 @@ class SearchPage extends PureComponent {
         [activeTab]: [],
         params: {
           ...params,
-          page: parseInt(params.page) - 1,
+          page: parseInt(params.page || '0') - 1,
         },
       },
       () => this._searchByAlgolia()
@@ -111,7 +111,7 @@ class SearchPage extends PureComponent {
         [activeTab]: [],
         params: {
           ...params,
-          page: parseInt(params.page) + 1,
+          page: parseInt(params.page || '0') + 1,
         },
       },
       () => this._searchByAlgolia()
