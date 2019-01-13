@@ -1,4 +1,5 @@
 import React, { PureComponent } from 'react';
+import { push } from 'gatsby';
 import ContentLoader from 'react-content-loader';
 import algoliasearch from 'algoliasearch';
 import cls from 'classnames';
@@ -67,11 +68,51 @@ class SearchPage extends PureComponent {
   }
 
   _handleTabChange = tab => {
+    const { searchVal, params } = this.state;
+
+    push(`/search?q=${searchVal}&ab=${tab.value}&page=0`);
+
     this.setState(
       {
         activeTab: tab.value,
         loading: true,
         [tab.value]: [],
+        params: {
+          ...params,
+          page: 0,
+        },
+      },
+      () => this._searchByAlgolia()
+    );
+  };
+
+  _handlePrevPage = () => {
+    const { activeTab, params } = this.state;
+
+    this.setState(
+      {
+        loading: true,
+        [activeTab]: [],
+        params: {
+          ...params,
+          page: parseInt(params.page) - 1,
+        },
+      },
+      () => this._searchByAlgolia()
+    );
+  };
+
+  _handleNextPage = () => {
+    const { activeTab, params } = this.state;
+
+    this.setState(
+      {
+        loading: true,
+        [activeTab]: [],
+        params: {
+          ...params,
+          page: parseInt(params.page) + 1,
+        },
       },
       () => this._searchByAlgolia()
     );
@@ -332,7 +373,15 @@ class SearchPage extends PureComponent {
   _renderPagination = () => {
     const { loading, pagination } = this.state;
 
-    return !loading && <Pagination {...pagination} />;
+    return (
+      !loading && (
+        <Pagination
+          {...pagination}
+          onPrev={this._handlePrevPage}
+          onNext={this._handleNextPage}
+        />
+      )
+    );
   };
 
   render() {
