@@ -1,6 +1,19 @@
 # gatsby-blog-medium
 
-> 神识 Medium 基于 Gatsby 实现的简单的个人或团队 blog
+> 基于 Gatsby 实现的，神似 Medium 的简单个人或团队博客网站
+
+## 导航
+
+- [安装](#安装)
+- [内容配置](#内容配置)
+  - [添加作者](#添加作者)
+  - [添加标签](#添加标签)
+  - [添加系列](#添加系列)
+  - [添加文章](#添加文章)
+- [站点配置](#站点配置)
+  - [基本配置](#添加作者)
+  - [Google Analytics](#google-analytics)
+  - [Algolia](#algolia)
 
 ## 安装
 
@@ -128,7 +141,7 @@ series: annual-summary
 
 大多数配置只需要改动 `gatsby-config.js` 文件即可。
 
-### google-analytics
+### Google Analytics
 
 你需要在项目根目录创建一个 `.env.development` 和 `.env.production` 文件。
 
@@ -138,7 +151,7 @@ series: annual-summary
 GATSBY_GOOGLE_ANALYTICS_TRACKINGID=xxxxxxxxx
 ```
 
-### algolia
+### Algolia
 
 你需要在项目根目录创建一个 `.env.development` 和 `.env.production` 文件。
 
