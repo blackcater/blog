@@ -29,7 +29,7 @@ const TABS = {
   TAGS: 'tags',
   SERIES: 'series',
 };
-const PAGE_SIZE = 2;
+const PAGE_SIZE = 10;
 
 class SearchPage extends PureComponent {
   constructor(props) {
