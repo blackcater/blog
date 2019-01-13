@@ -5,18 +5,11 @@ import { Link, StaticQuery, graphql } from 'gatsby';
 import Img from 'gatsby-image';
 import cls from 'classnames';
 import pick from 'utils/pick';
-import { getAttribute, setAttribute } from 'utils/attribute';
 
+import ThemeContext from 'components/ThemeContext';
 import { Icon } from 'components/common';
 
 import './style.less';
-
-const DEFAULT_THEME = 'light';
-let $html;
-
-if (typeof window !== 'undefined') {
-  $html = document.getElementsByTagName('html')[0];
-}
 
 class Header extends PureComponent {
   constructor(props) {
@@ -24,35 +17,17 @@ class Header extends PureComponent {
 
     this.state = {
       showMenu: false,
-      theme: $html
-        ? getAttribute($html, 'theme', DEFAULT_THEME)
-        : DEFAULT_THEME,
     };
   }
-
-  toggleTheme = t => {
-    const themes = ['light', 'dark'];
-    const theme = getAttribute($html, 'theme', this.state.theme);
-
-    if (theme === t) return;
-
-    const newTheme =
-      themes.indexOf(t) !== -1
-        ? t
-        : themes[(themes.indexOf(theme) + 1) % themes.length];
-
-    setAttribute($html, 'theme', newTheme);
-
-    this.setState({ theme: newTheme });
-  };
 
   toggleMenu = () => {
     this.setState({ showMenu: !this.state.showMenu });
   };
 
   render() {
-    const { theme, showMenu } = this.state;
-    const { title, shadow, maxWidth } = this.props;
+    const { showMenu } = this.state;
+    const { title, shadow, maxWidth, toggleTheme } = this.props;
+    const theme = this.context;
 
     return (
       <StaticQuery
@@ -116,7 +91,7 @@ class Header extends PureComponent {
                           <Icon icon="search" size={20} />
                         </Link>
                       </li>
-                      <li onClick={this.toggleTheme}>
+                      <li onClick={toggleTheme}>
                         <Icon
                           icon={
                             theme === 'light' ? 'moon-outline' : 'sun-outline'
@@ -157,6 +132,8 @@ class Header extends PureComponent {
     );
   }
 }
+
+Header.contextType = ThemeContext;
 
 Header.propTypes = {
   title: PropTypes.node,

@@ -9,6 +9,7 @@ import Layout from 'components/Layout';
 import Search from 'components/Search';
 import Pagination from 'components/Pagination';
 import Link from 'components/Link';
+import ThemeContext from 'components/ThemeContext';
 
 import './search.less';
 
@@ -29,7 +30,7 @@ const TABS = {
 };
 const PAGE_SIZE = 2;
 
-export default class SearchPage extends PureComponent {
+class SearchPage extends PureComponent {
   constructor(props) {
     super(props);
 
@@ -148,16 +149,21 @@ export default class SearchPage extends PureComponent {
 
     return (
       <div className="search-page__posts">
-        {loading && (
-          <ContentLoader width={800} height={383}>
-            <rect x="0" y="0" rx="0" ry="0" width="800" height="220" />
-            <rect x="0" y="241" rx="3" ry="3" width="700" height="32" />
-            <rect x="0" y="289" rx="3" ry="3" width="800" height="16" />
-            <rect x="0" y="313" rx="3" ry="3" width="450" height="16" />
-            <rect x="0" y="345" rx="3" ry="3" width="40" height="18" />
-            <rect x="720" y="345" rx="3" ry="3" width="80" height="18" />
-          </ContentLoader>
-        )}
+        {loading &&
+          this._renderLoading({
+            width: 800,
+            height: 383,
+            children: (
+              <>
+                <rect x="0" y="0" rx="0" ry="0" width="800" height="220" />
+                <rect x="0" y="241" rx="3" ry="3" width="700" height="32" />
+                <rect x="0" y="289" rx="3" ry="3" width="800" height="16" />
+                <rect x="0" y="313" rx="3" ry="3" width="450" height="16" />
+                <rect x="0" y="345" rx="3" ry="3" width="40" height="18" />
+                <rect x="720" y="345" rx="3" ry="3" width="80" height="18" />
+              </>
+            ),
+          })}
         {posts.length === 0 && this._renderEmpty()}
         {posts.map(post => (
           <div className="search-page__post" key={post.objectID}>
@@ -184,14 +190,19 @@ export default class SearchPage extends PureComponent {
 
     return (
       <div className="search-page__series">
-        {loading && (
-          <ContentLoader width={800} height={160}>
-            <rect x="0" y="0" rx="5" ry="5" width="120" height="160" />
-            <rect x="140" y="21" rx="3" ry="3" width="300" height="32" />
-            <rect x="140" y="102" rx="3" ry="3" width="660" height="20" />
-            <rect x="140" y="126" rx="3" ry="3" width="400" height="20" />
-          </ContentLoader>
-        )}
+        {loading &&
+          this._renderLoading({
+            width: 800,
+            height: 160,
+            children: (
+              <>
+                <rect x="0" y="0" rx="5" ry="5" width="120" height="160" />
+                <rect x="140" y="21" rx="3" ry="3" width="300" height="32" />
+                <rect x="140" y="102" rx="3" ry="3" width="660" height="20" />
+                <rect x="140" y="126" rx="3" ry="3" width="400" height="20" />
+              </>
+            ),
+          })}
         {series.length === 0 && this._renderEmpty()}
         {series.map(series => (
           <div className="search-page__series-item" key={series.objectID}>
@@ -220,13 +231,18 @@ export default class SearchPage extends PureComponent {
 
     return (
       <div className="search-page__authors">
-        {loading && (
-          <ContentLoader width={800} height={120}>
-            <rect x="0" y="0" rx="60" ry="60" width="120" height="120" />
-            <rect x="140" y="21" rx="3" ry="3" width="300" height="32" />
-            <rect x="140" y="86" rx="3" ry="3" width="500" height="20" />
-          </ContentLoader>
-        )}
+        {loading &&
+          this._renderLoading({
+            width: 800,
+            height: 120,
+            children: (
+              <>
+                <rect x="0" y="0" rx="60" ry="60" width="120" height="120" />
+                <rect x="140" y="21" rx="3" ry="3" width="300" height="32" />
+                <rect x="140" y="86" rx="3" ry="3" width="500" height="20" />
+              </>
+            ),
+          })}
         {authors.length === 0 && this._renderEmpty()}
         {authors.map(author => (
           <div className="search-page__author-item" key={author.objectID}>
@@ -251,17 +267,21 @@ export default class SearchPage extends PureComponent {
   };
 
   _renderTags = () => {
-    const { loading, tags } = this.state;
+    const { tags } = this.state;
 
     return (
       <div className="search-page__tags">
-        {loading && (
-          <ContentLoader width={800} height={120}>
-            <rect x="0" y="0" rx="60" ry="60" width="120" height="120" />
-            <rect x="140" y="21" rx="3" ry="3" width="300" height="32" />
-            <rect x="140" y="86" rx="3" ry="3" width="500" height="20" />
-          </ContentLoader>
-        )}
+        {this._renderLoading({
+          width: 800,
+          height: 120,
+          children: (
+            <>
+              <rect x="0" y="0" rx="60" ry="60" width="120" height="120" />
+              <rect x="140" y="21" rx="3" ry="3" width="300" height="32" />
+              <rect x="140" y="86" rx="3" ry="3" width="500" height="20" />
+            </>
+          ),
+        })}
         {tags.length === 0 && this._renderEmpty()}
         {tags.map(tag => (
           <div className="search-page__tag-item" key={tag.objectID}>
@@ -280,6 +300,26 @@ export default class SearchPage extends PureComponent {
         ))}
         {this._renderPagination()}
       </div>
+    );
+  };
+
+  _renderLoading = ({ children, ...props }) => {
+    const { loading } = this.state;
+
+    return (
+      loading && (
+        <ThemeContext.Consumer>
+          {theme => (
+            <ContentLoader
+              {...props}
+              primaryColor={theme === 'light' ? '#f7f7f7' : '#777777'}
+              secondaryColor={theme === 'light' ? '#fafafa' : '#828282'}
+            >
+              {children}
+            </ContentLoader>
+          )}
+        </ThemeContext.Consumer>
+      )
     );
   };
 
@@ -345,3 +385,5 @@ export default class SearchPage extends PureComponent {
     );
   }
 }
+
+export default SearchPage;

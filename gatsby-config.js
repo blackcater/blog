@@ -135,6 +135,19 @@ module.exports = {
                           }
                         }
                         date: date(formatString: "MMM D")
+                        author {
+                          id
+                          name
+                          nickname
+                        }
+                        series {
+                          id
+                          name
+                        }
+                        tags {
+                          id
+                          name
+                        }
                       }
                       timeToRead
                       excerpt(format: PLAIN)
@@ -151,6 +164,9 @@ module.exports = {
                 date: node.frontmatter.date,
                 excerpt: node.excerpt,
                 timeToRead: node.timeToRead,
+                author: node.frontmatter.author,
+                series: node.frontmatter.series,
+                tags: node.frontmatter.tags,
               })),
             indexName: 'posts',
           },
