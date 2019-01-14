@@ -120,7 +120,10 @@ export default ({ data, pageContext }) => {
               </Parallel.Line>
             </Parallel>
           ) : (
-            <Parallel className="index-page__parallel">
+            <Parallel
+              className="index-page__parallel"
+              offset={{ top: 65, bottom: 0 }}
+            >
               <Parallel.Line style={{ marginRight: 64 }}>
                 {posts.slice(3).map(node => (
                   <PostBig key={node.id} post={node} />

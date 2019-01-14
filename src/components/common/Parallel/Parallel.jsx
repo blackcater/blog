@@ -30,6 +30,7 @@ class Parallel extends PureComponent {
     };
     this.$parallel = React.createRef();
     this.waiting = false;
+    this.lastScrollY = 0;
   }
 
   static getDerivedStateFromProps(props, state) {
@@ -75,11 +76,21 @@ class Parallel extends PureComponent {
       const $parallelLines = Array.from(
         $parallel.getElementsByClassName('parallel__line')
       ).map(x => x.children[0]);
-      const { top: pTop, height: pHeight } = getOffset($parallel);
-
-      const scrollY = window.scrollY || window.pageYOffset + offset.top;
-      const windowH = window.innerHeight - offset.top - offset.bottom;
+      const windowH = window.innerHeight;
+      const scrollY = window.scrollY || window.pageYOffset;
+      const delta = scrollY > this.lastScrollY;
       const translateList = [];
+      let { top: pTop, height: pHeight } = getOffset($parallel);
+
+      if (delta) {
+        // 向下
+        pTop = pTop - offset.bottom;
+      } else {
+        // 向上
+        pTop = pTop - offset.top;
+      }
+
+      this.lastScrollY = scrollY;
 
       for (let i = 0, len = $parallelLines.length; i < len; i++) {
         const $line = $parallelLines[i];
