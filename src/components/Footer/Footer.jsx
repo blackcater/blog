@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link } from 'gatsby';
+import { withPrefix } from 'gatsby';
 
 import './style.less';
 
@@ -10,7 +10,9 @@ export default () => {
         <div className="footer__logo">Blog</div>
         <ul className="footer__links">
           <li>
-            <Link to="/rss.xml">RSS</Link>
+            <a href={withPrefix('/rss.xml')} target="_blank">
+              RSS
+            </a>
           </li>
         </ul>
       </div>
