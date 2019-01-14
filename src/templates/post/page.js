@@ -56,6 +56,7 @@ export default ({ data }) => {
   return (
     <Layout
       className="post-page"
+      autoHidden
       title={series && <Link to={`/series/${series.id}`}>{series.name}</Link>}
     >
       <div className="post-page__header">

@@ -3,6 +3,7 @@ import Media from 'react-media';
 import PropTypes from 'prop-types';
 import { Link, StaticQuery, graphql } from 'gatsby';
 import Img from 'gatsby-image';
+import { on, off, addStyle, animation } from 'dom-lib';
 import cls from 'classnames';
 import pick from 'utils/pick';
 
@@ -16,9 +17,62 @@ class Header extends PureComponent {
     super(props);
 
     this.state = {
+      hideMenu: false,
       showMenu: false,
+      waiting: false,
     };
+
+    this.$header = null;
+    this.lastScrollY = 0;
   }
+
+  componentDidMount() {
+    const { autoHidden } = this.props;
+
+    if (autoHidden) {
+      on(window, 'scroll', this._handleScroll);
+    }
+  }
+
+  componentWillUnmount() {
+    off(window, 'scroll', this._handleScroll);
+  }
+
+  _handleScroll = () => {
+    if (this.waiting) return;
+
+    this.waiting = true;
+
+    animation.requestAnimationFramePolyfill(() => {
+      const { hideMenu } = this.state;
+      const scrollY = window.scrollY || window.pageYOffset;
+      const delta = scrollY > this.lastScrollY;
+
+      this.lastScrollY = scrollY;
+
+      if (delta && !hideMenu) {
+        if (this.$header) {
+          addStyle(this.$header, { transform: 'translate(0, -200%)' });
+        }
+
+        this.setState({ hideMenu: true }, () => (this.waiting = false));
+
+        return;
+      }
+
+      if (!delta && hideMenu) {
+        if (this.$header) {
+          addStyle(this.$header, { transform: 'translate(0, 0)' });
+        }
+
+        this.setState({ hideMenu: false }, () => (this.waiting = false));
+
+        return;
+      }
+
+      this.waiting = false;
+    });
+  };
 
   toggleMenu = () => {
     this.setState({ showMenu: !this.state.showMenu });
@@ -54,79 +108,80 @@ class Header extends PureComponent {
           }
         `}
         render={data => (
-          <>
-            <div className={cls(['header', shadow && 'header--shadow'])}>
-              <div className="header__content" style={{ maxWidth }}>
-                <div className="header__content__left">
-                  <div className="logo">
-                    <Link to="/">Blog</Link>
-                  </div>
-                  {title && <div className="title">{title || 'Home'}</div>}
+          <div
+            ref={ref => (this.$header = ref)}
+            className={cls(['header', shadow && 'header--shadow'])}
+          >
+            <div className="header__content" style={{ maxWidth }}>
+              <div className="header__content__left">
+                <div className="logo">
+                  <Link to="/">Blog</Link>
                 </div>
-                <div className="header__content__right">
-                  <nav className="header__menu">
-                    <ul>
-                      <li>
-                        <Link to="/archive">归档</Link>
-                      </li>
-                    </ul>
-                  </nav>
-                  <div className="header__content__custom">
-                    <ul>
-                      <Media query="(max-width: 768px)">
-                        {matches =>
-                          matches && (
-                            <li onClick={this.toggleMenu}>
-                              {showMenu ? (
-                                <Icon icon="close" size={20} />
-                              ) : (
-                                <Icon icon="menu" size={20} />
-                              )}
-                            </li>
-                          )
+                {title && <div className="title">{title || 'Home'}</div>}
+              </div>
+              <div className="header__content__right">
+                <nav className="header__menu">
+                  <ul>
+                    <li>
+                      <Link to="/archive">归档</Link>
+                    </li>
+                  </ul>
+                </nav>
+                <div className="header__content__custom">
+                  <ul>
+                    <Media query="(max-width: 768px)">
+                      {matches =>
+                        matches && (
+                          <li onClick={this.toggleMenu}>
+                            {showMenu ? (
+                              <Icon icon="close" size={20} />
+                            ) : (
+                              <Icon icon="menu" size={20} />
+                            )}
+                          </li>
+                        )
+                      }
+                    </Media>
+                    <li>
+                      <Link to="/search">
+                        <Icon icon="search" size={20} />
+                      </Link>
+                    </li>
+                    <li onClick={toggleTheme}>
+                      <Icon
+                        icon={
+                          theme === 'light' ? 'moon-outline' : 'sun-outline'
                         }
-                      </Media>
-                      <li>
-                        <Link to="/search">
-                          <Icon icon="search" size={20} />
-                        </Link>
-                      </li>
-                      <li onClick={toggleTheme}>
-                        <Icon
-                          icon={
-                            theme === 'light' ? 'moon-outline' : 'sun-outline'
-                          }
-                          size={20}
+                        size={20}
+                      />
+                    </li>
+                    <li>
+                      <Link to="/">
+                        <Img
+                          style={{ width: 32, height: 32, borderRadius: 16 }}
+                          fixed={pick(data, 'avatar.childImageSharp.fixed')}
                         />
-                      </li>
-                      <li>
-                        <Link to="/">
-                          <Img
-                            style={{ width: 32, height: 32, borderRadius: 16 }}
-                            fixed={pick(data, 'avatar.childImageSharp.fixed')}
-                          />
-                        </Link>
-                      </li>
-                    </ul>
-                  </div>
+                      </Link>
+                    </li>
+                  </ul>
                 </div>
               </div>
-              <Media query="(max-width: 768px)">
-                {matches => (
-                  <nav
-                    className="header__menu"
-                    style={{ display: matches && showMenu ? 'block' : 'none' }}
-                  >
-                    <ul>
-                      <li>
-                        <Link to="/archive">归档</Link>
-                      </li>
-                    </ul>
-                  </nav>
-                )}
-              </Media>
             </div>
-          </>
+            <Media query="(max-width: 768px)">
+              {matches => (
+                <nav
+                  className="header__menu"
+                  style={{ display: matches && showMenu ? 'block' : 'none' }}
+                >
+                  <ul>
+                    <li>
+                      <Link to="/archive">归档</Link>
+                    </li>
+                  </ul>
+                </nav>
+              )}
+            </Media>
+          </div>
         )}
       />
     );
@@ -140,10 +195,12 @@ Header.propTypes = {
   shadow: PropTypes.bool,
   maxWidth: PropTypes.number,
   children: PropTypes.node,
+  autoHidden: PropTypes.bool,
 };
 
 Header.defaultProps = {
   shadow: true,
+  autoHidden: false,
   maxWidth: 1224,
 };
 
