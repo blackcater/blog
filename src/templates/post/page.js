@@ -7,6 +7,7 @@ import pick from 'utils/pick';
 
 import Layout from 'components/Layout';
 import Gallery from 'components/Gallery';
+import Affix from 'components/Affix';
 import { PostBig } from 'components/Post';
 
 import './style.less';
@@ -153,6 +154,7 @@ export default class PostPage extends PureComponent {
           }
         </Media>
         <Gallery ref={this.$gallery} />
+        <Affix />
       </Layout>
     );
   }

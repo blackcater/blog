@@ -6,7 +6,6 @@ import Img from 'gatsby-image';
 import Layout from 'components/Layout';
 import Slider from 'components/Slider';
 import Pagination from 'components/Pagination';
-import Affix from 'components/Affix';
 import { PostBig } from 'components/Post';
 import { Parallel } from 'components/common';
 import pick from 'utils/pick';
@@ -106,11 +105,11 @@ export default ({ data, pageContext }) => {
       {!pageContext.prev && <Slider list={posts.slice(0, 3)} />}
       <div className="index-page__separator" />
       <div className="index-page__title">FEATURED</div>
-      <Media query="(max-width: 1000px)">
+      <Media query="(max-width: 780px)">
         {matches =>
           matches ? (
             <Parallel className="index-page__parallel">
-              <Parallel.Line>
+              <Parallel.Line style={{ width: '100%' }}>
                 {posts.slice(3).map(node => (
                   <PostBig key={node.id} post={node} />
                 ))}
@@ -140,7 +139,6 @@ export default ({ data, pageContext }) => {
           )
         }
       </Media>
-      <Affix />
     </Layout>
   );
 };
