@@ -1,10 +1,11 @@
 import React, { PureComponent } from 'react';
 import ReactDOM from 'react-dom';
-import { on, off } from 'dom-lib';
-import cls from 'classnames';
+import { Transition } from 'react-transition-group';
+import { on, off, getOffset, addStyle } from 'dom-lib';
 
 import './style.less';
 
+const PADDING = 5;
 let $root;
 
 if (typeof window !== `undefined`) {
@@ -19,11 +20,24 @@ class Gallery extends PureComponent {
       show: false,
       curr: 0,
       images: [],
+
+      entering: {},
+      entered: {},
+      exiting: {},
+      exited: {},
     };
 
     this.$imgs = [];
     this.$imgFuncs = [];
   }
+
+  // componentDidMount() {
+  //   on(window, 'scroll', this._handleExitingGallery);
+  // }
+  //
+  // componentWillUnmount() {
+  //   off(window, 'scroll', this._handleExitingGallery);
+  // }
 
   load = $imgs => {
     const images = [];
@@ -52,36 +66,139 @@ class Gallery extends PureComponent {
   _handleImageClick = (e, $img, index) => {
     e.preventDefault();
 
-    console.dir($img);
-    console.dir(index);
+    const scrollY = window.scrollY || window.pageYOffset;
+    const windowW = window.innerWidth;
+    const windowH = window.innerHeight;
+    const offset = getOffset($img);
+    const entering = {
+      top: offset.top - scrollY,
+      left: offset.left,
+      width: offset.width,
+      height: offset.height,
+    };
+    let entered = {};
+
+    if (offset.width / offset.height > windowH / windowW) {
+      const imgW = windowW - PADDING * 2;
+      const imgH = (imgW * offset.height) / offset.width;
+
+      entered = {
+        top: (windowH - imgH) / 2,
+        left: PADDING,
+        width: imgW,
+        height: imgH,
+      };
+    } else {
+      const imgH = windowH - PADDING * 2;
+      const imgW = (offset.width / offset.height) * imgH;
+
+      entered = {
+        top: PADDING,
+        left: (windowW - imgW) / 2,
+        width: imgW,
+        height: imgH,
+      };
+    }
+
+    this.setState({
+      show: true,
+      curr: index,
+      entering,
+      entered,
+    });
+  };
+
+  _handleExitingGallery = e => {
+    const { curr, show } = this.state;
+
+    e.preventDefault();
+
+    if (!show) return;
+    if (this.waiting) return;
+
+    this.waiting = true;
+
+    const $img = this.$imgs[curr];
+    const scrollY = window.scrollY || window.pageYOffset;
+    const offset = getOffset($img);
+
+    this.setState(
+      {
+        show: false,
+        exiting: {
+          top: offset.top - scrollY,
+          left: offset.left,
+          width: offset.width,
+          height: offset.height,
+        },
+        exited: {},
+      },
+      () => (this.waiting = false)
+    );
+  };
+
+  _handleEnter = () => {
+    addStyle(document.body, { overflow: 'hidden' });
+  };
+
+  _handleExited = () => {
+    addStyle(document.body, { overflow: 'auto' });
   };
 
   _renderPortal = () => {
-    const { images, curr } = this.state;
+    const {
+      images,
+      curr,
+      show,
+      entering,
+      entered,
+      exiting,
+      exited,
+    } = this.state;
     const image = images[curr];
+    const stateMap = {
+      entering,
+      entered,
+      exiting,
+      exited,
+    };
+    const maskMap = {
+      entering: {
+        visibility: 'hidden',
+        opacity: 0,
+      },
+      entered: {
+        visibility: 'visible',
+        opacity: 1,
+      },
+      exiting: {
+        visibility: 'hidden',
+        opacity: 0,
+      },
+      exited: {},
+    };
 
     return (
-      <div className="gallery">
-        <div className="gallery__mask" />
-        <div className="gallery__content">
-          <div className="gallery__preview">
-            <img src={image} />
+      <Transition
+        mountOnEnter
+        unmountOnExit
+        in={show}
+        timeout={300}
+        onEnter={this._handleEnter}
+        onExited={this._handleExited}
+      >
+        {state => (
+          <div className="gallery" onClick={this._handleExitingGallery}>
+            <div className="gallery__mask" style={maskMap[state]} />
+            <img
+              className="gallery__preview"
+              style={stateMap[state]}
+              src={image}
+              alt="preview"
+            />
           </div>
-          <div className="gallery__images">
-            {images.map((image, index) => (
-              <div
-                className={cls([
-                  'gallery__image',
-                  index === curr && 'gallery__image--active',
-                ])}
-                key={image}
-              >
-                <div style={{ backgroundImage: `url(${image})` }} />
-              </div>
-            ))}
-          </div>
-        </div>
-      </div>
+        )}
+      </Transition>
     );
   };
 

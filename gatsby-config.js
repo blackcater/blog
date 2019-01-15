@@ -47,7 +47,13 @@ module.exports = {
       options: {
         excerpt_separator: `<!-- end -->`,
         plugins: [
-          'gatsby-remark-images',
+          {
+            resolve: `gatsby-remark-images`,
+            options: {
+              linkImagesToOriginal: false,
+              backgroundColor: 'transparent',
+            },
+          },
           'gatsby-remark-abbr',
           'gatsby-remark-emoji',
           {
