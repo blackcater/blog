@@ -1,0 +1,40 @@
+@import '~styles/common';
+
+.affix {
+  position: fixed;
+  right: 20px;
+  bottom: -200px;
+  width: 40px;
+  height: 40px;
+  border-radius: 20px;
+  background-color: @header-bg-color;
+  box-shadow: @header-shadow;
+  cursor: pointer;
+  overflow: hidden;
+
+  .transition(@properties: bottom);
+
+  &:hover {
+    background-color: @gray-bg-color;
+  }
+
+  i {
+    font-size: 40px;
+  }
+
+  &--show {
+    bottom: 20px;
+  }
+}
+
+// dark theme
+[data-theme='dark'] {
+  .affix {
+    background-color: @d-header-bg-color;
+    box-shadow: @d-header-shadow;
+
+    &:hover {
+      background-color: @d-gray-bg-color;
+    }
+  }
+}

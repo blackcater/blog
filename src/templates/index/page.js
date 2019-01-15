@@ -6,6 +6,7 @@ import Img from 'gatsby-image';
 import Layout from 'components/Layout';
 import Slider from 'components/Slider';
 import Pagination from 'components/Pagination';
+import Affix from 'components/Affix';
 import { PostBig } from 'components/Post';
 import { Parallel } from 'components/common';
 import pick from 'utils/pick';
@@ -139,6 +140,7 @@ export default ({ data, pageContext }) => {
           )
         }
       </Media>
+      <Affix />
     </Layout>
   );
 };
