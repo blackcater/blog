@@ -78,7 +78,7 @@ class Gallery extends PureComponent {
     };
     let entered = {};
 
-    if (offset.width / offset.height > windowH / windowW) {
+    if (offset.width / offset.height > windowW / windowH) {
       const imgW = windowW - PADDING * 2;
       const imgH = (imgW * offset.height) / offset.width;
 
@@ -203,6 +203,8 @@ class Gallery extends PureComponent {
   };
 
   render() {
+    if (!$root) return null;
+
     return ReactDOM.createPortal(this._renderPortal(), $root);
   }
 }

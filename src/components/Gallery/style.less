@@ -29,7 +29,13 @@
   }
 }
 
-@media (max-width: @desktop-break-point) {
+// dark theme
+[data-theme='dark'] {
   .gallery {
+    &__mask {
+      background-color: @d-content-bg-color;
+
+      .transition(@properties: background-color);
+    }
   }
 }
