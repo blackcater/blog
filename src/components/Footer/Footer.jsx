@@ -10,7 +10,11 @@ export default () => {
         <div className="footer__logo">Blog</div>
         <ul className="footer__links">
           <li>
-            <a href={withPrefix('/rss.xml')} target="_blank">
+            <a
+              href={withPrefix('/rss.xml')}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
               RSS
             </a>
           </li>

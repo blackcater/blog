@@ -76,21 +76,10 @@ class Parallel extends PureComponent {
       const $parallelLines = Array.from(
         $parallel.getElementsByClassName('parallel__line')
       ).map(x => x.children[0]);
-      const windowH = window.innerHeight;
-      const scrollY = window.scrollY || window.pageYOffset;
-      const delta = scrollY > this.lastScrollY;
+      const windowH = window.innerHeight - offset.top - offset.bottom;
+      const scrollY = (window.scrollY || window.pageYOffset) + offset.top;
       const translateList = [];
       let { top: pTop, height: pHeight } = getOffset($parallel);
-
-      if (delta) {
-        // 向下
-        pTop = pTop - offset.bottom;
-      } else {
-        // 向上
-        pTop = pTop - offset.top;
-      }
-
-      this.lastScrollY = scrollY;
 
       for (let i = 0, len = $parallelLines.length; i < len; i++) {
         const $line = $parallelLines[i];
@@ -102,12 +91,7 @@ class Parallel extends PureComponent {
         translateList[i] = { width: w || width, height: h || height };
 
         if (scrollY <= pTop) {
-          translateList[i] = {
-            ...translateList[i],
-            x: 0,
-            y: 0,
-            fixed: false,
-          };
+          translateList[i] = { ...translateList[i], x: 0, y: 0, fixed: false };
 
           continue;
         }

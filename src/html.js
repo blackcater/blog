@@ -28,6 +28,7 @@ class HTML extends React.Component {
             dangerouslySetInnerHTML={{ __html: this.props.body }}
           />
           <div id="popover-root" />
+          <div id="gallery-root" />
           {this.props.postBodyComponents}
         </body>
       </html>

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { PureComponent } from 'react';
 import Media from 'react-media';
 import { Link, graphql } from 'gatsby';
 import Img from 'gatsby-image';
@@ -6,6 +6,7 @@ import cls from 'classnames';
 import pick from 'utils/pick';
 
 import Layout from 'components/Layout';
+import Gallery from 'components/Gallery';
 import { PostBig } from 'components/Post';
 
 import './style.less';
@@ -48,83 +49,114 @@ function PostBigInfo({
   );
 }
 
-export default ({ data }) => {
-  const { post, prevPost, nextPost } = data;
-  const tags = pick(post, 'frontmatter.tags') || [];
-  const series = pick(post, 'frontmatter.series');
+export default class PostPage extends PureComponent {
+  constructor(props) {
+    super(props);
 
-  return (
-    <Layout
-      className="post-page"
-      autoHidden
-      title={series && <Link to={`/series/${series.id}`}>{series.name}</Link>}
-    >
-      <div className="post-page__header">
-        <div className="post-page__header__content">
-          {tags.length > 0 && (
-            <div className="post-page__header__tags">
-              {tags.map(tag => (
-                <span key={tag.id}>
-                  <Link to={`/tag/${tag.id}`}>{tag.name}</Link>
-                </span>
-              ))}
+    this.$content = React.createRef();
+    this.$gallery = React.createRef();
+  }
+
+  componentDidMount() {
+    const $content = this.$content.current;
+    const $gallery = this.$gallery.current;
+
+    if (!$content || !$gallery) return;
+
+    $gallery.load(Array.from($content.getElementsByTagName('img')));
+  }
+
+  componentWillUnmount() {
+    const $gallery = this.$gallery.current;
+
+    if (!$gallery) return;
+
+    $gallery.destroy();
+  }
+
+  render() {
+    const { data } = this.props;
+    const { post, prevPost, nextPost } = data;
+    const tags = pick(post, 'frontmatter.tags') || [];
+    const series = pick(post, 'frontmatter.series');
+
+    return (
+      <Layout
+        className="post-page"
+        autoHidden
+        title={series && <Link to={`/series/${series.id}`}>{series.name}</Link>}
+      >
+        <div className="post-page__header">
+          <div className="post-page__header__content">
+            {tags.length > 0 && (
+              <div className="post-page__header__tags">
+                {tags.map(tag => (
+                  <span key={tag.id}>
+                    <Link to={`/tag/${tag.id}`}>{tag.name}</Link>
+                  </span>
+                ))}
+              </div>
+            )}
+            <div className="post-page__header__title">
+              {pick(post, 'frontmatter.title')}
             </div>
-          )}
-          <div className="post-page__header__title">
-            {pick(post, 'frontmatter.title')}
+            <div className="post-page__header__author">
+              <Link to={`/author/${pick(post, 'frontmatter.author.id')}`}>
+                <img
+                  className="avatar"
+                  src={pick(
+                    post,
+                    'frontmatter.author.avatar.childImageSharp.resize.src'
+                  )}
+                  alt={pick(post, 'frontmatter.author.nickname')}
+                />
+              </Link>
+              <div className="content">
+                <div className="nickname">
+                  <Link to={`/author/${pick(post, 'frontmatter.author.id')}`}>
+                    {pick(post, 'frontmatter.author.nickname')}
+                  </Link>
+                </div>
+                <div className="desc">
+                  <div className="date">{pick(post, 'frontmatter.date')}</div>
+                  <div className="ttr">{pick(post, 'timeToRead')}min read</div>
+                </div>
+              </div>
+            </div>
           </div>
-          <div className="post-page__header__author">
-            <Link to={`/author/${pick(post, 'frontmatter.author.id')}`}>
-              <img
-                className="avatar"
-                src={pick(
-                  post,
-                  'frontmatter.author.avatar.childImageSharp.resize.src'
+          <div className="post-page__header__cover">
+            <Img
+              fluid={pick(post, 'frontmatter.cover.childImageSharp.fluid')}
+            />
+          </div>
+        </div>
+        <div
+          ref={this.$content}
+          className="post-page__content"
+          dangerouslySetInnerHTML={{ __html: pick(post, 'html') }}
+        />
+        <Media query="(max-width: 768px)">
+          {matches =>
+            matches ? (
+              <div className="post-page__footer">
+                {nextPost && <PostBig post={nextPost} />}
+                {prevPost && <PostBig post={prevPost} />}
+              </div>
+            ) : (
+              <div className="post-page__footer">
+                {nextPost && <PostBigInfo {...nextPost} title="READ NEXT" />}
+                {prevPost && (
+                  <PostBigInfo {...prevPost} title="READ PREV" reverse={true} />
                 )}
-                alt={pick(post, 'frontmatter.author.nickname')}
-              />
-            </Link>
-            <div className="content">
-              <div className="nickname">
-                <Link to={`/author/${pick(post, 'frontmatter.author.id')}`}>
-                  {pick(post, 'frontmatter.author.nickname')}
-                </Link>
               </div>
-              <div className="desc">
-                <div className="date">{pick(post, 'frontmatter.date')}</div>
-                <div className="ttr">{pick(post, 'timeToRead')}min read</div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div className="post-page__header__cover">
-          <Img fluid={pick(post, 'frontmatter.cover.childImageSharp.fluid')} />
-        </div>
-      </div>
-      <div
-        className="post-page__content"
-        dangerouslySetInnerHTML={{ __html: pick(post, 'html') }}
-      />
-      <Media query="(max-width: 768px)">
-        {matches =>
-          matches ? (
-            <div className="post-page__footer">
-              {nextPost && <PostBig post={nextPost} />}
-              {prevPost && <PostBig post={prevPost} />}
-            </div>
-          ) : (
-            <div className="post-page__footer">
-              {nextPost && <PostBigInfo {...nextPost} title="READ NEXT" />}
-              {prevPost && (
-                <PostBigInfo {...prevPost} title="READ PREV" reverse={true} />
-              )}
-            </div>
-          )
-        }
-      </Media>
-    </Layout>
-  );
-};
+            )
+          }
+        </Media>
+        <Gallery ref={this.$gallery} />
+      </Layout>
+    );
+  }
+}
 
 export const query = graphql`
   fragment PostPageDetail on MarkdownRemark {

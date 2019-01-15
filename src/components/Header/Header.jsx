@@ -22,7 +22,7 @@ class Header extends PureComponent {
       waiting: false,
     };
 
-    this.$header = null;
+    this.$header = React.createRef();
     this.lastScrollY = 0;
   }
 
@@ -51,8 +51,8 @@ class Header extends PureComponent {
       this.lastScrollY = scrollY;
 
       if (delta && !hideMenu) {
-        if (this.$header) {
-          addStyle(this.$header, { transform: 'translate(0, -200%)' });
+        if (this.$header.current) {
+          addStyle(this.$header.current, { transform: 'translate(0, -200%)' });
         }
 
         this.setState({ hideMenu: true }, () => (this.waiting = false));
@@ -61,8 +61,8 @@ class Header extends PureComponent {
       }
 
       if (!delta && hideMenu) {
-        if (this.$header) {
-          addStyle(this.$header, { transform: 'translate(0, 0)' });
+        if (this.$header.current) {
+          addStyle(this.$header.current, { transform: 'translate(0, 0)' });
         }
 
         this.setState({ hideMenu: false }, () => (this.waiting = false));
@@ -109,7 +109,7 @@ class Header extends PureComponent {
         `}
         render={data => (
           <div
-            ref={ref => (this.$header = ref)}
+            ref={this.$header}
             className={cls(['header', shadow && 'header--shadow'])}
           >
             <div className="header__content" style={{ maxWidth }}>
