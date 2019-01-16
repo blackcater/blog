@@ -1,5 +1,6 @@
 import React, { PureComponent } from 'react';
 import Media from 'react-media';
+import ReactDisqusComments from 'react-disqus-comments';
 import { Link, graphql } from 'gatsby';
 import Img from 'gatsby-image';
 import cls from 'classnames';
@@ -9,6 +10,7 @@ import Layout from 'components/Layout';
 import Outline from 'components/Outline';
 import Gallery from 'components/Gallery';
 import Affix from 'components/Affix';
+import ThemeContext from 'components/ThemeContext';
 import { PostBig } from 'components/Post';
 
 import './style.less';
@@ -57,6 +59,7 @@ export default class PostPage extends PureComponent {
 
     this.$content = React.createRef();
     this.$gallery = React.createRef();
+    this.$disqus = React.createRef();
   }
 
   componentDidMount() {
@@ -75,6 +78,35 @@ export default class PostPage extends PureComponent {
 
     $gallery.destroy();
   }
+
+  _renderComments = () => {
+    if (typeof window === 'undefined') return null;
+
+    const { data } = this.props;
+    const { post } = data;
+
+    return (
+      <ThemeContext.Consumer>
+        {() => (
+          <ReactDisqusComments
+            ref={this.$disqus}
+            shortname={process.env.GATSBY_DISQUS_SHORTNAME}
+            identifier={post.id}
+            title={pick(post, 'frontmatter.title')}
+            url={window.location.href}
+          >
+            {setTimeout(
+              () =>
+                this.$disqus &&
+                this.$disqus.current &&
+                this.$disqus.current.loadDisqus(),
+              300
+            )}
+          </ReactDisqusComments>
+        )}
+      </ThemeContext.Consumer>
+    );
+  };
 
   render() {
     const { data } = this.props;
@@ -138,6 +170,7 @@ export default class PostPage extends PureComponent {
           className="post-page__content"
           dangerouslySetInnerHTML={{ __html: pick(post, 'html') }}
         />
+        <div className="post-page__disqus">{this._renderComments()}</div>
         <Media query="(max-width: 768px)">
           {matches =>
             matches ? (

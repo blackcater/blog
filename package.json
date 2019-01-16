@@ -52,6 +52,7 @@
     "prop-types": "^15.6.2",
     "react": "16.7.0",
     "react-content-loader": "^3.4.2",
+    "react-disqus-comments": "^1.4.0",
     "react-dom": "16.7.0",
     "react-media": "^1.9.2",
     "react-transition-group": "^2.5.3"
