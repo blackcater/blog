@@ -27,7 +27,7 @@
 - [站点配置](#站点配置)
   - [基本配置](#添加作者)
   - [Google Analytics](#google-analytics)
-  - [Disqus](Disqus)
+  - [Disqus](#disqus)
   - [Algolia](#algolia)
 
 ## 安装

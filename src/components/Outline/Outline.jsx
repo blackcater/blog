@@ -31,7 +31,10 @@ class Outline extends PureComponent {
   };
 
   _handleGotoAnchor = ({ value }) => {
-    window.location.hash = `#${value.toLowerCase().replace(/\s+/g, '-')}`;
+    window.location.hash = `#${value
+      .toLowerCase()
+      .replace(/\s+/g, '-')
+      .replace(/\./g, '')}`;
   };
 
   render() {
