@@ -5267,10 +5267,20 @@ gatsby-remark-abbr@^1.0.0:
     remark-abbr "^1.0.7"
     unist-util-visit "^1.2.0"
 
-gatsby-remark-embed-gist@^1.1.4:
-  version "1.1.4"
-  resolved "https://registry.yarnpkg.com/gatsby-remark-embed-gist/-/gatsby-remark-embed-gist-1.1.4.tgz#44a3b049b1b0bb769999c814a10eba20073df795"
-  integrity sha512-fbGWa8RnNUuVUJgSUD0VjtgO+bW9Y//vFAqWf8/YC/aKellJ0DriOuOwxHICOQ9z2zlgFmxwjE1MmR54KvXMkA==
+gatsby-remark-autolink-headers@^2.0.12:
+  version "2.0.12"
+  resolved "https://registry.yarnpkg.com/gatsby-remark-autolink-headers/-/gatsby-remark-autolink-headers-2.0.12.tgz#96830bd7496ace7d1b7e07444aa09ecbe2ac59d2"
+  integrity sha512-TI7dpdHOUohIWCW7i8ta4zZAdWG5C2ZmrHMC9flWGWQ62oq6Q2eW+I1I/v//UZ+vJ1dRaSX2lmsVFmt87rLVHQ==
+  dependencies:
+    "@babel/runtime" "^7.0.0"
+    github-slugger "^1.1.1"
+    mdast-util-to-string "^1.0.2"
+    unist-util-visit "^1.3.0"
+
+gatsby-remark-embed-gist@^1.1.5:
+  version "1.1.5"
+  resolved "https://registry.yarnpkg.com/gatsby-remark-embed-gist/-/gatsby-remark-embed-gist-1.1.5.tgz#ff9e2f149296c3bf9e2f48c7e6ed09b5b9cc8752"
+  integrity sha512-U+aexBHYmhgL/roX1hbj5+Ea2VYPjGVBbi3aa8231L0oj6UqpePrfo4YJtfUQqRr51s7SLfPZAO9uIvEcpIJZw==
   dependencies:
     async-unist-util-visit "^1.0.0"
     babel-plugin-transform-runtime "^6.23.0"
@@ -9829,10 +9839,10 @@ react-media@^1.9.2:
     json2mq "^0.2.0"
     prop-types "^15.5.10"
 
-react-transition-group@^2.5.2:
-  version "2.5.2"
-  resolved "https://registry.yarnpkg.com/react-transition-group/-/react-transition-group-2.5.2.tgz#9457166a9ba6ce697a3e1b076b3c049b9fb2c408"
-  integrity sha512-vwHP++S+f6KL7rg8V1mfs62+MBKtbMeZDR8KiNmD7v98Gs3UPGsDZDahPJH2PVprFW5YHJfh6cbNim3zPndaSQ==
+react-transition-group@^2.5.3:
+  version "2.5.3"
+  resolved "https://registry.yarnpkg.com/react-transition-group/-/react-transition-group-2.5.3.tgz#26de363cab19e5c88ae5dbae105c706cf953bb92"
+  integrity sha512-2DGFck6h99kLNr8pOFk+z4Soq3iISydwOFeeEVPjTN6+Y01CmvbWmnN02VuTWyFdnRtIDPe+wy2q6Ui8snBPZg==
   dependencies:
     dom-helpers "^3.3.1"
     loose-envify "^1.4.0"

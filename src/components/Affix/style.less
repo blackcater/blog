@@ -12,7 +12,8 @@
   cursor: pointer;
   overflow: hidden;
 
-  .transition(@properties: bottom);
+  @properties: bottom, background-color;
+  .transition(@properties: @properties);
 
   &:hover {
     background-color: @gray-bg-color;

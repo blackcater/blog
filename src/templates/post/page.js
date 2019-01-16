@@ -6,6 +6,7 @@ import cls from 'classnames';
 import pick from 'utils/pick';
 
 import Layout from 'components/Layout';
+import Outline from 'components/Outline';
 import Gallery from 'components/Gallery';
 import Affix from 'components/Affix';
 import { PostBig } from 'components/Post';
@@ -80,6 +81,7 @@ export default class PostPage extends PureComponent {
     const { post, prevPost, nextPost } = data;
     const tags = pick(post, 'frontmatter.tags') || [];
     const series = pick(post, 'frontmatter.series');
+    const headings = pick(post, 'headings') || [];
 
     return (
       <Layout
@@ -153,6 +155,7 @@ export default class PostPage extends PureComponent {
             )
           }
         </Media>
+        <Outline list={headings} />
         <Gallery ref={this.$gallery} />
         <Affix />
       </Layout>

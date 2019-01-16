@@ -1,0 +1,101 @@
+@import '~styles/common';
+
+.outline {
+  &__reference {
+    position: fixed;
+    left: 20px;
+    bottom: 20px;
+    width: 40px;
+    height: 40px;
+    line-height: 40px;
+    border-radius: 20px;
+    background-color: @header-bg-color;
+    box-shadow: @header-shadow;
+    cursor: pointer;
+    overflow: hidden;
+    text-align: center;
+
+    .transition(@properties: background-color);
+
+    &:hover {
+      background-color: @gray-bg-color;
+    }
+
+    i {
+      font-size: 24px;
+      vertical-align: sub;
+    }
+  }
+
+  &__anchor {
+    padding: 20px;
+
+    &-title {
+      margin-bottom: 24px;
+      color: @title-color;
+      text-align: center;
+      font-size: 20px;
+      font-weight: 600;
+
+      .titleFF();
+    }
+
+    &-list {
+    }
+
+    &-item {
+      margin: 0.5em 0;
+      color: @title-color;
+      font-size: 14px;
+      font-weight: 600;
+      cursor: pointer;
+
+      .titleFF();
+
+      &[data-depth='3'] {
+        text-indent: 1em;
+      }
+
+      &[data-depth='4'] {
+        text-indent: 2em;
+      }
+
+      &:hover {
+        color: @primary-color;
+      }
+    }
+  }
+}
+
+// dark theme
+[data-theme='dark'] {
+  .outline {
+    &__reference {
+      background-color: @d-header-bg-color;
+      box-shadow: @d-header-shadow;
+
+      &:hover {
+        background-color: @d-gray-bg-color;
+      }
+    }
+
+    &__anchor {
+      &-title {
+        color: @d-title-color;
+
+        .titleFF();
+      }
+
+      &-list {
+      }
+
+      &-item {
+        color: @d-title-color;
+
+        &:hover {
+          color: @d-primary-color;
+        }
+      }
+    }
+  }
+}

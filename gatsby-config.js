@@ -56,6 +56,7 @@ module.exports = {
           },
           'gatsby-remark-abbr',
           'gatsby-remark-emoji',
+          'gatsby-remark-autolink-headers',
           {
             resolve: `gatsby-remark-prismjs`,
             options: {
