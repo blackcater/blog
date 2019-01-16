@@ -24,17 +24,25 @@ class Popper extends PureComponent {
 
     const { className } = props;
 
-    this.$container = document.createElement('div');
-    this.$container.className = className;
+    this.$container =
+      typeof window !== 'undefined' ? document.createElement('div') : null;
+
+    if (this.$container) {
+      this.$container.className = className;
+    }
   }
 
   componentDidMount() {
+    if (!this.$container) return;
+
     $root && $root.appendChild(this.$container);
 
     on(this.$container, 'click', this._handleClick);
   }
 
   componentWillUnmount() {
+    if (!this.$container) return;
+
     $root && $root.removeChild(this.$container);
 
     off(this.$container, 'click', this._handleClick);
@@ -47,6 +55,8 @@ class Popper extends PureComponent {
 
   render() {
     const { children } = this.props;
+
+    if (!this.$container) return null;
 
     return ReactDOM.createPortal(children, this.$container);
   }

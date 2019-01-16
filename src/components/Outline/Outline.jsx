@@ -27,7 +27,7 @@ class Outline extends PureComponent {
   };
 
   _getMaxHeight = () => {
-    return window ? window.innerHeight - 200 : 200;
+    return typeof window !== 'undefined' ? window.innerHeight - 200 : 200;
   };
 
   _handleGotoAnchor = ({ value }) => {
