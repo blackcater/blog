@@ -1,5 +1,4 @@
 import React, { PureComponent } from 'react';
-import Media from 'react-media';
 import ReactDisqusComments from 'react-disqus-comments';
 import { Link, graphql } from 'gatsby';
 import Img from 'gatsby-image';
@@ -171,23 +170,16 @@ export default class PostPage extends PureComponent {
           dangerouslySetInnerHTML={{ __html: pick(post, 'html') }}
         />
         <div className="post-page__disqus">{this._renderComments()}</div>
-        <Media query="(max-width: 768px)">
-          {matches =>
-            matches ? (
-              <div className="post-page__footer">
-                {nextPost && <PostBig post={nextPost} />}
-                {prevPost && <PostBig post={prevPost} />}
-              </div>
-            ) : (
-              <div className="post-page__footer">
-                {nextPost && <PostBigInfo {...nextPost} title="READ NEXT" />}
-                {prevPost && (
-                  <PostBigInfo {...prevPost} title="READ PREV" reverse={true} />
-                )}
-              </div>
-            )
-          }
-        </Media>
+        <div data-size="normal" className="post-page__footer">
+          {nextPost && <PostBig post={nextPost} />}
+          {prevPost && <PostBig post={prevPost} />}
+        </div>
+        <div data-size="large" className="post-page__footer">
+          {nextPost && <PostBigInfo {...nextPost} title="READ NEXT" />}
+          {prevPost && (
+            <PostBigInfo {...prevPost} title="READ PREV" reverse={true} />
+          )}
+        </div>
         <Outline list={headings} />
         <Gallery ref={this.$gallery} />
         <Affix />

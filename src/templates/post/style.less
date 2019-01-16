@@ -207,9 +207,14 @@
   }
 
   &__footer {
+    display: none;
     margin: 0 auto 24px;
     padding: 0 16px;
     max-width: 1224px;
+
+    &[data-size='large'] {
+      display: block;
+    }
   }
 
   &__big-info {
@@ -296,7 +301,18 @@
   }
 }
 
-@media (max-width: @desktop-break-point - 1px) {
+@media (max-width: @tablet-break-point) {
+  .post-page {
+    &__footer[data-size='large'] {
+      display: none;
+    }
+    &__footer[data-size='normal'] {
+      display: block;
+    }
+  }
+}
+
+@media (max-width: @desktop-break-point) {
   .post-page {
     &__header {
       margin: 0 0 40px;

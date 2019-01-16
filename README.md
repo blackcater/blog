@@ -27,6 +27,7 @@
 - [站点配置](#站点配置)
   - [基本配置](#添加作者)
   - [Google Analytics](#google-analytics)
+  - [Disqus](Disqus)
   - [Algolia](#algolia)
 
 ## 安装
@@ -163,6 +164,18 @@ series: annual-summary
 
 ```dotenv
 GATSBY_GOOGLE_ANALYTICS_TRACKINGID=xxxxxxxxx
+```
+
+### Disqus
+
+Disqus 是国外的网站评论系统，免费的噢～ 申请一个号即可。
+
+你需要在项目根目录创建一个 `.env.development` 和 `.env.production` 文件。
+
+在文件中添加环境变量 `GATSBY_DISQUS_SHORTNAME`
+
+```dotenv
+GATSBY_DISQUS_SHORTNAME=xxxxxxxxx
 ```
 
 ### Algolia
