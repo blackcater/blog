@@ -18,7 +18,7 @@
   },
   "devDependencies": {
     "dotenv": "^6.2.0",
-    "gatsby": "^2.0.119",
+    "gatsby": "^2.1.1",
     "gatsby-cli": "^2.4.10",
     "gatsby-image": "^2.0.29",
     "gatsby-plugin-algolia": "^0.3.0",
@@ -49,7 +49,7 @@
     "dom-lib": "^1.1.1",
     "popper.js": "^1.14.7",
     "prismjs": "^1.15.0",
-    "prop-types": "^15.7.1",
+    "prop-types": "^15.7.2",
     "react": "16.8.1",
     "react-content-loader": "^4.0.1",
     "react-disqus-comments": "^1.4.0",

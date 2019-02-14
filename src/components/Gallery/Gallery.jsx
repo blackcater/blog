@@ -31,14 +31,6 @@ class Gallery extends PureComponent {
     this.$imgFuncs = [];
   }
 
-  // componentDidMount() {
-  //   on(window, 'scroll', this._handleExitingGallery);
-  // }
-  //
-  // componentWillUnmount() {
-  //   off(window, 'scroll', this._handleExitingGallery);
-  // }
-
   load = $imgs => {
     const images = [];
 
