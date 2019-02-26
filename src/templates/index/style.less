@@ -61,16 +61,18 @@
 
       & > a {
         text-decoration: none;
+
+        &:last-child {
+          .series {
+            margin-bottom: 0;
+          }
+        }
       }
 
       .series {
         margin-bottom: 24px;
 
         .clearfix();
-
-        &:last-child {
-          margin-bottom: 0;
-        }
 
         &__cover {
           float: left;
@@ -92,8 +94,6 @@
         &__desc {
           color: @title-color;
           font-size: 13px;
-
-          .ellipsis();
         }
       }
     }
@@ -183,16 +183,18 @@
 
       & > a {
         text-decoration: none;
+
+        &:last-child {
+          .author {
+            margin-bottom: 0;
+          }
+        }
       }
 
       .author {
         margin-bottom: 24px;
 
         .clearfix();
-
-        &:last-child {
-          margin-bottom: 0;
-        }
 
         &__avatar {
           float: left;
@@ -215,8 +217,6 @@
         &__desc {
           color: @title-color;
           font-size: 13px;
-
-          .ellipsis();
         }
       }
     }

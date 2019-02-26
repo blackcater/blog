@@ -1,0 +1,18 @@
+{
+  "id": "vsuite",
+  "name": "vsuite",
+  "email": "blackcater2015@gmail.com",
+  "nickname": "vsuite",
+  "avatar": "avatar/vsuite.png",
+  "slogan": "VSUITE（Vue Suite 的简写）是一套为后台产品而生的 Vue 组建库。",
+  "links": [
+    {
+      "icon": "github",
+      "url": "https://www.github.com/vsuite"
+    },
+    {
+      "icon": "twitter",
+      "url": "https://vsuite.blackcater.win"
+    }
+  ]
+}

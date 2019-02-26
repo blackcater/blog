@@ -125,7 +125,7 @@ yarn serve
   // 必填
   description: '每年一度总结————回顾过去，展望未来！',
   // 必填
-  cover: 'cover/annual-summary-cover.png',
+  cover: advanced-frontend.png,
 }
 ```
 
