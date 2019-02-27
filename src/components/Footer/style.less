@@ -1,51 +1,117 @@
 @import '~styles/common';
 
 .footer {
+  display: block;
   width: 100%;
   background-color: @footer-bg-color;
 
   .transition(@properties: background-color);
 
   &__wrapper {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
     margin: 0 auto;
-    padding: 40px;
-    max-width: 1000px;
-    height: 30px;
+    padding: 40px 40px 0;
+    max-width: 1224px;
 
     .clearfix();
   }
 
   &__logo {
-    float: left;
-    color: @d-title-color;
-    font-size: 28px;
-    font-weight: 600;
+    margin-right: 15px;
+    width: 33%;
+    color: @d-text-color;
 
-    .titleFF();
+    .title {
+      margin-bottom: 15px;
+      color: @d-title-color;
+      font-size: 28px;
+      font-weight: 600;
+
+      .titleFF();
+
+      a {
+        margin-left: 15px;
+        color: @d-title-color;
+        font-size: 14px;
+        text-decoration: none;
+      }
+    }
   }
 
   &__links {
-    float: right;
-    margin: 0;
-    padding: 0;
-    list-style: none;
+    flex: 1;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
 
-    .clearfix();
+  &__link-list {
+    margin-bottom: 40px;
+    width: 50%;
 
-    li {
-      margin-right: 16px;
-      float: left;
-      color: @d-gray-color;
-      line-height: 30px;
+    .title {
+      color: @d-text-color;
+      height: 40px;
+      line-height: 40px;
+      font-weight: 700;
+    }
 
-      a {
-        color: inherit;
-        text-decoration: none;
+    ul {
+      margin: 0;
+      padding: 0;
+      list-style: none;
+
+      li {
+        a {
+          color: @d-title-color;
+          text-decoration: none;
+          line-height: 2;
+
+          &:hover {
+            color: @d-primary-color;
+          }
+        }
+
+        div.tag {
+          display: inline-block;
+          padding: 2px 6px;
+          height: 22px;
+          line-height: 22px;
+          background-color: @d-text-color;
+          color: @d-title-color;
+          border-radius: 4px;
+          transform: scale(0.6);
+
+          &.tag--hot {
+            background-color: #bf2a53;
+          }
+
+          &.tag--soon {
+            background-color: #a74911;
+          }
+        }
       }
+    }
+  }
+}
 
-      &:last-child {
-        margin-right: 0;
-      }
+@media (max-width: @tablet-break-point) {
+  .footer {
+    &__logo {
+      width: 100%;
+      margin-bottom: 30px;
+    }
+  }
+}
+
+@media (max-width: @mobile-break-point) {
+  .footer {
+    text-align: center;
+
+    &__link-list {
+      width: 100%;
     }
   }
 }

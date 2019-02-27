@@ -13,6 +13,47 @@ module.exports = {
     nickname: 'blackcater',
     slogan: '求知若饥，虚心若愚 (Stay hungry, stay foolish)',
     email: 'blackcater2015@gmail.com',
+    footer: {
+      links: [
+        {
+          name: 'CHANNELS',
+          list: [
+            {
+              name: 'Github',
+              link: 'https://github.com/blackcater',
+              tag: 'hot',
+            },
+            {
+              name: 'Twitter',
+              link: 'https://www.twitter.com/tomtang2015',
+            },
+            {
+              name: 'Weibo',
+              link: 'https://www.weibo.com/tangyinong2013',
+            },
+            {
+              name: 'Email',
+              link: 'mailto:blackcater2015@gmail.com',
+            },
+          ],
+        },
+        {
+          name: 'PROJECTS',
+          list: [
+            {
+              name: 'VSUITE',
+              link: 'https://github.com/vsuite/vsuite',
+              tag: 'soon',
+            },
+            {
+              name: 'BCFLOW',
+              link: 'https://github.com/the-bcflow/bcflow',
+              tag: 'soon',
+            },
+          ],
+        },
+      ],
+    },
   },
   plugins: [
     // https://www.npmjs.com/package/gatsby-source-filesystem
