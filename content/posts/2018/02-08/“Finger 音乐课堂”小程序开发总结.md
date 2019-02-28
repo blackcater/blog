@@ -37,10 +37,9 @@ tags: [miniprogram]
 
 在讲解这两个方法之前，我先讲一下 sessionKey 吧。仔细看过微信开发文档的人，肯定都见过 sessionKey 这个字眼。微信在解密加密数据的时候，都需要这个值才能解密成功。通过 jssdk 或者其他方法拿到 code 之后，再向服务端请求换取 sessionKey。sessionKey 不推荐保存在客户端，所以换取的过程应该坐在服务端，客户端通过请求服务端接口拿到换取后的信息（openid 和 unionid）。
 
-调用 `wx.login` 时，会得到一个 code，有了 code，我们(服务端)就可以请求 `https://api.weixin.qq.com/sns/jscode2session?appid=<APP_ID>&secret=<APP_SECRET>&js_code=<CODE>&grant_type=authorization_code`。之后你就可以在返回结果中，拿到 sessionKey, openid 和 unionid。`APP_ID` 和 `APP_SECRET` 分别是小程序的 appid 和 secret，你都可以在小程序的后台看到。`CODE` 就是通过 `wx.login` 得到的。
+调用 `wx.login` 时，会得到一个 code，有了 code，我们(服务端)就可以请求 `https://api.weixin.qq.com/sns/jscode2session?appid=APP_ID&secret=APP_SECRET&js_code=CODE&grant_type=authorization_code`。之后你就可以在返回结果中，拿到 sessionKey, openid 和 unionid。`APP_ID` 和 `APP_SECRET` 分别是小程序的 appid 和 secret，你都可以在小程序的后台看到。`CODE` 就是通过 `wx.login` 得到的。
 
 ```javascript
-// highlight-next-line
 wx.login({
   success: ({ code, errMsg }) => {
     if (code) {

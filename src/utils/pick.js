@@ -7,7 +7,11 @@ export default function pick(data, keyPath) {
   for (let i = 0, len = keys.length; i < len; i++) {
     const key = keys[i];
 
-    if (!result.hasOwnProperty(key)) {
+    if (
+      result === null ||
+      result === undefined ||
+      !result.hasOwnProperty(key)
+    ) {
       break;
     }
 

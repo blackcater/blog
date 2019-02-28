@@ -95,10 +95,10 @@ export function TagList({ list }) {
 }
 
 export default ({ data, pageContext }) => {
-  const posts = pick(data, 'posts.edges').map(x => x.node) || [];
-  const series = pick(data, 'series.edges').map(x => x.node) || [];
-  const authors = pick(data, 'authors.edges').map(x => x.node) || [];
-  const tags = pick(data, 'tags.edges').map(x => x.node) || [];
+  const posts = (pick(data, 'posts.edges') || []).map(x => x.node) || [];
+  const series = (pick(data, 'series.edges') || []).map(x => x.node) || [];
+  const authors = (pick(data, 'authors.edges') || []).map(x => x.node) || [];
+  const tags = (pick(data, 'tags.edges') || []).map(x => x.node) || [];
 
   return (
     <Layout className="index-page">
