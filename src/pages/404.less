@@ -1,1 +1,37 @@
 @import '~styles/common';
+
+.notfound-page {
+  &__wrap {
+    margin: 50px auto;
+    padding: 0 30px;
+    max-width: 1024px;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-around;
+
+    img {
+      float: left;
+    }
+  }
+
+  &__content {
+    margin: 70px 60px;
+  }
+}
+
+@media (max-width: @tablet-break-point) {
+  .notfound-page {
+    &__wrap {
+      text-align: center;
+
+      img {
+        width: 100%;
+      }
+    }
+
+    &__content {
+      width: 100%;
+    }
+  }
+}
