@@ -40,10 +40,11 @@ tags: [miniprogram]
 调用 `wx.login` 时，会得到一个 code，有了 code，我们(服务端)就可以请求 `https://api.weixin.qq.com/sns/jscode2session?appid=<APP_ID>&secret=<APP_SECRET>&js_code=<CODE>&grant_type=authorization_code`。之后你就可以在返回结果中，拿到 sessionKey, openid 和 unionid。`APP_ID` 和 `APP_SECRET` 分别是小程序的 appid 和 secret，你都可以在小程序的后台看到。`CODE` 就是通过 `wx.login` 得到的。
 
 ```javascript
+// highlight-next-line
 wx.login({
   success: ({ code, errMsg }) => {
     if (code) {
-      //发起网络请求
+      // 发起网络请求
       wx.request({
         // 请求你自己的服务器，该接口背后调用了 https://api.weixin.qq.com/sns/jscode2session?appid=<APP_ID>&secret=<APP_SECRET>&js_code=<CODE>&grant_type=authorization_code
         url: 'https://test.server.com/wechat/minprogram/login',
