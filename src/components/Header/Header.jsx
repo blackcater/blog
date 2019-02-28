@@ -27,13 +27,6 @@ class Header extends PureComponent {
     this.lastScrollY = 0;
   }
 
-  static getDerivedStateFromProps(props, state) {
-    console.dir(props);
-    console.dir(state);
-
-    return null;
-  }
-
   componentDidMount() {
     const { autoHidden } = this.props;
 

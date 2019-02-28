@@ -1,5 +1,5 @@
 import React, { PureComponent } from 'react';
-import { push } from 'gatsby';
+import { navigate } from 'gatsby';
 import ContentLoader from 'react-content-loader';
 import algoliasearch from 'algoliasearch';
 import cls from 'classnames';
@@ -35,7 +35,7 @@ class SearchPage extends PureComponent {
   constructor(props) {
     super(props);
 
-    const { q, tab, ...params } = qs.parse(this.props.location.search);
+    const { q, ab: tab, ...params } = qs.parse(this.props.location.search);
 
     this.state = {
       params,
@@ -70,7 +70,7 @@ class SearchPage extends PureComponent {
   _handleTabChange = tab => {
     const { searchVal, params } = this.state;
 
-    push(`/search?q=${searchVal}&ab=${tab.value}&page=0`);
+    navigate(`/search?q=${searchVal}&ab=${tab.value}&page=0`);
 
     this.setState(
       {
