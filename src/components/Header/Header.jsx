@@ -1,13 +1,14 @@
 import React, { PureComponent } from 'react';
 import Media from 'react-media';
 import PropTypes from 'prop-types';
-import { Link, StaticQuery, graphql } from 'gatsby';
+import { StaticQuery, graphql } from 'gatsby';
 import Img from 'gatsby-image';
 import { on, off, addStyle, animation } from 'dom-lib';
 import cls from 'classnames';
 import pick from 'utils/pick';
 
 import ThemeContext from 'components/ThemeContext';
+import Link from 'components/Link';
 import { Icon } from 'components/common';
 
 import './style.less';
@@ -24,6 +25,13 @@ class Header extends PureComponent {
 
     this.$header = React.createRef();
     this.lastScrollY = 0;
+  }
+
+  static getDerivedStateFromProps(props, state) {
+    console.dir(props);
+    console.dir(state);
+
+    return null;
   }
 
   componentDidMount() {
@@ -80,7 +88,14 @@ class Header extends PureComponent {
 
   render() {
     const { showMenu } = this.state;
-    const { title, shadow, maxWidth, toggleTheme } = this.props;
+    const {
+      className,
+      style,
+      title,
+      shadow,
+      maxWidth,
+      toggleTheme,
+    } = this.props;
     const theme = this.context;
 
     return (
@@ -110,7 +125,8 @@ class Header extends PureComponent {
         render={data => (
           <div
             ref={this.$header}
-            className={cls(['header', shadow && 'header--shadow'])}
+            style={style}
+            className={cls(['header', className, shadow && 'header--shadow'])}
           >
             <div className="header__content" style={{ maxWidth }}>
               <div className="header__content__left">

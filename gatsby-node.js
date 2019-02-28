@@ -79,6 +79,7 @@ exports.createPages = ({ page, graphql, actions }) => {
                 date
                 author {
                   id
+                  organization
                 }
                 tags {
                   id
@@ -325,7 +326,9 @@ function createAuthorPage(createPage) {
           },
         },
         prefix: `/author/${author.id}/`,
-        component: pathResolve('src/templates/author/page.js'),
+        component: author.organization
+          ? pathResolve('src/templates/organization/page.js')
+          : pathResolve('src/templates/author/page.js'),
         context: { author: author.id },
       },
       createPage

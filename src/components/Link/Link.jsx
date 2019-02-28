@@ -8,7 +8,7 @@ function useNativeLink(to) {
 
 const LinkAdvance = ({ to, children, ...rest }) => {
   return useNativeLink(to) ? (
-    <a href={to} {...rest}>
+    <a href={to} rel="noopener noreferrer" {...rest}>
       {children}
     </a>
   ) : (

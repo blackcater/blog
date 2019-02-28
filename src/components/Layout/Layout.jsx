@@ -42,7 +42,7 @@ class Layout extends PureComponent {
 
   render() {
     const { theme } = this.state;
-    const { className, children, ...rest } = this.props;
+    const { className, headerClassName, headerStyle, children, ...rest } = this.props;
 
     return (
       <StaticQuery
@@ -59,7 +59,12 @@ class Layout extends PureComponent {
         render={() => (
           <ThemeContext.Provider value={theme}>
             <div className={cls(['layout', className])}>
-              <Header toggleTheme={this._toggleTheme} {...rest} />
+              <Header
+                className={headerClassName}
+                style={headerStyle}
+                toggleTheme={this._toggleTheme}
+                {...rest}
+              />
               <div className="layout__content">{children}</div>
               <Footer />
             </div>

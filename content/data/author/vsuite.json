@@ -5,13 +5,15 @@
   "nickname": "vsuite",
   "avatar": "avatar/vsuite.png",
   "slogan": "VSUITE（Vue Suite 的简写）是一套为后台产品而生的 Vue 组建库。",
+  "organization": true,
+  "backgroundColor": "#e6728d",
   "links": [
     {
-      "icon": "github",
+      "icon": "github-outline",
       "url": "https://www.github.com/vsuite"
     },
     {
-      "icon": "twitter",
+      "icon": "globe",
       "url": "https://vsuite.blackcater.win"
     }
   ]
