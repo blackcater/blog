@@ -92,17 +92,27 @@ module.exports = {
             resolve: `gatsby-remark-images`,
             options: {
               maxWidth: 1200,
+              showCaptions: true,
               linkImagesToOriginal: false,
               backgroundColor: 'transparent',
             },
           },
           'gatsby-remark-abbr',
           'gatsby-remark-emoji',
+          'gatsby-remark-sub-sup',
+          {
+            resolve: `gatsby-remark-mermaid`,
+            options: {
+              theme: 'neutral',
+            },
+          },
+          'gatsby-remark-external-links',
           'gatsby-remark-autolink-headers',
           {
             resolve: `gatsby-remark-prismjs`,
             options: {
               classPrefix: 'language-',
+              noInlineHighlight: false,
             },
           },
           {
