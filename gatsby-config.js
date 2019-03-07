@@ -88,6 +88,18 @@ module.exports = {
       options: {
         excerpt_separator: `<!-- end -->`,
         plugins: [
+          'gatsby-remark-abbr',
+          'gatsby-remark-autolink-headers',
+          'gatsby-remark-copy-linked-files',
+          {
+            resolve: `gatsby-remark-embed-gist`,
+            options: {
+              username: 'blackcater',
+              includeDefaultCss: true,
+            },
+          },
+          'gatsby-remark-emoji',
+          'gatsby-remark-external-links',
           {
             resolve: `gatsby-remark-images`,
             options: {
@@ -97,17 +109,13 @@ module.exports = {
               backgroundColor: 'transparent',
             },
           },
-          'gatsby-remark-abbr',
-          'gatsby-remark-emoji',
-          'gatsby-remark-sub-sup',
+          'gatsby-remark-katex',
           {
             resolve: `gatsby-remark-mermaid`,
             options: {
               theme: 'neutral',
             },
           },
-          'gatsby-remark-external-links',
-          'gatsby-remark-autolink-headers',
           {
             resolve: `gatsby-remark-prismjs`,
             options: {
@@ -116,12 +124,12 @@ module.exports = {
             },
           },
           {
-            resolve: 'gatsby-remark-embed-gist',
+            resolve: `gatsby-remark-responsive-iframe`,
             options: {
-              username: 'blackcater',
-              includeDefaultCss: true,
+              wrapperStyle: `margin: 2em -30px`,
             },
           },
+          'gatsby-remark-sub-sup',
         ],
       },
     },

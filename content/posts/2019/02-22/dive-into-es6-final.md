@@ -84,3 +84,13 @@ sequenceDiagram
 ~subscript~, e.g. a~i~
 
 ^superscript^, e.g. e^x^
+
+This is a beautiful iframe:
+
+<iframe src="https://www.blackcater.com" width="300" height="100"></iframe>
+
+KaTeX example $a^2 + b^2 = c^2$
+
+$$
+a^2 + b^2 = c^2
+$$

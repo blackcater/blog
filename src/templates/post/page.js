@@ -12,6 +12,7 @@ import Affix from 'components/Affix';
 import ThemeContext from 'components/ThemeContext';
 import { PostBig } from 'components/Post';
 
+import 'katex/dist/katex.min.css';
 import './style.less';
 
 function PostBigInfo({
