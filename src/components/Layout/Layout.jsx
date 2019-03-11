@@ -1,4 +1,5 @@
 import React, { PureComponent } from 'react';
+import Snakke from 'react-snakke';
 import PropTypes from 'prop-types';
 import { StaticQuery, graphql } from 'gatsby';
 import { getAttribute, setAttribute } from 'utils/attribute';
@@ -42,7 +43,14 @@ class Layout extends PureComponent {
 
   render() {
     const { theme } = this.state;
-    const { className, headerClassName, headerStyle, children, ...rest } = this.props;
+    const {
+      className,
+      headerClassName,
+      headerStyle,
+      children,
+      snakke,
+      ...rest
+    } = this.props;
 
     return (
       <StaticQuery
@@ -65,6 +73,14 @@ class Layout extends PureComponent {
                 toggleTheme={this._toggleTheme}
                 {...rest}
               />
+              {snakke && (
+                <Snakke
+                  shadow
+                  color={theme === 'light' ? '#65c0a3' : '#4c8170'}
+                  height="3px"
+                  opacity=".8"
+                />
+              )}
               <div className="layout__content">{children}</div>
               <Footer />
             </div>
@@ -76,7 +92,12 @@ class Layout extends PureComponent {
 }
 
 Layout.propTypes = {
+  snakke: PropTypes.bool,
   children: PropTypes.node.isRequired,
+};
+
+Layout.defaultProps = {
+  snakke: false,
 };
 
 export default Layout;

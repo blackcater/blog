@@ -119,6 +119,7 @@ export default class PostPage extends PureComponent {
       <Layout
         className="post-page"
         autoHidden
+        snakke
         title={series && <Link to={`/series/${series.id}`}>{series.name}</Link>}
       >
         <div className="post-page__header">
