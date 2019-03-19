@@ -102,7 +102,7 @@ export default ({ data, pageContext }) => {
 
   return (
     <Layout className="index-page">
-      {!pageContext.prev && <Slider list={posts.slice(0, 3)} />}
+      {!pageContext.prev && <Slider list={posts.slice(0, 1)} />}
       <div className="index-page__separator" />
       <div className="index-page__title">FEATURED</div>
       <Media query="(max-width: 780px)">
@@ -110,7 +110,7 @@ export default ({ data, pageContext }) => {
           matches ? (
             <Parallel className="index-page__parallel">
               <Parallel.Line style={{ width: '100%' }}>
-                {posts.slice(3).map(node => (
+                {posts.slice(1).map(node => (
                   <PostBig key={node.id} post={node} />
                 ))}
                 <SeriesList list={series} cover={data.seriesCover} />
@@ -125,7 +125,7 @@ export default ({ data, pageContext }) => {
               offset={{ top: 65, bottom: 0 }}
             >
               <Parallel.Line style={{ marginRight: 64 }}>
-                {posts.slice(3).map(node => (
+                {posts.slice(1).map(node => (
                   <PostBig key={node.id} post={node} />
                 ))}
                 <Pagination {...pageContext} />
