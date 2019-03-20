@@ -92,6 +92,8 @@ class Gallery extends PureComponent {
       };
     }
 
+    addStyle($img, { opacity: 0 });
+
     this.setState({
       show: true,
       curr: index,
@@ -113,6 +115,8 @@ class Gallery extends PureComponent {
     const $img = this.$imgs[curr];
     const scrollY = window.scrollY || window.pageYOffset;
     const offset = getOffset($img);
+
+    addStyle($img, { opacity: 1 });
 
     this.setState(
       {
@@ -184,7 +188,7 @@ class Gallery extends PureComponent {
             <div className="gallery__mask" style={maskMap[state]} />
             <img
               className="gallery__preview"
-              style={stateMap[state]}
+              style={{ ...stateMap[state], ...maskMap[state] }}
               src={image}
               alt="preview"
             />
