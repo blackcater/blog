@@ -5,6 +5,7 @@ import PropTypes from 'prop-types';
 import PopperJS from 'popper.js';
 import cls from 'classnames';
 import { on, off } from 'dom-lib';
+import merge from 'lodash/merge';
 
 import './style.less';
 
@@ -128,7 +129,7 @@ class Popover extends Component {
 
   _updatePopper = () => {
     if (this.popperJS) {
-      return this.popperJS.update();
+      return this.popperJS.scheduleUpdate();
     }
 
     this._createPopper();
@@ -138,17 +139,27 @@ class Popover extends Component {
     const $reference = this.$reference.current;
     const $popper = this.$popper.current && this.$popper.current.$container;
     const $arrow = this.$arrow.current;
+    const {
+      positionFixed,
+      eventsEnabled,
+      removeOnDestroy,
+      modifiers,
+    } = this.props;
 
     if (!$reference || !$popper) return;
 
     let options = {
+      positionFixed,
+      eventsEnabled,
+      removeOnDestroy,
+      modifiers,
       placement: this.props.placement,
       onCreate: this._handleCreate,
       // onUpdate: this._handleUpdate,
     };
 
     if ($arrow) {
-      options = Object.assign(options, {
+      options = merge(options, {
         modifiers: {
           arrow: {
             element: $arrow,
@@ -236,6 +247,10 @@ Popover.propTypes = {
   placement: PropTypes.oneOf(PopperJS.placements),
   reference: PropTypes.node,
   arrow: PropTypes.bool,
+  positionFixed: PropTypes.bool,
+  eventsEnabled: PropTypes.bool,
+  removeOnDestroy: PropTypes.bool,
+  modifiers: PropTypes.object,
   referenceClassName: PropTypes.string,
   popperClassName: PropTypes.string,
 };
@@ -245,6 +260,10 @@ Popover.defaultProps = {
   trigger: 'click',
   placement: 'bottom',
   arrow: true,
+  positionFixed: false,
+  eventsEnabled: true,
+  removeOnDestroy: false,
+  modifiers: {},
 };
 
 export default Popover;

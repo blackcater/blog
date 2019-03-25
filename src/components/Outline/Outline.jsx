@@ -45,6 +45,7 @@ class Outline extends PureComponent {
 
     return (
       <Popover
+        positionFixed
         namespace="outline"
         placement="top-start"
         reference={<Icon icon="menu" />}
