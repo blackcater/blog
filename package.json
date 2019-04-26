@@ -10,10 +10,11 @@
     "gatsby"
   ],
   "scripts": {
-    "serve": "gatsby develop",
-    "build": "gatsby build",
+    "clean": "rm -rf .cache public",
+    "serve": "yarn clean && gatsby develop",
+    "build": "yarn clean && gatsby build",
     "format": "prettier --write \"src/**/*.{js,jsx,less,css}\"",
-    "deploy": "sh deploy.sh",
+    "deploy": "yarn clean && sh deploy.sh",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "dependencies": {
