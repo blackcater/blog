@@ -55,7 +55,11 @@ tags: [translation]
 
 最后一条是至关重要的：如果你的电脑不支持同时执行多个操作，则操作系统不得不伪造。我们将快速看看这到底是怎么一会是。首先，我们先把**并发（Concurrency）**视为认知上的多任务同时执行，**真正的并行（True Parallelism）**视为多任务真正的同时执行。
 
-![concurrency-parallelism.png](https://cdn.nlark.com/yuque/0/2019/png/93017/1556073510759-b6e68214-6d65-457f-8a3c-f6096bc01ecd.png#align=left&display=inline&height=240&name=concurrency-parallelism.png&originHeight=240&originWidth=240&size=8410&status=done&width=240)<br />并发与真正的并行
+
+<figure>
+    <img src="https://cdn.nlark.com/yuque/0/2019/png/93017/1556073510759-b6e68214-6d65-457f-8a3c-f6096bc01ecd.png#align=left&display=inline&height=240&name=concurrency-parallelism.png&originHeight=240&originWidth=240&size=8410&status=done&width=240" alt="并发与真正的并行">
+    <figcaption>并发与真正的并行</figcaption>
+</figure>
 
 ## 什么使得并发和并行成为可能？
 

@@ -92,7 +92,7 @@ class Gallery extends PureComponent {
       };
     }
 
-    addStyle($img, { opacity: 0 });
+    // addStyle($img, { opacity: 0 });
 
     this.setState({
       show: true,
