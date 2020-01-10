@@ -3,7 +3,7 @@ title: JavaScript引擎基础：形与行内缓存（翻译）
 cover: cover.png
 author: blackcater
 date: 2019-05-01
-series: javascript-engine
+series: advanced-frontend
 tags: [translation]
 draft: true
 ---

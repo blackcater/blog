@@ -286,7 +286,7 @@
 }
 
 // dark theme
-[data-theme='dark'] {
+.dark-theme() {
   .search-page {
     &__tabs {
       color: @d-gray-color;
@@ -370,4 +370,8 @@
       }
     }
   }
+}
+
+[data-theme='dark'] {
+  .dark-theme();
 }

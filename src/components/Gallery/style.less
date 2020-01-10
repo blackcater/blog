@@ -30,7 +30,7 @@
 }
 
 // dark theme
-[data-theme='dark'] {
+.dark-theme() {
   .gallery {
     &__mask {
       background-color: @d-content-bg-color;
@@ -38,4 +38,8 @@
       .transition(@properties: background-color);
     }
   }
+}
+
+[data-theme='dark'] {
+  .dark-theme();
 }

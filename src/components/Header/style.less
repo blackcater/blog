@@ -161,7 +161,7 @@
 }
 
 // theme
-[data-theme='dark'] {
+.dark-theme() {
   .header {
     background-color: @d-header-bg-color;
 
@@ -199,6 +199,10 @@
       }
     }
   }
+}
+
+[data-theme='dark'] {
+  .dark-theme();
 }
 
 // media query

@@ -68,7 +68,7 @@
 }
 
 // theme
-[data-theme='dark'] {
+.dark-theme() {
   .slider {
     &__slide {
       background-color: @d-gray-bg-color;
@@ -86,4 +86,8 @@
       }
     }
   }
+}
+
+[data-theme='dark'] {
+  .dark-theme();
 }

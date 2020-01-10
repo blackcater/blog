@@ -24,7 +24,7 @@
 }
 
 // theme
-[data-theme='dark'] {
+.dark-theme() {
   .dropdown {
     &__item {
       &:hover {
@@ -36,4 +36,8 @@
       border-top-color: @d-separator-color;
     }
   }
+}
+
+[data-theme='dark'] {
+  .dark-theme();
 }

@@ -78,7 +78,7 @@
 
 // dark theme
 
-[data-theme='dark'] {
+.dark-theme() {
   .post-card {
     border-color: @d-line-color;
     box-shadow: 0 1px 4px @d-line-color;
@@ -99,4 +99,8 @@
       color: @d-gray-color;
     }
   }
+}
+
+[data-theme='dark'] {
+  .dark-theme();
 }

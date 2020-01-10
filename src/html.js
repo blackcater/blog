@@ -1,12 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import { DEFAULT_THEME } from 'components/ThemeContext';
-
 class HTML extends React.Component {
   render() {
     return (
-      <html {...this.props.htmlAttributes} data-theme={DEFAULT_THEME}>
+      <html {...this.props.htmlAttributes}>
         <head>
           <meta charSet="utf-8" />
           <meta httpEquiv="x-ua-compatible" content="ie=edge" />

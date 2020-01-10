@@ -7,7 +7,11 @@ import cls from 'classnames';
 
 import Header from 'components/Header';
 import Footer from 'components/Footer';
-import ThemeContext, { THEMES, DEFAULT_THEME } from 'components/ThemeContext';
+import ThemeContext, {
+  THEMES,
+  DEFAULT_THEME,
+  supportDarkMode,
+} from 'components/ThemeContext';
 
 import 'styles/index.less';
 import './style.less';
@@ -22,8 +26,22 @@ class Layout extends PureComponent {
   constructor(props) {
     super(props);
 
-    this.state = { theme: DEFAULT_THEME };
+    this.state = {
+      theme: supportDarkMode ? 'dark' : DEFAULT_THEME,
+    };
   }
+
+  componentDidMount() {
+    if (supportDarkMode) {
+      this._setTheme('dark');
+    }
+  }
+
+  _setTheme = theme => {
+    setAttribute($html, 'theme', theme);
+
+    this.setState({ theme });
+  };
 
   _toggleTheme = t => {
     const themes = THEMES;
@@ -31,14 +49,11 @@ class Layout extends PureComponent {
 
     if (theme === t) return;
 
-    const newTheme =
+    this._setTheme(
       themes.indexOf(t) !== -1
         ? t
-        : themes[(themes.indexOf(theme) + 1) % themes.length];
-
-    setAttribute($html, 'theme', newTheme);
-
-    this.setState({ theme: newTheme });
+        : themes[(themes.indexOf(theme) + 1) % themes.length]
+    );
   };
 
   render() {

@@ -57,7 +57,7 @@
 }
 
 // dark theme
-[data-theme='dark'] {
+.dark-theme() {
   .author-page {
     &__header {
       border-bottom-color: @d-separator-color;
@@ -71,4 +71,8 @@
       color: @d-title-color;
     }
   }
+}
+
+[data-theme='dark'] {
+  .dark-theme();
 }

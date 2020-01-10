@@ -234,7 +234,7 @@
 }
 
 // theme
-[data-theme='dark'] {
+.dark-theme() {
   .index-page {
     &__separator {
       background-color: @d-separator-color;
@@ -291,4 +291,8 @@
       }
     }
   }
+}
+
+[data-theme='dark'] {
+  .dark-theme();
 }

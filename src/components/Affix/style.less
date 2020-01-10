@@ -29,7 +29,7 @@
 }
 
 // dark theme
-[data-theme='dark'] {
+.dark-theme() {
   .affix {
     background-color: @d-header-bg-color;
     box-shadow: @d-header-shadow;
@@ -38,4 +38,8 @@
       background-color: @d-gray-bg-color;
     }
   }
+}
+
+[data-theme='dark'] {
+  .dark-theme();
 }

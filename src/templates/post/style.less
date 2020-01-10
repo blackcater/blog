@@ -420,7 +420,7 @@
 }
 
 // theme
-[data-theme='dark'] {
+.dark-theme() {
   .post-page {
     &__header {
       &__title {
@@ -527,4 +527,8 @@
       }
     }
   }
+}
+
+[data-theme='dark'] {
+  .dark-theme();
 }

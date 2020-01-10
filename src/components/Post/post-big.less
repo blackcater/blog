@@ -85,7 +85,7 @@
 }
 
 // theme
-[data-theme='dark'] {
+.dark-theme() {
   .post-big {
     border-bottom-color: @d-separator-color;
 
@@ -111,4 +111,8 @@
       }
     }
   }
+}
+
+[data-theme='dark'] {
+  .dark-theme();
 }

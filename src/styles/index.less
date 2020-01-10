@@ -11,9 +11,13 @@ body {
 }
 
 // theme
-[data-theme='dark'] {
+.dark-theme() {
   body {
     color: @d-text-color;
     background-color: @d-content-bg-color;
   }
+}
+
+[data-theme='dark'] {
+  .dark-theme();
 }

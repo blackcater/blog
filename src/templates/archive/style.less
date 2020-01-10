@@ -88,7 +88,8 @@
   }
 }
 
-[data-theme='dark'] {
+// dark theme
+.dark-theme() {
   .archive-page {
     &__year {
       &__title {
@@ -108,4 +109,8 @@
       }
     }
   }
+}
+
+[data-theme='dark'] {
+  .dark-theme();
 }

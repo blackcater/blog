@@ -50,7 +50,7 @@
 }
 
 // dark theme
-[data-theme='dark'] {
+.dark-theme() {
   .search {
     input {
       color: @d-title-color;
@@ -66,4 +66,8 @@
   &__loading-line {
     background-color: @d-primary-color;
   }
+}
+
+[data-theme='dark'] {
+  .dark-theme();
 }

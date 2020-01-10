@@ -2,7 +2,7 @@
 title: 搭建私有npm镜像
 cover: cover.png
 author: blackcater
-date: 2018-03-01
+date: 2019-03-01
 tags: [docker]
 ---
 

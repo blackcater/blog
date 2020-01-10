@@ -19,13 +19,22 @@ module.exports = {
           name: 'CHANNELS',
           list: [
             {
+              name: '语雀',
+              link: 'https://www.yuque.com/blackcater',
+              tag: 'hot',
+            },
+            {
               name: 'Github',
               link: 'https://github.com/blackcater',
               tag: 'hot',
             },
             {
+              name: 'Gitee',
+              link: 'https://gitee.com/blackcater',
+            },
+            {
               name: 'Twitter',
-              link: 'https://www.twitter.com/tomtang2015',
+              link: 'https://twitter.com/tang_elon',
             },
             {
               name: 'Weibo',
@@ -41,12 +50,12 @@ module.exports = {
           name: 'PROJECTS',
           list: [
             {
-              name: 'VSUITE',
+              name: 'vsuite',
               link: 'https://github.com/vsuite/vsuite',
               tag: 'soon',
             },
             {
-              name: 'BCFLOW',
+              name: 'bcflow',
               link: 'https://github.com/the-bcflow/bcflow',
               tag: 'soon',
             },

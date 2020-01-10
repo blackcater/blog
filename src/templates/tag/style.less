@@ -63,7 +63,7 @@
 }
 
 // dark-theme
-[data-theme='dark'] {
+.dark-theme() {
   .tag-page {
     &__title {
       color: @d-title-color;
@@ -73,4 +73,8 @@
       color: @d-gray-color;
     }
   }
+}
+
+[data-theme='dark'] {
+  .dark-theme();
 }

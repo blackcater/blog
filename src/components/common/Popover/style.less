@@ -83,7 +83,7 @@
 }
 
 // theme
-[data-theme='dark'] {
+.dark-theme() {
   .popover__popper {
     &__wrapper {
       background-color: @d-content-bg-color;
@@ -99,4 +99,8 @@
       }
     }
   }
+}
+
+[data-theme='dark'] {
+  .dark-theme();
 }

@@ -2,7 +2,7 @@
 title: “Finger 音乐课堂”小程序开发总结
 cover: cover.jpg
 author: blackcater
-date: 2018-02-08
+date: 2019-02-08
 tags: [miniprogram]
 ---
 
@@ -132,9 +132,7 @@ function combinePageMethods(methodName, list = []) {
       if (item[methodName]) {
         if (list.length - 1 !== index) {
           console.log(
-            `mixin: \`${
-              item.$name
-            }\`'s ${methodName} lifecycle method will be called`
+            `mixin: \`${item.$name}\`'s ${methodName} lifecycle method will be called`
           );
         }
 
