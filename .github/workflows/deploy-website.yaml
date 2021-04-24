@@ -1,0 +1,33 @@
+name: Deploy website
+
+on:
+  push:
+    # 只有推送到 master 分支才会触发
+    branches:
+      - master
+
+jobs:
+  generate:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repo
+        uses: actions/checkout@v2
+      - name: Use Node.js
+        uses: actions/setup-node@v2-beta
+        with:
+          node-version: "14"
+      - name: Install dependencies
+        run: |-
+          yarn global add pnpm
+          pnpm install
+      - name: Generate website
+        run: |-
+          pnpm build
+      - name: Deploy website
+        run: |-
+          cd public
+          git init
+          git add -A
+          time=$(date "+%Y/%m/%d-%H:%M:%S")
+          git commit -m "deploy on ${time}"
+          git push -f https://github.com/blackcater/blackcater.github.io.git master:master
