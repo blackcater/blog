@@ -119,8 +119,6 @@ packages:
       lodash.debounce: 4.0.8
       resolve: 1.20.0
       semver: 6.3.0
-    transitivePeerDependencies:
-      - supports-color
     dev: false
 
   /@babel/helper-define-polyfill-provider/0.2.0_@babel+core@7.13.16:
@@ -137,8 +135,6 @@ packages:
       lodash.debounce: 4.0.8
       resolve: 1.20.0
       semver: 6.3.0
-    transitivePeerDependencies:
-      - supports-color
     dev: false
 
   /@babel/helper-explode-assignable-expression/7.13.0:
@@ -452,7 +448,7 @@ packages:
       '@babel/core': ^7.0.0-0
     dependencies:
       '@babel/core': registry.nlark.com/@babel/core/7.12.9
-      '@babel/helper-plugin-utils': 7.13.0
+      '@babel/helper-plugin-utils': 7.10.4
       '@babel/plugin-syntax-object-rest-spread': 7.8.3_@babel+core@7.12.9
       '@babel/plugin-transform-parameters': 7.13.0_@babel+core@7.12.9
     dev: false
@@ -1361,8 +1357,6 @@ packages:
       babel-plugin-polyfill-corejs3: 0.2.0
       babel-plugin-polyfill-regenerator: 0.2.0
       semver: 6.3.0
-    transitivePeerDependencies:
-      - supports-color
     dev: false
 
   /@babel/plugin-transform-runtime/7.13.15_@babel+core@7.13.16:
@@ -1377,8 +1371,6 @@ packages:
       babel-plugin-polyfill-corejs3: 0.2.0_@babel+core@7.13.16
       babel-plugin-polyfill-regenerator: 0.2.0_@babel+core@7.13.16
       semver: 6.3.0
-    transitivePeerDependencies:
-      - supports-color
     dev: false
 
   /@babel/plugin-transform-shorthand-properties/7.12.13:
@@ -1578,8 +1570,6 @@ packages:
       babel-plugin-polyfill-regenerator: 0.2.0
       core-js-compat: registry.nlark.com/core-js-compat/3.11.0
       semver: 6.3.0
-    transitivePeerDependencies:
-      - supports-color
     dev: false
 
   /@babel/preset-env/7.13.15_@babel+core@7.13.16:
@@ -1657,8 +1647,6 @@ packages:
       babel-plugin-polyfill-regenerator: 0.2.0_@babel+core@7.13.16
       core-js-compat: registry.nlark.com/core-js-compat/3.11.0
       semver: 6.3.0
-    transitivePeerDependencies:
-      - supports-color
     dev: false
 
   /@babel/preset-modules/0.1.4:
@@ -2017,27 +2005,15 @@ packages:
     peerDependencies:
       acorn: ^6.0.0 || ^7.0.0 || ^8.0.0
     dependencies:
-      acorn: 7.4.1
+      acorn: registry.nlark.com/acorn/7.4.1
     dev: false
 
-  /acorn-jsx/5.3.1_acorn@8.1.1:
+  /acorn-jsx/5.3.1_acorn@8.2.0:
     resolution: {integrity: sha1-/IZh4Rt6wVOcR9v+oucrOvNNJns=, tarball: acorn-jsx/download/acorn-jsx-5.3.1.tgz}
     peerDependencies:
       acorn: ^6.0.0 || ^7.0.0 || ^8.0.0
     dependencies:
-      acorn: 8.1.1
-    dev: false
-
-  /acorn/7.4.1:
-    resolution: {integrity: sha1-/q7SVZc9LndVW4PbwIhRpsY1IPo=, tarball: acorn/download/acorn-7.4.1.tgz?cache=0&sync_timestamp=1618252905744&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2Facorn%2Fdownload%2Facorn-7.4.1.tgz}
-    engines: {node: '>=0.4.0'}
-    hasBin: true
-    dev: false
-
-  /acorn/8.1.1:
-    resolution: {integrity: sha1-+wAmiFuayfSLrB4YXkr0cpcRSf8=, tarball: acorn/download/acorn-8.1.1.tgz?cache=0&sync_timestamp=1618252905744&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2Facorn%2Fdownload%2Facorn-8.1.1.tgz}
-    engines: {node: '>=0.4.0'}
-    hasBin: true
+      acorn: registry.nlark.com/acorn/8.2.0
     dev: false
 
   /address/1.1.2:
@@ -2050,8 +2026,6 @@ packages:
     engines: {node: '>= 6.0.0'}
     dependencies:
       debug: 4.3.1
-    transitivePeerDependencies:
-      - supports-color
     dev: false
 
   /ajv-errors/1.0.1_ajv@6.12.6:
@@ -2344,8 +2318,6 @@ packages:
       '@babel/compat-data': 7.13.15
       '@babel/helper-define-polyfill-provider': 0.2.0
       semver: 6.3.0
-    transitivePeerDependencies:
-      - supports-color
     dev: false
 
   /babel-plugin-polyfill-corejs2/0.2.0_@babel+core@7.13.16:
@@ -2357,8 +2329,6 @@ packages:
       '@babel/core': registry.nlark.com/@babel/core/7.13.16
       '@babel/helper-define-polyfill-provider': 0.2.0_@babel+core@7.13.16
       semver: 6.3.0
-    transitivePeerDependencies:
-      - supports-color
     dev: false
 
   /babel-plugin-polyfill-corejs3/0.2.0:
@@ -2368,8 +2338,6 @@ packages:
     dependencies:
       '@babel/helper-define-polyfill-provider': 0.2.0
       core-js-compat: registry.nlark.com/core-js-compat/3.11.0
-    transitivePeerDependencies:
-      - supports-color
     dev: false
 
   /babel-plugin-polyfill-corejs3/0.2.0_@babel+core@7.13.16:
@@ -2380,8 +2348,6 @@ packages:
       '@babel/core': registry.nlark.com/@babel/core/7.13.16
       '@babel/helper-define-polyfill-provider': 0.2.0_@babel+core@7.13.16
       core-js-compat: registry.nlark.com/core-js-compat/3.11.0
-    transitivePeerDependencies:
-      - supports-color
     dev: false
 
   /babel-plugin-polyfill-regenerator/0.2.0:
@@ -2390,8 +2356,6 @@ packages:
       '@babel/core': ^7.0.0-0
     dependencies:
       '@babel/helper-define-polyfill-provider': 0.2.0
-    transitivePeerDependencies:
-      - supports-color
     dev: false
 
   /babel-plugin-polyfill-regenerator/0.2.0_@babel+core@7.13.16:
@@ -2401,8 +2365,6 @@ packages:
     dependencies:
       '@babel/core': registry.nlark.com/@babel/core/7.13.16
       '@babel/helper-define-polyfill-provider': 0.2.0_@babel+core@7.13.16
-    transitivePeerDependencies:
-      - supports-color
     dev: false
 
   /backo2/1.0.2:
@@ -3266,26 +3228,8 @@ packages:
   /debug/4.3.1:
     resolution: {integrity: sha1-8NIpxQXgxtjEmsVT0bE9wYP2su4=, tarball: debug/download/debug-4.3.1.tgz}
     engines: {node: '>=6.0'}
-    peerDependencies:
-      supports-color: '*'
-    peerDependenciesMeta:
-      supports-color:
-        optional: true
     dependencies:
       ms: 2.1.2
-    dev: false
-
-  /debug/4.3.1_supports-color@6.1.0:
-    resolution: {integrity: sha1-8NIpxQXgxtjEmsVT0bE9wYP2su4=, tarball: debug/download/debug-4.3.1.tgz}
-    engines: {node: '>=6.0'}
-    peerDependencies:
-      supports-color: '*'
-    peerDependenciesMeta:
-      supports-color:
-        optional: true
-    dependencies:
-      ms: 2.1.2
-      supports-color: 6.1.0
     dev: false
 
   /decamelize/1.2.0:
@@ -3787,7 +3731,7 @@ packages:
     resolution: {integrity: sha1-8t8zC3Usb1UBn4vYm3ZgA5wbu7Y=, tarball: espree/download/espree-7.3.1.tgz}
     engines: {node: ^10.12.0 || >=12.0.0}
     dependencies:
-      acorn: 7.4.1
+      acorn: registry.nlark.com/acorn/7.4.1
       acorn-jsx: 5.3.1_acorn@7.4.1
       eslint-visitor-keys: 1.3.0
     dev: false
@@ -4017,8 +3961,6 @@ packages:
       yauzl: 2.10.0
     optionalDependencies:
       '@types/yauzl': registry.nlark.com/@types/yauzl/2.9.1
-    transitivePeerDependencies:
-      - supports-color
     dev: false
 
   /fast-deep-equal/3.1.3:
@@ -4828,8 +4770,6 @@ packages:
     dependencies:
       agent-base: 6.0.2
       debug: 4.3.1
-    transitivePeerDependencies:
-      - supports-color
     dev: false
 
   /human-signals/1.1.1:
@@ -7803,7 +7743,6 @@ packages:
       socket.io-parser: registry.nlark.com/socket.io-parser/4.0.4
     transitivePeerDependencies:
       - bufferutil
-      - supports-color
       - utf-8-validate
     dev: false
 
@@ -7822,7 +7761,6 @@ packages:
       socket.io-parser: registry.nlark.com/socket.io-parser/4.0.4
     transitivePeerDependencies:
       - bufferutil
-      - supports-color
       - utf-8-validate
     dev: false
 
@@ -7920,30 +7858,26 @@ packages:
     resolution: {integrity: sha1-6cGKQQ5e1+EkQqVJ+9ivp2cDjWU=, tarball: spdx-license-ids/download/spdx-license-ids-3.0.7.tgz}
     dev: false
 
-  /spdy-transport/3.0.0_supports-color@6.1.0:
+  /spdy-transport/3.0.0:
     resolution: {integrity: sha1-ANSGOmQArXXfkzYaFghgXl3NzzE=, tarball: spdy-transport/download/spdy-transport-3.0.0.tgz}
     dependencies:
-      debug: 4.3.1_supports-color@6.1.0
+      debug: 4.3.1
       detect-node: 2.0.5
       hpack.js: 2.1.6
       obuf: 1.1.2
       readable-stream: 3.6.0
       wbuf: 1.7.3
-    transitivePeerDependencies:
-      - supports-color
     dev: false
 
-  /spdy/4.0.2_supports-color@6.1.0:
+  /spdy/4.0.2:
     resolution: {integrity: sha1-t09GYgOj7aRSwCSSuR+56EonZ3s=, tarball: spdy/download/spdy-4.0.2.tgz}
     engines: {node: '>=6.0.0'}
     dependencies:
-      debug: 4.3.1_supports-color@6.1.0
+      debug: 4.3.1
       handle-thing: 2.0.1
       http-deceiver: 1.2.7
       select-hose: 2.0.0
-      spdy-transport: 3.0.0_supports-color@6.1.0
-    transitivePeerDependencies:
-      - supports-color
+      spdy-transport: 3.0.0
     dev: false
 
   /split-string/3.1.0:
@@ -8555,9 +8489,6 @@ packages:
     peerDependencies:
       file-loader: '*'
       webpack: ^4.0.0 || ^5.0.0
-    peerDependenciesMeta:
-      file-loader:
-        optional: true
     dependencies:
       file-loader: 6.2.0_webpack@5.35.1
       loader-utils: 2.0.0
@@ -8705,17 +8636,13 @@ packages:
     hasBin: true
     peerDependencies:
       webpack: ^4.0.0 || ^5.0.0
-      webpack-cli: '*'
-    peerDependenciesMeta:
-      webpack-cli:
-        optional: true
     dependencies:
       ansi-html: 0.0.7
       bonjour: 3.5.0
       chokidar: 2.1.8
       compression: 1.7.4
       connect-history-api-fallback: 1.6.0
-      debug: 4.3.1_supports-color@6.1.0
+      debug: 4.3.1
       del: 4.1.1
       express: 4.17.1
       html-entities: 1.4.0
@@ -8735,7 +8662,7 @@ packages:
       serve-index: 1.9.1
       sockjs: 0.3.21
       sockjs-client: 1.5.1
-      spdy: 4.0.2_supports-color@6.1.0
+      spdy: 4.0.2
       strip-ansi: 3.0.1
       supports-color: 6.1.0
       url: 0.11.0
@@ -8988,8 +8915,6 @@ packages:
       resolve: 1.20.0
       semver: 5.7.1
       source-map: 0.5.7
-    transitivePeerDependencies:
-      - supports-color
     dev: false
 
   registry.nlark.com/@babel/core/7.12.9:
@@ -9014,8 +8939,6 @@ packages:
       resolve: 1.20.0
       semver: 5.7.1
       source-map: 0.5.7
-    transitivePeerDependencies:
-      - supports-color
     dev: false
 
   registry.nlark.com/@babel/core/7.13.16:
@@ -9039,8 +8962,6 @@ packages:
       json5: 2.2.0
       semver: 6.3.0
       source-map: 0.5.7
-    transitivePeerDependencies:
-      - supports-color
     dev: false
 
   registry.nlark.com/@babel/eslint-parser/7.13.14_898a7a025c5413b619a892ba97f73e55:
@@ -9245,8 +9166,6 @@ packages:
       '@babel/types': registry.nlark.com/@babel/types/7.13.17
       debug: 4.3.1
       globals: 11.12.0
-    transitivePeerDependencies:
-      - supports-color
     dev: false
 
   registry.nlark.com/@babel/types/7.13.17:
@@ -9279,8 +9198,6 @@ packages:
       js-yaml: 3.14.1
       minimatch: 3.0.4
       strip-json-comments: 3.1.1
-    transitivePeerDependencies:
-      - supports-color
     dev: false
 
   registry.nlark.com/@fullhuman/postcss-purgecss/3.1.3:
@@ -10059,8 +9976,6 @@ packages:
       unified: registry.nlark.com/unified/9.2.0
       unist-builder: registry.nlark.com/unist-builder/2.0.3
       unist-util-visit: registry.nlark.com/unist-util-visit/2.0.3
-    transitivePeerDependencies:
-      - supports-color
     dev: false
 
   registry.nlark.com/@mdx-js/react/1.6.22_react@17.0.2:
@@ -10107,19 +10022,6 @@ packages:
       webpack-dev-server: 3.x
       webpack-hot-middleware: 2.x
       webpack-plugin-serve: 0.x || 1.x
-    peerDependenciesMeta:
-      '@types/webpack':
-        optional: true
-      sockjs-client:
-        optional: true
-      type-fest:
-        optional: true
-      webpack-dev-server:
-        optional: true
-      webpack-hot-middleware:
-        optional: true
-      webpack-plugin-serve:
-        optional: true
     dependencies:
       ansi-html: 0.0.7
       error-stack-parser: 2.0.6
@@ -10581,10 +10483,6 @@ packages:
     peerDependencies:
       '@typescript-eslint/parser': ^4.0.0
       eslint: ^5.0.0 || ^6.0.0 || ^7.0.0
-      typescript: '*'
-    peerDependenciesMeta:
-      typescript:
-        optional: true
     dependencies:
       '@typescript-eslint/experimental-utils': registry.nlark.com/@typescript-eslint/experimental-utils/4.22.0_eslint@7.25.0
       '@typescript-eslint/parser': registry.nlark.com/@typescript-eslint/parser/4.22.0_eslint@7.25.0
@@ -10597,7 +10495,7 @@ packages:
       semver: 7.3.5
       tsutils: 3.21.0
     transitivePeerDependencies:
-      - supports-color
+      - typescript
     dev: false
 
   registry.nlark.com/@typescript-eslint/experimental-utils/4.22.0_eslint@7.25.0:
@@ -10617,7 +10515,6 @@ packages:
       eslint-scope: 5.1.1
       eslint-utils: 2.1.0
     transitivePeerDependencies:
-      - supports-color
       - typescript
     dev: false
 
@@ -10629,10 +10526,6 @@ packages:
     engines: {node: ^10.12.0 || >=12.0.0}
     peerDependencies:
       eslint: ^5.0.0 || ^6.0.0 || ^7.0.0
-      typescript: '*'
-    peerDependenciesMeta:
-      typescript:
-        optional: true
     dependencies:
       '@typescript-eslint/scope-manager': registry.nlark.com/@typescript-eslint/scope-manager/4.22.0
       '@typescript-eslint/types': registry.nlark.com/@typescript-eslint/types/4.22.0
@@ -10640,7 +10533,7 @@ packages:
       debug: 4.3.1
       eslint: registry.nlark.com/eslint/7.25.0
     transitivePeerDependencies:
-      - supports-color
+      - typescript
     dev: false
 
   registry.nlark.com/@typescript-eslint/scope-manager/4.22.0:
@@ -10665,11 +10558,6 @@ packages:
     name: '@typescript-eslint/typescript-estree'
     version: 4.22.0
     engines: {node: ^10.12.0 || >=12.0.0}
-    peerDependencies:
-      typescript: '*'
-    peerDependenciesMeta:
-      typescript:
-        optional: true
     dependencies:
       '@typescript-eslint/types': registry.nlark.com/@typescript-eslint/types/4.22.0
       '@typescript-eslint/visitor-keys': registry.nlark.com/@typescript-eslint/visitor-keys/4.22.0
@@ -10679,7 +10567,7 @@ packages:
       semver: 7.3.5
       tsutils: 3.21.0
     transitivePeerDependencies:
-      - supports-color
+      - typescript
     dev: false
 
   registry.nlark.com/@typescript-eslint/visitor-keys/4.22.0:
@@ -10734,7 +10622,6 @@ packages:
     transitivePeerDependencies:
       - '@babel/core'
       - bufferutil
-      - supports-color
       - utf-8-validate
     dev: false
 
@@ -10812,7 +10699,6 @@ packages:
       - '@mdx-js/mdx'
       - bufferutil
       - core-js
-      - supports-color
       - utf-8-validate
       - webpack
     dev: false
@@ -10856,6 +10742,14 @@ packages:
     resolution: {integrity: sha1-/q7SVZc9LndVW4PbwIhRpsY1IPo=, registry: https://registry.npm.taobao.org/, tarball: https://registry.nlark.com/acorn/download/acorn-7.4.1.tgz}
     name: acorn
     version: 7.4.1
+    engines: {node: '>=0.4.0'}
+    hasBin: true
+    dev: false
+
+  registry.nlark.com/acorn/8.2.0:
+    resolution: {integrity: sha1-isu77yWKVeN208b/Zu28y9LJFaQ=, registry: https://registry.npm.taobao.org/, tarball: https://registry.nlark.com/acorn/download/acorn-8.2.0.tgz}
+    name: acorn
+    version: 8.2.0
     engines: {node: '>=0.4.0'}
     hasBin: true
     dev: false
@@ -11145,8 +11039,6 @@ packages:
       babel-plugin-transform-react-remove-prop-types: registry.nlark.com/babel-plugin-transform-react-remove-prop-types/0.4.24
       gatsby-core-utils: registry.nlark.com/gatsby-core-utils/2.3.0
       gatsby-legacy-polyfills: registry.nlark.com/gatsby-legacy-polyfills/1.3.0
-    transitivePeerDependencies:
-      - supports-color
     dev: false
 
   registry.nlark.com/babel-preset-gatsby/1.3.0_757409e4093318e6f0fcfb165eaa3573:
@@ -11176,8 +11068,6 @@ packages:
       core-js: registry.nlark.com/core-js/3.11.0
       gatsby-core-utils: registry.nlark.com/gatsby-core-utils/2.3.0
       gatsby-legacy-polyfills: registry.nlark.com/gatsby-legacy-polyfills/1.3.0
-    transitivePeerDependencies:
-      - supports-color
     dev: false
 
   registry.nlark.com/bail/1.0.5:
@@ -12407,7 +12297,7 @@ packages:
     name: domutils
     version: 1.5.1
     dependencies:
-      dom-serializer: 0.2.2
+      dom-serializer: 0.1.1
       domelementtype: 1.3.1
     dev: false
 
@@ -12500,7 +12390,6 @@ packages:
       yeast: 0.1.2
     transitivePeerDependencies:
       - bufferutil
-      - supports-color
       - utf-8-validate
     dev: false
 
@@ -12528,7 +12417,6 @@ packages:
       ws: registry.nlark.com/ws/7.4.5
     transitivePeerDependencies:
       - bufferutil
-      - supports-color
       - utf-8-validate
     dev: false
 
@@ -12621,11 +12509,6 @@ packages:
       eslint-plugin-react: ^7.20.3
       eslint-plugin-react-hooks: ^4.0.8
       eslint-plugin-testing-library: ^3.9.0
-    peerDependenciesMeta:
-      eslint-plugin-jest:
-        optional: true
-      eslint-plugin-testing-library:
-        optional: true
     dependencies:
       '@typescript-eslint/eslint-plugin': registry.nlark.com/@typescript-eslint/eslint-plugin/4.22.0_f53b530e17fae12b9f48d6443ee1308c
       '@typescript-eslint/parser': registry.nlark.com/@typescript-eslint/parser/4.22.0_eslint@7.25.0
@@ -12795,8 +12678,6 @@ packages:
       table: registry.nlark.com/table/6.5.1
       text-table: 0.2.0
       v8-compile-cache: 2.3.0
-    transitivePeerDependencies:
-      - supports-color
     dev: false
 
   registry.nlark.com/estree-util-is-identifier-name/1.1.0:
@@ -13125,7 +13006,6 @@ packages:
       yurnalist: registry.nlark.com/yurnalist/2.1.0
     transitivePeerDependencies:
       - bufferutil
-      - supports-color
       - utf-8-validate
     dev: false
 
@@ -13241,7 +13121,6 @@ packages:
       react-dom: registry.nlark.com/react-dom/17.0.2_react@17.0.2
     transitivePeerDependencies:
       - '@babel/core'
-      - supports-color
     dev: false
 
   registry.nlark.com/gatsby-plugin-mdx/2.3.0_73e8d0148a4c5c71ceb6a02bbce55c80:
@@ -13295,8 +13174,6 @@ packages:
       unist-util-map: registry.nlark.com/unist-util-map/1.0.5
       unist-util-remove: registry.nlark.com/unist-util-remove/1.0.3
       unist-util-visit: registry.nlark.com/unist-util-visit/1.4.1
-    transitivePeerDependencies:
-      - supports-color
     dev: false
 
   registry.nlark.com/gatsby-plugin-page-creator/3.3.0_gatsby@3.3.1:
@@ -13317,8 +13194,6 @@ packages:
       gatsby-telemetry: registry.nlark.com/gatsby-telemetry/2.3.0
       globby: 11.0.3
       lodash: 4.17.21
-    transitivePeerDependencies:
-      - supports-color
     dev: false
 
   registry.nlark.com/gatsby-plugin-postcss/4.3.0_gatsby@3.3.1+postcss@8.2.12:
@@ -13388,8 +13263,6 @@ packages:
       '@babel/runtime': registry.nlark.com/@babel/runtime/7.13.17
       babel-plugin-remove-graphql-queries: registry.nlark.com/babel-plugin-remove-graphql-queries/3.3.0_@babel+core@7.13.16+gatsby@3.3.1
       gatsby: registry.nlark.com/gatsby/3.3.1_react-dom@17.0.2+react@17.0.2
-    transitivePeerDependencies:
-      - supports-color
     dev: false
 
   registry.nlark.com/gatsby-plugin-utils/1.3.0_gatsby@3.3.1:
@@ -13487,7 +13360,6 @@ packages:
       yoga-layout-prebuilt: registry.nlark.com/yoga-layout-prebuilt/1.10.0
     transitivePeerDependencies:
       - bufferutil
-      - supports-color
       - utf-8-validate
     dev: false
 
@@ -13568,8 +13440,6 @@ packages:
       mermaid: registry.nlark.com/mermaid/8.9.2
       puppeteer: registry.nlark.com/puppeteer/8.0.0
       unist-util-visit: registry.nlark.com/unist-util-visit/1.4.1
-    transitivePeerDependencies:
-      - supports-color
     dev: false
 
   registry.nlark.com/gatsby-remark-responsive-iframe/4.0.0_gatsby@3.3.1:
@@ -13831,11 +13701,9 @@ packages:
       - eslint-plugin-jest
       - eslint-plugin-testing-library
       - sockjs-client
-      - supports-color
       - type-fest
       - typescript
       - utf-8-validate
-      - webpack-cli
       - webpack-hot-middleware
       - webpack-plugin-serve
     dev: false
@@ -15112,8 +14980,6 @@ packages:
       minify: registry.nlark.com/minify/4.1.3
       moment-mini: registry.nlark.com/moment-mini/2.24.0
       stylis: registry.nlark.com/stylis/3.5.4
-    transitivePeerDependencies:
-      - supports-color
     dev: false
 
   registry.nlark.com/micromark-extension-mdx-expression/0.3.2:
@@ -15168,8 +15034,8 @@ packages:
     name: micromark-extension-mdxjs
     version: 0.3.0
     dependencies:
-      acorn: 8.1.1
-      acorn-jsx: 5.3.1_acorn@8.1.1
+      acorn: registry.nlark.com/acorn/8.2.0
+      acorn-jsx: 5.3.1_acorn@8.2.0
       micromark: registry.nlark.com/micromark/2.11.4
       micromark-extension-mdx-expression: registry.nlark.com/micromark-extension-mdx-expression/0.3.2
       micromark-extension-mdx-jsx: registry.nlark.com/micromark-extension-mdx-jsx/0.3.3
@@ -15221,8 +15087,6 @@ packages:
       terser: 4.8.0
       try-catch: registry.nlark.com/try-catch/2.0.1
       try-to-catch: registry.nlark.com/try-to-catch/1.1.1
-    transitivePeerDependencies:
-      - supports-color
     dev: false
 
   registry.nlark.com/mitt/1.2.0:
@@ -15922,10 +15786,10 @@ packages:
       jimp: registry.nlark.com/jimp/0.14.0
     dev: false
 
-  registry.nlark.com/prebuild-install/6.1.1:
-    resolution: {integrity: sha1-Z1T6bA1V7O1/nhRAj/nky6bwl7Q=, registry: https://registry.npm.taobao.org/, tarball: https://registry.nlark.com/prebuild-install/download/prebuild-install-6.1.1.tgz}
+  registry.nlark.com/prebuild-install/6.1.2:
+    resolution: {integrity: sha1-bOX8WXj+ul08v/7coGgrE2oLW/8=, registry: https://registry.npm.taobao.org/, tarball: https://registry.nlark.com/prebuild-install/download/prebuild-install-6.1.2.tgz}
     name: prebuild-install
-    version: 6.1.1
+    version: 6.1.2
     engines: {node: '>=6'}
     hasBin: true
     dependencies:
@@ -16060,7 +15924,6 @@ packages:
       ws: registry.nlark.com/ws/7.4.5
     transitivePeerDependencies:
       - bufferutil
-      - supports-color
       - utf-8-validate
     dev: false
 
@@ -16308,8 +16171,6 @@ packages:
       is-alphabetical: registry.nlark.com/is-alphabetical/1.0.4
       remark-parse: registry.nlark.com/remark-parse/8.0.3
       unified: registry.nlark.com/unified/9.2.0
-    transitivePeerDependencies:
-      - supports-color
     dev: false
 
   registry.nlark.com/remark-mdx/2.0.0-next.9:
@@ -16332,8 +16193,6 @@ packages:
       '@babel/plugin-proposal-object-rest-spread': 7.10.4_@babel+core@7.10.5
       '@babel/plugin-syntax-jsx': 7.10.4_@babel+core@7.10.5
       '@mdx-js/util': registry.nlark.com/@mdx-js/util/2.0.0-next.8
-    transitivePeerDependencies:
-      - supports-color
     dev: false
 
   registry.nlark.com/remark-parse/6.0.3:
@@ -16595,7 +16454,7 @@ packages:
       color: 3.1.3
       detect-libc: registry.nlark.com/detect-libc/1.0.3
       node-addon-api: 3.1.0
-      prebuild-install: registry.nlark.com/prebuild-install/6.1.1
+      prebuild-install: registry.nlark.com/prebuild-install/6.1.2
       semver: 7.3.5
       simple-get: registry.nlark.com/simple-get/3.1.0
       tar-fs: registry.nlark.com/tar-fs/2.1.1
@@ -16679,8 +16538,6 @@ packages:
       '@types/component-emitter': registry.nlark.com/@types/component-emitter/1.2.10
       component-emitter: 1.3.0
       debug: 4.3.1
-    transitivePeerDependencies:
-      - supports-color
     dev: false
 
   registry.nlark.com/sort-keys-length/1.0.1:
@@ -17663,18 +17520,13 @@ packages:
     version: 5.35.1
     engines: {node: '>=10.13.0'}
     hasBin: true
-    peerDependencies:
-      webpack-cli: '*'
-    peerDependenciesMeta:
-      webpack-cli:
-        optional: true
     dependencies:
       '@types/eslint-scope': 3.7.0
       '@types/estree': 0.0.47
       '@webassemblyjs/ast': 1.11.0
       '@webassemblyjs/wasm-edit': 1.11.0
       '@webassemblyjs/wasm-parser': 1.11.0
-      acorn: 8.1.1
+      acorn: registry.nlark.com/acorn/8.2.0
       browserslist: registry.nlark.com/browserslist/4.16.5
       chrome-trace-event: 1.0.3
       enhanced-resolve: registry.nlark.com/enhanced-resolve/5.8.0
@@ -17764,11 +17616,6 @@ packages:
     peerDependencies:
       bufferutil: ^4.0.1
       utf-8-validate: ^5.0.2
-    peerDependenciesMeta:
-      bufferutil:
-        optional: true
-      utf-8-validate:
-        optional: true
     dev: false
 
   registry.nlark.com/x-is-string/0.1.0:
