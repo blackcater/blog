@@ -97,7 +97,8 @@ columns:
       - "opensource"
     tags:
       - "vue"
-    author: "blackcater"
+    authors:
+      - "blackcater"
     chapters:
       - title: "暂无"
   - id: "frontend-bible"
@@ -114,7 +115,8 @@ columns:
       - "typescript"
       - "react"
       - "vue"
-    author: "blackcater"
+    authors:
+      - "blackcater"
     chapters:
       - title: "开篇词"
         sections: []

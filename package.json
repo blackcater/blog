@@ -12,6 +12,7 @@
   "dependencies": {
     "@unisite/theme-blog": "next",
     "gatsby": "^3.3.1",
+    "gatsby-plugin-compile-es6-packages": "^2.1.0",
     "react": "^17.0.2",
     "react-dom": "^17.0.2"
   },
