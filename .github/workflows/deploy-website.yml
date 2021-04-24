@@ -6,7 +6,8 @@ on:
     branches:
       - main
   pull_request:
-    branches: [ main ]
+    branches:
+      - main
 
 jobs:
   deploy:
@@ -23,13 +24,11 @@ jobs:
           npm install
           npm run build
       - name: Deploy website
-        run: |-
-          cd public
-          git config --global user.email "blackcater2015@gmail.com"
-          git config --global user.name "blackcater"
-          git init
-          git branch
-          git add -A
-          time=$(date "+%Y/%m/%d-%H:%M:%S")
-          git commit -m "deploy on ${time}"
-          git push -f https://github.com/blackcater/blackcater.github.io.git master:master
+        uses: cpina/github-action-push-to-another-repository@master
+        env:
+          API_TOKEN_GITHUB: ${{ secrets.API_TOKEN_GITHUB }}
+        with:
+          source-directory: public
+          destination-github-username: blackcater
+          destination-repository-name: blackcater.github.io
+          user-email: blackcater@blackcater.dev
