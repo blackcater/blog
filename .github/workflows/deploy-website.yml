@@ -25,7 +25,10 @@ jobs:
       - name: Deploy website
         run: |-
           cd public
+          git config --global user.email "blackcater2015@gmail.com"
+          git config --global user.name "blackcater"
           git init
+          git branch
           git add -A
           time=$(date "+%Y/%m/%d-%H:%M:%S")
           git commit -m "deploy on ${time}"
