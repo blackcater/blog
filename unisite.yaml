@@ -1,0 +1,136 @@
+# Configuration for unisite theme
+themeConfig:
+  header:
+    bar:
+      text: "当前正处于开发阶段"
+      closable: false
+    nav:
+      - title: "开源项目"
+        items:
+          - title: "unisite"
+            subTitle: "Gatsby ❤️ Theme = Unisite"
+            link: "https://www.github.com/blackcater-labs/unisite"
+      - title: "联系我"
+        items:
+          - title: "Github"
+            link: "https://www.github.com/blackcater"
+          - title: "LeetCode"
+            link: "https://leetcode-cn.com/u/blackcater/"
+          - title: "Email"
+            link: "mailto:blackcater@blackcater.dev"
+      - title: "博客源码"
+        link: "https://www.github.com/blackcater/blog"
+
+categories:
+  - id: "frontend"
+    name: "前端"
+  - id: "backend"
+    name: "后端"
+  - id: "devops"
+    name: "运维"
+  - id: "mobile"
+    name: "移动端"
+  - id: "linux"
+    name: "Linux"
+  - id: "opensource"
+    name: "开源"
+  - id: "life"
+    name: "生活"
+
+tags:
+  - id: "html"
+    name: "HTML"
+  - id: "css"
+    name: "CSS"
+  - id: "javascript"
+    name: "JavaScript"
+  - id: "typescript"
+    name: "TypeScript"
+  - id: "browser"
+    name: "浏览器"
+  - id: "react"
+    name: "React"
+  - id: "vue"
+    name: "Vue"
+  - id: "miniprogram"
+    name: "小程序"
+  - id: "gatsby"
+    name: "Gatsby"
+  - id: "java"
+    name: "Java"
+  - id: "golang"
+    name: "Go"
+  - id: "rust"
+    name: "Rust"
+  - id: "c"
+    name: "C"
+  - id: "cpp"
+    name: "C++"
+  - id: "objective-c"
+    name: "Objective-C"
+  - id: "swift"
+    name: "Swift"
+  - id: "python"
+    name: "Python"
+  - id: "php"
+    name: "PHP"
+  - id: "docker"
+    name: "Docker"
+  - id: "kubernetes"
+    name: "Kubernetes"
+
+users:
+  - id: "blackcater"
+    name: "Elon Tang"
+    avatar: "content/user/blackcater.png"
+    description: "God helps those who help themselves."
+    email: "blackcater@blackcater.dev"
+    website_url: "https://www.blackcater.com"
+    github_url: "https://www.github.com/blackcater"
+
+columns:
+  - id: "dive-into-vue"
+    title: "深入浅出 Vue"
+    cover: "content/column/dive-into-vue/cover.png"
+    categories:
+      - "frontend"
+      - "opensource"
+    tags:
+      - "vue"
+    author: "blackcater"
+    chapters:
+      - title: "暂无"
+  - id: "frontend-bible"
+    title: "前端圣经"
+    cover: "content/column/frontend-bible/cover.png"
+    categories:
+      - "frontend"
+      - "opensource"
+    tags:
+      - "html"
+      - "css"
+      - "browser"
+      - "javascript"
+      - "typescript"
+      - "react"
+      - "vue"
+    author: "blackcater"
+    chapters:
+      - title: "开篇词"
+        sections: []
+      - title: "HTML"
+        sections: []
+      - title: "CSS"
+        sections: []
+      - title: "JavaScript"
+        sections: []
+      - title: "TypeScript"
+        sections: []
+      - title: "前端框架"
+        sections: []
+      - title: "微前端架构"
+        sections: []
+      - title: "Node.js"
+        sections: []
+      - title: "前端基础设施"
+        sections: []

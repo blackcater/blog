@@ -1,9 +1,0 @@
-{
-  "name": "gatsby-plugin-algolia",
-  "version": "",
-  "description": "A gatsby plugin for algolia",
-  "main": "index.js",
-  "author": "blackcater",
-  "license": "MIT",
-  "private": false
-}

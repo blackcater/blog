@@ -1,16 +1,33 @@
-# Project dependencies
-# https://www.npmjs.org/doc/misc/npm-faq.html#should-i-check-my-node_modules-folder-into-git
-
-# npm & yarn
-node_modules
-.cache/
-npm-error.log
-yarn-error.log
-
-# Build directory
-public/
+# Operating System
 .DS_Store
 
-# editor
+# Editor
+.vscode/
 .idea/
-.code/
+.nova/
+.graphqlconfig
+
+# Node.js
+node_modules/
+
+# Yarn@2
+.yarn/
+
+# TypeScript
+lib/
+
+# Unisite
+.unisite/
+
+# Gatsby
+.cache/
+public/
+
+# Logs
+*.log
+
+# taskpaper
+*.taskpaper
+
+# env
+*.local

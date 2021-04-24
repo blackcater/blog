@@ -1,9 +1,0 @@
-/* pages/index/index.wxss */
-.page .h1 {
-    padding: 160rpx 60rpx;
-    font-size: 60rpx;
-    height: 80rpx;
-    line-height: 80rpx;
-    color: #ffffff;
-    font-weight: 700;
-}
