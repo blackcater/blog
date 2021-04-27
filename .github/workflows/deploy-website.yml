@@ -24,7 +24,7 @@ jobs:
           npm install
           npm run build
       - name: Deploy website
-        uses: cpina/github-action-push-to-another-repository@master
+        uses: cpina/github-action-push-to-another-repository@main
         env:
           API_TOKEN_GITHUB: ${{ secrets.API_TOKEN_GITHUB }}
         with:
