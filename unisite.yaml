@@ -87,6 +87,7 @@ users:
     email: "blackcater@blackcater.dev"
     website_url: "https://www.blackcater.com"
     github_url: "https://www.github.com/blackcater"
+    leetcode_url: "https://leetcode-cn.com/u/blackcater"
 
 columns:
   - id: "dive-into-vue"
