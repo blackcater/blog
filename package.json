@@ -13,7 +13,7 @@
     "@unisite/theme-blog": "next",
     "gatsby": "3.4.0",
     "gatsby-plugin-compile-es6-packages": "2.1.0",
-    "react": "17.0.2",
+    "react": "19.2.8",
     "react-dom": "17.0.2"
   },
   "devDependencies": {
